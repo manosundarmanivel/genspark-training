@@ -398,13 +398,3 @@ end $$;
 
 
  
--- Transaction-Based Questions (5)
--- Write a transaction that inserts a customer and an initial rental in one atomic operation.
- 
--- Simulate a failure in a multi-step transaction (update film + insert into inventory) and roll back.
- 
--- Create a transaction that transfers an inventory item from one store to another.
- 
--- Demonstrate SAVEPOINT and ROLLBACK TO SAVEPOINT by updating payment amounts, then undoing one.
- 
--- Write a transaction that deletes a customer and all associated rentals and payments, ensuring atomicity.
