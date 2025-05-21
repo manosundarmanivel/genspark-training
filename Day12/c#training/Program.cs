@@ -670,42 +670,42 @@ public void ModifyEmployee()
  
 // Searching with ContainsKey
 
-using System;
-using System.Collections.Generic;
+// using System;
+// using System.Collections.Generic;
 
-class Product
-{
-    static void Main()
-    {
-        Dictionary<string, double> products = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
+// class Product
+// {
+//     static void Main()
+//     {
+//         Dictionary<string, double> products = new Dictionary<string, double>(StringComparer.OrdinalIgnoreCase);
 
-        products.Add("Laptop", 55000.99);
-        products.Add("Headphones", 2999.50);
-        products.Add("Smartphone", 23000.00);
-        products.Add("Keyboard", 1500.75);
-        products.Add("Monitor", 8700.20);
+//         products.Add("Laptop", 55000.99);
+//         products.Add("Headphones", 2999.50);
+//         products.Add("Smartphone", 23000.00);
+//         products.Add("Keyboard", 1500.75);
+//         products.Add("Monitor", 8700.20);
 
 
-        System.Console.WriteLine("--Product List--");
-        foreach (var item in products)
-        {
-            System.Console.WriteLine($"Product: {item.Key}| Price:{item.Value}");
-        }
+//         System.Console.WriteLine("--Product List--");
+//         foreach (var item in products)
+//         {
+//             System.Console.WriteLine($"Product: {item.Key}| Price:{item.Value}");
+//         }
 
-        System.Console.WriteLine("\n Enter the name of the product to search: ");
-        string searchProduct = Console.ReadLine();
+//         System.Console.WriteLine("\n Enter the name of the product to search: ");
+//         string searchProduct = Console.ReadLine();
 
-        if (products.ContainsKey(searchProduct))
-        {
-            System.Console.WriteLine($"Price of {searchProduct} : {products[searchProduct]}");
-        }
+//         if (products.ContainsKey(searchProduct))
+//         {
+//             System.Console.WriteLine($"Price of {searchProduct} : {products[searchProduct]}");
+//         }
 
-        else
-        {
-            Console.WriteLine($"{searchProduct} not found in the product list");
-        }
-    }
-}
+//         else
+//         {
+//             Console.WriteLine($"{searchProduct} not found in the product list");
+//         }
+//     }
+// }
 
 
 // Is Dictionary more efficient than LINQ?
