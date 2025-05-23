@@ -1,0 +1,231 @@
+
+S -	Single Responsibility Principle
+O -	Open/Closed Principle
+L -	Liskov Substitution Principle
+I -	Interface Segregation Principle
+D -	Dependency Inversion Principle
+
+1. Single Responsibility Principle(SRP):
+
+A class should have only one reason to change.
+
+public class AppointmentManager
+{
+    public void Book() { }
+    public void SaveToDatabase() { }  // Violation
+    public void SendConfirmationEmail() {  } // Violation
+}
+
+Separate responsibilities :
+
+public class AppointmentService
+{
+    public void Book(Appointment appt) { }
+}
+
+public class AppointmentRepository
+{
+    public void Save(Appointment appt) { }
+}
+
+public class EmailService
+{
+    public void SendConfirmation(Appointment appt) { }
+}
+
+Each class has one responsibility (separation of concerns)
+----------------------------------------------------------------------------------------------------
+
+2. Open/Closed Principle (OCP):
+
+Entities should be open for extension, but closed for modification.
+
+So use Abstraction to Extend
+
+public interface IReminderService
+{
+    void SendReminder(Appointment appt);
+}
+
+public class SmsReminderService : IReminderService
+{
+    public void SendReminder(Appointment appt)
+    {
+        Console.WriteLine("Sending SMS to " + appt.PatientName);
+    }
+}
+
+public class EmailReminderService : IReminderService
+{
+    public void SendReminder(Appointment appt)
+    {
+        Console.WriteLine("Sending Email to " + appt.PatientName);
+    }
+}
+
+We can add more types of reminders without changing existing code.
+
+You can add new NotificationService or Repository without changing AppointmentService
+
+----------------------------------------------------------------------------------------------------
+
+3. Liskov Substitution Principle (LSP):
+Subtypes must be substitutable for their base types.
+
+
+public abstract class ReminderService
+{
+    public abstract void Send(Appointment appt);
+}
+
+public class SmsReminder : ReminderService
+{
+    public override void Send(Appointment appt) { send SMS  }
+}
+
+public class EmailReminder : ReminderService
+{
+    public override void Send(Appointment appt) { send email }
+}
+
+public void Notify(ReminderService reminder, Appointment appt)
+{
+    reminder.Send(appt); // Works regardless of whether it's SMS or Email
+}
+
+
+Any INotificationService or IAppointmentRepository can replace the other
+----------------------------------------------------------------------------------------------------
+
+4. Interface Segregation Principle (ISP):
+
+Clients should not be forced to depend on methods they do not use.
+public interface IAppointmentOperations
+{
+    void Book();
+    void Cancel();
+    void Reschedule();
+    void SendMarketingEmail(); // Why is this here?
+}
+
+Split interfaces so classes only implement what they actually need.
+
+public interface IAppointmentActions
+{
+    void Book();
+    void Cancel();
+}
+
+public interface IEmailNotification
+{
+    void SendReminder();
+}
+
+Interfaces are small and focused
+----------------------------------------------------------------------------------------------------
+5. Dependency Inversion Principle (DIP):
+Depend on abstractions, not concrete implementations.
+
+public class Appointment
+{
+    public string PatientName { get; set; }
+    public DateTime Date { get; set; }
+}
+
+public interface IAppointmentRepository
+{
+    void Save(Appointment appointment);
+    List<Appointment> GetAppointments(DateTime date);
+}
+
+
+//For testing 
+
+public class InMemoryAppointmentRepository : IAppointmentRepository
+{
+    private readonly List<Appointment> _appointments = new();
+
+    public void Save(Appointment appointment)
+    {
+        _appointments.Add(appointment);
+    }
+
+    public List<Appointment> GetAppointments(DateTime date)
+    {
+        return _appointments.Where(a => a.Date.Date == date.Date).ToList();
+    }
+}
+
+
+//For Production
+
+public class DbAppointmentRepository : IAppointmentRepository
+{
+    
+    public void Save(Appointment appointment)
+    {
+        Console.WriteLine($"Saving appointment to database: {appointment.PatientName} at {appointment.Date}");
+    }
+
+    public List<Appointment> GetAppointments(DateTime date)
+    {
+        Console.WriteLine("Fetching appointments from DB...");
+        return new List<Appointment> // Simulated DB data
+        {
+            new Appointment { PatientName = "Alice", Date = date }
+        };
+    }
+}
+
+Business Logic Layer – AppointmentManager
+
+public class AppointmentManager
+{
+    private readonly IAppointmentRepository _repository;
+
+    public AppointmentManager(IAppointmentRepository repository)
+    {
+        _repository = repository;
+    }
+
+    public void BookAppointment(Appointment appointment)
+    {
+        _repository.Save(appointment);
+        Console.WriteLine($"Booked appointment for {appointment.PatientName}");
+    }
+
+    public void PrintAppointments(DateTime date)
+    {
+        var appointments = _repository.GetAppointments(date);
+        foreach (var appt in appointments)
+        {
+            Console.WriteLine($"{appt.PatientName} - {appt.Date}");
+        }
+    }
+}
+
+Switching Data Layers at Runtime (Main Method)
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Swap this to use either implementation:
+        // IAppointmentRepository repository = new InMemoryAppointmentRepository();
+        IAppointmentRepository repository = new DbAppointmentRepository();
+
+        var manager = new AppointmentManager(repository);
+
+        var appt = new Appointment
+        {
+            PatientName = "Mano Sundar M",
+            Date = DateTime.Now.AddHours(2)
+        };
+
+        manager.BookAppointment(appt);
+        manager.PrintAppointments(DateTime.Today);
+    }
+}
+
+AppointmentService depends on abstractions, not concrete classes
+
+
