@@ -9,6 +9,7 @@ namespace WholeApplication
     {
         static void Main()
         {
+            // IAppointmentRepository repo = new SqlAppointmentRepository("conncection_string");
             IAppointmentRepository repo = new InMemoryAppointmentRepository();
             INotificationService notifier = new ConsoleNotificationService();
             var service = new AppointmentService(repo, notifier);
