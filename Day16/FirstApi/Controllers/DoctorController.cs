@@ -1,62 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
-using FirstApi.Models; 
+using FirstApi.Models;
+using FirstApi.Services.Interfaces;
 
-[ApiController]
-[Route("/api/[controller]")]
-public class DoctorController : ControllerBase
+namespace FirstApi.Controllers
 {
-    public static List<Doctor> doctors = new List<Doctor>
+    [ApiController]
+    [Route("api/[controller]")]
+    public class DoctorController : ControllerBase
     {
-        new Doctor { Id = 1, Name = "Dr. Smith", Specialization = "Cardiology", PhoneNumber = "123-456-7890", Email = "dr.smith@example.com" },
-        new Doctor { Id = 2, Name = "Dr. Johnson", Specialization = "Neurology", PhoneNumber = "987-654-3210", Email = "dr.johnson@example.com" }
-    };
+        private readonly IService<Doctor> _service;
+        public DoctorController(IService<Doctor> service) => _service = service;
 
-    [HttpGet]
-    [ProducesResponseType(typeof(List<Doctor>), StatusCodes.Status200OK)]
-    public ActionResult<List<Doctor>> GetDoctors()
-    {
-        return Ok(doctors);
-    }
+        [HttpGet]
+        public ActionResult<List<Doctor>> GetAll() => _service.GetAll();
 
-    [HttpPut("{id}")]
-    [ProducesResponseType(typeof(Doctor), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public ActionResult<Doctor> GetDoctorById(int id)
-    {
-        var doctor = doctors.FirstOrDefault(d => d.Id == id);
-        if (doctor == null)
-            return NotFound("Doctor not found.");
-
-        return Ok(doctor);
-    }
-
-    [HttpPost]
-    [ProducesResponseType(typeof(Doctor), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public ActionResult<Doctor> AddDoctor([FromBody] Doctor doctor)
-    {
-        if (doctor == null || string.IsNullOrEmpty(doctor.Name) || string.IsNullOrEmpty(doctor.Specialization))
+        [HttpPost]
+        public IActionResult Add([FromBody] Doctor doctor)
         {
-            return BadRequest("Invalid doctor data.");
+            _service.Add(doctor);
+            return CreatedAtAction(nameof(GetAll), new { id = doctor.Id }, doctor);
         }
 
-        doctor.Id = doctors.Max(d => d.Id) + 1;
-        doctors.Add(doctor);
-        return CreatedAtAction(nameof(GetDoctorById), new { id = doctor.Id }, doctor);
-    }
-
-    [HttpDelete("{id}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public ActionResult DeleteDoctor(int id)
-    {
-        var doctor = doctors.FirstOrDefault(d => d.Id == id);
-        if (doctor == null)
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
         {
-            return NotFound("Doctor not found.");
+            _service.Delete(id);
+            return NoContent();
         }
-
-        doctors.Remove(doctor);
-        return NoContent();
     }
 }

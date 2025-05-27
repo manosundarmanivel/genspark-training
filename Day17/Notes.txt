@@ -1,0 +1,48 @@
+Updated the Day16 code
+
+
+Setup Npgsql EF Core with ASP.NET Core - Quick Steps
+
+1. Install Npgsql EF Core package:
+   Run in terminal inside project folder:
+   dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL
+
+2. Verify package installed by checking .csproj:
+   <ItemGroup>
+     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="x.y.z" />
+   </ItemGroup>
+
+3. In Program.cs (or Startup.cs), add using directives:
+   using Microsoft.EntityFrameworkCore;
+
+4. Configure DbContext in Program.cs:
+   builder.Services.AddDbContext<AppDbContext>(options =>
+       options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+5. Add connection string in appsettings.json:
+   {
+     "ConnectionStrings": {
+       "DefaultConnection": "Host=localhost;Port=5432;Database=yourdbname;Username=yourusername;Password=yourpassword"
+     }
+   }
+
+6. Create your DbContext class inheriting from DbContext:
+   public class AppDbContext : DbContext
+   {
+       public AppDbContext(DbContextOptions<AppDbContext> options)
+           : base(options)
+       {
+       }
+
+       // DbSets e.g.
+       public DbSet<Doctor> Doctors { get; set; }
+       public DbSet<Patient> Patients { get; set; }
+       public DbSet<Appointment> Appointments { get; set; }
+   }
+
+7. Add migrations and update database (ensure dotnet-ef is installed):
+   dotnet tool install --global dotnet-ef    (if not installed)
+   dotnet ef migrations add InitialCreate
+   dotnet ef database update
+
+8. Build and run your project.
