@@ -1,71 +1,31 @@
 using Microsoft.AspNetCore.Mvc;
-using FirstApi.Models; 
+using FirstApi.Models;
+using FirstApi.Services.Interfaces;
 
-[ApiController]
-[Route("/api/[controller]")]
-public class PatientController : ControllerBase
+namespace FirstApi.Controllers
 {
-    public static List<Patient> patients = new List<Patient>
+    [ApiController]
+    [Route("api/[controller]")]
+    public class PatientController : ControllerBase
     {
-        new Patient { Id = 1, Name = "John Doe", Age = 30, Gender = "Male", Address = "123 Main St" },
-    };
+        private readonly IService<Patient> _service;
+        public PatientController(IService<Patient> service) => _service = service;
 
-    [HttpGet]
-    [ProducesResponseType(typeof(List<Patient>), StatusCodes.Status200OK)]
-    public ActionResult<List<Patient>> GetPatients()
-    {
-        return Ok(patients);
-    }
-    [HttpGet("{id}")]
-    [ProducesResponseType(typeof(Patient), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public ActionResult<Patient> GetPatientById(int id)
-    {
-        var patient = patients.FirstOrDefault(p => p.Id == id);
-        if (patient == null)
-            return NotFound("Patient not found.");
+        [HttpGet]
+        public ActionResult<List<Patient>> GetAll() => _service.GetAll();
 
-        return Ok(patient);
-    }
-    [HttpPost]
-    [ProducesResponseType(typeof(Patient), StatusCodes.Status201Created)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status400BadRequest)]
-    public ActionResult<Patient> CreatePatient([FromBody] Patient newPatient)
-    {
-        if (newPatient == null)
-            return BadRequest("Invalid patient data.");
+        [HttpPost]
+        public IActionResult Add([FromBody] Patient patient)
+        {
+            _service.Add(patient);
+            return CreatedAtAction(nameof(GetAll), new { id = patient.Id }, patient);
+        }
 
-        newPatient.Id = patients.Max(p => p.Id) + 1;
-        patients.Add(newPatient);
-        return CreatedAtAction(nameof(GetPatientById), new { id = newPatient.Id }, newPatient);
-    }
-    [HttpPut("{id}")]
-    [ProducesResponseType(typeof(Patient), StatusCodes.Status200OK)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public ActionResult<Patient> UpdatePatient(int id, [FromBody] Patient updatedPatient)
-    {
-        var patient = patients.FirstOrDefault(p => p.Id == id);
-        if (patient == null)
-            return NotFound("Patient not found.");
-
-        patient.Name = updatedPatient.Name;
-        patient.Age = updatedPatient.Age;
-        patient.Gender = updatedPatient.Gender;
-        patient.Address = updatedPatient.Address;
-
-        return Ok(patient);
-    }
-
-    [HttpDelete("{id}")]
-    [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [ProducesResponseType(typeof(string), StatusCodes.Status404NotFound)]
-    public ActionResult DeletePatient(int id)
-    {
-        var patient = patients.FirstOrDefault(p => p.Id == id);
-        if (patient == null)
-            return NotFound("Patient not found.");
-
-        patients.Remove(patient);
-        return NoContent();
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _service.Delete(id);
+            return NoContent();
+        }
     }
 }
