@@ -14,10 +14,9 @@ public class User
     public string Email { get; set; } = null!;
 
 
-    [InverseProperty("Followee")]
+   
     public ICollection<UserFollow> Followers { get; set; } = new List<UserFollow>();
 
    
-    [InverseProperty("Follower")]
     public ICollection<UserFollow> Following { get; set; } = new List<UserFollow>();
 }
