@@ -5,14 +5,15 @@ namespace FirstAPI.Misc
 {
     public class PatientMapper
     {
-        public Patient? MapPatientAddRequestDoctor(PatientAddRequestDto addRequestDto)
+        public Patient MapPatientAddRequestToPatient(PatientAddRequestDto addRequestDto)
         {
-            Patient patient = new();
-            patient.Name = addRequestDto.Name;
-            patient.
-            doctor. = addRequestDto.YearsOfExperience;
-            doctor.Email = addRequestDto.Email;
-            return doctor;
+            return new Patient
+            {
+                Name = addRequestDto.Name,
+                Age = addRequestDto.Age,
+                Email = addRequestDto.Email,
+                Phone = addRequestDto.Phone
+            };
         }
     }
 }
