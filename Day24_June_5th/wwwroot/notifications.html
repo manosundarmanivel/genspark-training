@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SignalR Notification</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+</head>
+<body>
+    <h2>Notifications</h2>
+    <ul id="notificationsList"></ul>
+
+    <script>
+        // Create connection with automatic reconnect and credentials included
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5203/hub/notifications", { withCredentials: true })
+            .withAutomaticReconnect()
+            .build();
+
+        // Listen to "DocumentUploaded" event - adapt params according to backend
+        connection.on("DocumentUploaded", data => {
+            const notification = document.createElement("li");
+            const uploadedAt = new Date(data.uploadedAt).toLocaleString();
+            notification.textContent = `Document uploaded: "${data.title}" at ${uploadedAt}`;
+            document.getElementById("notificationsList").prepend(notification);
+        });
+
+        // Start the connection
+        connection.start()
+            .then(() => {
+                console.log("Connected to SignalR Hub");
+                // Optionally notify the hub on connection
+                // return connection.invoke("SendMessage", "Client", "Connected successfully");
+            })
+            .catch(err => console.error("SignalR connection error:", err));
+
+        // Optional: handle reconnecting events
+        connection.onreconnecting(error => {
+            console.warn("SignalR reconnecting...", error);
+        });
+
+        connection.onreconnected(connectionId => {
+            console.log("SignalR reconnected, connectionId:", connectionId);
+        });
+
+        connection.onclose(error => {
+            console.warn("SignalR connection closed", error);
+        });
+        
+    </script>
+    
+</body>
+</html>
