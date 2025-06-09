@@ -1,0 +1,395 @@
+
+
+body {
+  margin: 0;
+  font-family: 'Inter', 'Roboto', sans-serif;
+  background-color: #F5F5F5;
+  color: #333;
+}
+
+.container {
+  max-width: 1140px;
+  margin: auto;
+  padding: 0 24px;
+}
+
+
+
+.header {
+  background: #fff;
+  padding: 24px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.header .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header nav a {
+  margin: 0 16px;
+  text-decoration: none;
+  color: #333;
+}
+
+.header .logo {
+  display: flex;
+  align-items: center;
+}
+
+.header .logo h1 {
+  font-size: 28px;
+}
+
+.header .logo .logo-icon {
+  color: rgb(30, 173, 230);
+  height: 40px;
+  width: 40px;
+  padding: 12px;
+}
+
+.header .btn {
+  margin-left: 12px;
+}
+
+
+
+.hero {
+  background: #EAF6FF;
+}
+
+.hero-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.hero-text {
+  max-width: 50%;
+}
+
+.hero-text h1 {
+  font-size: 60px;
+  font-weight: 600;
+}
+
+.hero-text p {
+  font-size: 20px;
+  font-weight: 100;
+  line-height: 1.6;
+}
+
+.hero-image img {
+  width: 400px;
+  height: auto;
+}
+
+
+
+.services {
+  padding: 64px 0;
+  background: #fff;
+  text-align: center;
+}
+
+.services .container h2 {
+  font-size: 36px;
+}
+
+.services .container h3 {
+  font-size: 22px;
+}
+
+.services .container p {
+  font-size: 16px;
+}
+
+.cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 32px;
+}
+
+.card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+  width: 280px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.service-icon {
+  color: rgb(22, 172, 231);
+  height: 60px;
+  width: 60px;
+  padding: 5px;
+}
+
+
+
+.testimonials {
+  background: #EAF6FF;
+  padding: 64px 0;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.testimonials .container h2 {
+  font-size: 36px;
+}
+
+.testimonials .container p {
+  font-size: 20px;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.testimonial-icon {
+  color: rgb(22, 172, 231);
+  height: 60px;
+  width: 60px;
+  padding: 10px;
+}
+
+.icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.author {
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+
+
+.hours {
+  background: #fff;
+  padding: 64px 0;
+}
+
+.hours-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 54px;
+  padding: 0 200px;
+}
+
+.hours-grid .sub-container div {
+  justify-items: center;
+}
+
+.hours-icon {
+  color: rgb(22, 172, 231);
+  height: 50px;
+  width: 50px;
+  padding: 10px;
+}
+
+
+
+.btn {
+  background: rgb(83, 201, 247);
+  color: #000;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn.book {
+  background-color: rgb(81, 198, 244);
+  padding: 5px 20px;
+  margin-top: 20px;
+}
+
+.btn.book h1 {
+  font-size: 18px;
+  font-weight: 100;
+  color: white;
+}
+
+.btn.outline {
+  background: none;
+  border: 1px solid #666;
+  color: #333;
+}
+
+.btn:hover {
+  background-color: rgb(30, 173, 230);
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn.book:hover {
+  background-color: rgb(25, 150, 210);
+  color: white;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn.outline:hover {
+  background-color: #333;
+  color: #fff;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 6px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  border-radius: 2px;
+  
+}
+
+
+
+@media (max-width: 768px) {
+  .header .container {
+    align-items: center;
+    position: relative;
+  }
+
+  .header nav {
+    margin-top: 12px;
+  
+  }
+
+  .header nav a {
+    padding: 12px 24px;
+    
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links a,
+  .nav-links .btn {
+    margin: 12px 0;
+  }
+
+  .hero-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 100%;
+  }
+
+  .hero-text h1 {
+    font-size: 40px;
+  }
+
+  .hero-text p {
+    font-size: 18px;
+  }
+
+  .hero-image img {
+    width: 100%;
+    max-width: 320px;
+    margin-top: 24px;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 90%;
+    margin-bottom: 16px;
+  }
+
+  
+
+  .testimonials {
+    padding: 48px 16px;
+  }
+
+  .testimonial-card {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .testimonial-icon {
+    margin-bottom: 12px;
+  }
+
+  .hours-grid {
+    gap: 32px;
+    padding: 0 30px;
+  }
+
+  .hours-grid .sub-container div {
+    justify-items: center;
+  }
+
+  .hours-icon {
+    height: 35px;
+    width: 35px;
+    padding: 10px;
+  }
+
+  .btn {
+    width: 100%;
+    text-align: center;
+    margin: 10px 0;
+  }
+
+  .btn.book h1 {
+    font-size: 16px;
+  }
+}
