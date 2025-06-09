@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Doctor's Clinic</title>
+    <link rel="stylesheet" href="styles.css" />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600&family=Roboto&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="logo-icon" data-lucide="stethoscope"></i>
+                <h1>Doctor’s Clinic</h1>
+            </div>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="nav-links" id="navLinks">
+                <a href="#">Home</a>
+                <a href="#">Services</a>
+                <button class="btn login">Log In</button>
+                <button class="btn outline">Register</button>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Quality Care for Your Health</h1>
+                <p>Our clinic provides the best medical services for you and your family.</p>
+                <button class="btn book">
+                    <h1>Book Appointment</h1>
+                </button>
+            </div>
+            <div class="hero-image">
+                <img src="./Assets/hero.png" alt="Doctor" />
+            </div>
+        </div>
+    </section>
+
+    <section class="services">
+        <div class="container">
+            <h2>Our Services</h2>
+            <div class="cards">
+                <div class="card">
+                    <div class="icon"><i class="service-icon" data-lucide="stethoscope"></i></div>
+                    <h3>Primary Care</h3>
+                    <p>Provide doctor early care or cutlanes.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="service-icon" data-lucide="baby"></i></div>
+                    <h3>Pediatrics</h3>
+                    <p>Provide careare with kids in-names.</p>
+                </div>
+                <div class="card">
+                    <div class="icon"><i class="service-icon" data-lucide="heart-pulse"></i></div>
+                    <h3>Specialty Care</h3>
+                    <p>Provide accarearie and curisel-car.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <h2>What Our Patients Are Saying</h2>
+            <div class="testimonial-card">
+                <i class="testimonial-icon" data-lucide="quote"></i>
+                <div>
+                    <p class="quote">Excellent service and wonderful staff. <br>I always feel well taken care of.</p>
+                    <p class="author">John D.</p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="hours">
+        <div class="container hours-grid">
+            <div class="sub-container">
+                <div>
+                    <i class="hours-icon" data-lucide="clock"></i>
+                    <h2></i> Clinic Hours</h2>
+                </div>
+                <p>Monday – Friday 8:00 AM – 6:00 PM</p>
+                <p>Saturday 9:00 AM – 1:00 PM</p>
+            </div>
+            <div class="sub-container">
+                <div>
+                    <i class="hours-icon" data-lucide="calendar"></i>
+                    <h2> Clinic Days</h2>
+                </div>
+                <p>Monday – Friday 8:00 AM – 5:00 PM</p>
+                <p>Saturday 9:00 AM – 1:00 PM</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+    </script>
+</body>
+
+</html>
