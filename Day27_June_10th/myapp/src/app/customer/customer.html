@@ -1,0 +1,14 @@
+<div class="customer-details">
+  <h3>Customer Details</h3>
+  <p><strong>Name:</strong> {{ customer.name }}</p>
+  <p><strong>Email:</strong> {{ customer.email }}</p>
+  <p><strong>City:</strong> {{ customer.city }}</p>
+
+  <div class="reactions">
+    <i class="bi bi-hand-thumbs-up" (click)="like()"></i>
+    <span>{{ likes }}</span>
+    <i class="bi bi-hand-thumbs-down" (click)="dislike()"></i>
+    <span>{{ dislikes }}</span>
+   
+  </div>
+</div>

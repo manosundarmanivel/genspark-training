@@ -1,6 +1,6 @@
-namespace ElearnAPI.DTOs.Auth
+namespace ElearnAPI.DTOs
 {
-    public class LoginRequestDto
+    public class LoginDto
     {
         public string Username { get; set; } = null!;
         public string Password { get; set; } = null!;

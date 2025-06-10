@@ -18,16 +18,25 @@ namespace ElearnAPI.Repositories
             _context = context;
         }
 
-        public async Task AddAsync(Course course)
-        {
-            await _context.Courses.AddAsync(course);
-        }
+public async Task AddAsync(Course course)
+{
+    await _context.Courses.AddAsync(course);
+    await _context.SaveChangesAsync(); 
+}
 
-        public async Task DeleteAsync(Course course)
-        {
-            course.IsDeleted = true;
-            _context.Courses.Update(course);
-        }
+public async Task DeleteAsync(Course course)
+{
+    course.IsDeleted = true;
+    _context.Courses.Update(course);
+    await _context.SaveChangesAsync(); 
+}
+
+public async Task UpdateAsync(Course course)
+{
+    _context.Courses.Update(course);
+    await _context.SaveChangesAsync();
+}
+
 
         public async Task<IEnumerable<Course>> GetAllAsync(int page, int pageSize)
         {
@@ -52,10 +61,7 @@ namespace ElearnAPI.Repositories
                 .ToListAsync();
         }
 
-        public async Task UpdateAsync(Course course)
-        {
-            _context.Courses.Update(course);
-        }
+      
 
         public async Task<int> CountAsync()
         {

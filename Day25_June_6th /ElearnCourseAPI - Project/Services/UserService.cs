@@ -1,3 +1,4 @@
+// Services/UserService.cs
 using AutoMapper;
 using ElearnAPI.DTOs;
 using ElearnAPI.Interfaces.Repositories;
@@ -45,13 +46,15 @@ namespace ElearnAPI.Services
         public async Task<UserDto?> GetByIdAsync(Guid id)
         {
             var user = await _userRepository.GetByIdAsync(id);
-            return user == null ? null : _mapper.Map<UserDto>(user);
+            if (user == null) return null;
+            return _mapper.Map<UserDto>(user);
         }
 
         public async Task<UserDto?> GetByUsernameAsync(string username)
         {
             var user = await _userRepository.GetByUsernameAsync(username);
-            return user == null ? null : _mapper.Map<UserDto>(user);
+            if (user == null) return null;
+            return _mapper.Map<UserDto>(user);
         }
 
         public async Task<bool> UpdateAsync(Guid id, UserDto userDto)
@@ -60,8 +63,26 @@ namespace ElearnAPI.Services
             if (user == null) return false;
 
             user.Username = userDto.Username;
+            user.Role = userDto.Role;
+            user.UpdatedAt = DateTime.UtcNow;
+
             await _userRepository.UpdateAsync(user);
             return true;
+        }
+
+        public async Task<User?> GetUserModelByUsernameAsync(string username)
+        {
+            return await _userRepository.GetByUsernameAsync(username);
+        }
+
+        public async Task<User?> GetByRefreshTokenAsync(string refreshToken)
+        {
+            return await _userRepository.GetByRefreshTokenAsync(refreshToken);
+        }
+
+        public async Task UpdateRefreshTokenAsync(User user)
+        {
+            await _userRepository.UpdateAsync(user);
         }
     }
 }

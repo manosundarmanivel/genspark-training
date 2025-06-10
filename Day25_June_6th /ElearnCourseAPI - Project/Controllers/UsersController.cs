@@ -1,5 +1,7 @@
+// Controllers/UsersController.cs
 using ElearnAPI.DTOs;
 using ElearnAPI.Interfaces.Services;
+using ElearnAPI.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -30,34 +32,48 @@ namespace ElearnAPI.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var user = await _userService.GetByIdAsync(id);
-            if (user == null) return NotFound();
+            if (user == null) return NotFound(new { success = false, message = "User not found." });
             return Ok(new { success = true, data = user });
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateUserDto dto)
         {
-            var user = await _userService.CreateAsync(new UserDto
+            if (!ModelState.IsValid)
+                return BadRequest(new { success = false, message = "Invalid data." });
+
+           
+            var existingUser = await _userService.GetByUsernameAsync(dto.Username);
+            if (existingUser != null)
+                return Conflict(new { success = false, message = "Username already exists." });
+
+            var userDto = new UserDto
             {
                 Username = dto.Username,
                 Role = dto.Role
-            }, dto.Password);
+            };
 
+            var user = await _userService.CreateAsync(userDto, dto.Password);
             return CreatedAtAction(nameof(GetById), new { id = user.Id }, new { success = true, data = user });
         }
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(Guid id, [FromBody] UserDto userDto)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(new { success = false, message = "Invalid data." });
+
             var result = await _userService.UpdateAsync(id, userDto);
-            return result ? Ok(new { success = true }) : NotFound();
+            if (!result) return NotFound(new { success = false, message = "User not found." });
+            return Ok(new { success = true });
         }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
             var result = await _userService.DeleteAsync(id);
-            return result ? Ok(new { success = true }) : NotFound();
+            if (!result) return NotFound(new { success = false, message = "User not found." });
+            return Ok(new { success = true });
         }
     }
 }
