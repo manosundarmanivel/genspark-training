@@ -2,6 +2,7 @@ using ElearnAPI.DTOs;
 using ElearnAPI.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -12,6 +13,7 @@ namespace ElearnAPI.Controllers
     public class UploadController : ControllerBase
     {
         private readonly IUploadService _uploadService;
+        private readonly string _uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
         public UploadController(IUploadService uploadService)
         {
@@ -22,32 +24,56 @@ namespace ElearnAPI.Controllers
         [HttpPost("upload")]
         public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
         {
-            var path = Path.Combine("Uploads", dto.File.FileName);
-
-            using (var stream = new FileStream(path, FileMode.Create))
+            try
             {
-                await dto.File.CopyToAsync(stream);
+               
+                if (!Directory.Exists(_uploadRoot))
+                    Directory.CreateDirectory(_uploadRoot);
+
+                
+                var sanitizedFileName = Path.GetFileName(dto.File.FileName);
+
+              
+                var filePath = Path.Combine(_uploadRoot, sanitizedFileName);
+
+            
+                using (var stream = new FileStream(filePath, FileMode.Create))
+                {
+                    await dto.File.CopyToAsync(stream);
+                }
+
+                
+                var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
+                {
+                    FileName = sanitizedFileName,
+                    Path = filePath,
+                    UploadedBy = User.Identity?.Name ?? "Unknown"
+                });
+
+                return Ok(new { success = true, data = fileMeta });
             }
-
-            var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
+            catch (Exception ex)
             {
-                FileName = dto.File.FileName,
-                Path = path,
-                UploadedBy = User.Identity?.Name ?? "Unknown"
-            });
-
-            return Ok(new { success = true, data = fileMeta });
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = "File upload failed.",
+                    error = ex.Message
+                });
+            }
         }
 
         [HttpGet("{filename}")]
         public IActionResult Download(string filename)
         {
-            var path = Path.Combine("Uploads", filename);
-            if (!System.IO.File.Exists(path))
+            var sanitizedFileName = Path.GetFileName(filename);
+            var filePath = Path.Combine(_uploadRoot, sanitizedFileName);
+
+            if (!System.IO.File.Exists(filePath))
                 return NotFound(new { success = false, message = "File not found" });
 
-            var fileBytes = System.IO.File.ReadAllBytes(path);
-            return File(fileBytes, "application/octet-stream", filename);
+            var fileBytes = System.IO.File.ReadAllBytes(filePath);
+            return File(fileBytes, "application/octet-stream", sanitizedFileName);
         }
     }
 }

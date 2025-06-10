@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using ElearnAPI.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
 
-builder.Services.AddDbContext<AppDbContext>(options =>
+builder.Services.AddDbContext<ElearnDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 // AutoMapper
@@ -28,12 +29,18 @@ builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
+builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+
+
 
 // Services
+builder.Services.AddScoped<IRoleService, RoleService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
 // JWT Authentication
 var jwtConfig = builder.Configuration.GetSection("Jwt");
@@ -117,6 +124,6 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
-app.MapHub<NotificationHub>("/notifications");
+app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();

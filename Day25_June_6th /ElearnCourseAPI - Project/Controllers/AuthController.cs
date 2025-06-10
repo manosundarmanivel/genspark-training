@@ -1,11 +1,11 @@
 using ElearnAPI.DTOs;
-using ElearnAPI.Interfaces;
 using ElearnAPI.Interfaces.Services;
 using ElearnAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Security.Claims;
 using System.Threading.Tasks;
+using AutoMapper;
+using ElearnAPI.Interfaces;  
 
 namespace ElearnAPI.Controllers
 {
@@ -15,17 +15,52 @@ namespace ElearnAPI.Controllers
     {
         private readonly IUserService _userService;
         private readonly IJwtTokenService _jwtService;
+        private readonly IMapper _mapper;
+private readonly IRoleService _roleService;
 
-        public AuthController(IUserService userService, IJwtTokenService jwtService)
-        {
-            _userService = userService;
-            _jwtService = jwtService;
-        }
+public AuthController(IUserService userService, IJwtTokenService jwtService, IMapper mapper, IRoleService roleService)
+{
+    _userService = userService;
+    _jwtService = jwtService;
+    _mapper = mapper;
+    _roleService = roleService;
+}
+
+
+
+[HttpPost("register")]
+public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+{
+    var existingUser = await _userService.GetByUsernameAsync(dto.Username);
+    if (existingUser != null)
+        return BadRequest(new { success = false, message = "Username already taken" });
+
+    var role = await _roleService.GetByNameAsync(dto.Role);
+    if (role == null)
+        return BadRequest(new { success = false, message = "Invalid role specified" });
+
+    var userDto = new UserDto
+    {
+        Username = dto.Username,
+        Role = role
+    };
+
+    var createdUserDto = await _userService.CreateAsync(userDto, dto.Password);
+
+    if (createdUserDto == null)
+        return StatusCode(500, new { success = false, message = "User creation failed" });
+
+    return Ok(new { success = true, data = createdUserDto });
+}
+
+
+
 
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = await _userService.GetByUsernameAsync(dto.Username);
+            // Get full User model (not UserDto)
+            var user = await _userService.GetUserModelByUsernameAsync(dto.Username);
             if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
                 return Unauthorized(new { success = false, message = "Invalid credentials" });
 
@@ -34,7 +69,8 @@ namespace ElearnAPI.Controllers
 
             user.RefreshToken = refreshToken;
             user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
-            await _userService.UpdateRefreshTokenAsync(user); // save refresh info
+
+            await _userService.UpdateRefreshTokenAsync(user);
 
             return Ok(new
             {
@@ -56,6 +92,7 @@ namespace ElearnAPI.Controllers
 
             user.RefreshToken = newRefreshToken;
             user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(7);
+
             await _userService.UpdateRefreshTokenAsync(user);
 
             return Ok(new
@@ -66,30 +103,6 @@ namespace ElearnAPI.Controllers
             });
         }
 
-        [HttpPost("logout")]
-        public async Task<IActionResult> Logout()
-        {
-            var username = User.Identity?.Name;
-            if (username == null) return Unauthorized();
 
-            var user = await _userService.GetByUsernameAsync(username);
-            if (user == null) return Unauthorized();
-
-            user.RefreshToken = null;
-            user.RefreshTokenExpiryTime = null;
-            await _userService.UpdateRefreshTokenAsync(user);
-
-            return Ok(new { success = true, message = "Logged out" });
-        }
-
-        [HttpGet("me")]
-        public async Task<IActionResult> Me()
-        {
-            var username = User.Identity?.Name;
-            if (username == null) return Unauthorized();
-
-            var user = await _userService.GetByUsernameAsync(username);
-            return Ok(new { success = true, data = user });
-        }
     }
 }

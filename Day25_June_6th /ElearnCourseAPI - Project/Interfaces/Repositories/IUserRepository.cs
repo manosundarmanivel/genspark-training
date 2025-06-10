@@ -14,5 +14,8 @@ namespace ElearnAPI.Interfaces.Repositories
         Task UpdateAsync(User user);
         Task DeleteAsync(User user);
         Task<int> CountAsync();
+
+        Task<User?> GetByRefreshTokenAsync(string refreshToken);
+
     }
 }
