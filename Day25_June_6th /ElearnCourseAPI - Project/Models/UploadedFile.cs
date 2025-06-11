@@ -13,5 +13,7 @@ namespace ElearnAPI.Models
         public DateTime UploadedAt { get; set; } = DateTime.UtcNow;
 
         public Guid CourseId { get; set; }
+
+        public string Path { get; set; } = null!; 
     }
 }

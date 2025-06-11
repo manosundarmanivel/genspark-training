@@ -5,6 +5,6 @@ namespace ElearnAPI.DTOs
     public class UploadFileDto
     {
         public IFormFile File { get; set; } = null!;
-        public string CourseId { get; set; } = null!;
+         public Guid CourseId { get; set; }
     }
 }

@@ -12,6 +12,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
 using ElearnAPI.SignalR;
+using System.Security.Claims;
+using Microsoft.AspNetCore.RateLimiting;
+using System.Threading.RateLimiting;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +45,66 @@ builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = 429;
+
+  
+    options.OnRejected = async (context, token) =>
+    {
+        context.HttpContext.Response.ContentType = "application/json";
+        context.HttpContext.Response.StatusCode = 429;
+
+        var errorResponse = new
+        {
+            success = false,
+            message = "Rate limit exceeded. Please try again later."
+        };
+
+        await context.HttpContext.Response.WriteAsJsonAsync(errorResponse, cancellationToken: token);
+    };
+
+
+options.AddPolicy("StudentPolicy", context =>
+{
+    var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous_student";
+
+    return RateLimitPartition.GetTokenBucketLimiter<string>(
+        userId,
+        _ => new TokenBucketRateLimiterOptions
+        {
+            TokenLimit = 100,
+            TokensPerPeriod = 100,
+            ReplenishmentPeriod = TimeSpan.FromMinutes(1),
+            AutoReplenishment = true,
+            QueueLimit = 0,
+            QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+        });
+});
+
+
+options.AddPolicy("InstructorPolicy", context =>
+{
+    var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous_instructor";
+
+    return RateLimitPartition.GetTokenBucketLimiter<string>(
+        userId,
+        _ => new TokenBucketRateLimiterOptions
+        {
+            TokenLimit = 3,
+            TokensPerPeriod = 3,
+            ReplenishmentPeriod = TimeSpan.FromMinutes(1),
+            AutoReplenishment = true,
+            QueueLimit = 0,
+            QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+        });
+});
+
+
+});
+
+
+
 // JWT Authentication
 var jwtConfig = builder.Configuration.GetSection("Jwt");
 var key = Encoding.UTF8.GetBytes(jwtConfig["Key"]!);
@@ -64,12 +127,16 @@ builder.Services.AddAuthentication(opt =>
     };
 });
 
-// CORS
+
+
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+// Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", policy =>
+    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
     {
-        policy.WithOrigins("http://localhost:3000")
+        policy.WithOrigins("http://127.0.0.1:5500")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
@@ -110,6 +177,9 @@ var app = builder.Build();
 // Middleware pipeline
 app.UseMiddleware<ErrorHandlingMiddleware>();
 
+// Use rate limiter
+app.UseRateLimiter();
+
 app.UseCors("AllowFrontend");
 
 if (app.Environment.IsDevelopment())
@@ -117,11 +187,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseCors(MyAllowSpecificOrigins);
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+
 
 app.MapControllers();
 app.MapHub<NotificationHub>("/notificationHub");

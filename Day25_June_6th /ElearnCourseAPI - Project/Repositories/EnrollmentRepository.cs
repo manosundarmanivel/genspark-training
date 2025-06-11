@@ -48,5 +48,19 @@ namespace ElearnAPI.Repositories
                 .Select(e => e.Course)
                 .ToListAsync();
         }
+
+      
+
+
+        public async Task<IEnumerable<Enrollment>> GetEnrollmentsByCourseIdAsync(Guid courseId)
+        {
+            return await _context.Enrollments
+                .Include(e => e.Student)
+                .Where(e => e.CourseId == courseId)
+                .ToListAsync();
+        }
+
+
+
     }
 }
