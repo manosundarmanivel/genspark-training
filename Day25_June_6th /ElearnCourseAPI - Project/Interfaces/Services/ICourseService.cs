@@ -10,7 +10,8 @@ namespace ElearnAPI.Interfaces.Services
         Task<CourseDto?> GetByIdAsync(Guid id);
         Task<IEnumerable<CourseDto>> GetAllAsync(int page, int pageSize);
         Task<IEnumerable<CourseDto>> GetByInstructorIdAsync(Guid instructorId, int page, int pageSize);
-        Task<CourseDto> CreateAsync(CourseDto courseDto);
+        Task<CourseDto> CreateAsync(CourseDto courseDto, Guid instructorId);
+
         Task<bool> UpdateAsync(Guid id, CourseDto courseDto);
         Task<bool> DeleteAsync(Guid id);
     }

@@ -4,6 +4,7 @@ using ElearnAPI.Interfaces.Repositories;
 using ElearnAPI.Interfaces.Services;
 using ElearnAPI.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ElearnAPI.Services
@@ -30,8 +31,19 @@ namespace ElearnAPI.Services
         {
             var file = await _uploadRepository.GetByIdAsync(id);
             if (file == null) return false;
+
             await _uploadRepository.DeleteAsync(file);
             return true;
+        }
+
+        public async Task<List<UploadedFile>> GetFilesByCourseIdAsync(Guid courseId)
+        {
+            return await _uploadRepository.GetFilesByCourseIdAsync(courseId);
+        }
+
+        public async Task<UploadedFile?> GetFileByIdAsync(Guid fileId)
+        {
+            return await _uploadRepository.GetByIdAsync(fileId);
         }
     }
 }

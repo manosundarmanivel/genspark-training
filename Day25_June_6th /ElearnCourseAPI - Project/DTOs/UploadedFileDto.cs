@@ -4,7 +4,7 @@ namespace ElearnAPI.DTOs
     {
         public string FileName { get; set; } = null!;
         public string Path { get; set; } = null!;
-        public string UploadedBy { get; set; } = null!;
-        public DateTime UploadedAt { get; set; }
+        public Guid CourseId { get; set; }
+     
     }
 }

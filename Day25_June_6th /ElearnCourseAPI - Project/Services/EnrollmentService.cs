@@ -4,16 +4,21 @@ using System.Threading.Tasks;
 using ElearnAPI.Interfaces.Repositories;
 using ElearnAPI.Interfaces.Services;
 using ElearnAPI.Models;
+using ElearnAPI.DTOs;
+using AutoMapper;
+
 
 namespace ElearnAPI.Services
 {
     public class EnrollmentService : IEnrollmentService
     {
         private readonly IEnrollmentRepository _enrollmentRepo;
+        private readonly IMapper _mapper;
 
-        public EnrollmentService(IEnrollmentRepository enrollmentRepo)
+        public EnrollmentService(IEnrollmentRepository enrollmentRepo, IMapper mapper)
         {
             _enrollmentRepo = enrollmentRepo;
+            _mapper = mapper;
         }
 
         public async Task<bool> EnrollStudentAsync(Guid userId, Guid courseId)
@@ -44,5 +49,17 @@ namespace ElearnAPI.Services
         {
             return await _enrollmentRepo.GetEnrolledCoursesAsync(userId);
         }
+
+        public async Task<bool> IsStudentEnrolledInCourseAsync(Guid userId, Guid courseId)
+        {
+            return await _enrollmentRepo.IsEnrolledAsync(userId, courseId);
+        }
+
+        public async Task<IEnumerable<UserDto>> GetStudentsEnrolledInCourseAsync(Guid courseId)
+{
+    var enrollments = await _enrollmentRepo.GetEnrollmentsByCourseIdAsync(courseId);
+    return enrollments.Select(e => _mapper.Map<UserDto>(e.Student));
+}
+
     }
 }

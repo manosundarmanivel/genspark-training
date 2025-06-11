@@ -9,5 +9,8 @@ namespace ElearnAPI.Interfaces.Repositories
         Task<UploadedFile?> GetByIdAsync(Guid id);
         Task AddAsync(UploadedFile file);
         Task DeleteAsync(UploadedFile file);
+        Task<List<UploadedFile>> GetFilesByCourseIdAsync(Guid courseId);
+
+
     }
 }

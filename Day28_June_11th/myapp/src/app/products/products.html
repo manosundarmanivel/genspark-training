@@ -1,0 +1,12 @@
+@if (products) {
+    <div class="products">
+        @for (item of products; track item.id) {
+            <app-product [product]="item"></app-product>
+        }
+    </div>
+}
+@else {
+    <div>
+        No products available
+    </div>
+}

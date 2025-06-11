@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Learning Notification</title>
+</head>
+<body>
+    <h2>E-Learning Notifications</h2>
+    <p>Listening for file upload notifications for your course...</p>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/7.0.5/signalr.min.js"></script>
+    <script>
+    
+        const jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub3N1bmRhckBnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTc1OTU0LTkxZTItN2MzMy1iZWYxLWJhOWZmMDE0MmJkNyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NDk2Mzg5MDAsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.eXza7w_uvz2AuQSYxS-cxHXH4jKcSYcx57UnKEAKqPU";        
+        const courseId = "019755e3-b46c-7cd3-853a-2f8c60ee7d8b"; 
+
+   
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("http://localhost:5295/notificationHub", { 
+                accessTokenFactory: () => jwtToken
+            })
+            .configureLogging(signalR.LogLevel.Information)
+            .build();
+
+       
+        connection.on("ReceiveNotification", (data) => {
+            alert(`${data.message}`);
+            console.log("Notification:", data);
+        });
+
+        
+        connection.start()
+            .then(() => {
+                console.log("Connected to SignalR hub!");
+                return connection.invoke("JoinCourseGroup", courseId);
+            })
+            .then(() => {
+                console.log(`Joined course group: course-${courseId}`);
+            })
+            .catch(err => console.error("Connection error:", err));
+    </script>
+</body>
+</html>

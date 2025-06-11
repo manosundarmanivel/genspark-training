@@ -1,9 +1,13 @@
+// Controllers/UploadController.cs
 using ElearnAPI.DTOs;
 using ElearnAPI.Interfaces.Services;
+using ElearnAPI.SignalR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System;
 using System.IO;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace ElearnAPI.Controllers
@@ -13,11 +17,13 @@ namespace ElearnAPI.Controllers
     public class UploadController : ControllerBase
     {
         private readonly IUploadService _uploadService;
+        private readonly IHubContext<NotificationHub> _hubContext;
         private readonly string _uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
-        public UploadController(IUploadService uploadService)
+        public UploadController(IUploadService uploadService, IHubContext<NotificationHub> hubContext)
         {
             _uploadService = uploadService;
+            _hubContext = hubContext;
         }
 
         [Authorize(Roles = "Instructor")]
@@ -26,29 +32,36 @@ namespace ElearnAPI.Controllers
         {
             try
             {
-               
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (!Guid.TryParse(userIdClaim, out var uploadedBy))
+                    return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
+
                 if (!Directory.Exists(_uploadRoot))
                     Directory.CreateDirectory(_uploadRoot);
 
-                
                 var sanitizedFileName = Path.GetFileName(dto.File.FileName);
-
-              
                 var filePath = Path.Combine(_uploadRoot, sanitizedFileName);
 
-            
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
                     await dto.File.CopyToAsync(stream);
                 }
 
-                
                 var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
                 {
                     FileName = sanitizedFileName,
                     Path = filePath,
-                    UploadedBy = User.Identity?.Name ?? "Unknown"
+                    CourseId = dto.CourseId,
                 });
+
+                
+                await _hubContext.Clients.Group($"course-{dto.CourseId}")
+                    .SendAsync("ReceiveNotification", new
+                    {
+                        message = $"📂 New file uploaded: {sanitizedFileName}",
+                        courseId = dto.CourseId,
+                        uploadedAt = DateTime.UtcNow
+                    });
 
                 return Ok(new { success = true, data = fileMeta });
             }
