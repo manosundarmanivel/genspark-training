@@ -1,0 +1,761 @@
+2025-06-12 11:38:12.551 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-12 11:38:12.735 +05:30 [INF] Now listening on: http://localhost:5295
+2025-06-12 11:38:12.736 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 11:38:12.737 +05:30 [INF] Hosting environment: Development
+2025-06-12 11:38:12.737 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-06-12 11:39:04.772 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 72
+2025-06-12 11:39:04.840 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-12 11:39:04.954 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 6:09:04 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 11:39:04.974 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 6:09:04 AM'.
+2025-06-12 11:39:04.980 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 11:39:05.004 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 11:39:06.928 +05:30 [INF] Executed DbCommand (66ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 11:39:07.599 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 11:39:07.614 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 11:39:07.638 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 2628.5214ms
+2025-06-12 11:39:07.643 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 11:39:07.656 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 2889.8471ms
+2025-06-12 11:39:47.079 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-06-12 11:39:47.109 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-12 11:39:47.116 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-12 11:39:47.122 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-06-12 11:39:47.152 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-12 11:39:47.153 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-12 11:39:47.162 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-06-12 11:39:47.204 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 11:39:47.218 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 101.8125ms
+2025-06-12 11:39:47.218 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-12 11:39:47.219 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 139.5998ms
+2025-06-12 11:41:55.291 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-12 11:41:55.307 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 3:58:14 AM', Current time (UTC): '6/12/2025 6:11:55 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 11:41:55.308 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 3:58:14 AM', Current time (UTC): '6/12/2025 6:11:55 AM'.
+2025-06-12 11:41:55.312 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Instructor)
+2025-06-12 11:41:55.320 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 11:41:55.320 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 401 0 null 28.9506ms
+2025-06-12 11:42:20.576 +05:30 [INF] Application is shutting down...
+2025-06-12 11:59:38.921 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-12 11:59:39.102 +05:30 [INF] Now listening on: http://localhost:5295
+2025-06-12 11:59:39.104 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 11:59:39.105 +05:30 [INF] Hosting environment: Development
+2025-06-12 11:59:39.105 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-06-12 12:24:10.396 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 72
+2025-06-12 12:24:10.476 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-12 12:24:10.581 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 6:54:10 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:24:10.615 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 6:54:10 AM'.
+2025-06-12 12:24:10.625 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 12:24:10.659 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 12:24:11.023 +05:30 [INF] Login attempt for user manosundar@gmail.com
+2025-06-12 12:24:12.760 +05:30 [INF] Executed DbCommand (49ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 12:24:13.806 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 12:24:13.818 +05:30 [INF] User manosundar@gmail.com logged in successfully
+2025-06-12 12:24:13.824 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:24:13.848 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 3183.1077ms
+2025-06-12 12:24:13.856 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 12:24:13.869 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 3477.7968ms
+2025-06-12 12:27:02.424 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - application/json 83
+2025-06-12 12:27:02.429 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-12 12:27:02.438 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ElearnAPI.DTOs.RegisterDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 12:27:02.465 +05:30 [INF] Executing BadRequestObjectResult, writing value of type 'Microsoft.AspNetCore.Mvc.ValidationProblemDetails'.
+2025-06-12 12:27:02.505 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI) in 66.4472ms
+2025-06-12 12:27:02.505 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-12 12:27:02.505 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - 400 null application/problem+json; charset=utf-8 81.2475ms
+2025-06-12 12:28:44.290 +05:30 [INF] Application is shutting down...
+2025-06-12 12:28:55.662 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-12 12:28:55.848 +05:30 [INF] Now listening on: http://localhost:5295
+2025-06-12 12:28:55.850 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-12 12:28:55.850 +05:30 [INF] Hosting environment: Development
+2025-06-12 12:28:55.851 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-06-12 12:29:02.500 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - application/json 83
+2025-06-12 12:29:02.568 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-12 12:29:02.606 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-12 12:29:02.631 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ElearnAPI.DTOs.RegisterDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 12:29:02.973 +05:30 [INF] Registering user muthu@gmail.com with role Student
+2025-06-12 12:29:04.478 +05:30 [INF] Executed DbCommand (66ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 12:29:04.514 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__name_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Name"
+FROM "Roles" AS r
+WHERE r."Name" = @__name_0
+LIMIT 1
+2025-06-12 12:29:05.140 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "PasswordHash", "RefreshToken", "RefreshTokenExpiryTime", "RoleId", "UpdatedAt", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING "IsDeleted";
+2025-06-12 12:29:05.164 +05:30 [INF] User muthu@gmail.com registered successfully
+2025-06-12 12:29:05.173 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-12 12:29:05.206 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI) in 2569.7945ms
+2025-06-12 12:29:05.211 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-12 12:29:05.224 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - 200 null application/json; charset=utf-8 2728.5519ms
+2025-06-12 12:29:33.067 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 62
+2025-06-12 12:29:33.140 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 6:59:33 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:29:33.156 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 6:59:33 AM'.
+2025-06-12 12:29:33.156 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 12:29:33.163 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 12:29:33.186 +05:30 [INF] Login attempt for user muthu@gmail.com
+2025-06-12 12:29:33.215 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 12:29:33.627 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 12:29:33.630 +05:30 [INF] User muthu@gmail.com logged in successfully
+2025-06-12 12:29:33.630 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:29:33.632 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 469.2238ms
+2025-06-12 12:29:33.633 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 12:29:33.633 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 566.3009ms
+2025-06-12 12:29:50.779 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-06-12 12:29:50.806 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-12 12:29:50.811 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-12 12:29:50.822 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-06-12 12:29:50.916 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-12 12:29:50.918 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-12 12:29:50.936 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-06-12 12:29:50.970 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:29:50.977 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 165.4654ms
+2025-06-12 12:29:50.978 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-12 12:29:50.978 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 199.0958ms
+2025-06-12 12:30:12.059 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:30:12.061 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 7:00:12 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:30:12.062 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 7:00:12 AM'.
+2025-06-12 12:30:12.066 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Student)
+2025-06-12 12:30:12.072 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 12:30:12.073 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - 401 0 null 13.5051ms
+2025-06-12 12:31:27.269 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:31:27.271 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 7:01:27 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:31:27.271 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 7:01:27 AM'.
+2025-06-12 12:31:27.274 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Student)
+2025-06-12 12:31:27.275 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 12:31:27.276 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - 401 0 null 6.4961ms
+2025-06-12 12:31:35.695 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:31:35.697 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:31:35.702 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:31:35.722 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:31:35.723 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:31:35.724 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:31:35.736 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 33.3753ms
+2025-06-12 12:31:35.736 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:31:35.736 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - 200 null application/json; charset=utf-8 41.6756ms
+2025-06-12 12:31:50.418 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:31:50.418 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:31:50.419 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:31:50.419 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - 405 0 null 1.6298ms
+2025-06-12 12:32:02.334 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:32:02.335 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:32:02.336 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:32:02.336 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - 405 0 null 1.4168ms
+2025-06-12 12:32:11.471 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-12 12:32:11.472 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:32:11.472 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:32:11.478 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:32:11.478 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:32:11.479 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:32:11.479 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 6.6396ms
+2025-06-12 12:32:11.479 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:32:11.480 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 8.7693ms
+2025-06-12 12:33:00.822 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:33:00.823 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:33:00.823 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:33:00.826 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:33:00.826 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:33:00.827 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:33:00.827 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 3.3567ms
+2025-06-12 12:33:00.827 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:33:00.827 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c4285b - 200 null application/json; charset=utf-8 5.1459ms
+2025-06-12 12:34:04.902 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c428 - null null
+2025-06-12 12:34:04.903 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:34:04.904 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:34:04.917 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:34:04.917 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:34:04.917 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:34:04.918 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 14.0492ms
+2025-06-12 12:34:04.918 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:34:04.918 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c428 - 200 null application/json; charset=utf-8 15.6544ms
+2025-06-12 12:34:44.723 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c428 - null 0
+2025-06-12 12:34:44.724 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:34:44.724 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:34:44.724 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/enrollments?courseId=01976230-0cd0-7b58-b101-db5056c428 - 405 0 null 1.3088ms
+2025-06-12 12:35:26.869 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/enrollments - application/json 58
+2025-06-12 12:35:26.869 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:35:26.869 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:35:26.869 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/enrollments - 405 0 null 0.7669ms
+2025-06-12 12:38:44.275 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/enrollments - application/json 58
+2025-06-12 12:38:44.276 +05:30 [INF] Executing endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:38:44.276 +05:30 [INF] Executed endpoint '405 HTTP Method Not Supported'
+2025-06-12 12:38:44.277 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/enrollments - 405 0 null 1.6081ms
+2025-06-12 12:40:07.331 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - null 0
+2025-06-12 12:40:07.333 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.Enroll (ElearnCourseAPI)'
+2025-06-12 12:40:07.337 +05:30 [INF] Route matched with {action = "Enroll", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Enroll(System.Guid) on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:40:07.388 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Enrollments" AS e
+    WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1)
+2025-06-12 12:40:07.435 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Enrollments" ("CourseId", "UserId", "EnrolledAt")
+VALUES (@p0, @p1, @p2);
+2025-06-12 12:40:07.436 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" successfully enrolled in course "01976230-0cd0-7b58-b101-db5056c4285b".
+2025-06-12 12:40:07.437 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:40:07.438 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.Enroll (ElearnCourseAPI) in 100.639ms
+2025-06-12 12:40:07.438 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.Enroll (ElearnCourseAPI)'
+2025-06-12 12:40:07.439 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - 200 null application/json; charset=utf-8 107.2061ms
+2025-06-12 12:40:14.612 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-12 12:40:14.613 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:40:14.613 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:40:14.615 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:40:14.616 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:40:14.616 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:40:14.621 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 8.2707ms
+2025-06-12 12:40:14.621 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:40:14.622 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 10.0457ms
+2025-06-12 12:40:30.610 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/019755e3-b46c-7cd3-853a-2f8c60ee7d8b - null null
+2025-06-12 12:40:30.621 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 6:12:46 PM', Current time (UTC): '6/12/2025 7:10:30 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:40:30.622 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 6:12:46 PM', Current time (UTC): '6/12/2025 7:10:30 AM'.
+2025-06-12 12:40:30.622 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Student)
+2025-06-12 12:40:30.623 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 12:40:30.623 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/019755e3-b46c-7cd3-853a-2f8c60ee7d8b - 401 0 null 13.3256ms
+2025-06-12 12:41:07.243 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/019755e3-b46c-7cd3-853a-2f8c60ee7d8b - null null
+2025-06-12 12:41:07.245 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI)'
+2025-06-12 12:41:07.248 +05:30 [INF] Route matched with {action = "DownloadFiles", controller = "StudentDownload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadFiles(System.Guid) on controller ElearnAPI.Controllers.StudentDownloadController (ElearnCourseAPI).
+2025-06-12 12:41:07.251 +05:30 [INF] Student requested file list for course "019755e3-b46c-7cd3-853a-2f8c60ee7d8b"
+2025-06-12 12:41:07.256 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Enrollments" AS e
+    WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1)
+2025-06-12 12:41:07.257 +05:30 [WRN] Student "019762ef-629a-77a7-9c1f-327d213ceae2" attempted to access course "019755e3-b46c-7cd3-853a-2f8c60ee7d8b" without enrollment
+2025-06-12 12:41:07.261 +05:30 [INF] Executing ForbidResult with authentication schemes (["You are not enrolled in this course."]).
+2025-06-12 12:41:07.268 +05:30 [INF] Executed action ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI) in 19.89ms
+2025-06-12 12:41:07.269 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI)'
+2025-06-12 12:41:07.271 +05:30 [ERR] Unhandled exception caught by middleware
+System.InvalidOperationException: No authentication handler is registered for the scheme 'You are not enrolled in this course.'. The registered schemes are: Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("You are not enrolled in this course.",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at ElearnAPI.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI/Middleware/ErrorHandlingMiddleware.cs:line 25
+2025-06-12 12:41:07.291 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/019755e3-b46c-7cd3-853a-2f8c60ee7d8b - 500 null application/json 47.4779ms
+2025-06-12 12:41:37.565 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:41:37.566 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI)'
+2025-06-12 12:41:37.566 +05:30 [INF] Route matched with {action = "DownloadFiles", controller = "StudentDownload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadFiles(System.Guid) on controller ElearnAPI.Controllers.StudentDownloadController (ElearnCourseAPI).
+2025-06-12 12:41:37.567 +05:30 [INF] Student requested file list for course "01976230-0cd0-7b58-b101-db5056c4285b"
+2025-06-12 12:41:37.574 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Enrollments" AS e
+    WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1)
+2025-06-12 12:41:37.593 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__courseId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CourseId", u."FileName", u."FileType", u."Path", u."UploadedAt"
+FROM "UploadedFiles" AS u
+WHERE u."CourseId" = @__courseId_0
+2025-06-12 12:41:37.633 +05:30 [INF] Returning 1 files for student "019762ef-629a-77a7-9c1f-327d213ceae2" in course "01976230-0cd0-7b58-b101-db5056c4285b"
+2025-06-12 12:41:37.634 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[<>f__AnonymousType5`3[[System.Guid, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:41:37.639 +05:30 [INF] Executed action ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI) in 72.0985ms
+2025-06-12 12:41:37.639 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI)'
+2025-06-12 12:41:37.639 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/01976230-0cd0-7b58-b101-db5056c4285b - 200 null application/json; charset=utf-8 73.9055ms
+2025-06-12 12:41:54.183 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d - null null
+2025-06-12 12:41:54.184 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 6:12:46 PM', Current time (UTC): '6/12/2025 7:11:54 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:41:54.185 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 6:12:46 PM', Current time (UTC): '6/12/2025 7:11:54 AM'.
+2025-06-12 12:41:54.185 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Student)
+2025-06-12 12:41:54.186 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 12:41:54.186 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d - 401 0 null 2.3021ms
+2025-06-12 12:42:22.001 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 62
+2025-06-12 12:42:22.002 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 12:42:22.002 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 12:42:22.008 +05:30 [INF] Login attempt for user muthu@gmail.com
+2025-06-12 12:42:22.012 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 12:42:22.201 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 12:42:22.201 +05:30 [INF] User muthu@gmail.com logged in successfully
+2025-06-12 12:42:22.202 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:42:22.202 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 199.0376ms
+2025-06-12 12:42:22.202 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 12:42:22.202 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 200.6692ms
+2025-06-12 12:42:40.634 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d - null null
+2025-06-12 12:42:40.635 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFile (ElearnCourseAPI)'
+2025-06-12 12:42:40.640 +05:30 [INF] Route matched with {action = "DownloadFile", controller = "StudentDownload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadFile(System.Guid) on controller ElearnAPI.Controllers.StudentDownloadController (ElearnCourseAPI).
+2025-06-12 12:42:40.645 +05:30 [INF] Download request received for file "d345ed30-2673-4981-b9be-eb38b5985e9d"
+2025-06-12 12:42:40.654 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CourseId", u."FileName", u."FileType", u."Path", u."UploadedAt"
+FROM "UploadedFiles" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+2025-06-12 12:42:40.658 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Enrollments" AS e
+    WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1)
+2025-06-12 12:42:40.671 +05:30 [INF] Serving file "d345ed30-2673-4981-b9be-eb38b5985e9d" to student "019762ef-629a-77a7-9c1f-327d213ceae2"
+2025-06-12 12:42:40.672 +05:30 [INF] Executing FileContentResult, sending file with download name 'file_example_MP4_480_1_5MG.mp4' ...
+2025-06-12 12:42:40.696 +05:30 [INF] Executed action ElearnAPI.Controllers.StudentDownloadController.DownloadFile (ElearnCourseAPI) in 56.4538ms
+2025-06-12 12:42:40.697 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFile (ElearnCourseAPI)'
+2025-06-12 12:42:40.697 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d - 200 1570024 application/octet-stream 63.4135ms
+2025-06-12 12:44:02.838 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d - null null
+2025-06-12 12:44:02.839 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 7:14:02 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 12:44:02.840 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/10/2025 5:28:32 PM', Current time (UTC): '6/12/2025 7:14:02 AM'.
+2025-06-12 12:44:02.840 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Student)
+2025-06-12 12:44:02.840 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 12:44:02.840 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d - 401 0 null 2.3185ms
+2025-06-12 12:47:04.055 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5295/api/v1/enrollments/019755e3-b46c-7cd3-853a-2f8c60ee7d8b - null null
+2025-06-12 12:47:04.057 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.Unenroll (ElearnCourseAPI)'
+2025-06-12 12:47:04.060 +05:30 [INF] Route matched with {action = "Unenroll", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Unenroll(System.Guid) on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:47:04.095 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."UserId", e."CourseId", e."EnrolledAt"
+FROM "Enrollments" AS e
+WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1
+LIMIT 1
+2025-06-12 12:47:04.096 +05:30 [INF] Unenroll failed. Enrollment not found for user "019762ef-629a-77a7-9c1f-327d213ceae2" in course "019755e3-b46c-7cd3-853a-2f8c60ee7d8b".
+2025-06-12 12:47:04.097 +05:30 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:47:04.098 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.Unenroll (ElearnCourseAPI) in 37.1049ms
+2025-06-12 12:47:04.098 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.Unenroll (ElearnCourseAPI)'
+2025-06-12 12:47:04.098 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5295/api/v1/enrollments/019755e3-b46c-7cd3-853a-2f8c60ee7d8b - 404 null application/json; charset=utf-8 43.6066ms
+2025-06-12 12:47:24.978 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-12 12:47:24.979 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:47:24.979 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:47:24.985 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:47:24.985 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:47:24.986 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:47:24.986 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 6.3473ms
+2025-06-12 12:47:24.986 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:47:24.986 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 8.3002ms
+2025-06-12 12:47:42.496 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:47:42.497 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.Unenroll (ElearnCourseAPI)'
+2025-06-12 12:47:42.497 +05:30 [INF] Route matched with {action = "Unenroll", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Unenroll(System.Guid) on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:47:42.499 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."UserId", e."CourseId", e."EnrolledAt"
+FROM "Enrollments" AS e
+WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1
+LIMIT 1
+2025-06-12 12:47:42.512 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+DELETE FROM "Enrollments"
+WHERE "CourseId" = @p0 AND "UserId" = @p1;
+2025-06-12 12:47:42.517 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" successfully unenrolled from course "01976230-0cd0-7b58-b101-db5056c4285b".
+2025-06-12 12:47:42.517 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:47:42.518 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.Unenroll (ElearnCourseAPI) in 20.1206ms
+2025-06-12 12:47:42.518 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.Unenroll (ElearnCourseAPI)'
+2025-06-12 12:47:42.518 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - 200 null application/json; charset=utf-8 22.1566ms
+2025-06-12 12:47:50.754 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-12 12:47:50.754 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:47:50.755 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 12:47:50.757 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 12:47:50.758 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 12:47:50.758 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 12:47:50.758 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 3.338ms
+2025-06-12 12:47:50.758 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 12:47:50.759 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 5.0538ms
+2025-06-12 12:48:03.354 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/student/files/01976230-0cd0-7b58-b101-db5056c4285b - null null
+2025-06-12 12:48:03.355 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI)'
+2025-06-12 12:48:03.355 +05:30 [INF] Route matched with {action = "DownloadFiles", controller = "StudentDownload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DownloadFiles(System.Guid) on controller ElearnAPI.Controllers.StudentDownloadController (ElearnCourseAPI).
+2025-06-12 12:48:03.356 +05:30 [INF] Student requested file list for course "01976230-0cd0-7b58-b101-db5056c4285b"
+2025-06-12 12:48:03.358 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Enrollments" AS e
+    WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1)
+2025-06-12 12:48:03.358 +05:30 [WRN] Student "019762ef-629a-77a7-9c1f-327d213ceae2" attempted to access course "01976230-0cd0-7b58-b101-db5056c4285b" without enrollment
+2025-06-12 12:48:03.358 +05:30 [INF] Executing ForbidResult with authentication schemes (["You are not enrolled in this course."]).
+2025-06-12 12:48:03.359 +05:30 [INF] Executed action ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI) in 3.6789ms
+2025-06-12 12:48:03.359 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.StudentDownloadController.DownloadFiles (ElearnCourseAPI)'
+2025-06-12 12:48:03.360 +05:30 [ERR] Unhandled exception caught by middleware
+System.InvalidOperationException: No authentication handler is registered for the scheme 'You are not enrolled in this course.'. The registered schemes are: Bearer. Did you forget to call AddAuthentication().Add[SomeAuthHandler]("You are not enrolled in this course.",...)?
+   at Microsoft.AspNetCore.Authentication.AuthenticationService.ForbidAsync(HttpContext context, String scheme, AuthenticationProperties properties)
+   at Microsoft.AspNetCore.Mvc.ForbidResult.ExecuteResultAsync(ActionContext context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeNextResultFilterAsync>g__Awaited|30_0[TFilter,TFilterAsync](ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.Rethrow(ResultExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.ResultNext[TFilter,TFilterAsync](State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.InvokeResultFilters()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at Swashbuckle.AspNetCore.SwaggerUI.SwaggerUIMiddleware.Invoke(HttpContext httpContext)
+   at Swashbuckle.AspNetCore.Swagger.SwaggerMiddleware.Invoke(HttpContext httpContext, ISwaggerProvider swaggerProvider)
+   at Microsoft.AspNetCore.RateLimiting.RateLimitingMiddleware.InvokeInternal(HttpContext context, EnableRateLimitingAttribute enableRateLimitingAttribute)
+   at ElearnAPI.Middleware.ErrorHandlingMiddleware.InvokeAsync(HttpContext context) in /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI/Middleware/ErrorHandlingMiddleware.cs:line 25
+2025-06-12 12:48:03.361 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/student/files/01976230-0cd0-7b58-b101-db5056c4285b - 500 null application/json 6.9878ms
+2025-06-12 13:17:16.166 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - application/json 92
+2025-06-12 13:17:16.168 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-12 13:17:16.169 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ElearnAPI.DTOs.RegisterDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 13:17:16.174 +05:30 [INF] Registering user ramkumar@gmail.com with role Instructor
+2025-06-12 13:17:16.198 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 13:17:16.204 +05:30 [WRN] Registration failed: Username ramkumar@gmail.com already exists
+2025-06-12 13:17:16.205 +05:30 [INF] Executing BadRequestObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 13:17:16.206 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI) in 36.7384ms
+2025-06-12 13:17:16.206 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-12 13:17:16.206 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - 400 null application/json; charset=utf-8 41.0073ms
+2025-06-12 14:26:55.441 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.html - null null
+2025-06-12 14:26:55.551 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.html - 200 null text/html;charset=utf-8 110.7419ms
+2025-06-12 14:26:55.983 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - null null
+2025-06-12 14:26:56.181 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 197.9399ms
+2025-06-12 15:18:27.051 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 48
+2025-06-12 15:18:27.057 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:18:27.059 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 15:18:27.071 +05:30 [INF] Login attempt for user ram
+2025-06-12 15:18:27.110 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 15:18:27.333 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 15:18:27.334 +05:30 [INF] User ram logged in successfully
+2025-06-12 15:18:27.334 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:18:27.335 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 275.7556ms
+2025-06-12 15:18:27.335 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:18:27.335 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 284.9795ms
+2025-06-12 15:19:20.400 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/courses - application/json 219
+2025-06-12 15:19:20.417 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.Create (ElearnCourseAPI)'
+2025-06-12 15:19:20.440 +05:30 [INF] Route matched with {action = "Create", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(ElearnAPI.DTOs.CourseDto) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-12 15:19:20.486 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Guid), @p4='?', @p5='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Courses" ("Id", "CreatedAt", "Description", "InstructorId", "Title", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "IsDeleted";
+2025-06-12 15:19:20.496 +05:30 [INF] Course created by instructor "019755ca-1b0f-7b4f-bcb0-5681bcff155f": "0197638b-42db-78a2-bc34-86753a31188a"
+2025-06-12 15:19:20.496 +05:30 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-12 15:19:20.503 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.Create (ElearnCourseAPI) in 62.5016ms
+2025-06-12 15:19:20.503 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.Create (ElearnCourseAPI)'
+2025-06-12 15:19:20.503 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/courses - 201 null application/json; charset=utf-8 102.8544ms
+2025-06-12 15:20:14.940 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 62
+2025-06-12 15:20:14.945 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/12/2025 9:50:14 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 15:20:14.948 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/12/2025 9:50:14 AM'.
+2025-06-12 15:20:14.948 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:20:14.948 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 15:20:14.951 +05:30 [INF] Login attempt for user muthu@gmail.com
+2025-06-12 15:20:14.956 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 15:20:15.146 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 15:20:15.147 +05:30 [INF] User muthu@gmail.com logged in successfully
+2025-06-12 15:20:15.147 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:20:15.147 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 198.5835ms
+2025-06-12 15:20:15.147 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:20:15.147 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 207.7183ms
+2025-06-12 15:20:48.827 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-06-12 15:20:48.828 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-12 15:20:48.828 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-12 15:20:48.831 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-06-12 15:20:48.838 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-06-12 15:20:48.839 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:20:48.839 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 10.6266ms
+2025-06-12 15:20:48.839 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-12 15:20:48.839 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 12.2905ms
+2025-06-12 15:29:08.352 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/files/upload - multipart/form-data; boundary=--------------------------110421101330529628803683 1570394
+2025-06-12 15:29:08.356 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Instructor)
+2025-06-12 15:29:08.359 +05:30 [INF] AuthenticationScheme: Bearer was forbidden.
+2025-06-12 15:29:08.361 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/files/upload - 403 0 null 6.9945ms
+2025-06-12 15:29:08.371 +05:30 [INF] Connection id "0HND9FQEIS5J1", Request id "0HND9FQEIS5J1:00000001": the application completed without reading the entire request body.
+2025-06-12 15:29:14.951 +05:30 [INF] Connection id "0HND9FQEIS5J1", Request id "0HND9FQEIS5J1:00000001": automatic draining of the request body timed out after taking over 5 seconds.
+2025-06-12 15:29:25.922 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 48
+2025-06-12 15:29:25.923 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:29:25.923 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 15:29:25.924 +05:30 [INF] Login attempt for user ram
+2025-06-12 15:29:25.942 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 15:29:26.136 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 15:29:26.136 +05:30 [INF] User ram logged in successfully
+2025-06-12 15:29:26.137 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:29:26.137 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 213.4897ms
+2025-06-12 15:29:26.137 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:29:26.137 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 214.6279ms
+2025-06-12 15:29:39.868 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-12 15:29:39.872 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-12 15:29:39.879 +05:30 [INF] Route matched with {action = "GetCoursesByInstructor", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCoursesByInstructor(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-12 15:29:39.890 +05:30 [INF] Fetching courses for instructor "019755ca-1b0f-7b4f-bcb0-5681bcff155f"
+2025-06-12 15:29:39.901 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-12 15:29:39.902 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-12 15:29:39.915 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__instructorId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE c."InstructorId" = @__instructorId_0 AND NOT (c."IsDeleted")
+LIMIT @__p_2 OFFSET @__p_1
+2025-06-12 15:29:39.916 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:29:39.916 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI) in 37.7628ms
+2025-06-12 15:29:39.917 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-12 15:29:39.917 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 200 null application/json; charset=utf-8 49.462ms
+2025-06-12 15:29:55.742 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/students/019755e3-b46c-7cd3-853a-2f8c60ee7d8b
+ - null null
+2025-06-12 15:29:55.744 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 3:58:14 AM', Current time (UTC): '6/12/2025 9:59:55 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 15:29:55.744 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 3:58:14 AM', Current time (UTC): '6/12/2025 9:59:55 AM'.
+2025-06-12 15:29:55.745 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Instructor)
+2025-06-12 15:29:55.745 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-12 15:29:55.745 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/students/019755e3-b46c-7cd3-853a-2f8c60ee7d8b
+ - 401 0 null 2.7345ms
+2025-06-12 15:30:02.689 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/students/019755e3-b46c-7cd3-853a-2f8c60ee7d8b
+ - null null
+2025-06-12 15:30:02.691 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetStudentsEnrolledInCourse (ElearnCourseAPI)'
+2025-06-12 15:30:02.695 +05:30 [INF] Route matched with {action = "GetStudentsEnrolledInCourse", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetStudentsEnrolledInCourse(System.Guid) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-12 15:30:02.706 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE c."Id" = @__id_0 AND NOT (c."IsDeleted")
+LIMIT 1
+2025-06-12 15:30:02.707 +05:30 [WRN] Course with ID "019755e3-b46c-7cd3-853a-2f8c60ee7d8b" not found for instructor "019755ca-1b0f-7b4f-bcb0-5681bcff155f"
+2025-06-12 15:30:02.707 +05:30 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:30:02.707 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetStudentsEnrolledInCourse (ElearnCourseAPI) in 11.9271ms
+2025-06-12 15:30:02.707 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetStudentsEnrolledInCourse (ElearnCourseAPI)'
+2025-06-12 15:30:02.707 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/students/019755e3-b46c-7cd3-853a-2f8c60ee7d8b
+ - 404 null application/json; charset=utf-8 18.0344ms
+2025-06-12 15:39:14.494 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 62
+2025-06-12 15:39:14.495 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:39:14.495 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 15:39:14.496 +05:30 [INF] Login attempt for user admin@gmail.com
+2025-06-12 15:39:14.511 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 15:39:14.724 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 15:39:14.725 +05:30 [INF] User admin@gmail.com logged in successfully
+2025-06-12 15:39:14.725 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:39:14.725 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 229.5481ms
+2025-06-12 15:39:14.725 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 15:39:14.725 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 230.9681ms
+2025-06-12 15:39:43.618 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5295/api/v1/users/019755a5-23a7-7524-aa71-7bc56a7d7e21 - null null
+2025-06-12 15:39:43.620 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.UsersController.Delete (ElearnCourseAPI)'
+2025-06-12 15:39:43.626 +05:30 [INF] Route matched with {action = "Delete", controller = "Users"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Delete(System.Guid) on controller ElearnAPI.Controllers.UsersController (ElearnCourseAPI).
+2025-06-12 15:39:43.654 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Id" = @__id_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 15:39:43.655 +05:30 [WRN] User not found for deletion: "019755a5-23a7-7524-aa71-7bc56a7d7e21"
+2025-06-12 15:39:43.655 +05:30 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 15:39:43.655 +05:30 [INF] Executed action ElearnAPI.Controllers.UsersController.Delete (ElearnCourseAPI) in 28.7635ms
+2025-06-12 15:39:43.655 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.UsersController.Delete (ElearnCourseAPI)'
+2025-06-12 15:39:43.655 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5295/api/v1/users/019755a5-23a7-7524-aa71-7bc56a7d7e21 - 404 null application/json; charset=utf-8 37.1777ms
+2025-06-12 16:47:31.151 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 62
+2025-06-12 16:47:31.162 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/12/2025 11:17:31 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-12 16:47:31.165 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/12/2025 11:17:31 AM'.
+2025-06-12 16:47:31.166 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 16:47:31.167 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-12 16:47:31.175 +05:30 [INF] Login attempt for user muthu@gmail.com
+2025-06-12 16:47:31.234 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-12 16:47:31.593 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-12 16:47:31.594 +05:30 [INF] User muthu@gmail.com logged in successfully
+2025-06-12 16:47:31.594 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 16:47:31.595 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 427.4429ms
+2025-06-12 16:47:31.595 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-12 16:47:31.596 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 444.8654ms
+2025-06-12 16:47:37.334 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-12 16:47:37.337 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 16:47:37.337 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 16:47:37.349 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 16:47:37.350 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 16:47:37.350 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 16:47:37.350 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 13.0091ms
+2025-06-12 16:47:37.350 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 16:47:37.351 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 17.8753ms
+2025-06-12 16:47:57.474 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - null 0
+2025-06-12 16:47:57.475 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.Enroll (ElearnCourseAPI)'
+2025-06-12 16:47:57.475 +05:30 [INF] Route matched with {action = "Enroll", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Enroll(System.Guid) on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 16:47:57.493 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__courseId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "Enrollments" AS e
+    WHERE e."UserId" = @__userId_0 AND e."CourseId" = @__courseId_1)
+2025-06-12 16:47:57.499 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Enrollments" ("CourseId", "UserId", "EnrolledAt")
+VALUES (@p0, @p1, @p2);
+2025-06-12 16:47:57.499 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" successfully enrolled in course "01976230-0cd0-7b58-b101-db5056c4285b".
+2025-06-12 16:47:57.499 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 16:47:57.500 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.Enroll (ElearnCourseAPI) in 24.0347ms
+2025-06-12 16:47:57.500 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.Enroll (ElearnCourseAPI)'
+2025-06-12 16:47:57.500 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b - 200 null application/json; charset=utf-8 26.228ms
+2025-06-12 16:48:02.694 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-12 16:48:02.694 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 16:48:02.695 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-12 16:48:02.698 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-12 16:48:02.700 +05:30 [INF] User "019762ef-629a-77a7-9c1f-327d213ceae2" retrieved their enrolled courses.
+2025-06-12 16:48:02.700 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-12 16:48:02.701 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 5.7909ms
+2025-06-12 16:48:02.701 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-12 16:48:02.701 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 7.7338ms
+2025-06-12 18:16:13.140 +05:30 [INF] Application is shutting down...
