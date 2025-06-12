@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>User Data Fetch Example</title>
+  <style>
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+    #output {
+      margin-top: 20px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h2>User Data Fetching</h2>
+  
+  <button onclick="getUserDataCallback()">Get Data (Callback)</button>
+  <button onclick="getUserDataPromise()">Get Data (Promise)</button>
+  <button onclick="getUserDataAsync()">Get Data (Async/Await)</button>
+
+  <div id="output"></div>
+
+  <script>
+    const output = document.getElementById("output");
+
+
+    const fakeUserData = {
+      id: 1,
+      name: "John Doe",
+      email: "john@example.com"
+    };
+
+    //Callback
+    function fetchUserDataCallback(callback) {
+      setTimeout(() => {
+        callback(fakeUserData);
+      }, 1000);
+    }
+
+    function getUserDataCallback() {
+      output.innerText = "Fetching user data (callback)...";
+      fetchUserDataCallback(data => {
+        output.innerText = "Callback Result:\n" + JSON.stringify(data, null, 2);
+      });
+    }
+
+    //Promise
+    function fetchUserDataPromise() {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(fakeUserData);
+        }, 1000);
+      });
+    }
+
+    function getUserDataPromise() {
+      output.innerText = "Fetching user data (promise)...";
+      fetchUserDataPromise().then(data => {
+        output.innerText = "Promise Result:\n" + JSON.stringify(data, null, 2);
+      });
+    }
+
+    // Async/Await 
+    async function getUserDataAsync() {
+      output.innerText = "Fetching user data (async/await)...";
+      const data = await fetchUserDataPromise(); // Reusing promise function
+      output.innerText = "Async/Await Result:\n" + JSON.stringify(data, null, 2);
+    }
+  </script>
+</body>
+</html>
