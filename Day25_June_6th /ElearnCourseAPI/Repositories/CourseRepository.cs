@@ -18,24 +18,24 @@ namespace ElearnAPI.Repositories
             _context = context;
         }
 
-public async Task AddAsync(Course course)
-{
-    await _context.Courses.AddAsync(course);
-    await _context.SaveChangesAsync(); 
-}
+        public async Task AddAsync(Course course)
+        {
+            await _context.Courses.AddAsync(course);
+            await _context.SaveChangesAsync();
+        }
 
-public async Task DeleteAsync(Course course)
-{
-    course.IsDeleted = true;
-    _context.Courses.Update(course);
-    await _context.SaveChangesAsync(); 
-}
+        public async Task DeleteAsync(Course course)
+        {
+            course.IsDeleted = true;
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
+        }
 
-public async Task UpdateAsync(Course course)
-{
-    _context.Courses.Update(course);
-    await _context.SaveChangesAsync();
-}
+        public async Task UpdateAsync(Course course)
+        {
+            _context.Courses.Update(course);
+            await _context.SaveChangesAsync();
+        }
 
 
         public async Task<IEnumerable<Course>> GetAllAsync(int page, int pageSize)
@@ -56,16 +56,26 @@ public async Task UpdateAsync(Course course)
         {
             return await _context.Courses
                 .Where(c => c.InstructorId == instructorId && !c.IsDeleted)
+                 .Include(c => c.UploadedFiles)
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
         }
 
-      
+
 
         public async Task<int> CountAsync()
         {
             return await _context.Courses.CountAsync(c => !c.IsDeleted);
         }
+        
+        public async Task<IEnumerable<Course>> SearchByNameAsync(string query)
+{
+    return await _context.Courses
+        .Where(c => c.Title.ToLower().Contains(query.ToLower()))
+       
+        .ToListAsync();
+}
+
     }
 }

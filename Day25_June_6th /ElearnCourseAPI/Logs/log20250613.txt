@@ -1,0 +1,538 @@
+2025-06-13 08:14:34.971 +05:30 [INF] Application is shutting down...
+2025-06-13 14:28:41.922 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-13 14:28:42.298 +05:30 [INF] Now listening on: http://localhost:5295
+2025-06-13 14:28:42.303 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-13 14:28:42.303 +05:30 [INF] Hosting environment: Development
+2025-06-13 14:28:42.303 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-06-13 14:32:31.033 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/favicon-16x16.png - null null
+2025-06-13 14:32:31.033 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/apple-touch-icon-precomposed.png - null null
+2025-06-13 14:32:31.033 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/apple-touch-icon.png - null null
+2025-06-13 14:32:31.033 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/favicon-32x32.png - null null
+2025-06-13 14:32:31.033 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/favicon.ico - null null
+2025-06-13 14:32:31.102 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-13 14:32:31.123 +05:30 [INF] Sending file. Request path: '/favicon-16x16.png'. Physical path: 'N/A'
+2025-06-13 14:32:31.123 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-06-13 14:32:31.127 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/favicon-32x32.png - 200 628 image/png 96.5768ms
+2025-06-13 14:32:31.127 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/favicon-16x16.png - 200 665 image/png 96.5692ms
+2025-06-13 14:32:31.147 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/apple-touch-icon-precomposed.png - 404 0 null 117.6196ms
+2025-06-13 14:32:31.147 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/apple-touch-icon.png - 404 0 null 117.6168ms
+2025-06-13 14:32:31.147 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/favicon.ico - 404 0 null 117.6194ms
+2025-06-13 14:32:31.149 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/apple-touch-icon-precomposed.png, Response status code: 404
+2025-06-13 14:32:31.149 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/apple-touch-icon.png, Response status code: 404
+2025-06-13 14:32:31.149 +05:30 [INF] Request reached the end of the middleware pipeline without being handled by application code. Request path: GET http://localhost:5295/favicon.ico, Response status code: 404
+2025-06-13 14:32:38.117 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.html - null null
+2025-06-13 14:32:38.221 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.html - 200 null text/html;charset=utf-8 104.4279ms
+2025-06-13 14:32:38.251 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui.css - null null
+2025-06-13 14:32:38.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.css - null null
+2025-06-13 14:32:38.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-standalone-preset.js - null null
+2025-06-13 14:32:38.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-bundle.js - null null
+2025-06-13 14:32:38.255 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.js - null null
+2025-06-13 14:32:38.256 +05:30 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-06-13 14:32:38.258 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.css - 200 202 text/css 3.3078ms
+2025-06-13 14:32:38.258 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.js - 200 null application/javascript;charset=utf-8 3.0162ms
+2025-06-13 14:32:38.274 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-06-13 14:32:38.277 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-06-13 14:32:38.279 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 24.1586ms
+2025-06-13 14:32:38.279 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui.css - 200 154949 text/css 27.7829ms
+2025-06-13 14:32:38.288 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-06-13 14:32:38.288 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-bundle.js - 200 1484234 text/javascript 33.0878ms
+2025-06-13 14:32:38.483 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - null null
+2025-06-13 14:32:38.507 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/favicon-32x32.png - null null
+2025-06-13 14:32:38.507 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-06-13 14:32:38.508 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/favicon-32x32.png - 200 628 image/png 0.9582ms
+2025-06-13 14:32:38.673 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 190.5323ms
+2025-06-13 14:34:01.448 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 58
+2025-06-13 14:34:01.456 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:34:01.487 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:34:01.831 +05:30 [INF] Login attempt for user ram@gmail.com
+2025-06-13 14:34:03.450 +05:30 [INF] Executed DbCommand (67ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:34:04.116 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:34:04.126 +05:30 [INF] User ram@gmail.com logged in successfully
+2025-06-13 14:34:04.132 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:34:04.147 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 2655.3006ms
+2025-06-13 14:34:04.148 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:34:04.157 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 2708.9954ms
+2025-06-13 14:37:01.498 +05:30 [INF] Application is shutting down...
+2025-06-13 14:37:12.024 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-13 14:37:12.262 +05:30 [INF] Now listening on: http://localhost:5295
+2025-06-13 14:37:12.264 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-13 14:37:12.265 +05:30 [INF] Hosting environment: Development
+2025-06-13 14:37:12.265 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-06-13 14:39:31.923 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/files/upload - multipart/form-data; boundary=--------------------------593753017494165542407773 1570664
+2025-06-13 14:39:32.000 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-13 14:39:32.174 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.UploadController.Upload (ElearnCourseAPI)'
+2025-06-13 14:39:32.200 +05:30 [INF] Route matched with {action = "Upload", controller = "Upload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(ElearnAPI.DTOs.UploadFileDto) on controller ElearnAPI.Controllers.UploadController (ElearnCourseAPI).
+2025-06-13 14:39:33.965 +05:30 [INF] Executed DbCommand (73ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?', @p4='?', @p5='?', @p6='?', @p7='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UploadedFiles" ("Id", "CourseId", "Description", "FileName", "FileType", "Path", "Topic", "UploadedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2025-06-13 14:39:33.997 +05:30 [INF] File uploaded: file_example_MP4_480_1_5MG.mp4 for Course: "01976506-1976-7548-9e7d-5d4e442eba72"
+2025-06-13 14:39:34.007 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.UploadedFileDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 14:39:34.052 +05:30 [INF] Executed action ElearnAPI.Controllers.UploadController.Upload (ElearnCourseAPI) in 1847.4428ms
+2025-06-13 14:39:34.058 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.UploadController.Upload (ElearnCourseAPI)'
+2025-06-13 14:39:34.072 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/files/upload - 200 null application/json; charset=utf-8 2153.6203ms
+2025-06-13 14:39:55.091 +05:30 [INF] Application is shutting down...
+2025-06-13 14:40:19.026 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-06-13 14:40:19.165 +05:30 [INF] Now listening on: http://localhost:5295
+2025-06-13 14:40:19.167 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-06-13 14:40:19.168 +05:30 [INF] Hosting environment: Development
+2025-06-13 14:40:19.168 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-06-13 14:42:06.434 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5295/api/v1/files/0197688d-3281-7c4b-94d0-9941925f12cb - multipart/form-data; boundary=----WebKitFormBoundaryflTgn8xmDsS4ueA0 12282
+2025-06-13 14:42:06.473 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:42:06.490 +05:30 [INF] CORS policy execution failed.
+2025-06-13 14:42:06.491 +05:30 [INF] Request origin http://localhost:5295 does not have permission to access the resource.
+2025-06-13 14:42:06.492 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-06-13 14:42:06.520 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Instructor)
+2025-06-13 14:42:06.525 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-13 14:42:06.530 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5295/api/v1/files/0197688d-3281-7c4b-94d0-9941925f12cb - 401 0 null 97.6698ms
+2025-06-13 14:42:12.327 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.html - null null
+2025-06-13 14:42:12.419 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.html - 200 null text/html;charset=utf-8 93.2536ms
+2025-06-13 14:42:12.638 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - null null
+2025-06-13 14:42:12.817 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 179.5437ms
+2025-06-13 14:43:14.384 +05:30 [INF] Request starting HTTP/1.1 PUT http://localhost:5295/api/v1/files/0197688d-3281-7c4b-94d0-9941925f12cb - multipart/form-data; boundary=--------------------------108702336671206835098479 1570632
+2025-06-13 14:43:14.458 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.UploadController.Update (ElearnCourseAPI)'
+2025-06-13 14:43:14.476 +05:30 [INF] Route matched with {action = "Update", controller = "Upload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Update(System.Guid, ElearnAPI.DTOs.UploadFileDto) on controller ElearnAPI.Controllers.UploadController (ElearnCourseAPI).
+2025-06-13 14:43:16.163 +05:30 [INF] Executed DbCommand (64ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CourseId", u."Description", u."FileName", u."FileType", u."Path", u."Topic", u."UploadedAt"
+FROM "UploadedFiles" AS u
+WHERE u."Id" = @__id_0
+LIMIT 1
+2025-06-13 14:43:16.407 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?', @p4='?', @p5='?', @p6='?', @p7='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UploadedFiles" ("Id", "CourseId", "Description", "FileName", "FileType", "Path", "Topic", "UploadedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2025-06-13 14:43:16.422 +05:30 [INF] File updated: file_example_MP4_480_1_5MG.mp4 for FileId: "0197688d-3281-7c4b-94d0-9941925f12cb"
+2025-06-13 14:43:16.430 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:43:16.447 +05:30 [INF] Executed action ElearnAPI.Controllers.UploadController.Update (ElearnCourseAPI) in 1967.2356ms
+2025-06-13 14:43:16.448 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.UploadController.Update (ElearnCourseAPI)'
+2025-06-13 14:43:16.461 +05:30 [INF] Request finished HTTP/1.1 PUT http://localhost:5295/api/v1/files/0197688d-3281-7c4b-94d0-9941925f12cb - 200 null application/json; charset=utf-8 2076.0273ms
+2025-06-13 14:43:28.865 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-13 14:43:28.886 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:43:28.894 +05:30 [INF] Route matched with {action = "GetCoursesByInstructor", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCoursesByInstructor(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:43:28.904 +05:30 [INF] Fetching courses for instructor "01976502-d9b1-776e-9d87-3f43a90d078e"
+2025-06-13 14:43:28.956 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-13 14:43:28.957 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-13 14:43:29.071 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__instructorId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."CreatedAt", c0."Description", c0."InstructorId", c0."IsDeleted", c0."Title", c0."UpdatedAt", u."Id", u."CourseId", u."Description", u."FileName", u."FileType", u."Path", u."Topic", u."UploadedAt"
+FROM (
+    SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    WHERE c."InstructorId" = @__instructorId_0 AND NOT (c."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS c0
+LEFT JOIN "UploadedFiles" AS u ON c0."Id" = u."CourseId"
+ORDER BY c0."Id"
+2025-06-13 14:43:29.120 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:43:29.135 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI) in 241.1643ms
+2025-06-13 14:43:29.136 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:43:29.136 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 200 null application/json; charset=utf-8 271.0095ms
+2025-06-13 14:49:40.084 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 58
+2025-06-13 14:49:40.088 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:49:40.095 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:49:40.118 +05:30 [INF] Login attempt for user ram@gmail.com
+2025-06-13 14:49:40.259 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:49:40.748 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:49:40.749 +05:30 [INF] User ram@gmail.com logged in successfully
+2025-06-13 14:49:40.750 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:49:40.751 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 655.6358ms
+2025-06-13 14:49:40.751 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:49:40.752 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 667.9082ms
+2025-06-13 14:52:18.507 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/courses - application/json 68
+2025-06-13 14:52:18.509 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.Create (ElearnCourseAPI)'
+2025-06-13 14:52:18.513 +05:30 [INF] Route matched with {action = "Create", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Create(ElearnAPI.DTOs.CourseDto) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:52:18.559 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?' (DbType = Guid), @p4='?', @p5='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Courses" ("Id", "CreatedAt", "Description", "InstructorId", "Title", "UpdatedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5)
+RETURNING "IsDeleted";
+2025-06-13 14:52:18.578 +05:30 [INF] Course created by instructor "01976502-d9b1-776e-9d87-3f43a90d078e": "01976898-df2d-76ab-b5f4-7ab58f11a2f8"
+2025-06-13 14:52:18.581 +05:30 [INF] Executing CreatedAtActionResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 14:52:18.610 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.Create (ElearnCourseAPI) in 96.6511ms
+2025-06-13 14:52:18.610 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.Create (ElearnCourseAPI)'
+2025-06-13 14:52:18.610 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/courses - 201 null application/json; charset=utf-8 103.4092ms
+2025-06-13 14:52:39.446 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - application/json 86
+2025-06-13 14:52:39.448 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-13 14:52:39.453 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ElearnAPI.DTOs.RegisterDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:52:39.463 +05:30 [INF] Registering user kumar@gmail.com with role Instructor
+2025-06-13 14:52:39.470 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:52:39.485 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__name_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT r."Id", r."Name"
+FROM "Roles" AS r
+WHERE r."Name" = @__name_0
+LIMIT 1
+2025-06-13 14:52:39.859 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Users" ("Id", "CreatedAt", "PasswordHash", "RefreshToken", "RefreshTokenExpiryTime", "RoleId", "UpdatedAt", "Username")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7)
+RETURNING "IsDeleted";
+2025-06-13 14:52:39.863 +05:30 [INF] User kumar@gmail.com registered successfully
+2025-06-13 14:52:39.863 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 14:52:39.867 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI) in 414.0633ms
+2025-06-13 14:52:39.867 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-06-13 14:52:39.868 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - 200 null application/json; charset=utf-8 421.8545ms
+2025-06-13 14:52:56.599 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 62
+2025-06-13 14:52:56.600 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:52:56.600 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:52:56.610 +05:30 [INF] Login attempt for user kumar@gmail.com
+2025-06-13 14:52:56.614 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:52:56.799 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:52:56.799 +05:30 [INF] User kumar@gmail.com logged in successfully
+2025-06-13 14:52:56.800 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:52:56.800 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 199.1416ms
+2025-06-13 14:52:56.800 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:52:56.800 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 200.8741ms
+2025-06-13 14:53:35.200 +05:30 [INF] Request starting HTTP/1.1 DELETE http://localhost:5295/api/v1/courses/01976898-df2d-76ab-b5f4-7ab58f11a2f8 - null null
+2025-06-13 14:53:35.202 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.Delete (ElearnCourseAPI)'
+2025-06-13 14:53:35.207 +05:30 [INF] Route matched with {action = "Delete", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Delete(System.Guid) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:53:35.224 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__id_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE c."Id" = @__id_0 AND NOT (c."IsDeleted")
+LIMIT 1
+2025-06-13 14:53:35.228 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p6='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?', @p2='?' (DbType = Guid), @p3='?' (DbType = Boolean), @p4='?', @p5='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Courses" SET "CreatedAt" = @p0, "Description" = @p1, "InstructorId" = @p2, "IsDeleted" = @p3, "Title" = @p4, "UpdatedAt" = @p5
+WHERE "Id" = @p6;
+2025-06-13 14:53:35.229 +05:30 [INF] Course deleted successfully for ID "01976898-df2d-76ab-b5f4-7ab58f11a2f8"
+2025-06-13 14:53:35.229 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:53:35.230 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.Delete (ElearnCourseAPI) in 22.7236ms
+2025-06-13 14:53:35.230 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.Delete (ElearnCourseAPI)'
+2025-06-13 14:53:35.231 +05:30 [INF] Request finished HTTP/1.1 DELETE http://localhost:5295/api/v1/courses/01976898-df2d-76ab-b5f4-7ab58f11a2f8 - 200 null application/json; charset=utf-8 30.5835ms
+2025-06-13 14:55:12.701 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 60
+2025-06-13 14:55:12.706 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/13/2025 9:25:12 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-13 14:55:12.732 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/13/2025 9:25:12 AM'.
+2025-06-13 14:55:12.732 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:55:12.732 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:55:12.733 +05:30 [INF] Login attempt for user mano@gmail.com
+2025-06-13 14:55:12.854 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:55:12.993 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:55:12.994 +05:30 [INF] User mano@gmail.com logged in successfully
+2025-06-13 14:55:12.994 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:55:12.994 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 261.6246ms
+2025-06-13 14:55:12.994 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:55:12.994 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 293.0264ms
+2025-06-13 14:55:18.629 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-06-13 14:55:18.629 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-13 14:55:18.634 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:55:18.637 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-06-13 14:55:18.640 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-13 14:55:18.640 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-06-13 14:55:18.648 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-06-13 14:55:18.650 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:55:18.651 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 16.9972ms
+2025-06-13 14:55:18.651 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-06-13 14:55:18.651 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 22.7129ms
+2025-06-13 14:55:32.039 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/search?query=mobile - null null
+2025-06-13 14:55:32.040 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.SearchCourses (ElearnCourseAPI)'
+2025-06-13 14:55:32.044 +05:30 [INF] Route matched with {action = "SearchCourses", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SearchCourses(System.String) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:55:32.049 +05:30 [INF] Searching courses with query: mobile
+2025-06-13 14:55:32.091 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__ToLower_0_contains='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE lower(c."Title") LIKE @__ToLower_0_contains
+2025-06-13 14:55:32.093 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:55:32.093 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.SearchCourses (ElearnCourseAPI) in 48.8387ms
+2025-06-13 14:55:32.093 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.SearchCourses (ElearnCourseAPI)'
+2025-06-13 14:55:32.094 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/search?query=mobile - 200 null application/json; charset=utf-8 55.3082ms
+2025-06-13 14:57:06.773 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 58
+2025-06-13 14:57:06.775 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:57:06.775 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:57:06.776 +05:30 [INF] Login attempt for user ram@gmail.com
+2025-06-13 14:57:06.779 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:57:06.992 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:57:06.992 +05:30 [INF] User ram@gmail.com logged in successfully
+2025-06-13 14:57:06.992 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:57:06.993 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 217.592ms
+2025-06-13 14:57:06.993 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:57:06.993 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 219.8681ms
+2025-06-13 14:57:42.426 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 60
+2025-06-13 14:57:42.429 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/13/2025 9:27:42 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-06-13 14:57:42.430 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '6/12/2025 7:29:33 AM', Current time (UTC): '6/13/2025 9:27:42 AM'.
+2025-06-13 14:57:42.430 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:57:42.430 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:57:42.431 +05:30 [INF] Login attempt for user mano@gmail.com
+2025-06-13 14:57:42.434 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:57:42.620 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:57:42.620 +05:30 [INF] User mano@gmail.com logged in successfully
+2025-06-13 14:57:42.620 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:57:42.620 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 189.8401ms
+2025-06-13 14:57:42.621 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:57:42.621 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 194.5399ms
+2025-06-13 14:57:59.036 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - null null
+2025-06-13 14:57:59.038 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-13 14:57:59.045 +05:30 [INF] Route matched with {action = "GetMyCourses", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyCourses() on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-06-13 14:57:59.067 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+FROM "Enrollments" AS e
+INNER JOIN "Courses" AS c ON e."CourseId" = c."Id"
+WHERE e."UserId" = @__userId_0
+2025-06-13 14:57:59.068 +05:30 [INF] User "01976502-84d3-783f-ad38-4a562ed36172" retrieved their enrolled courses.
+2025-06-13 14:57:59.069 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.Models.Course, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:57:59.090 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI) in 45.2191ms
+2025-06-13 14:57:59.091 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetMyCourses (ElearnCourseAPI)'
+2025-06-13 14:57:59.091 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments - 200 null application/json; charset=utf-8 55.2888ms
+2025-06-13 14:58:07.340 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-06-13 14:58:07.340 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.341 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.342 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 2.5289ms
+2025-06-13 14:58:07.345 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-13 14:58:07.345 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.346 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.347 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-13 14:58:07.354 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-13 14:58:07.354 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 9.7217ms
+2025-06-13 14:58:07.362 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=qG7n53VRA4JegIBuQsOw2g&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTc2NTAyLTg0ZDMtNzgzZi1hZDM4LTRhNTYyZWQzNjE3MiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NDk4MDg2NjIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.NDTmi9zpcR0W6YRd7uOS6rJd6WbQ1_0n6qqn5ZSJmuo - null null
+2025-06-13 14:58:07.362 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.363 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.363 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-06-13 14:58:07.363 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-13 14:58:07.364 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=qG7n53VRA4JegIBuQsOw2g&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTc2NTAyLTg0ZDMtNzgzZi1hZDM4LTRhNTYyZWQzNjE3MiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NDk4MDg2NjIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.NDTmi9zpcR0W6YRd7uOS6rJd6WbQ1_0n6qqn5ZSJmuo - 401 0 null 1.5489ms
+2025-06-13 14:58:07.367 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-06-13 14:58:07.368 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.368 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.368 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.6982ms
+2025-06-13 14:58:07.369 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-13 14:58:07.369 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.370 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.370 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-13 14:58:07.371 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-13 14:58:07.371 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.5055ms
+2025-06-13 14:58:07.377 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=Ki_KdXMI18h3ruvZ-wlG9Q&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTc2NTAyLTg0ZDMtNzgzZi1hZDM4LTRhNTYyZWQzNjE3MiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NDk4MDg2NjIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.NDTmi9zpcR0W6YRd7uOS6rJd6WbQ1_0n6qqn5ZSJmuo - null null
+2025-06-13 14:58:07.378 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.378 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.378 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-06-13 14:58:07.378 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-06-13 14:58:07.378 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=Ki_KdXMI18h3ruvZ-wlG9Q&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTc2NTAyLTg0ZDMtNzgzZi1hZDM4LTRhNTYyZWQzNjE3MiIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NDk4MDg2NjIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.NDTmi9zpcR0W6YRd7uOS6rJd6WbQ1_0n6qqn5ZSJmuo - 401 0 null 0.8469ms
+2025-06-13 14:58:07.381 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-06-13 14:58:07.381 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.381 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.381 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.3825ms
+2025-06-13 14:58:07.382 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-06-13 14:58:07.382 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.382 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.382 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-06-13 14:58:07.383 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-06-13 14:58:07.383 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 0.8398ms
+2025-06-13 14:58:07.385 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887384 - null null
+2025-06-13 14:58:07.385 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.385 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.385 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887384 - 204 null null 0.3999ms
+2025-06-13 14:58:07.386 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887384 - null null
+2025-06-13 14:58:07.386 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.386 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.386 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-13 14:58:07.399 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-13 14:58:07.399 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887384 - 200 0 application/octet-stream 13.4594ms
+2025-06-13 14:58:07.401 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887400 - null null
+2025-06-13 14:58:07.402 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.402 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.402 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887400 - 204 null null 0.5888ms
+2025-06-13 14:58:07.403 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - null null
+2025-06-13 14:58:07.404 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887400 - null null
+2025-06-13 14:58:07.404 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.404 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.404 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.404 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.405 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - 204 null null 1.1132ms
+2025-06-13 14:58:07.405 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-13 14:58:07.406 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - text/plain;charset=UTF-8 32
+2025-06-13 14:58:07.407 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.407 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.407 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-13 14:58:07.409 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-13 14:58:07.409 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - 200 0 text/plain 2.6535ms
+2025-06-13 14:58:07.418 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-13 14:58:07.418 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887400 - 200 3 application/octet-stream 14.5994ms
+2025-06-13 14:58:07.420 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887417 - null null
+2025-06-13 14:58:07.420 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.420 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - null null
+2025-06-13 14:58:07.420 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.421 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.421 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887417 - 204 null null 1.1716ms
+2025-06-13 14:58:07.421 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.421 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - 204 null null 0.8578ms
+2025-06-13 14:58:07.422 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887417 - null null
+2025-06-13 14:58:07.422 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.422 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.423 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - text/plain;charset=UTF-8 110
+2025-06-13 14:58:07.423 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.423 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.423 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-13 14:58:07.423 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-13 14:58:07.424 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-13 14:58:07.424 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw - 200 0 text/plain 1.3307ms
+2025-06-13 14:58:07.439 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-13 14:58:07.439 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887417 - 200 44 application/octet-stream 17.1265ms
+2025-06-13 14:58:07.442 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887440 - null null
+2025-06-13 14:58:07.442 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.442 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.443 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887440 - 204 null null 0.5401ms
+2025-06-13 14:58:07.444 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887440 - null null
+2025-06-13 14:58:07.444 +05:30 [INF] No CORS policy found for the specified request.
+2025-06-13 14:58:07.444 +05:30 [INF] CORS policy execution successful.
+2025-06-13 14:58:07.445 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-06-13 14:58:31.511 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - application/json 58
+2025-06-13 14:58:31.512 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:58:31.512 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(ElearnAPI.DTOs.LoginDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-06-13 14:58:31.513 +05:30 [INF] Login attempt for user ram@gmail.com
+2025-06-13 14:58:31.520 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__username_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."CreatedAt", u."IsDeleted", u."PasswordHash", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."Username" = @__username_0 AND NOT (u."IsDeleted")
+LIMIT 1
+2025-06-13 14:58:31.716 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p8='?' (DbType = Guid), @p0='?' (DbType = DateTime), @p1='?' (DbType = Boolean), @p2='?', @p3='?', @p4='?' (DbType = DateTime), @p5='?' (DbType = Int32), @p6='?' (DbType = DateTime), @p7='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "CreatedAt" = @p0, "IsDeleted" = @p1, "PasswordHash" = @p2, "RefreshToken" = @p3, "RefreshTokenExpiryTime" = @p4, "RoleId" = @p5, "UpdatedAt" = @p6, "Username" = @p7
+WHERE "Id" = @p8;
+2025-06-13 14:58:31.716 +05:30 [INF] User ram@gmail.com logged in successfully
+2025-06-13 14:58:31.717 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:58:31.717 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI) in 204.3802ms
+2025-06-13 14:58:31.717 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Login (ElearnCourseAPI)'
+2025-06-13 14:58:31.717 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/login - 200 null application/json; charset=utf-8 206.7932ms
+2025-06-13 14:58:55.931 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/files/upload - multipart/form-data; boundary=--------------------------442976125708962115560675 1570668
+2025-06-13 14:58:55.934 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.UploadController.Upload (ElearnCourseAPI)'
+2025-06-13 14:58:55.942 +05:30 [INF] Route matched with {action = "Upload", controller = "Upload"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Upload(ElearnAPI.DTOs.UploadFileDto) on controller ElearnAPI.Controllers.UploadController (ElearnCourseAPI).
+2025-06-13 14:58:55.980 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?', @p3='?', @p4='?', @p5='?', @p6='?', @p7='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "UploadedFiles" ("Id", "CourseId", "Description", "FileName", "FileType", "Path", "Topic", "UploadedAt")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7);
+2025-06-13 14:58:55.980 +05:30 [INF] File uploaded: file_example_MP4_480_1_5MG.mp4 for Course: "01976506-1976-7548-9e7d-5d4e442eba72"
+2025-06-13 14:58:55.988 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-06-13 14:58:55.988 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.UploadedFileDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-06-13 14:58:55.988 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=qn4dEzjHofYr3fW3R62eyw&_=1749806887440 - 200 226 application/octet-stream 48544.5618ms
+2025-06-13 14:58:55.990 +05:30 [INF] Executed action ElearnAPI.Controllers.UploadController.Upload (ElearnCourseAPI) in 48.1628ms
+2025-06-13 14:58:55.991 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.UploadController.Upload (ElearnCourseAPI)'
+2025-06-13 14:58:55.993 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/files/upload - 200 null application/json; charset=utf-8 61.6739ms
+2025-06-13 14:59:33.446 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-13 14:59:33.446 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:33.447 +05:30 [INF] Route matched with {action = "GetCoursesByInstructor", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCoursesByInstructor(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:59:33.450 +05:30 [INF] Fetching courses for instructor "01976502-d9b1-776e-9d87-3f43a90d078e"
+2025-06-13 14:59:33.457 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__instructorId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."CreatedAt", c0."Description", c0."InstructorId", c0."IsDeleted", c0."Title", c0."UpdatedAt", u."Id", u."CourseId", u."Description", u."FileName", u."FileType", u."Path", u."Topic", u."UploadedAt"
+FROM (
+    SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    WHERE c."InstructorId" = @__instructorId_0 AND NOT (c."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS c0
+LEFT JOIN "UploadedFiles" AS u ON c0."Id" = u."CourseId"
+ORDER BY c0."Id"
+2025-06-13 14:59:33.460 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:59:33.461 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI) in 13.953ms
+2025-06-13 14:59:33.461 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:33.461 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 200 null application/json; charset=utf-8 15.7377ms
+2025-06-13 14:59:35.553 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-13 14:59:35.554 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:35.554 +05:30 [INF] Route matched with {action = "GetCoursesByInstructor", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCoursesByInstructor(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:59:35.554 +05:30 [INF] Fetching courses for instructor "01976502-d9b1-776e-9d87-3f43a90d078e"
+2025-06-13 14:59:35.556 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__instructorId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."CreatedAt", c0."Description", c0."InstructorId", c0."IsDeleted", c0."Title", c0."UpdatedAt", u."Id", u."CourseId", u."Description", u."FileName", u."FileType", u."Path", u."Topic", u."UploadedAt"
+FROM (
+    SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    WHERE c."InstructorId" = @__instructorId_0 AND NOT (c."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS c0
+LEFT JOIN "UploadedFiles" AS u ON c0."Id" = u."CourseId"
+ORDER BY c0."Id"
+2025-06-13 14:59:35.556 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:59:35.557 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI) in 2.7567ms
+2025-06-13 14:59:35.557 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:35.557 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 200 null application/json; charset=utf-8 4.2591ms
+2025-06-13 14:59:36.544 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-13 14:59:36.545 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:36.545 +05:30 [INF] Route matched with {action = "GetCoursesByInstructor", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCoursesByInstructor(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:59:36.546 +05:30 [INF] Fetching courses for instructor "01976502-d9b1-776e-9d87-3f43a90d078e"
+2025-06-13 14:59:36.548 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__instructorId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."CreatedAt", c0."Description", c0."InstructorId", c0."IsDeleted", c0."Title", c0."UpdatedAt", u."Id", u."CourseId", u."Description", u."FileName", u."FileType", u."Path", u."Topic", u."UploadedAt"
+FROM (
+    SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    WHERE c."InstructorId" = @__instructorId_0 AND NOT (c."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS c0
+LEFT JOIN "UploadedFiles" AS u ON c0."Id" = u."CourseId"
+ORDER BY c0."Id"
+2025-06-13 14:59:36.549 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:59:36.549 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI) in 3.9505ms
+2025-06-13 14:59:36.550 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:36.550 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 200 null application/json; charset=utf-8 5.9778ms
+2025-06-13 14:59:55.956 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-13 14:59:55.957 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:55.957 +05:30 [INF] Route matched with {action = "GetCoursesByInstructor", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetCoursesByInstructor(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-06-13 14:59:55.958 +05:30 [INF] Fetching courses for instructor "01976502-d9b1-776e-9d87-3f43a90d078e"
+2025-06-13 14:59:55.961 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__instructorId_0='?' (DbType = Guid), @__p_2='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c0."Id", c0."CreatedAt", c0."Description", c0."InstructorId", c0."IsDeleted", c0."Title", c0."UpdatedAt", u."Id", u."CourseId", u."Description", u."FileName", u."FileType", u."Path", u."Topic", u."UploadedAt"
+FROM (
+    SELECT c."Id", c."CreatedAt", c."Description", c."InstructorId", c."IsDeleted", c."Title", c."UpdatedAt"
+    FROM "Courses" AS c
+    WHERE c."InstructorId" = @__instructorId_0 AND NOT (c."IsDeleted")
+    LIMIT @__p_2 OFFSET @__p_1
+) AS c0
+LEFT JOIN "UploadedFiles" AS u ON c0."Id" = u."CourseId"
+ORDER BY c0."Id"
+2025-06-13 14:59:55.962 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-06-13 14:59:55.968 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI) in 10.3886ms
+2025-06-13 14:59:55.968 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetCoursesByInstructor (ElearnCourseAPI)'
+2025-06-13 14:59:55.970 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 499 null application/json; charset=utf-8 13.4172ms
+2025-06-13 14:59:56.540 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - null null
+2025-06-13 14:59:56.544 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses/instructor?page=1&pageSize=10 - 429 null application/json; charset=utf-8 4.241ms
+2025-06-13 15:00:19.547 +05:30 [INF] Application is shutting down...

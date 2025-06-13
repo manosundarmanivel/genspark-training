@@ -1,0 +1,7 @@
+<h2>Profile</h2>
+<div *ngIf="user; else noData">
+  <p>Welcome, {{ user.username }}</p>
+</div>
+<ng-template #noData>
+  <p>No user is logged in.</p>
+</ng-template>

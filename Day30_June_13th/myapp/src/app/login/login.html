@@ -1,0 +1,13 @@
+<h2>Login</h2>
+<form (ngSubmit)="onLogin()">
+  <label>Username:
+    <input [(ngModel)]="user.username" name="username">
+  </label>
+  <br>
+  <label>Password:
+    <input [(ngModel)]="user.password" name="password" type="password">
+  </label>
+  <br>
+  <button type="submit">Login</button>
+</form>
+<p>{{ message }}</p>

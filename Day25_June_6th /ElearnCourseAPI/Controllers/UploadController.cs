@@ -57,6 +57,8 @@ namespace ElearnAPI.Controllers
                     FileName = sanitizedFileName,
                     Path = filePath,
                     CourseId = dto.CourseId,
+                    Topic = dto.Topic,
+                    Description = dto.Description
                 });
 
                 _logger.Information("File uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
@@ -131,11 +133,13 @@ namespace ElearnAPI.Controllers
                 existingFile.Path = newPath;
                 existingFile.CourseId = dto.CourseId;
 
-                await _uploadService.UploadFileAsync(new UploadedFileDto
+                var updated = await _uploadService.UploadFileAsync(new UploadedFileDto
                 {
                     FileName = sanitizedFileName,
                     Path = newPath,
-                    CourseId = dto.CourseId
+                    CourseId = dto.CourseId,
+                    Topic = dto.Topic,
+                    Description = dto.Description
                 });
 
                 _logger.Information("File updated: {FileName} for FileId: {FileId}", sanitizedFileName, fileId);

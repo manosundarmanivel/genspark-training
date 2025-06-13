@@ -1,0 +1,27 @@
+{
+	"info": {
+		"_postman_id": "454ad462-68b1-4049-9006-860e70bb7ff9",
+		"name": "Register",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45741991",
+		"_collection_link": "https://manosundar.postman.co/workspace/Mano-Sundar's-Workspace~f74f440d-38d6-478f-8519-fd1761af82b5/collection/45741991-454ad462-68b1-4049-9006-860e70bb7ff9?action=share&source=collection_link&creator=45741991"
+	},
+	"item": [
+		{
+			"name": "Instructor",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Student",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

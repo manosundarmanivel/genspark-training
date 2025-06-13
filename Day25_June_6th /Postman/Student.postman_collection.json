@@ -1,0 +1,294 @@
+{
+	"info": {
+		"_postman_id": "72ed443a-3786-41bf-83f0-d02bc6f57079",
+		"name": "Student",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45741991",
+		"_collection_link": "https://manosundar.postman.co/workspace/Mano-Sundar's-Workspace~f74f440d-38d6-478f-8519-fd1761af82b5/collection/45741991-72ed443a-3786-41bf-83f0-d02bc6f57079?action=share&source=collection_link&creator=45741991"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"username\": \"manosundar@gmail.com\",\n  \"password\": \"manosundar@123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5295/api/v1/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListOfAvailableCourses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5295/api/v1/courses",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"courses"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SearchAvailableCourses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5295/api/v1/courses/search?query=ram",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"courses",
+						"search"
+					],
+					"query": [
+						{
+							"key": "query",
+							"value": "ram"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "EnrollCourse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"enrollments",
+						"01976230-0cd0-7b58-b101-db5056c4285b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListOfEnrolledCourse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5295/api/v1/enrollments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"enrollments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCourseFiles",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5295/api/v1/student/files/01976230-0cd0-7b58-b101-db5056c4285b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"student",
+						"files",
+						"01976230-0cd0-7b58-b101-db5056c4285b"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DownloadCourse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5295/api/v1/student/files/download/d345ed30-2673-4981-b9be-eb38b5985e9d",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"student",
+						"files",
+						"download",
+						"d345ed30-2673-4981-b9be-eb38b5985e9d"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UnEnrollCourse",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{accessToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5295/api/v1/enrollments/01976230-0cd0-7b58-b101-db5056c4285b",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"enrollments",
+						"01976230-0cd0-7b58-b101-db5056c4285b"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "auth_token",
+			"value": "",
+			"type": "default"
+		}
+	]
+}

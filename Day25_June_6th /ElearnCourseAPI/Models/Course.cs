@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ElearnAPI.Models
 {
@@ -20,5 +21,7 @@ namespace ElearnAPI.Models
 
         public ICollection<Enrollment> Enrollments { get; set; } = new List<Enrollment>();
 
+       
+        public ICollection<UploadedFile> UploadedFiles { get; set; } = new List<UploadedFile>();
     }
 }

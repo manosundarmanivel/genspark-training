@@ -8,7 +8,6 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
-using System.Security.Principal;
 using System.Threading.Tasks;
 
 namespace ElearnAPI.Tests.Controllers
@@ -69,7 +68,7 @@ namespace ElearnAPI.Tests.Controllers
 
             var result = await _controller.GetById(Guid.NewGuid());
 
-            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         }
 
         [Test]
@@ -103,7 +102,7 @@ namespace ElearnAPI.Tests.Controllers
 
             var result = await _controller.Update(Guid.NewGuid(), new CourseDto());
 
-            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
         }
 
         [Test]
@@ -123,7 +122,44 @@ namespace ElearnAPI.Tests.Controllers
 
             var result = await _controller.Delete(Guid.NewGuid());
 
-            Assert.That(result, Is.InstanceOf<NotFoundResult>());
+            Assert.That(result, Is.InstanceOf<NotFoundObjectResult>());
+        }
+
+        [Test]
+        public async Task GetCoursesByInstructor_ValidRequest_ReturnsOk()
+        {
+            var instructorId = Guid.NewGuid();
+            SetUserWithId(instructorId);
+            _mockCourseService.Setup(s => s.GetByInstructorIdAsync(instructorId, 1, 10)).ReturnsAsync(new List<CourseDto>());
+
+            var result = await _controller.GetCoursesByInstructor();
+
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+        }
+
+        [Test]
+        public async Task GetStudentsEnrolledInCourse_ValidRequest_ReturnsOk()
+        {
+            var instructorId = Guid.NewGuid();
+            var courseId = Guid.NewGuid();
+            SetUserWithId(instructorId);
+            var courseDto = new CourseDto { Id = courseId, InstructorId = instructorId };
+            _mockCourseService.Setup(s => s.GetByIdAsync(courseId)).ReturnsAsync(courseDto);
+            _mockEnrollmentService.Setup(s => s.GetStudentsEnrolledInCourseAsync(courseId)).ReturnsAsync(new List<UserDtoResponse>());
+
+            var result = await _controller.GetStudentsEnrolledInCourse(courseId);
+
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
+        }
+
+        [Test]
+        public async Task SearchCourses_ValidQuery_ReturnsOk()
+        {
+            _mockCourseService.Setup(s => s.SearchByNameAsync("test")).ReturnsAsync(new List<CourseDto>());
+
+            var result = await _controller.SearchCourses("test");
+
+            Assert.That(result, Is.InstanceOf<OkObjectResult>());
         }
     }
 }

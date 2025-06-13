@@ -14,9 +14,7 @@ namespace ElearnAPI.Data
         public DbSet<Role> Roles { get; set; }
         public DbSet<Course> Courses { get; set; }
         public DbSet<UploadedFile> UploadedFiles { get; set; }
-        
         public DbSet<Enrollment> Enrollments { get; set; }
-
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,14 +40,19 @@ namespace ElearnAPI.Data
                 entity.Property(e => e.Title).IsRequired().HasMaxLength(100);
                 entity.Property(e => e.Description).HasMaxLength(500);
                 entity.Property(e => e.InstructorId).IsRequired();
+                entity.Property(e => e.IsDeleted).HasDefaultValue(false);
+                entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
 
                 entity.HasOne<User>()
                       .WithMany()
                       .HasForeignKey(e => e.InstructorId)
                       .OnDelete(DeleteBehavior.Restrict);
 
-                entity.Property(e => e.IsDeleted).HasDefaultValue(false);
-                entity.Property(e => e.CreatedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
+       
+                entity.HasMany(e => e.UploadedFiles)
+                      .WithOne(f => f.Course!)
+                      .HasForeignKey(f => f.CourseId)
+                      .OnDelete(DeleteBehavior.Cascade);
             });
 
             modelBuilder.Entity<UploadedFile>(entity =>
@@ -60,12 +63,10 @@ namespace ElearnAPI.Data
                 entity.Property(e => e.UploadedAt).HasDefaultValueSql("CURRENT_TIMESTAMP");
                 entity.Property(e => e.CourseId).IsRequired();
 
-                entity.HasOne<Course>()
-                      .WithMany()
-                      .HasForeignKey(e => e.CourseId)
-                      .OnDelete(DeleteBehavior.Cascade);
+           
+                entity.Property(e => e.Topic).IsRequired().HasMaxLength(150);
+                entity.Property(e => e.Description).HasMaxLength(1000);
             });
-
 
             modelBuilder.Entity<Role>().HasData(
                 new Role { Id = 1, Name = "Admin" },
@@ -74,7 +75,7 @@ namespace ElearnAPI.Data
             );
 
             modelBuilder.Entity<Enrollment>()
-       .HasKey(e => new { e.UserId, e.CourseId });
+                .HasKey(e => new { e.UserId, e.CourseId });
 
             modelBuilder.Entity<Enrollment>()
                 .HasOne(e => e.Student)
