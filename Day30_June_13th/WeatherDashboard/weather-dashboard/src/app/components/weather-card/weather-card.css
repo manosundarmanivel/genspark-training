@@ -1,0 +1,110 @@
+.weather-card {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  max-width: 350px;
+  margin: 1rem auto;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+}
+
+.weather-header {
+  text-align: center;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid #f0f0f0;
+  padding-bottom: 1rem;
+}
+
+.city-name {
+  margin: 0;
+  color: #2d3748;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.weather-condition {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.weather-icon {
+  width: 48px;
+  height: 48px;
+}
+
+.condition-text {
+  color: #4a5568;
+  font-size: 1.1rem;
+  font-weight: 500;
+  text-transform: capitalize;
+}
+
+.weather-details {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.detail-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+}
+
+.detail-label {
+  color: #718096;
+  font-size: 0.95rem;
+}
+
+.detail-value {
+  color: #2d3748;
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  background: #fff5f5;
+  border-radius: 8px;
+  color: #e53e3e;
+  font-weight: 500;
+}
+
+.error-icon {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Animation for weather card */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.weather-card {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Responsive adjustments */
+@media (max-width: 400px) {
+  .weather-card {
+    padding: 1rem;
+  }
+  
+  .city-name {
+    font-size: 1.3rem;
+  }
+  
+  .weather-icon {
+    width: 40px;
+    height: 40px;
+  }
+}

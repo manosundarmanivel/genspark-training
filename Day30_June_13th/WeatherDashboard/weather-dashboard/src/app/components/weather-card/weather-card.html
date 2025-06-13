@@ -1,0 +1,35 @@
+<div class="weather-card" *ngIf="weather">
+  <ng-container *ngIf="!weather.error; else errorTpl">
+    <div class="weather-header">
+      <h2 class="city-name">{{ weather.city }}</h2>
+      <div class="weather-condition">
+        <img *ngIf="iconUrl" [src]="iconUrl" [alt]="weather.condition" class="weather-icon" />
+        <span class="condition-text">{{ weather.condition }}</span>
+      </div>
+    </div>
+
+    <div class="weather-details">
+      <div class="detail-row">
+        <span class="detail-label">Temperature:</span>
+        <span class="detail-value">{{ weather.temp }}°C</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Humidity:</span>
+        <span class="detail-value">{{ weather.humidity }}%</span>
+      </div>
+      <div class="detail-row">
+        <span class="detail-label">Wind Speed:</span>
+        <span class="detail-value">{{ weather.windSpeed }} m/s</span>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-template #errorTpl>
+    <div class="error-message">
+      <svg class="error-icon" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+      </svg>
+      <span>{{ weather.error }}</span>
+    </div>
+  </ng-template>
+</div>
