@@ -14,5 +14,7 @@ namespace ElearnAPI.Interfaces.Services
 
         Task<bool> UpdateAsync(Guid id, CourseDto courseDto);
         Task<bool> DeleteAsync(Guid id);
+        Task<IEnumerable<CourseDto>> SearchByNameAsync(string query);
+
     }
 }

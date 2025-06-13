@@ -17,6 +17,8 @@ using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 using Serilog;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services
@@ -50,7 +52,7 @@ builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = 429;
 
-  
+
     options.OnRejected = async (context, token) =>
     {
         context.HttpContext.Response.ContentType = "application/json";
@@ -66,40 +68,40 @@ builder.Services.AddRateLimiter(options =>
     };
 
 
-options.AddPolicy("StudentPolicy", context =>
-{
-    var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous_student";
+    options.AddPolicy("StudentPolicy", context =>
+    {
+        var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous_student";
 
-    return RateLimitPartition.GetTokenBucketLimiter<string>(
-        userId,
-        _ => new TokenBucketRateLimiterOptions
-        {
-            TokenLimit = 100,
-            TokensPerPeriod = 100,
-            ReplenishmentPeriod = TimeSpan.FromMinutes(1),
-            AutoReplenishment = true,
-            QueueLimit = 0,
-            QueueProcessingOrder = QueueProcessingOrder.OldestFirst
-        });
-});
+        return RateLimitPartition.GetTokenBucketLimiter<string>(
+            userId,
+            _ => new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = 100,
+                TokensPerPeriod = 100,
+                ReplenishmentPeriod = TimeSpan.FromMinutes(1),
+                AutoReplenishment = true,
+                QueueLimit = 0,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+            });
+    });
 
 
-options.AddPolicy("InstructorPolicy", context =>
-{
-    var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous_instructor";
+    options.AddPolicy("InstructorPolicy", context =>
+    {
+        var userId = context.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "anonymous_instructor";
 
-    return RateLimitPartition.GetTokenBucketLimiter<string>(
-        userId,
-        _ => new TokenBucketRateLimiterOptions
-        {
-            TokenLimit = 3,
-            TokensPerPeriod = 3,
-            ReplenishmentPeriod = TimeSpan.FromMinutes(1),
-            AutoReplenishment = true,
-            QueueLimit = 0,
-            QueueProcessingOrder = QueueProcessingOrder.OldestFirst
-        });
-});
+        return RateLimitPartition.GetTokenBucketLimiter<string>(
+            userId,
+            _ => new TokenBucketRateLimiterOptions
+            {
+                TokenLimit = 3,
+                TokensPerPeriod = 3,
+                ReplenishmentPeriod = TimeSpan.FromMinutes(1),
+                AutoReplenishment = true,
+                QueueLimit = 0,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst
+            });
+    });
 
 
 });

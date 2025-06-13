@@ -14,12 +14,12 @@ namespace ElearnAPI.Models
 
         public Guid CourseId { get; set; }
 
+        public string Path { get; set; } = null!;
 
-        public string Path { get; set; } = null!; 
-        
-         public string Topic { get; set; } = null!;
+        public string Topic { get; set; } = null!; 
+        public string? Description { get; set; }   
 
-        
-        public string? Description { get; set; }
+    
+        public Course? Course { get; set; }
     }
 }

@@ -20,13 +20,13 @@ namespace ElearnAPI.Services
             _mapper = mapper;
         }
 
-       public async Task<CourseDto> CreateAsync(CourseDto courseDto, Guid instructorId)
-{
-    var course = _mapper.Map<Course>(courseDto);
-    course.InstructorId = instructorId; // Attach instructor ID
-    await _courseRepository.AddAsync(course);
-    return _mapper.Map<CourseDto>(course);
-}
+        public async Task<CourseDto> CreateAsync(CourseDto courseDto, Guid instructorId)
+        {
+            var course = _mapper.Map<Course>(courseDto);
+            course.InstructorId = instructorId; // Attach instructor ID
+            await _courseRepository.AddAsync(course);
+            return _mapper.Map<CourseDto>(course);
+        }
 
 
         public async Task<bool> DeleteAsync(Guid id)
@@ -56,7 +56,7 @@ namespace ElearnAPI.Services
             return _mapper.Map<IEnumerable<CourseDto>>(courses);
         }
 
-        
+
 
         public async Task<bool> UpdateAsync(Guid id, CourseDto courseDto)
         {
@@ -68,5 +68,12 @@ namespace ElearnAPI.Services
             await _courseRepository.UpdateAsync(course);
             return true;
         }
+        
+        public async Task<IEnumerable<CourseDto>> SearchByNameAsync(string query)
+{
+    var courses = await _courseRepository.SearchByNameAsync(query);
+    return _mapper.Map<IEnumerable<CourseDto>>(courses);
+}
+
     }
 }

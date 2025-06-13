@@ -1,0 +1,42 @@
+{
+	"info": {
+		"_postman_id": "cc0a3ca4-d61e-44b1-b31b-d59bd51433e3",
+		"name": "Auth",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "45741991",
+		"_collection_link": "https://manosundar.postman.co/workspace/Mano-Sundar's-Workspace~f74f440d-38d6-478f-8519-fd1761af82b5/collection/45741991-cc0a3ca4-d61e-44b1-b31b-d59bd51433e3?action=share&source=collection_link&creator=45741991"
+	},
+	"item": [
+		{
+			"name": "Refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"refreshToken\": \"string\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5295/api/v1/auth/refresh",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5295",
+					"path": [
+						"api",
+						"v1",
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

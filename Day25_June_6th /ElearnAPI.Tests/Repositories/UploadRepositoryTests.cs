@@ -34,98 +34,106 @@ namespace ElearnAPI.Tests.Repositories
             _context.Dispose();
         }
 
-        [Test]
-        public async Task AddAsync_ShouldAddFileSuccessfully()
-        {
-            var file = new UploadedFile
-            {
-                FileName = "test.pdf",
-                FileType = "application/pdf",
-                CourseId = _testCourseId,
-                Path = "/uploads/test.pdf"
-            };
+[Test]
+public async Task AddAsync_ShouldAddFileSuccessfully()
+{
+    var file = new UploadedFile
+    {
+        FileName = "test.pdf",
+        FileType = "application/pdf",
+        CourseId = _testCourseId,
+        Path = "/uploads/test.pdf",
+        Topic = "Test Topic"
+    };
 
-            await _repository.AddAsync(file);
+    await _repository.AddAsync(file);
 
-            var result = await _context.UploadedFiles.FindAsync(file.Id);
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result!.FileName, Is.EqualTo("test.pdf"));
-        }
+    var result = await _context.UploadedFiles.FindAsync(file.Id);
+    Assert.That(result, Is.Not.Null);
+    Assert.That(result!.FileName, Is.EqualTo("test.pdf"));
+}
 
-        [Test]
-        public async Task DeleteAsync_ShouldRemoveFileSuccessfully()
-        {
-            var file = new UploadedFile
-            {
-                FileName = "delete.pdf",
-                FileType = "application/pdf",
-                CourseId = _testCourseId,
-                Path = "/uploads/delete.pdf"
-            };
 
-            await _context.UploadedFiles.AddAsync(file);
-            await _context.SaveChangesAsync();
+  [Test]
+public async Task DeleteAsync_ShouldRemoveFileSuccessfully()
+{
+    var file = new UploadedFile
+    {
+        FileName = "delete.pdf",
+        FileType = "application/pdf",
+        CourseId = _testCourseId,
+        Path = "/uploads/delete.pdf",
+        Topic = "Delete Topic"
+    };
 
-            await _repository.DeleteAsync(file);
+    await _context.UploadedFiles.AddAsync(file);
+    await _context.SaveChangesAsync();
 
-            var result = await _context.UploadedFiles.FindAsync(file.Id);
-            Assert.That(result, Is.Null);
-        }
+    await _repository.DeleteAsync(file);
 
-        [Test]
-        public async Task GetByIdAsync_ShouldReturnCorrectFile()
-        {
-            var file = new UploadedFile
-            {
-                FileName = "findme.pdf",
-                FileType = "application/pdf",
-                CourseId = _testCourseId,
-                Path = "/uploads/findme.pdf"
-            };
+    var result = await _context.UploadedFiles.FirstOrDefaultAsync(f => f.Id == file.Id);
+    Assert.That(result, Is.Null);
+}
 
-            await _context.UploadedFiles.AddAsync(file);
-            await _context.SaveChangesAsync();
+[Test]
+public async Task GetByIdAsync_ShouldReturnCorrectFile()
+{
+    var file = new UploadedFile
+    {
+        FileName = "findme.pdf",
+        FileType = "application/pdf",
+        CourseId = _testCourseId,
+        Path = "/uploads/findme.pdf",
+        Topic = "FindMe Topic"
+    };
 
-            var result = await _repository.GetByIdAsync(file.Id);
-            Assert.That(result, Is.Not.Null);
-            Assert.That(result!.FileName, Is.EqualTo("findme.pdf"));
-        }
+    await _context.UploadedFiles.AddAsync(file);
+    await _context.SaveChangesAsync();
 
-        [Test]
-        public async Task GetFilesByCourseIdAsync_ShouldReturnCorrectFiles()
-        {
-            var file1 = new UploadedFile
-            {
-                FileName = "c1file1.pdf",
-                FileType = "application/pdf",
-                CourseId = _testCourseId,
-                Path = "/uploads/c1file1.pdf"
-            };
+    var result = await _repository.GetByIdAsync(file.Id);
+    Assert.That(result, Is.Not.Null);
+    Assert.That(result!.FileName, Is.EqualTo("findme.pdf"));
+}
 
-            var file2 = new UploadedFile
-            {
-                FileName = "c1file2.pdf",
-                FileType = "application/pdf",
-                CourseId = _testCourseId,
-                Path = "/uploads/c1file2.pdf"
-            };
+[Test]
+public async Task GetFilesByCourseIdAsync_ShouldReturnCorrectFiles()
+{
+    var file1 = new UploadedFile
+    {
+        FileName = "c1file1.pdf",
+        FileType = "application/pdf",
+        CourseId = _testCourseId,
+        Path = "/uploads/c1file1.pdf",
+        Topic = "Course Topic 1" 
+    };
 
-            var otherCourseFile = new UploadedFile
-            {
-                FileName = "othercourse.pdf",
-                FileType = "application/pdf",
-                CourseId = Guid.NewGuid(),
-                Path = "/uploads/othercourse.pdf"
-            };
+    var file2 = new UploadedFile
+    {
+        FileName = "c1file2.pdf",
+        FileType = "application/pdf",
+        CourseId = _testCourseId,
+        Path = "/uploads/c1file2.pdf",
+        Topic = "Course Topic 2" 
+    };
 
-            await _context.UploadedFiles.AddRangeAsync(file1, file2, otherCourseFile);
-            await _context.SaveChangesAsync();
+    var otherCourseFile = new UploadedFile
+    {
+        FileName = "othercourse.pdf",
+        FileType = "application/pdf",
+        CourseId = Guid.NewGuid(),
+        Path = "/uploads/othercourse.pdf",
+        Topic = "Other Course Topic" 
+    };
 
-            var result = await _repository.GetFilesByCourseIdAsync(_testCourseId);
+    await _context.UploadedFiles.AddRangeAsync(file1, file2, otherCourseFile);
+    await _context.SaveChangesAsync();
 
-            Assert.That(result.Count, Is.EqualTo(2));
-            Assert.That(result.Any(f => f.FileName == "c1file1.pdf"), Is.True);
-            Assert.That(result.Any(f => f.FileName == "c1file2.pdf"), Is.True);
-        }
+    var result = await _repository.GetFilesByCourseIdAsync(_testCourseId);
+
+    Assert.That(result.Count, Is.EqualTo(2));
+    Assert.That(result.Any(f => f.FileName == "c1file1.pdf"), Is.True);
+    Assert.That(result.Any(f => f.FileName == "c1file2.pdf"), Is.True);
+}
+
     }
 }
