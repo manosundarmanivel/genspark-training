@@ -1,0 +1,17 @@
+<div class="weather-container">
+  <!-- City Search Component -->
+  <div class="city-search-wrapper">
+    <app-city-search></app-city-search>
+  </div>
+
+  <!-- Weather Card with Error Handling -->
+  <div *ngIf="weatherService.weather$ | async as weather" class="weather-result">
+    <app-weather-card [weather]="weather"></app-weather-card>
+    <div *ngIf="weather.error" class="weather-error">
+      <svg class="error-icon" viewBox="0 0 24 24">
+        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+      </svg>
+      <span>{{ weather.error }}</span>
+    </div>
+  </div>
+</div>
