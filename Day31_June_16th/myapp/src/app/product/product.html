@@ -1,0 +1,9 @@
+<div class="product-card">
+  <img class="product-image" [src]="product?.thumbnail" alt="Product image" />
+  <div class="product-content">
+   
+    <p class="product-description">{{ product?.description }}</p>
+    <p class="product-price">{{ product?.price | currency:'INR' }}</p>
+
+  </div>
+</div>
