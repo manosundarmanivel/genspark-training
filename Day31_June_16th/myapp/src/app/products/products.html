@@ -1,0 +1,37 @@
+<div class="search-wrapper">
+  <h2 class="search-heading">Explore Our Product Collection</h2>
+  <div class="search-container">
+    <input
+      class="search-input search-input-lg"
+      type="text"
+      [(ngModel)]="searchInput"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Search for laptops, phones, accessories..."
+    />
+  </div>
+</div>
+
+@if (products) {
+  <div class="products-grid">
+    @for (item of products; track item.id) {
+      <div class="product-container">
+        <h4 class="product-highlighted-title" [innerHTML]="highlight(item.title)"></h4>
+        <app-product [product]="item" (addToCart)="onAddToCart($event)"></app-product>
+      </div>
+    }
+  </div>
+} @else if (!isLoading) {
+  <div class="no-products">No products available</div>
+}
+
+@if (isLoading) {
+  <p class="loading">Loading...</p>
+}
+
+<button
+  class="back-to-top"
+  *ngIf="showBackToTop"
+  (click)="scrollToTop()"
+>
+  ↑ Back to Top
+</button>
