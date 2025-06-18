@@ -1,0 +1,53 @@
+<div class="search-wrapper">
+    <h2 class="search-heading">
+    Welcome <span class="highlighted">{{ username }}</span>!
+  </h2>
+  <h2 class="search-heading">Explore Our Product Collection</h2>
+  <div class="search-container">
+    <input
+      class="search-input search-input-lg"
+      type="text"
+      [(ngModel)]="searchInput"
+      (ngModelChange)="onSearchChange($event)"
+      placeholder="Search for laptops, phones, accessories..."
+    />
+  </div>
+</div>
+<router-outlet></router-outlet>
+
+@if ((products ?? []).length > 0) {
+  <div class="products-grid">
+   @for (item of products; track item.id) {
+  <div class="product-container">
+   
+    <a [routerLink]="['/home', username, 'product', item.id]">
+     <app-product
+  [product]="item"
+  [highlightedTitle]="highlight(item.title)"
+  (addToCart)="onAddToCart($event)">
+</app-product>
+
+      
+    </a>
+  </div>
+}
+
+
+  </div>
+} @else if (!isLoading) {
+  <div class="no-products">No products available</div>
+}
+
+
+@if (isLoading) {
+  <p class="loading">Loading...</p>
+}
+
+<button
+  class="back-to-top"
+  *ngIf="showBackToTop"
+  (click)="scrollToTop()"
+>
+  ↑ Back to Top
+</button>
+
