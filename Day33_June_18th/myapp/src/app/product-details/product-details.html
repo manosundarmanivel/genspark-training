@@ -1,0 +1,120 @@
+<!-- product-details.component.html -->
+<div class="product-detail-container">
+  <!-- Loading State -->
+  <div *ngIf="isLoading" class="loading-state">
+    <div class="spinner"></div>
+    <p>Loading product details...</p>
+  </div>
+
+  <!-- Error State -->
+  <div *ngIf="error" class="error-state">
+    <svg class="error-icon" viewBox="0 0 24 24">
+      <path d="M11 15h2v2h-2zm0-8h2v6h-2zm1-5C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
+    </svg>
+    <p class="error-message">{{ error }}</p>
+    <button class="retry-button" >Retry</button>
+  </div>
+
+  <!-- Product Details -->
+  <div *ngIf="product" class="product-card">
+    <!-- Image Gallery -->
+    <div class="gallery-section">
+      <div class="main-image-container">
+        <img [src]="selectedImage || product.thumbnail" 
+             alt="{{ product.title }}"
+             class="main-image">
+      </div>
+      <div class="thumbnail-strip">
+        <div *ngFor="let img of product.images" 
+             class="thumbnail-container"
+             [class.active]="selectedImage === img"
+             (click)="selectedImage = img">
+          <img [src]="img" alt="Thumbnail" class="thumbnail">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details -->
+    <div class="details-section">
+      <div class="product-header">
+        <span class="brand-tag">{{ product.brand }}</span>
+        <h1 class="product-title">{{ product.title }}</h1>
+        
+        <div class="rating-container">
+          <div class="star-rating">
+            <span *ngFor="let star of [1,2,3,4,5]" class="star">★</span>
+          </div>
+          <span class="rating-value">{{ product.rating }}/5</span>
+          <span class="reviews-link">({{ product.reviewCount }} reviews)</span>
+        </div>
+      </div>
+
+      <div class="pricing-section">
+        <div class="price-row">
+          <span class="current-price">{{ product.price | currency:'INR' }}</span>
+          <span class="discount-badge">SAVE {{ product.discountPercentage }}%</span>
+        </div>
+        <div class="original-price">{{ product.originalPrice | currency:'INR' }}</div>
+      </div>
+
+      <div class="stock-info" [class.low-stock]="product.stock < 10">
+        <svg class="stock-icon" viewBox="0 0 24 24">
+          <path d="M20 8h-4V4H8v4H4v12h16V8zM10 6h4v2h-4V6zm6 12h-4v-4h4v4zm2-4v4h2v-4h-2zm-8 4H6v-4h4v4z"/>
+        </svg>
+        <span>{{ product.stock }} in stock</span>
+        <span *ngIf="product.stock < 10" class="stock-alert"> - Low stock!</span>
+      </div>
+
+      <p class="product-description">{{ product.description }}</p>
+
+      <div class="action-buttons">
+        <button class="primary-button">
+          <svg class="cart-icon" viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
+          </svg>
+          ADD TO CART
+        </button>
+        <button class="secondary-button">
+          <svg class="wishlist-icon" viewBox="0 0 24 24">
+            <path d="M16.5 3c-1.74 0-3.41.81-4.5 2.09C10.91 3.81 9.24 3 7.5 3 4.42 3 2 5.42 2 8.5c0 3.78 3.4 6.86 8.55 11.54L12 21.35l1.45-1.32C18.6 15.36 22 12.28 22 8.5 22 5.42 19.58 3 16.5 3zm-4.4 15.55l-.1.1-.1-.1C7.14 14.24 4 11.39 4 8.5 4 6.5 5.5 5 7.5 5c1.54 0 3.04.99 3.57 2.36h1.87C13.46 5.99 14.96 5 16.5 5c2 0 3.5 1.5 3.5 3.5 0 2.89-3.14 5.74-7.9 10.05z"/>
+          </svg>
+          ADD TO WISHLIST
+        </button>
+      </div>
+
+      <div class="specifications">
+        <h3 class="specs-title">Product Specifications</h3>
+        <div class="specs-grid">
+          <div class="spec-item">
+            <span class="spec-label">SKU:</span>
+            <span class="spec-value">{{ product.sku }}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Weight:</span>
+            <span class="spec-value">{{ product.weight }}g</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Dimensions:</span>
+            <span class="spec-value">{{ product.dimensions.width }} × {{ product.dimensions.height }} × {{ product.dimensions.depth }} cm</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Warranty:</span>
+            <span class="spec-value">{{ product.warrantyInformation }}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Shipping:</span>
+            <span class="spec-value">{{ product.shippingInformation }}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Return Policy:</span>
+            <span class="spec-value">{{ product.returnPolicy }}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Min. Order:</span>
+            <span class="spec-value">{{ product.minimumOrderQuantity }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+
+
+<div class="filters">
+  <label>
+    Gender:
+    <select [(ngModel)]="genderFilter" (ngModelChange)="filterUsers()">
+      <option value="">All</option>
+      <option *ngFor="let gender of filteredGenderOptions" [value]="gender">{{ gender }}</option>
+    </select>
+  </label>
+
+  <label>
+    Role:
+    <select [(ngModel)]="roleFilter" (ngModelChange)="filterUsers()">
+      <option value="">All</option>
+      <option *ngFor="let role of filteredRoleOptions" [value]="role">{{ role }}</option>
+    </select>
+  </label>
+
+  <label>
+    State:
+    <select [(ngModel)]="stateFilter" (ngModelChange)="filterUsers()">
+      <option value="">All</option>
+      <option *ngFor="let state of filteredStateOptions" [value]="state">{{ state }}</option>
+    </select>
+  </label>
+
+  <button (click)="resetFilters()">Reset</button>
+</div>
+
+<div class="dashboard-row">
+ 
+  <div class="chart-column">
+    <div class="chart-card">
+      <h3>Gender Distribution</h3>
+      <canvas baseChart
+        [data]="genderChartData"
+        [type]="genderChartType"
+        [legend]="true"
+        [options]="{ responsive: true }">
+      </canvas>
+    </div>
+
+    <div class="chart-card">
+      <h3>Role Distribution</h3>
+      <canvas baseChart
+        [data]="roleChartData"
+        [type]="roleChartType"
+        [legend]="true"
+        [options]="{ responsive: true }">
+      </canvas>
+    </div>
+  </div>
+
+
+  <div class="map-column">
+    <div class="chart-card map-card">
+      <h3>State Distribution</h3>
+      <app-us-map [stateList]="filteredStates"></app-us-map>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<table class="user-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Gender</th>
+      <th>Role</th>
+      <th>State</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of filteredUsers">
+      <td>{{ user.firstName }} {{ user.lastName }}</td>
+      <td>{{ user.gender }}</td>
+      <td>{{ user.role }}</td>
+      <td>{{ user.state }}</td>
+    </tr>
+  </tbody>
+</table>
