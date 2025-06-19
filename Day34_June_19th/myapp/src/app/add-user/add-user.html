@@ -1,0 +1,90 @@
+<div class="user-management-wrapper">
+  <!-- Left: Form Column -->
+  <section class="form-section">
+    <h2 class="section-header">Add New User</h2>
+    <form [formGroup]="form" (ngSubmit)="addUser()" class="user-form">
+      <div class="form-field">
+        <label for="username">Username</label>
+        <input id="username" type="text" formControlName="username" />
+        <div class="error" *ngIf="form.get('username')?.touched && form.get('username')?.errors">
+          <div *ngIf="form.get('username')?.errors?.['required']">Username is required</div>
+          <div *ngIf="form.get('username')?.errors?.['bannedName']">Contains banned words</div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" />
+        <div class="error" *ngIf="form.get('email')?.touched && form.get('email')?.errors">
+          <div *ngIf="form.get('email')?.errors?.['required']">Email is required</div>
+          <div *ngIf="form.get('email')?.errors?.['email']">Invalid email</div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="password">Password</label>
+        <input id="password" type="password" formControlName="password" />
+        <div class="error" *ngIf="form.get('password')?.touched && form.get('password')?.errors">
+          <div *ngIf="form.get('password')?.errors?.['required']">Password required</div>
+          <div *ngIf="form.get('password')?.errors?.['minlength']">Min 6 characters</div>
+          <div *ngIf="form.get('password')?.errors?.['weakPassword']">Must include number & symbol</div>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="confirmPassword">Confirm Password</label>
+        <input id="confirmPassword" type="password" formControlName="confirmPassword" />
+        <div class="error" *ngIf="form.get('confirmPassword')?.touched && form.errors?.['passwordMismatch']">
+          Passwords do not match
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="role">Role</label>
+        <select id="role" formControlName="role">
+          <option value="Admin">Admin</option>
+          <option value="User">User</option>
+          <option value="Guest">Guest</option>
+        </select>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="form.invalid">Create User</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Right: Search + Results -->
+  <section class="data-section">
+    <h2 class="section-header">Search & Filter</h2>
+    <div class="filter-bar">
+      <input type="text" [formControl]="searchControl" placeholder="Search users..." />
+      <select (change)="onRoleChange($event)">
+        <option value="All">All Roles</option>
+        <option value="Admin">Admin</option>
+        <option value="User">User</option>
+        <option value="Guest">Guest</option>
+      </select>
+    </div>
+
+    <h2 class="section-header">User List</h2>
+    <div class="table-wrapper">
+      <table class="user-table">
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of filteredUsers$ | async">
+            <td>{{ user.username }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.role }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>

@@ -1,0 +1,14 @@
+<div class="card recipe-card">
+  <img class="card-img-top" [src]="recipe?.image" alt="{{ recipe?.name }}">
+  <div class="card-body">
+    <h5 class="card-title">{{ recipe?.name }}</h5>
+    <ul class="list-unstyled recipe-meta">
+      <li><i class="bi bi-globe2 me-1"></i> {{ recipe?.cuisine }}</li>
+      <li><i class="bi bi-clock me-1"></i> {{ (recipe?.cookTimeMinutes ?? 0) + (recipe?.prepTimeMinutes ?? 0) }} mins</li>
+    </ul>
+    <p class="card-text">
+      <strong>Ingredients:</strong><br />
+      {{ recipe?.ingredients?.join(', ') }}
+    </p>
+  </div>
+</div>
