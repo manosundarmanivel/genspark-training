@@ -15,6 +15,7 @@ namespace ElearnAPI.Interfaces.Repositories
         Task DeleteAsync(Course course);
         Task<int> CountAsync();
         Task<IEnumerable<Course>> SearchByNameAsync(string query);
+        Task<Course?> GetByIdWithDetailsAsync(Guid id);
 
     }
 }

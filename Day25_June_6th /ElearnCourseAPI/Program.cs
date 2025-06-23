@@ -37,6 +37,8 @@ builder.Services.AddScoped<ICourseRepository, CourseRepository>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
+builder.Services.AddScoped<IUserFileProgressRepository, UserFileProgressRepository>();
+
 
 
 
@@ -146,6 +148,17 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularDev", policy =>
+    {
+        policy.WithOrigins("http://localhost:4200")
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials(); // optional, only if using cookies or auth headers
+    });
+});
+
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
@@ -194,6 +207,7 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 app.UseRateLimiter();
 
 app.UseCors("AllowFrontend");
+app.UseCors("AllowAngularDev");
 
 if (app.Environment.IsDevelopment())
 {

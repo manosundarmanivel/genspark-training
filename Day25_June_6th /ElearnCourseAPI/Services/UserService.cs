@@ -84,5 +84,23 @@ namespace ElearnAPI.Services
         {
             await _userRepository.UpdateAsync(user);
         }
+
+       public async Task<bool> UpdateProfileAsync(Guid userId, UpdateProfileDto dto)
+{
+    var user = await _userRepository.GetByIdAsync(userId);
+    if (user == null || user.IsDeleted) return false;
+
+  
+    user.FullName = dto.FullName;
+
+    user.PhoneNumber = dto.PhoneNumber;
+    user.ProfilePictureUrl = dto.ProfilePictureUrl;
+    user.Bio = dto.Bio;
+    user.UpdatedAt = DateTime.UtcNow;
+
+    await _userRepository.UpdateAsync(user);
+    return true;
+}
+
     }
 }

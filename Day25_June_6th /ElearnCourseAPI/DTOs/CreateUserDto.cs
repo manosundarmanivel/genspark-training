@@ -5,14 +5,21 @@ namespace ElearnAPI.DTOs
 {
     public class CreateUserDto
     {
-        [Required(ErrorMessage = "Username is required.")]
+        [Required]
         public string Username { get; set; } = null!;
 
-        [Required(ErrorMessage = "Password is required.")]
-        [MinLength(6, ErrorMessage = "Password must be at least 6 characters long.")]
+        [Required]
+        [MinLength(6)]
         public string Password { get; set; } = null!;
 
-        [Required(ErrorMessage = "Role is required.")]
+        [Required]
         public Role Role { get; set; } = null!;
+
+        // Optional profile info
+        public string? FullName { get; set; }
+        public string? Email { get; set; }
+        public string? PhoneNumber { get; set; }
+        public string? Bio { get; set; }
+        public string? ProfilePictureUrl { get; set; }
     }
 }

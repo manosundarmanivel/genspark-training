@@ -60,7 +60,25 @@ namespace ElearnAPI.Repositories
                 .Skip((page - 1) * pageSize)
                 .Take(pageSize)
                 .ToListAsync();
-        }
+        }public async Task<Course?> GetByIdWithDetailsAsync(Guid id)
+{
+    var course = await _context.Courses
+        .Include(c => c.Instructor)
+        .Include(c => c.UploadedFiles)
+        .Include(c => c.Enrollments) 
+        .FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+
+    if (course != null && course.UploadedFiles.Any())
+    {
+        course.UploadedFiles = course.UploadedFiles
+            .OrderBy(f => f.UploadedAt)
+            .ToList();
+    }
+
+    return course;
+}
+
+
 
 
 

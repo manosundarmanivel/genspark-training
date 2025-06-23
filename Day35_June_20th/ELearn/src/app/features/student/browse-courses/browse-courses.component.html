@@ -1,0 +1,50 @@
+<div class="max-w-7xl mx-auto px-6 py-12" *ngIf="coursesState$ | async as state">
+  <!-- Main Headline -->
+  <div class="text-center mb-12">
+    <h1 class="text-4xl font-bold text-gray-900">Expand Your Knowledge</h1>
+    <p class="text-lg text-gray-600 mt-2">
+      Explore top-rated online courses across development, design, business, and more.
+    </p>
+  </div>
+
+  <!-- Error -->
+  <div *ngIf="state.error" class="text-center text-red-600 mt-4 text-base">
+    {{ state.error }}
+  </div>
+
+  <!-- Loading -->
+  <div *ngIf="state.loading" class="text-center text-indigo-600 mt-10 text-lg font-medium animate-pulse">
+    Loading popular courses...
+  </div>
+
+  <!-- Empty State -->
+  <div *ngIf="!state.loading && !state.error && state.courses.length === 0" class="text-center text-gray-500 mt-10 text-base">
+    No courses found. New content coming soon!
+  </div>
+
+  <!-- Course Grid -->
+  <div *ngIf="!state.loading && state.courses.length > 0" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+    <div
+      *ngFor="let course of state.courses"
+      class="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
+    >
+      <img
+        src="https://img.freepik.com/free-psd/e-learning-template-design_23-2151081790.jpg?semt=ais_hybrid&w=740"
+        alt="Course image"
+        class="h-48 w-full object-cover"
+      />
+      <div class="p-5 flex flex-col justify-between flex-1">
+        <div>
+          <h3 class="text-lg font-semibold text-gray-800 truncate mb-1">{{ course.title }}</h3>
+          <p class="text-sm text-gray-600 line-clamp-3">{{ course.description }}</p>
+        </div>
+        <button
+          [routerLink]="['/student-dashboard/course-detail', course.id]"
+          class="mt-4 bg-indigo-600 text-white text-sm px-4 py-2 rounded hover:bg-indigo-700 transition"
+        >
+          View Course
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white shadow-md rounded">
+  <h2 class="text-2xl font-bold mb-4">Register</h2>
+  <form [formGroup]="form" (ngSubmit)="register()">
+    <div class="mb-4">
+      <label>Email</label>
+      <input type="email" formControlName="username" class="w-full border px-3 py-2 rounded" />
+    </div>
+    <div class="mb-4">
+      <label>Password</label>
+      <input type="password" formControlName="password" class="w-full border px-3 py-2 rounded" />
+    </div>
+    <div class="mb-4">
+      <label>Role</label>
+      <select formControlName="roleId" class="w-full border px-3 py-2 rounded">
+        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+      </select>
+    </div>
+    <div *ngIf="error" class="text-red-500 text-sm mb-2">{{ error }}</div>
+    <button type="submit" class="w-full bg-green-600 text-white py-2 rounded">Register</button>
+  </form>
+</div>

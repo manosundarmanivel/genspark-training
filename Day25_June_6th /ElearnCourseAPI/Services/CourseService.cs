@@ -44,11 +44,12 @@ namespace ElearnAPI.Services
             return _mapper.Map<IEnumerable<CourseDto>>(courses);
         }
 
-        public async Task<CourseDto?> GetByIdAsync(Guid id)
-        {
-            var course = await _courseRepository.GetByIdAsync(id);
-            return course == null ? null : _mapper.Map<CourseDto>(course);
-        }
+ public async Task<Course?> GetByIdAsync(Guid id)
+    {
+        return await _courseRepository.GetByIdWithDetailsAsync(id);
+    }
+
+        
 
         public async Task<IEnumerable<CourseDto>> GetByInstructorIdAsync(Guid instructorId, int page, int pageSize)
         {

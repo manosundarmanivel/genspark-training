@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Serilog; // Serilog logger
 using System;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
+
 
 namespace ElearnAPI.Controllers
 {
@@ -127,5 +130,82 @@ namespace ElearnAPI.Controllers
                 refreshToken = newRefreshToken
             });
         }
+
+        [Authorize]
+        [HttpGet("profile")]
+        public async Task<IActionResult> GetProfile()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim == null)
+                {
+                    _logger.Warning("Unauthorized access - missing user ID claim");
+                    return Unauthorized(new { success = false, message = "Unauthorized" });
+                }
+
+                var userId = Guid.Parse(userIdClaim.Value);
+                var user = await _userService.GetByIdAsync(userId);
+                if (user == null)
+                {
+                    _logger.Warning("User not found with ID: {UserId}", userId);
+                    return NotFound(new { success = false, message = "User not found" });
+                }
+
+                var profile = new UserProfileDto
+                {
+                    Id = user.Id,
+                    Username = user.Username,
+                    Role = user.Role.Name,
+                    FullName = user.FullName,
+                    PhoneNumber = user.PhoneNumber,
+                    ProfilePictureUrl = user.ProfilePictureUrl,
+                    Bio = user.Bio,
+
+                };
+
+                return Ok(new { success = true, data = profile });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error fetching user profile");
+                return StatusCode(500, new { success = false, message = "An error occurred while fetching profile" });
+            }
+        }
+
+
+[Authorize]
+[HttpPut("profile")]
+
+public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDto dto)
+{
+    try
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null)
+        {
+            _logger.Warning("Unauthorized update attempt - missing user ID claim");
+            return Unauthorized(new { success = false, message = "Unauthorized" });
+        }
+
+        var userId = Guid.Parse(userIdClaim.Value);
+        var updated = await _userService.UpdateProfileAsync(userId, dto);
+
+        if (!updated)
+        {
+            _logger.Warning("Profile update failed for user ID: {UserId}", userId);
+            return BadRequest(new { success = false, message = "Profile update failed" });
+        }
+
+        _logger.Information("Profile updated successfully for user ID: {UserId}", userId);
+        return Ok(new { success = true, message = "Profile updated successfully" });
+    }
+    catch (Exception ex)
+    {
+        _logger.Error(ex, "Error occurred during profile update");
+        return StatusCode(500, new { success = false, message = "An error occurred while updating the profile" });
+    }
+}
+
     }
 }

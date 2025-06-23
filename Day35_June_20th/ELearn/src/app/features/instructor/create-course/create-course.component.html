@@ -1,0 +1,180 @@
+<div class="max-w-2xl mx-auto mt-12 px-6 py-10 space-y-10">
+
+  <div class="text-center">
+    <h1 class="text-3xl font-bold text-gray-900">Create a New Course</h1>
+    <p class="text-sm text-gray-500 mt-2">Provide course details and upload materials to engage learners.</p>
+  </div>
+
+  <!-- Step 1: Course Details -->
+  <div *ngIf="step === 1">
+    <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-6">Step 1: Course Details</h2>
+
+    <form [formGroup]="courseForm" (ngSubmit)="submitCourse()" class="space-y-6">
+
+      <!-- Title -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Title <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          formControlName="title"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Introduction to Machine Learning"
+        />
+        <p *ngIf="courseForm.get('title')?.touched && courseForm.get('title')?.invalid" class="text-red-500 text-xs mt-1">
+          Title is required.
+        </p>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description <span class="text-red-500">*</span></label>
+        <textarea
+          formControlName="description"
+          rows="3"
+          class="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Learn the basics of machine learning, including supervised and unsupervised learning."
+        ></textarea>
+        <p *ngIf="courseForm.get('description')?.touched && courseForm.get('description')?.invalid" class="text-red-500 text-xs mt-1">
+          Description is required.
+        </p>
+      </div>
+
+      <!-- Thumbnail URL -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Thumbnail URL <span class="text-red-500">*</span></label>
+        <input
+          type="url"
+          formControlName="thumbnailUrl"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="https://example.com/thumbnails/ml-course.jpg"
+        />
+        <p *ngIf="courseForm.get('thumbnailUrl')?.touched && courseForm.get('thumbnailUrl')?.invalid" class="text-red-500 text-xs mt-1">
+          Thumbnail URL is required.
+        </p>
+      </div>
+
+      <!-- Domain -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Domain <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          formControlName="domain"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Artificial Intelligence"
+        />
+        <p *ngIf="courseForm.get('domain')?.touched && courseForm.get('domain')?.invalid" class="text-red-500 text-xs mt-1">
+          Domain is required.
+        </p>
+      </div>
+
+      <!-- Level -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Level <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          formControlName="level"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Beginner"
+        />
+        <p *ngIf="courseForm.get('level')?.touched && courseForm.get('level')?.invalid" class="text-red-500 text-xs mt-1">
+          Level is required.
+        </p>
+      </div>
+
+      <!-- Language -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Language <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          formControlName="language"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="English"
+        />
+        <p *ngIf="courseForm.get('language')?.touched && courseForm.get('language')?.invalid" class="text-red-500 text-xs mt-1">
+          Language is required.
+        </p>
+      </div>
+
+      <!-- Tags -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Tags <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          formControlName="tags"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="machine learning, AI, beginner, data science"
+        />
+        <p *ngIf="courseForm.get('tags')?.touched && courseForm.get('tags')?.invalid" class="text-red-500 text-xs mt-1">
+          Tags are required.
+        </p>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="loading$ | async"
+      >
+        {{ (loading$ | async) ? 'Creating...' : 'Continue to Upload' }}
+      </button>
+    </form>
+  </div>
+
+  <!-- Step 2: Upload Content -->
+  <div *ngIf="step === 2">
+    <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-6">📁 Step 2: Upload Course Content</h2>
+
+    <form [formGroup]="fileForm" (ngSubmit)="uploadContent()" class="space-y-6">
+
+      <!-- Topic -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Topic <span class="text-red-500">*</span></label>
+        <input
+          type="text"
+          formControlName="topic"
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="e.g. Supervised Learning"
+        />
+        <p *ngIf="fileForm.get('topic')?.touched && fileForm.get('topic')?.invalid" class="text-red-500 text-xs mt-1">
+          Topic is required.
+        </p>
+      </div>
+
+      <!-- Description -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Description <span class="text-red-500">*</span></label>
+        <textarea
+          formControlName="description"
+          rows="3"
+          class="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          placeholder="Briefly describe the topic"
+        ></textarea>
+        <p *ngIf="fileForm.get('description')?.touched && fileForm.get('description')?.invalid" class="text-red-500 text-xs mt-1">
+          Description is required.
+        </p>
+      </div>
+
+      <!-- File Upload -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-2">Upload File <span class="text-red-500">*</span></label>
+        <input
+          type="file"
+          (change)="onFileChange($event)"
+          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+        />
+        <p *ngIf="fileForm.get('file')?.touched && fileForm.get('file')?.invalid" class="text-red-500 text-xs mt-1">
+          File is required.
+        </p>
+      </div>
+
+      <!-- Submit -->
+      <button
+        type="submit"
+        class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+        [disabled]="loading$ | async"
+      >
+        {{ (loading$ | async) ? 'Uploading...' : 'Upload Content' }}
+      </button>
+    </form>
+  </div>
+</div>

@@ -22,6 +22,8 @@ namespace ElearnAPI.Interfaces.Services
 
         // Method to update refresh token info on User model
         Task UpdateRefreshTokenAsync(User user);
+
+        Task<bool> UpdateProfileAsync(Guid userId, UpdateProfileDto dto);
     
 
     }

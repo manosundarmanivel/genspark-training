@@ -1,0 +1,31 @@
+<div *ngIf="course$ | async as result">
+  <ng-container *ngIf="result.error; else showCourse">
+    <p class="text-red-600">{{ result.error }}</p>
+  </ng-container>
+
+  <ng-template #showCourse>
+    <div *ngIf="result.data as course">
+      <h2 class="text-xl font-bold">{{ course.title }}</h2>
+      <p>{{ course.description }}</p>
+
+      <video
+        *ngIf="course.firstUploadedFile?.fileName"
+        [src]="getVideoUrl(course.firstUploadedFile.fileName)"
+        controls
+        class="mt-4 rounded-xl w-full max-w-xl"
+      ></video>
+
+      <button
+        *ngIf="!course.isEnrolled"
+        (click)="enroll(course.id)"
+        class="mt-4 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+      >
+        Enroll
+      </button>
+
+      <p *ngIf="course.isEnrolled" class="mt-4 text-green-600 font-semibold">
+        You are already enrolled in this course.
+      </p>
+    </div>
+  </ng-template>
+</div>

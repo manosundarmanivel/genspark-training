@@ -20,13 +20,13 @@ namespace ElearnAPI.Repositories
         public async Task AddAsync(UploadedFile file)
         {
             await _context.UploadedFiles.AddAsync(file);
-             await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(UploadedFile file)
         {
             _context.UploadedFiles.Remove(file);
-             await _context.SaveChangesAsync(); 
+            await _context.SaveChangesAsync();
         }
 
         public async Task<UploadedFile?> GetByIdAsync(Guid id)
@@ -39,6 +39,11 @@ namespace ElearnAPI.Repositories
             return await _context.UploadedFiles
                                  .Where(f => f.CourseId == courseId)
                                  .ToListAsync();
+        }
+        
+         public async Task SaveChangesAsync()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

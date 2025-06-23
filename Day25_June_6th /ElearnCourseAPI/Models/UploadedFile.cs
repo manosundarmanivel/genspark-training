@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace ElearnAPI.Models
 {
@@ -16,10 +17,12 @@ namespace ElearnAPI.Models
 
         public string Path { get; set; } = null!;
 
-        public string Topic { get; set; } = null!; 
-        public string? Description { get; set; }   
+        public string Topic { get; set; } = null!;
 
-    
+        public string? Description { get; set; }
+
         public Course? Course { get; set; }
+
+        public ICollection<UserFileProgress> FileProgresses { get; set; } = new List<UserFileProgress>();
     }
 }

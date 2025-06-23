@@ -56,20 +56,89 @@ namespace ElearnAPI.Controllers
             return Ok(new { success = true, data = courses });
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetById(Guid id)
+        // [HttpGet("{id}")]
+        // public async Task<IActionResult> GetById(Guid id)
+        // {
+        //     _logger.Information("Fetching course with ID: {CourseId}", id);
+        //     var course = await _courseService.GetByIdAsync(id);
+
+        //     if (course == null)
+        //     {
+        //         _logger.Warning("Course with ID {CourseId} not found.", id);
+        //         return NotFound(new { success = false, message = "Course not found." });
+        //     }
+
+        //     return Ok(new { success = true, data = course });
+        // }
+
+        [AllowAnonymous]
+[HttpGet("{id}")]
+ // Allows previewing course for unauthenticated users too
+public async Task<IActionResult> GetById(Guid id)
+{
+    _logger.Information("Fetching course details for ID: {CourseId}", id);
+
+    var course = await _courseService.GetByIdAsync(id);
+    if (course == null)
+    {
+        _logger.Warning("Course with ID {CourseId} not found.", id);
+        return NotFound(new { success = false, message = "Course not found." });
+    }
+
+    var orderedFiles = course.UploadedFiles.OrderBy(f => f.UploadedAt).ToList();
+    var firstFile = orderedFiles.FirstOrDefault();
+
+    // Default not enrolled
+    bool isEnrolled = false;
+
+    // Try to get user ID if authenticated
+    if (User.Identity != null && User.Identity.IsAuthenticated)
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (Guid.TryParse(userIdClaim, out var userId))
         {
-            _logger.Information("Fetching course with ID: {CourseId}", id);
-            var course = await _courseService.GetByIdAsync(id);
-
-            if (course == null)
-            {
-                _logger.Warning("Course with ID {CourseId} not found.", id);
-                return NotFound(new { success = false, message = "Course not found." });
-            }
-
-            return Ok(new { success = true, data = course });
+            isEnrolled = course.Enrollments.Any(e => e.UserId == userId);
         }
+    }
+
+    var visibleFiles = isEnrolled ? orderedFiles : orderedFiles.Take(1).ToList();
+
+    return Ok(new
+    {
+        success = true,
+        data = new
+        {
+            course.Id,
+            course.Title,
+            course.Description,
+            course.CreatedAt,
+            InstructorEmail = course.Instructor?.Username,
+            IsEnrolled = isEnrolled,
+
+            FirstUploadedFile = firstFile == null ? null : new
+            {
+                firstFile.Id,
+                firstFile.FileName,
+                firstFile.Topic,
+                firstFile.Description,
+                firstFile.Path,
+                firstFile.UploadedAt
+            },
+
+            UploadedFiles = visibleFiles.Select(f => new
+            {
+                f.Id,
+                f.FileName,
+                f.Topic,
+                f.Description,
+                f.Path,
+                f.UploadedAt
+            })
+        }
+    });
+}
+
+
 
         [Authorize(Roles = "Instructor")]
         [HttpPost]
