@@ -49,7 +49,7 @@ namespace ElearnAPI.Repositories
                 .ToListAsync();
         }
 
-      
+
 
 
         public async Task<IEnumerable<Enrollment>> GetEnrollmentsByCourseIdAsync(Guid courseId)
@@ -59,6 +59,25 @@ namespace ElearnAPI.Repositories
                 .Where(e => e.CourseId == courseId)
                 .ToListAsync();
         }
+
+        public async Task<IEnumerable<Enrollment>> GetEnrollmentsByStudentIdAsync(Guid studentId)
+        {
+            return await _context.Enrollments
+                .Where(e => e.UserId == studentId)
+                .ToListAsync();
+        }
+
+
+        public async Task<Enrollment?> GetEnrollmentWithDetailsAsync(Guid userId, Guid courseId)
+        {
+            return await _context.Enrollments
+                .Include(e => e.Student)
+                .Include(e => e.Course)
+                .FirstOrDefaultAsync(e => e.UserId == userId && e.CourseId == courseId);
+        }
+
+
+
 
 
 

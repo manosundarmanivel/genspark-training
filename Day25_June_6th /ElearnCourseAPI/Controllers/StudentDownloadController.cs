@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace ElearnAPI.Controllers
 {
     [ApiController]
-    [EnableRateLimiting("StudentPolicy")]
+    // [EnableRateLimiting("StudentPolicy")]
     [Route("api/v1/student/files")]
-    [Authorize(Roles = "Student")]
+    // [Authorize(Roles = "Student")]
     public class StudentDownloadController : ControllerBase
     {
         private readonly IEnrollmentService _enrollmentService;
@@ -46,12 +46,12 @@ namespace ElearnAPI.Controllers
                 return Unauthorized(new { success = false, message = "Invalid token." });
             }
 
-            var isEnrolled = await _enrollmentService.IsStudentEnrolledInCourseAsync(studentId, courseId);
-            if (!isEnrolled)
-            {
-                _logger.Warning("Student {StudentId} attempted to access course {CourseId} without enrollment", studentId, courseId);
-                return Forbid("You are not enrolled in this course.");
-            }
+            // var isEnrolled = await _enrollmentService.IsStudentEnrolledInCourseAsync(studentId, courseId);
+            // if (!isEnrolled)
+            // {
+            //     _logger.Warning("Student {StudentId} attempted to access course {CourseId} without enrollment", studentId, courseId);
+            //     return Forbid("You are not enrolled in this course.");
+            // }
 
             var files = await _uploadService.GetFilesByCourseIdAsync(courseId);
             if (files == null || !files.Any())

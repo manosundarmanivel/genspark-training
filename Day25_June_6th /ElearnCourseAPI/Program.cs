@@ -16,6 +16,8 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 using Serilog;
+using Microsoft.Extensions.FileProviders;
+
 
 
 
@@ -38,6 +40,9 @@ builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 builder.Services.AddScoped<IUserFileProgressRepository, UserFileProgressRepository>();
+builder.Services.AddScoped<IUserFileProgressRepository, UserFileProgressRepository>();
+
+
 
 
 
@@ -49,6 +54,8 @@ builder.Services.AddScoped<ICourseService, CourseService>();
 builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
+builder.Services.AddScoped<IUserFileProgressService, UserFileProgressService>();
+
 
 builder.Services.AddRateLimiter(options =>
 {
@@ -130,6 +137,25 @@ builder.Services.AddAuthentication(opt =>
         ValidAudience = jwtConfig["Audience"],
         IssuerSigningKey = new SymmetricSecurityKey(key)
     };
+
+    opt.Events = new JwtBearerEvents
+    {
+        OnMessageReceived = context =>
+        {
+            var accessToken = context.Request.Query["access_token"];
+            var path = context.HttpContext.Request.Path;
+
+            if (!string.IsNullOrEmpty(accessToken) &&
+                path.StartsWithSegments("/notificationHub"))
+            {
+                context.Token = accessToken;
+            }
+
+            return Task.CompletedTask;
+        }
+    };
+
+    
 });
 
 
@@ -139,25 +165,15 @@ var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 // Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: MyAllowSpecificOrigins, policy =>
+    options.AddPolicy("FrontendPolicy", policy =>
     {
-        policy.WithOrigins("http://127.0.0.1:5500")
+        policy.WithOrigins("http://localhost:4200") // Update this as per your frontend port
               .AllowAnyHeader()
               .AllowAnyMethod()
-              .AllowCredentials();
+              .AllowCredentials(); // Required for SignalR
     });
 });
 
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowAngularDev", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
-              .AllowCredentials(); // optional, only if using cookies or auth headers
-    });
-});
 
 // Configure Serilog
 Log.Logger = new LoggerConfiguration()
@@ -206,16 +222,35 @@ app.UseMiddleware<ErrorHandlingMiddleware>();
 // Use rate limiter
 app.UseRateLimiter();
 
-app.UseCors("AllowFrontend");
-app.UseCors("AllowAngularDev");
+app.UseCors("FrontendPolicy");
+
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseCors(MyAllowSpecificOrigins);
+
 app.UseHttpsRedirection();
+
+
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "UploadedThumbnails")),
+    RequestPath = "/UploadedThumbnails"
+});
+
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
+    RequestPath = "/uploads"
+});
+
+
+
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -94,9 +94,19 @@ namespace ElearnAPI.Services
     user.FullName = dto.FullName;
 
     user.PhoneNumber = dto.PhoneNumber;
-    user.ProfilePictureUrl = dto.ProfilePictureUrl;
+   
     user.Bio = dto.Bio;
     user.UpdatedAt = DateTime.UtcNow;
+
+     if (dto.ProfilePictureUrl != null)
+    {
+        var fileName = $"{Guid.NewGuid()}_{dto.ProfilePictureUrl.FileName}";
+        var path = Path.Combine("wwwroot/profile-pics", fileName);
+        using var stream = new FileStream(path, FileMode.Create);
+        await dto.ProfilePictureUrl.CopyToAsync(stream);
+
+        user.ProfilePictureUrl = $"/profile-pics/{fileName}";
+    }
 
     await _userRepository.UpdateAsync(user);
     return true;

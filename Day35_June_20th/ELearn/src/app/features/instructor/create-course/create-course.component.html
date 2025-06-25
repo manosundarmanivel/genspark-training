@@ -1,180 +1,189 @@
-<div class="max-w-2xl mx-auto mt-12 px-6 py-10 space-y-10">
-
-  <div class="text-center">
-    <h1 class="text-3xl font-bold text-gray-900">Create a New Course</h1>
-    <p class="text-sm text-gray-500 mt-2">Provide course details and upload materials to engage learners.</p>
-  </div>
+<div class="max-w-4xl mx-auto p-8 space-y-10">
+ 
 
   <!-- Step 1: Course Details -->
-  <div *ngIf="step === 1">
-    <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-6">Step 1: Course Details</h2>
+  <form *ngIf="step === 1" [formGroup]="courseForm" (ngSubmit)="submitCourse()" class="space-y-6" novalidate>
+    <h2 class="text-3xl font-bold text-indigo-700">Step 1: Course Details</h2>
 
-    <form [formGroup]="courseForm" (ngSubmit)="submitCourse()" class="space-y-6">
-
-      <!-- Title -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Title <span class="text-red-500">*</span></label>
-        <input
-          type="text"
-          formControlName="title"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Introduction to Machine Learning"
-        />
-        <p *ngIf="courseForm.get('title')?.touched && courseForm.get('title')?.invalid" class="text-red-500 text-xs mt-1">
-          Title is required.
-        </p>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Course Title *</label>
+      <input
+        formControlName="title"
+        type="text"
+        placeholder="Course Title"
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      />
+      <div class="text-red-500 text-sm mt-1" 
+           *ngIf="courseForm.get('title')?.invalid && courseForm.get('title')?.touched">
+        Title is required and must be at least 5 characters
       </div>
+    </div>
 
-      <!-- Description -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Description <span class="text-red-500">*</span></label>
-        <textarea
-          formControlName="description"
-          rows="3"
-          class="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Learn the basics of machine learning, including supervised and unsupervised learning."
-        ></textarea>
-        <p *ngIf="courseForm.get('description')?.touched && courseForm.get('description')?.invalid" class="text-red-500 text-xs mt-1">
-          Description is required.
-        </p>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Course Description *</label>
+      <textarea
+        formControlName="description"
+        rows="4"
+        placeholder="Course Description"
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
+      ></textarea>
+      <div class="text-red-500 text-sm mt-1" 
+           *ngIf="courseForm.get('description')?.invalid && courseForm.get('description')?.touched">
+        Description is required and must be at least 20 characters
       </div>
+    </div>
 
-      <!-- Thumbnail URL -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Thumbnail URL <span class="text-red-500">*</span></label>
-        <input
-          type="url"
-          formControlName="thumbnailUrl"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="https://example.com/thumbnails/ml-course.jpg"
-        />
-        <p *ngIf="courseForm.get('thumbnailUrl')?.touched && courseForm.get('thumbnailUrl')?.invalid" class="text-red-500 text-xs mt-1">
-          Thumbnail URL is required.
-        </p>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Domain *</label>
+      <select
+        formControlName="domain"
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      >
+        <option value="" disabled>Select Domain</option>
+        <option *ngFor="let d of domainOptions" [value]="d">{{ d }}</option>
+      </select>
+      <div class="text-red-500 text-sm mt-1" 
+           *ngIf="courseForm.get('domain')?.invalid && courseForm.get('domain')?.touched">
+        Please select a domain
       </div>
+    </div>
 
-      <!-- Domain -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Domain <span class="text-red-500">*</span></label>
-        <input
-          type="text"
-          formControlName="domain"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Artificial Intelligence"
-        />
-        <p *ngIf="courseForm.get('domain')?.touched && courseForm.get('domain')?.invalid" class="text-red-500 text-xs mt-1">
-          Domain is required.
-        </p>
-      </div>
-
-      <!-- Level -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Level <span class="text-red-500">*</span></label>
-        <input
-          type="text"
+        <label class="block text-sm font-medium text-gray-700 mb-1">Level *</label>
+        <select
           formControlName="level"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="Beginner"
-        />
-        <p *ngIf="courseForm.get('level')?.touched && courseForm.get('level')?.invalid" class="text-red-500 text-xs mt-1">
-          Level is required.
-        </p>
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        >
+          <option value="" disabled>Select Level</option>
+          <option *ngFor="let l of levelOptions" [value]="l">{{ l }}</option>
+        </select>
+        <div class="text-red-500 text-sm mt-1" 
+             *ngIf="courseForm.get('level')?.invalid && courseForm.get('level')?.touched">
+          Please select a level
+        </div>
       </div>
 
-      <!-- Language -->
       <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Language <span class="text-red-500">*</span></label>
-        <input
-          type="text"
+        <label class="block text-sm font-medium text-gray-700 mb-1">Language *</label>
+        <select
           formControlName="language"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="English"
-        />
-        <p *ngIf="courseForm.get('language')?.touched && courseForm.get('language')?.invalid" class="text-red-500 text-xs mt-1">
-          Language is required.
-        </p>
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+        >
+          <option value="" disabled>Select Language</option>
+          <option *ngFor="let l of languageOptions" [value]="l">{{ l }}</option>
+        </select>
+        <div class="text-red-500 text-sm mt-1" 
+             *ngIf="courseForm.get('language')?.invalid && courseForm.get('language')?.touched">
+          Please select a language
+        </div>
       </div>
+    </div>
 
-      <!-- Tags -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Tags <span class="text-red-500">*</span></label>
-        <input
-          type="text"
-          formControlName="tags"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          placeholder="machine learning, AI, beginner, data science"
-        />
-        <p *ngIf="courseForm.get('tags')?.touched && courseForm.get('tags')?.invalid" class="text-red-500 text-xs mt-1">
-          Tags are required.
-        </p>
+    <!-- Tags Input -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Tags *</label>
+      <input
+        placeholder="Add tags (Press Enter or comma)"
+        [value]="tagInput"
+        (input)="tagInput = $any($event.target).value"
+       
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
+      />
+      <div class="text-xs text-gray-500 mt-1">Max {{ maxTags }} tags. Press Enter or comma to add</div>
+      <div class="mt-2 flex flex-wrap gap-2">
+        <span *ngFor="let tag of tags" class="bg-indigo-100 text-sm px-3 py-1 rounded-full flex items-center">
+          {{ tag }}
+          <button type="button" (click)="removeTag(tag)" class="ml-2 text-red-600 font-bold">×</button>
+        </span>
       </div>
-
-      <!-- Submit -->
-      <button
-        type="submit"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
-        [disabled]="loading$ | async"
-      >
-        {{ (loading$ | async) ? 'Creating...' : 'Continue to Upload' }}
-      </button>
-    </form>
-  </div>
-
-  <!-- Step 2: Upload Content -->
-  <div *ngIf="step === 2">
-    <h2 class="text-xl font-semibold text-gray-800 border-b pb-2 mb-6">📁 Step 2: Upload Course Content</h2>
-
-    <form [formGroup]="fileForm" (ngSubmit)="uploadContent()" class="space-y-6">
-
-      <!-- Topic -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Topic <span class="text-red-500">*</span></label>
-        <input
-          type="text"
-          formControlName="topic"
-          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          placeholder="e.g. Supervised Learning"
-        />
-        <p *ngIf="fileForm.get('topic')?.touched && fileForm.get('topic')?.invalid" class="text-red-500 text-xs mt-1">
-          Topic is required.
-        </p>
+      <div class="text-red-500 text-sm mt-1" *ngIf="tags.length === 0 && courseForm.get('tags')?.touched">
+        At least one tag is required
       </div>
+    </div>
 
-      <!-- Description -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-1">Description <span class="text-red-500">*</span></label>
-        <textarea
-          formControlName="description"
-          rows="3"
-          class="w-full px-4 py-2 border rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500"
-          placeholder="Briefly describe the topic"
-        ></textarea>
-        <p *ngIf="fileForm.get('description')?.touched && fileForm.get('description')?.invalid" class="text-red-500 text-xs mt-1">
-          Description is required.
-        </p>
+    <!-- Thumbnail Upload -->
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Course Thumbnail *</label>
+      <input
+        type="file"
+        accept="image/*"
+        (change)="onThumbnailChange($event)"
+        class="text-sm text-gray-600"
+        required
+      />
+      <div class="text-red-500 text-sm mt-1" *ngIf="!selectedThumbnail && courseForm.touched">
+        Thumbnail is required
       </div>
+      <img
+        *ngIf="thumbnailPreview"
+        [src]="thumbnailPreview"
+        alt="Thumbnail Preview"
+        class="h-32 mt-3 rounded border"
+      />
+    </div>
 
-      <!-- File Upload -->
-      <div>
-        <label class="block text-sm font-medium text-gray-700 mb-2">Upload File <span class="text-red-500">*</span></label>
-        <input
-          type="file"
-          (change)="onFileChange($event)"
-          class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-        />
-        <p *ngIf="fileForm.get('file')?.touched && fileForm.get('file')?.invalid" class="text-red-500 text-xs mt-1">
-          File is required.
-        </p>
+    <button
+      type="submit"
+      class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="courseForm.invalid || !selectedThumbnail || (loading$ | async)"
+    >
+      Continue
+    </button>
+  </form>
+
+  <!-- Step 2: Upload Course File -->
+  <form *ngIf="step === 2" [formGroup]="fileForm" (ngSubmit)="uploadContent()" class="space-y-6" novalidate>
+    <h2 class="text-3xl font-bold text-green-700">Step 2: Upload Course File</h2>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Topic *</label>
+      <input
+        formControlName="topic"
+        type="text"
+        placeholder="Topic"
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
+      />
+      <div class="text-red-500 text-sm mt-1" 
+           *ngIf="fileForm.get('topic')?.invalid && fileForm.get('topic')?.touched">
+        Topic is required
       </div>
+    </div>
 
-      <!-- Submit -->
-      <button
-        type="submit"
-        class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2.5 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
-        [disabled]="loading$ | async"
-      >
-        {{ (loading$ | async) ? 'Uploading...' : 'Upload Content' }}
-      </button>
-    </form>
-  </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">File Description *</label>
+      <textarea
+        formControlName="description"
+        rows="3"
+        placeholder="File Description"
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"
+      ></textarea>
+      <div class="text-red-500 text-sm mt-1" 
+           *ngIf="fileForm.get('description')?.invalid && fileForm.get('description')?.touched">
+        Description is required
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Select File *</label>
+      <input
+        type="file"
+        (change)="onFileChange($event)"
+        class="text-sm text-gray-600"
+        required
+      />
+      <div class="text-red-500 text-sm mt-1" 
+           *ngIf="fileForm.get('file')?.invalid && fileForm.get('file')?.touched">
+        File is required
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+      [disabled]="fileForm.invalid || (loading$ | async)"
+    >
+      Upload & Finish
+    </button>
+  </form>
 </div>

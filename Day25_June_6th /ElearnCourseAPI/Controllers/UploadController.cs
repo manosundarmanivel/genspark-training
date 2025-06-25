@@ -9,6 +9,7 @@ using System;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ElearnAPI.Models;
 
 namespace ElearnAPI.Controllers
 {
@@ -21,69 +22,103 @@ namespace ElearnAPI.Controllers
         private readonly Serilog.ILogger _logger;
         private readonly string _uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
-        public UploadController(IUploadService uploadService, IHubContext<NotificationHub> hubContext)
+       private readonly IUserFileProgressService _userFileProgressService;
+
+public UploadController(
+    IUploadService uploadService,
+    IHubContext<NotificationHub> hubContext,
+    IUserFileProgressService userFileProgressService)
+{
+    _uploadService = uploadService;
+    _hubContext = hubContext;
+    _userFileProgressService = userFileProgressService;
+    _logger = Log.ForContext<UploadController>();
+}
+
+       [Authorize(Roles = "Instructor")]
+[HttpPost("upload")]
+public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
+{
+    try
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (!Guid.TryParse(userIdClaim, out var uploadedBy))
         {
-            _uploadService = uploadService;
-            _hubContext = hubContext;
-            _logger = Log.ForContext<UploadController>();
+            _logger.Warning("Invalid token during upload.");
+            return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
         }
 
-        [Authorize(Roles = "Instructor")]
-        [HttpPost("upload")]
-        public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
+        var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+        if (!Directory.Exists(uploadsRoot))
+            Directory.CreateDirectory(uploadsRoot);
+
+        var sanitizedFileName = Path.GetFileName(dto.File.FileName);
+        var filePath = Path.Combine(uploadsRoot, sanitizedFileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
         {
-            try
-            {
-                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-                if (!Guid.TryParse(userIdClaim, out var uploadedBy))
-                {
-                    _logger.Warning("Invalid token during upload.");
-                    return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
-                }
-
-                if (!Directory.Exists(_uploadRoot))
-                    Directory.CreateDirectory(_uploadRoot);
-
-                var sanitizedFileName = Path.GetFileName(dto.File.FileName);
-                var filePath = Path.Combine(_uploadRoot, sanitizedFileName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await dto.File.CopyToAsync(stream);
-                }
-
-                var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
-                {
-                    FileName = sanitizedFileName,
-                    Path = filePath,
-                    CourseId = dto.CourseId,
-                    Topic = dto.Topic,
-                    Description = dto.Description
-                });
-
-                _logger.Information("File uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
-
-                await _hubContext.Clients.Group($"course-{dto.CourseId}")
-                    .SendAsync("ReceiveNotification", new
-                    {
-                        message = $"📂 New file uploaded: {sanitizedFileName}",
-                        courseId = dto.CourseId,
-                        uploadedAt = DateTime.UtcNow
-                    });
-
-                return Ok(new { success = true, data = fileMeta });
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "File upload failed.");
-                return StatusCode(500, new
-                {
-                    success = false,
-                    message = "File upload failed.",
-                    error = ex.Message
-                });
-            }
+            await dto.File.CopyToAsync(stream);
         }
+
+        var publicUrlPath = $"/uploads/{sanitizedFileName}";
+
+        var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
+        {
+            FileName = sanitizedFileName,
+            Path = publicUrlPath,
+            CourseId = dto.CourseId,
+            Topic = dto.Topic,
+            Description = dto.Description
+        });
+
+       
+        await _userFileProgressService.AddProgressAsync(new
+        UserFileProgress
+        {
+            Id = Guid.NewGuid(),
+            UserId = uploadedBy,
+            UploadedFileId = fileMeta.Id,
+            IsCompleted = false,
+            
+        });
+
+        _logger.Information("File uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
+
+        await _hubContext.Clients.Group($"course-{dto.CourseId}")
+            .SendAsync("ReceiveNotification", new
+            {
+                message = $"New file uploaded: {sanitizedFileName}",
+                courseId = dto.CourseId,
+               
+            });
+
+        return Ok(new
+        {
+            success = true,
+            data = new
+            {
+                fileMeta.Id,
+                fileMeta.FileName,
+                fileMeta.Topic,
+                fileMeta.Description,
+                fileMeta.CourseId,
+                path = publicUrlPath
+            }
+        });
+    }
+    catch (Exception ex)
+    {
+        _logger.Error(ex, "File upload failed.");
+        return StatusCode(500, new
+        {
+            success = false,
+            message = "File upload failed.",
+            error = ex.Message
+        });
+    }
+}
+
+
 
         [HttpGet("{filename}")]
         public IActionResult Download(string filename)

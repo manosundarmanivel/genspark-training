@@ -10,7 +10,7 @@
       (click)="loadCourses()"
       class="text-sm text-indigo-600 hover:text-indigo-800 font-medium transition"
     >
-      ⟳ Refresh
+      Refresh
     </button>
   </div>
 
@@ -25,7 +25,7 @@
 
   <!-- Error -->
   <div *ngIf="!state.loading && state.error" class="text-red-600 font-semibold text-sm">
-    ⚠️ {{ state.error }}
+    {{ state.error }}
   </div>
 
   <!-- No Courses -->
@@ -41,11 +41,13 @@
       class="border rounded-xl shadow-sm hover:shadow-lg transition bg-white flex flex-col overflow-hidden"
     >
       <!-- Course Image -->
-      <img
-        src="https://img.freepik.com/free-psd/e-learning-template-design_23-2151081790.jpg?semt=ais_hybrid&w=740"
-        alt="Course Image"
-        class="h-48 w-full object-cover"
-      />
+<img
+  [src]="course?.thumbnailUrl ? 'http://localhost:5295/' + course.thumbnailUrl : 'https://static.skillshare.com/uploads/video/thumbnails/02789fe5c46b98db955cd8be0d103bd7/original'"
+  alt="Course Image"
+  class="h-48 w-full object-cover"
+/>
+
+
 
       <!-- Course Info -->
       <div class="p-5 flex-1 flex flex-col justify-between">
@@ -66,16 +68,13 @@
 
         <!-- Actions -->
         <div class="flex justify-end space-x-3 mt-2">
-          <button
-            class="px-4 py-1.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded"
-          >
-            Edit Course
-          </button>
-          <button
-            class="px-4 py-1.5 text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 rounded"
-          >
-            Update Files
-          </button>
+         <button
+  class="px-4 py-1.5 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded"
+  [routerLink]="['/instructor-dashboard/edit-course', course.id]"
+>
+  Edit Course
+</button>
+          
         </div>
       </div>
     </div>

@@ -22,7 +22,8 @@ export class ProfileService {
     return this.http.get<{ success: boolean; data: UserProfile }>(this.apiUrl);
   }
 
-  updateProfile(profile: Partial<UserProfile>): Observable<{ success: boolean; message: string }> {
-    return this.http.put<{ success: boolean; message: string }>(this.apiUrl, profile);
-  }
+updateProfile(profileData: FormData): Observable<{ success: boolean; message: string }> {
+  return this.http.put<{ success: boolean; message: string }>(this.apiUrl, profileData);
+}
+
 }

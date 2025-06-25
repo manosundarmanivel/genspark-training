@@ -42,7 +42,7 @@ namespace ElearnAPI.Repositories
         {
             _context.UserFileProgresses.Update(progress);
             return Task.CompletedTask;
-            SaveChangesAsync();
+           
         }
 
         public async Task SaveChangesAsync()

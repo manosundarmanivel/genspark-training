@@ -14,6 +14,12 @@ namespace ElearnAPI.Interfaces.Repositories
         Task<IEnumerable<Course>> GetEnrolledCoursesAsync(Guid userId);
 
         Task<IEnumerable<Enrollment>> GetEnrollmentsByCourseIdAsync(Guid courseId);
+
+        Task<IEnumerable<Enrollment>> GetEnrollmentsByStudentIdAsync(Guid studentId);
+
+        Task<Enrollment?> GetEnrollmentWithDetailsAsync(Guid userId, Guid courseId);
+
+
        
        
 

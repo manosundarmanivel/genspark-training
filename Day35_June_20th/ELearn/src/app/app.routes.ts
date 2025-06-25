@@ -12,14 +12,15 @@ import { CourseDetailComponent } from './features/student/course-detail/course-d
 import { EnrolledCoursesComponent } from './features/student/enrolled-courses/enrolled-courses.component';
 import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
+import { EditCourseComponent } from './features/instructor/edit-course/edit-course.component';
 
 export const routes: Routes = [
 { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
+//   { path: '**', redirectTo: 'login' }, // or a NotFoundComponent if you have one
 
-//   { path: 'admin-dashboard', component: AdminDashboardComponent },
-//   { path: 'instructor-dashboard', component: InstructorDashboardComponent },
-//   { path: 'student-dashboard', component: StudentDashboardComponent },
+
+
 {
   path: 'instructor-dashboard',
   component: DashboardLayoutComponent,
@@ -29,7 +30,8 @@ export const routes: Routes = [
     { path: '', component: InstructorDashboardComponent },
     { path: 'create-course', component: CreateCourseComponent },
     { path: 'my-courses', component: MyCoursesComponent },
-    {path:'profile', component:ProfileComponent}
+    {path:'profile', component:ProfileComponent},
+      {path: 'edit-course/:id', component:EditCourseComponent},
   ]
 },
 {
@@ -41,7 +43,9 @@ export const routes: Routes = [
     { path: '', component: StudentDashboardComponent },
     {path: 'browse', component: BrowseCoursesComponent},
     {path: 'course-detail/:courseId', component:CourseDetailComponent},
-    {path: 'enrolled', component:EnrolledCoursesComponent}
+    {path: 'enrolled', component:EnrolledCoursesComponent},
+    {path:'profile', component:ProfileComponent},
+
    
     // { path: 'my-courses', component: MyCoursesComponent }
   ]

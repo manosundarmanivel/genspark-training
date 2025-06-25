@@ -21,20 +21,36 @@ namespace ElearnAPI.Services
             _mapper = mapper;
         }
 
-        public async Task<bool> EnrollStudentAsync(Guid userId, Guid courseId)
-        {
-            var alreadyEnrolled = await _enrollmentRepo.IsEnrolledAsync(userId, courseId);
-            if (alreadyEnrolled) return false;
+   
+public async Task<EnrollmentNotificationDto?> EnrollStudentAsync(Guid userId, Guid courseId)
+{
+ 
+    var alreadyEnrolled = await _enrollmentRepo.IsEnrolledAsync(userId, courseId);
+    if (alreadyEnrolled) return null;
 
-            var enrollment = new Enrollment
-            {
-                UserId = userId,
-                CourseId = courseId
-            };
+  
+    var newEnrollment = new Enrollment
+    {
+        UserId = userId,
+        CourseId = courseId
+    };
 
-            await _enrollmentRepo.AddEnrollmentAsync(enrollment);
-            return true;
-        }
+    await _enrollmentRepo.AddEnrollmentAsync(newEnrollment);
+
+
+    var enrollmentDetails = await _enrollmentRepo.GetEnrollmentWithDetailsAsync(userId, courseId);
+    if (enrollmentDetails == null) return null;
+
+    return new EnrollmentNotificationDto
+    {
+        StudentName = enrollmentDetails.Student.FullName ?? enrollmentDetails.Student.Username,
+        CourseTitle = enrollmentDetails.Course.Title,
+        InstructorId = enrollmentDetails.Course.InstructorId
+    };
+}
+
+
+
 
         public async Task<bool> UnenrollStudentAsync(Guid userId, Guid courseId)
         {

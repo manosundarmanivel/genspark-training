@@ -175,9 +175,9 @@ namespace ElearnAPI.Controllers
 
 
 [Authorize]
-[HttpPut("profile")]
-
-public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDto dto)
+ [HttpPut("profile")]
+[Consumes("multipart/form-data")]
+public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileDto dto)
 {
     try
     {
@@ -206,6 +206,7 @@ public async Task<IActionResult> UpdateProfile([FromBody] UpdateProfileDto dto)
         return StatusCode(500, new { success = false, message = "An error occurred while updating the profile" });
     }
 }
+
 
     }
 }

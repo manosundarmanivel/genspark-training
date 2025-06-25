@@ -13,6 +13,7 @@ namespace ElearnAPI.Models
 
         public string? ThumbnailUrl { get; set; }
 
+
         public string Domain { get; set; } = null!; // e.g., "Web Development", "Data Science"
 
         public string? Level { get; set; } // e.g., "Beginner", "Intermediate", "Advanced"

@@ -19,10 +19,16 @@ namespace ElearnAPI.Controllers
         private readonly IEnrollmentService _enrollmentService;
         private readonly Serilog.ILogger _logger;
 
-        public CoursesController(ICourseService courseService, IEnrollmentService enrollmentService)
+        private readonly IUserFileProgressService _userFileProgressService;
+
+        public CoursesController(
+            ICourseService courseService,
+            IEnrollmentService enrollmentService,
+            IUserFileProgressService userFileProgressService)
         {
             _courseService = courseService;
             _enrollmentService = enrollmentService;
+            _userFileProgressService = userFileProgressService;
             _logger = Log.ForContext<CoursesController>();
         }
 
@@ -40,8 +46,8 @@ namespace ElearnAPI.Controllers
             return Ok(new { success = true, data = courses });
         }
 
-        [Authorize(Roles = "Instructor")]
-        [EnableRateLimiting("InstructorPolicy")]
+        // [Authorize(Roles = "Instructor")]
+        // [EnableRateLimiting("InstructorPolicy")]
         [HttpGet("instructor")]
         public async Task<IActionResult> GetCoursesByInstructor(int page = 1, int pageSize = 10)
         {
@@ -71,78 +77,111 @@ namespace ElearnAPI.Controllers
         //     return Ok(new { success = true, data = course });
         // }
 
-        [AllowAnonymous]
-[HttpGet("{id}")]
- // Allows previewing course for unauthenticated users too
-public async Task<IActionResult> GetById(Guid id)
-{
-    _logger.Information("Fetching course details for ID: {CourseId}", id);
 
-    var course = await _courseService.GetByIdAsync(id);
-    if (course == null)
-    {
-        _logger.Warning("Course with ID {CourseId} not found.", id);
-        return NotFound(new { success = false, message = "Course not found." });
-    }
-
-    var orderedFiles = course.UploadedFiles.OrderBy(f => f.UploadedAt).ToList();
-    var firstFile = orderedFiles.FirstOrDefault();
-
-    // Default not enrolled
-    bool isEnrolled = false;
-
-    // Try to get user ID if authenticated
-    if (User.Identity != null && User.Identity.IsAuthenticated)
-    {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (Guid.TryParse(userIdClaim, out var userId))
+        // [Authorize(Roles = "Instructor")]
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
         {
-            isEnrolled = course.Enrollments.Any(e => e.UserId == userId);
-        }
-    }
+            var course = await _courseService.GetByIdAsync(id);
+            if (course == null)
+                return NotFound(new { success = false, message = "Course not found." });
 
-    var visibleFiles = isEnrolled ? orderedFiles : orderedFiles.Take(1).ToList();
+            var orderedFiles = course.UploadedFiles.OrderBy(f => f.UploadedAt).ToList();
+            var firstFile = orderedFiles.FirstOrDefault();
+            bool isEnrolled = false;
+            bool isCompleted = false;
+            List<Guid> completedFileIds = new();
+            Guid userId = Guid.Empty;
 
-    return Ok(new
-    {
-        success = true,
-        data = new
-        {
-            course.Id,
-            course.Title,
-            course.Description,
-            course.CreatedAt,
-            InstructorEmail = course.Instructor?.Username,
-            IsEnrolled = isEnrolled,
-
-            FirstUploadedFile = firstFile == null ? null : new
+            if (User.Identity?.IsAuthenticated == true)
             {
-                firstFile.Id,
-                firstFile.FileName,
-                firstFile.Topic,
-                firstFile.Description,
-                firstFile.Path,
-                firstFile.UploadedAt
-            },
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (Guid.TryParse(userIdClaim, out userId))
+                {
+                    isEnrolled = course.Enrollments.Any(e => e.UserId == userId);
 
-            UploadedFiles = visibleFiles.Select(f => new
+                    if (isEnrolled)
+                    {
+                        completedFileIds = await _userFileProgressService.GetCompletedFileIdsAsync(userId, course.Id);
+                        isCompleted = orderedFiles.All(f => completedFileIds.Contains(f.Id));
+                    }
+                }
+            }
+
+            var visibleFiles = isEnrolled ? orderedFiles : orderedFiles.Take(1).ToList();
+            var thumbnailUrl = string.IsNullOrEmpty(course.ThumbnailUrl)
+                ? null
+                : Url.Action(nameof(GetThumbnail), "Courses", new { id = course.Id }, Request.Scheme);
+
+            return Ok(new
             {
-                f.Id,
-                f.FileName,
-                f.Topic,
-                f.Description,
-                f.Path,
-                f.UploadedAt
-            })
+                success = true,
+                data = new
+                {
+                    course.Id,
+                    course.Title,
+                    course.Description,
+                    course.CreatedAt,
+                    course.Level,
+                    course.Language,
+                    course.Domain,
+                    course.Tags,
+                    ThumbnailUrl = thumbnailUrl,
+                    InstructorName = course.Instructor?.FullName,
+                    IsEnrolled = isEnrolled,
+                    IsCompleted = isCompleted,
+
+                    FirstUploadedFile = firstFile == null ? null : new
+                    {
+                        firstFile.Id,
+                        firstFile.FileName,
+                        firstFile.Topic,
+                        firstFile.Description,
+                        firstFile.Path,
+                        firstFile.UploadedAt,
+                        IsCompleted = completedFileIds.Contains(firstFile.Id)
+                    },
+
+                    UploadedFiles = visibleFiles.Select(f => new
+                    {
+                        f.Id,
+                        f.FileName,
+                        f.Topic,
+                        f.Description,
+                        f.Path,
+                        f.UploadedAt,
+                        IsCompleted = completedFileIds.Contains(f.Id)
+                    })
+                }
+            });
         }
-    });
-}
 
 
 
         [Authorize(Roles = "Instructor")]
+        [HttpGet("{id}/thumbnail")]
+        public async Task<IActionResult> GetThumbnail(Guid id)
+        {
+            var course = await _courseService.GetByIdAsync(id);
+            if (course == null || string.IsNullOrEmpty(course.ThumbnailUrl))
+                return NotFound(new { success = false, message = "Thumbnail not found." });
+
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), course.ThumbnailUrl);
+            if (!System.IO.File.Exists(filePath))
+                return NotFound(new { success = false, message = "Thumbnail file missing on server." });
+
+            var contentType = "image/jpeg"; // You could use `Path.GetExtension(filePath)` to determine
+            var fileBytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            return File(fileBytes, contentType);
+        }
+
+
+
+
+
+
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CourseDto courseDto)
+        public async Task<IActionResult> Create([FromForm] CreateCourseDto courseDto)
         {
             if (!TryGetUserIdFromToken(out var instructorId))
             {
@@ -152,10 +191,31 @@ public async Task<IActionResult> GetById(Guid id)
 
             try
             {
-                var course = await _courseService.CreateAsync(courseDto, instructorId);
-                _logger.Information("Course created by instructor {InstructorId}: {CourseId}", instructorId, course.Id);
 
-                return CreatedAtAction(nameof(GetById), new { id = course.Id }, new { success = true, data = course });
+                string? savedThumbnailPath = null;
+                if (courseDto.Thumbnail != null && courseDto.Thumbnail.Length > 0)
+                {
+                    var uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "UploadedThumbnails");
+                    if (!Directory.Exists(uploadRoot))
+                        Directory.CreateDirectory(uploadRoot);
+
+                    var sanitizedFileName = Path.GetFileName(courseDto.Thumbnail.FileName);
+                    var uniqueFileName = $"{Guid.NewGuid()}_{sanitizedFileName}";
+                    var filePath = Path.Combine(uploadRoot, uniqueFileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await courseDto.Thumbnail.CopyToAsync(stream);
+                    }
+
+                    savedThumbnailPath = Path.Combine("UploadedThumbnails", uniqueFileName); // relative path
+                }
+
+                var createdCourse = await _courseService.CreateAsync(courseDto, instructorId, savedThumbnailPath);
+
+                _logger.Information("Course created by instructor {InstructorId}: {CourseId}", instructorId, createdCourse.Id);
+
+                return CreatedAtAction(nameof(GetById), new { id = createdCourse.Id }, new { success = true, data = createdCourse });
             }
             catch (Exception ex)
             {
@@ -163,6 +223,8 @@ public async Task<IActionResult> GetById(Guid id)
                 return StatusCode(500, new { success = false, message = "Course creation failed.", error = ex.Message });
             }
         }
+
+
 
         [Authorize(Roles = "Instructor")]
         [HttpPut("{id}")]
@@ -239,18 +301,18 @@ public async Task<IActionResult> GetById(Guid id)
             return Ok(new { success = true, data = students });
         }
 
- [Authorize(Roles = "Student")]
+        [Authorize(Roles = "Student")]
         [HttpGet("search")]
-public async Task<IActionResult> SearchCourses([FromQuery] string query)
-{
-    if (string.IsNullOrWhiteSpace(query))
-        return BadRequest(new { success = false, message = "Search query is required." });
+        public async Task<IActionResult> SearchCourses([FromQuery] string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return BadRequest(new { success = false, message = "Search query is required." });
 
-    _logger.Information("Searching courses with query: {Query}", query);
-    var results = await _courseService.SearchByNameAsync(query);
+            _logger.Information("Searching courses with query: {Query}", query);
+            var results = await _courseService.SearchByNameAsync(query);
 
-    return Ok(new { success = true, data = results });
-}
+            return Ok(new { success = true, data = results });
+        }
 
     }
 }

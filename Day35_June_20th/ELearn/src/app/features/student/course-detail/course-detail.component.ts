@@ -4,6 +4,8 @@ import { StudentService } from '../services/student.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { switchMap, map, catchError, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-course-detail',
@@ -17,19 +19,32 @@ export class CourseDetailComponent {
   private sanitizer = inject(DomSanitizer);
   private router = inject(Router);
 
-  course$ = this.route.paramMap.pipe(
-    switchMap(paramMap => {
-      const courseId = paramMap.get('courseId');
-      if (!courseId) {
-        return of({ error: 'Course ID missing', data: null });
-      }
+course$ = this.route.paramMap.pipe(
+  switchMap(paramMap => {
+    const courseId = paramMap.get('courseId');
+    if (!courseId) {
+      console.warn('Course ID is missing in route.');
+      return of({ error: 'Course ID missing', data: null });
+    }
 
-      return this.studentService.getCourseById(courseId).pipe(
-        map(res => ({ data: res.data, error: null })),
-        catchError(err => of({ error: err.message || 'Failed to load course details.', data: null }))
-      );
-    })
-  );
+    return this.studentService.getCourseById(courseId).pipe(
+      map(res => ({ data: res.data, error: null })),
+      catchError(err => {
+        console.error('Error loading course:', err);
+        return of({ error: err.message || 'Failed to load course details.', data: null });
+      })
+    );
+  }),
+  tap(result => {
+    if (result.error) {
+      console.warn('Course load failed:', result.error);
+    } else {
+      console.log('Course data loaded:', result.data);
+    }
+  })
+);
+
+  
 
   getVideoUrl(fileName: string): SafeResourceUrl {
     const path = `/assets/videos/${fileName}`;

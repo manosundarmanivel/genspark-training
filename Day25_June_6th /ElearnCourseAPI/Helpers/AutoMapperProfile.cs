@@ -14,6 +14,7 @@ namespace ElearnAPI.Mapping
             CreateMap<CreateUserDto, User>();
             CreateMap<CourseDto, Course>();
             CreateMap<Course, CourseDto>();
+             CreateMap<CreateCourseDto, Course>();
             CreateMap<UploadedFileDto, UploadedFile>();
             CreateMap<UploadedFileDto, UploadedFile>().ReverseMap();
             CreateMap<CourseDto, Course>().ReverseMap();

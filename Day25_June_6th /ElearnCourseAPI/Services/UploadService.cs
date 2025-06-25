@@ -71,6 +71,7 @@ namespace ElearnAPI.Services
         public async Task<List<UploadedFile>> GetFilesByCourseIdAsync(Guid courseId)
         {
             return await _uploadRepository.GetFilesByCourseIdAsync(courseId);
+            
         }
 
         public async Task<UploadedFile?> GetFileByIdAsync(Guid fileId)

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, map, Observable, of, throwError } from 'rxjs';
+import { tap } from 'rxjs/operators'; 
 
 @Injectable({ providedIn: 'root' })
 export class StudentService {
@@ -9,10 +10,17 @@ export class StudentService {
   constructor(private http: HttpClient) {}
 
   getAllCourses() {
+     
     return this.http.get<any>(this.baseUrl).pipe(
-      map(res => res?.data ?? []),
+        tap(response => console.log(' GetAllCourses API Response:', response)), 
+        
+      map(res => res?.data ?? []
+        
+        
+      ),
       catchError(err => {
         console.error('Error fetching courses:', err);
+       
         return throwError(() => new Error('Failed to fetch courses'));
       })
     );
@@ -28,6 +36,7 @@ export class StudentService {
 
 
  getCourseById(courseId: string): Observable<any> {
+
     return this.http
       .get<any>(`${this.baseUrl}/${courseId}`)
       .pipe(catchError(this.handleError));

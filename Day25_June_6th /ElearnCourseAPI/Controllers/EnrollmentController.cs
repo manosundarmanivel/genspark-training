@@ -5,6 +5,9 @@ using Serilog;
 using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using ElearnAPI.SignalR;
+using Microsoft.AspNetCore.SignalR;
+
 
 namespace ElearnAPI.Controllers
 {
@@ -15,33 +18,41 @@ namespace ElearnAPI.Controllers
     {
         private readonly IEnrollmentService _enrollmentService;
         private readonly Serilog.ILogger _logger;
+          private readonly IHubContext<NotificationHub> _hubContext;
 
-        public EnrollmentController(IEnrollmentService enrollmentService)
+        public EnrollmentController(IEnrollmentService enrollmentService, IHubContext<NotificationHub> hubContext)
         {
             _enrollmentService = enrollmentService;
-            _logger = Log.ForContext<EnrollmentController>(); 
+            _logger = Log.ForContext<EnrollmentController>();
+            _hubContext = hubContext;
         }
 
         [HttpPost("{courseId}")]
-        public async Task<IActionResult> Enroll(Guid courseId)
-        {
-            var userId = GetUserIdFromToken();
-            if (userId == null)
-            {
-                _logger.Warning("Enroll attempt failed due to missing or invalid token.");
-                return Unauthorized(new { success = false, message = "Invalid user token." });
-            }
+public async Task<IActionResult> Enroll(Guid courseId)
+{
+    var userId = GetUserIdFromToken();
+    if (userId == null)
+    {
+        _logger.Warning("Enroll attempt failed due to missing or invalid token.");
+        return Unauthorized(new { success = false, message = "Invalid user token." });
+    }
 
-            var result = await _enrollmentService.EnrollStudentAsync(userId.Value, courseId);
-            if (!result)
-            {
-                _logger.Information("Enrollment failed. User {UserId} may already be enrolled or course {CourseId} is invalid.", userId, courseId);
-                return BadRequest(new { success = false, message = "Already enrolled or invalid course." });
-            }
+    var notification = await _enrollmentService.EnrollStudentAsync(userId.Value, courseId);
+    if (notification == null)
+    {
+        _logger.Information("Enrollment failed. User {UserId} may already be enrolled or course {CourseId} is invalid.", userId, courseId);
+        return BadRequest(new { success = false, message = "Already enrolled or invalid course." });
+    }
 
-            _logger.Information("User {UserId} successfully enrolled in course {CourseId}.", userId, courseId);
-            return Ok(new { success = true, message = "Enrolled successfully." });
-        }
+    _logger.Information("User {UserId} successfully enrolled in course {CourseId}.", userId, courseId);
+
+    await _hubContext.Clients
+        .Group($"instructor-{notification.InstructorId}")
+        .SendAsync("ReceiveEnrollmentNotification", notification.StudentName, notification.CourseTitle);
+
+    return Ok(new { success = true, message = "Enrolled successfully." });
+}
+
 
         [HttpDelete("{courseId}")]
         public async Task<IActionResult> Unenroll(Guid courseId)

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { InstructorService } from '../services/instructor.service';
 import { catchError, map, startWith } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
+import { RouterModule } from '@angular/router';
 
 interface UploadedFile {
   id: string;
@@ -12,6 +13,7 @@ interface UploadedFile {
 }
 
 interface Course {
+thumbnailUrl: any;
   id: string;
   title: string;
   description: string;
@@ -28,7 +30,7 @@ interface CourseState {
 @Component({
   selector: 'app-my-courses',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterModule],
   templateUrl: './my-courses.component.html',
 })
 export class MyCoursesComponent {

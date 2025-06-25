@@ -1,10 +1,43 @@
 <div class="max-w-7xl mx-auto px-6 py-12" *ngIf="coursesState$ | async as state">
-  <!-- Main Headline -->
+
   <div class="text-center mb-12">
     <h1 class="text-4xl font-bold text-gray-900">Expand Your Knowledge</h1>
     <p class="text-lg text-gray-600 mt-2">
       Explore top-rated online courses across development, design, business, and more.
     </p>
+  </div>
+
+
+  <div class="flex flex-wrap justify-center gap-4 mb-8">
+    <select #lang (change)="updateLanguage(lang.value)" class="border border-gray-300 px-4 py-2 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <option value="">All Languages</option>
+      <option value="English">English</option>
+      <option value="Hindi">Hindi</option>
+      <option value="Tamil">Tamil</option>
+    </select>
+
+    <select #level (change)="updateLevel(level.value)" class="border border-gray-300 px-4 py-2 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+      <option value="">All Levels</option>
+      <option value="Beginner">Beginner</option>
+      <option value="Intermediate">Intermediate</option>
+      <option value="Advanced">Advanced</option>
+    </select>
+
+     <input
+      #domainInput
+      type="text"
+      placeholder="Search by Domain"
+      (input)="updateDomain(domainInput.value)"
+      class="border border-gray-300 px-4 py-2 rounded-md text-sm w-52 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    />
+
+    <input
+      #tagInput
+      type="text"
+      placeholder="Search by tag (e.g., 'AI')"
+      (input)="updateTag(tagInput.value)"
+      class="border border-gray-300 px-4 py-2 rounded-md text-sm w-52 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+    />
   </div>
 
   <!-- Error -->
@@ -17,25 +50,25 @@
     Loading popular courses...
   </div>
 
-  <!-- Empty State -->
+  <!-- No Courses -->
   <div *ngIf="!state.loading && !state.error && state.courses.length === 0" class="text-center text-gray-500 mt-10 text-base">
     No courses found. New content coming soon!
   </div>
 
-  <!-- Course Grid -->
-  <div *ngIf="!state.loading && state.courses.length > 0" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
+  <!-- Courses Grid -->
+  <div *ngIf="!state.loading && state.courses.length > 0" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <div
       *ngFor="let course of state.courses"
-      class="bg-white rounded-lg shadow-md hover:shadow-lg transition overflow-hidden flex flex-col"
+      class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-200 overflow-hidden flex flex-col border border-gray-200"
     >
-      <img
-        src="https://img.freepik.com/free-psd/e-learning-template-design_23-2151081790.jpg?semt=ais_hybrid&w=740"
-        alt="Course image"
-        class="h-48 w-full object-cover"
-      />
+     <img
+  [src]="course?.thumbnailUrl ? 'http://localhost:5295/' + course.thumbnailUrl : 'https://static.skillshare.com/uploads/video/thumbnails/02789fe5c46b98db955cd8be0d103bd7/original'"
+  alt="Course Image"
+  class="h-48 w-full object-cover"
+/>
       <div class="p-5 flex flex-col justify-between flex-1">
         <div>
-          <h3 class="text-lg font-semibold text-gray-800 truncate mb-1">{{ course.title }}</h3>
+          <h3 class="text-md font-semibold text-gray-800 truncate mb-1">{{ course.title }}</h3>
           <p class="text-sm text-gray-600 line-clamp-3">{{ course.description }}</p>
         </div>
         <button

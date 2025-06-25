@@ -11,22 +11,32 @@ namespace ElearnAPI.Services
 {
     public class CourseService : ICourseService
     {
+        private readonly IEnrollmentRepository _enrollmentRepository;
         private readonly ICourseRepository _courseRepository;
         private readonly IMapper _mapper;
 
-        public CourseService(ICourseRepository courseRepository, IMapper mapper)
+        public CourseService(ICourseRepository courseRepository, IEnrollmentRepository enrollmentRepository, IMapper mapper)
         {
             _courseRepository = courseRepository;
+            _enrollmentRepository = enrollmentRepository;
             _mapper = mapper;
         }
 
-        public async Task<CourseDto> CreateAsync(CourseDto courseDto, Guid instructorId)
-        {
-            var course = _mapper.Map<Course>(courseDto);
-            course.InstructorId = instructorId; // Attach instructor ID
-            await _courseRepository.AddAsync(course);
-            return _mapper.Map<CourseDto>(course);
-        }
+public async Task<CourseDto> CreateAsync(CreateCourseDto courseDto, Guid instructorId, string? thumbnailPath)
+{
+    var course = _mapper.Map<Course>(courseDto);
+    course.InstructorId = instructorId;
+
+    if (!string.IsNullOrEmpty(thumbnailPath))
+    {
+        course.ThumbnailUrl = thumbnailPath;
+    }
+
+    await _courseRepository.AddAsync(course);
+
+    return _mapper.Map<CourseDto>(course);
+}
+
 
 
         public async Task<bool> DeleteAsync(Guid id)
@@ -44,12 +54,12 @@ namespace ElearnAPI.Services
             return _mapper.Map<IEnumerable<CourseDto>>(courses);
         }
 
- public async Task<Course?> GetByIdAsync(Guid id)
-    {
-        return await _courseRepository.GetByIdWithDetailsAsync(id);
-    }
+        public async Task<Course?> GetByIdAsync(Guid id)
+        {
+            return await _courseRepository.GetByIdWithDetailsAsync(id);
+        }
 
-        
+
 
         public async Task<IEnumerable<CourseDto>> GetByInstructorIdAsync(Guid instructorId, int page, int pageSize)
         {
@@ -69,12 +79,26 @@ namespace ElearnAPI.Services
             await _courseRepository.UpdateAsync(course);
             return true;
         }
-        
+
         public async Task<IEnumerable<CourseDto>> SearchByNameAsync(string query)
+        {
+            var courses = await _courseRepository.SearchByNameAsync(query);
+            return _mapper.Map<IEnumerable<CourseDto>>(courses);
+        }
+
+
+public async Task<List<Guid>> GetCourseIdsByStudentAsync(Guid studentId)
 {
-    var courses = await _courseRepository.SearchByNameAsync(query);
-    return _mapper.Map<IEnumerable<CourseDto>>(courses);
+    var enrollments = await _enrollmentRepository.GetEnrollmentsByStudentIdAsync(studentId);
+    return enrollments.Select(e => e.CourseId).Distinct().ToList();
 }
+
+public async Task<Guid?> GetInstructorIdByCourseAsync(Guid courseId)
+{
+    var course = await _courseRepository.GetByIdAsync(courseId);
+    return course?.InstructorId;
+}
+
 
     }
 }
