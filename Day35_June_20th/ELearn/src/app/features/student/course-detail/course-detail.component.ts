@@ -18,6 +18,8 @@ export class CourseDetailComponent {
   private studentService = inject(StudentService);
   private sanitizer = inject(DomSanitizer);
   private router = inject(Router);
+  selectedVideo: any = null;
+
 
 course$ = this.route.paramMap.pipe(
   switchMap(paramMap => {
@@ -46,10 +48,11 @@ course$ = this.route.paramMap.pipe(
 
   
 
-  getVideoUrl(fileName: string): SafeResourceUrl {
-    const path = `/assets/videos/${fileName}`;
-    return this.sanitizer.bypassSecurityTrustResourceUrl(path);
-  }
+getVideoUrl(fileName: string): SafeResourceUrl {
+  const url = `http://localhost:5295/api/v1/courses/stream/${fileName}`;
+  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+}
+
 
   enroll(courseId: string): void {
     this.studentService.enrollInCourse(courseId).subscribe({
@@ -62,4 +65,26 @@ course$ = this.route.paramMap.pipe(
       }
     });
   }
+
+  markAsCompleted(fileId: string): void {
+  this.studentService.markFileAsCompleted(fileId).subscribe({
+    next: () => {
+      // Update the UI without reload
+      const current = this.selectedVideo;
+      if (current?.id === fileId) current.isCompleted = true;
+      this.course$.pipe(tap(result => {
+        result.data.uploadedFiles.forEach((f: any) => {
+          if (f.id === fileId) f.isCompleted = true;
+        });
+      })).subscribe();
+
+      alert('Marked as completed!');
+    },
+    error: err => {
+      console.error('Failed to mark as completed:', err);
+      alert('Failed to mark as completed. Please try again.');
+    }
+  });
+}
+
 }

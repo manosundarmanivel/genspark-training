@@ -150,7 +150,9 @@ export class DashboardLayoutComponent {
           { label: 'Browse Courses', path: '/student-dashboard/browse' },
         ];
       default:
-        return [];
+        return [
+            
+        ];
     }
   });
 }

@@ -38,12 +38,15 @@ namespace ElearnAPI.Repositories
                 .ToListAsync();
         }
 
-        public Task UpdateAsync(UserFileProgress progress)
-        {
-            _context.UserFileProgresses.Update(progress);
-            return Task.CompletedTask;
-           
-        }
+       public async Task UpdateAsync(UserFileProgress progress)
+{
+    Console.WriteLine($"Updating Progress ID: {progress.Id}, IsCompleted: {progress.IsCompleted}, CompletedAt: {progress.CompletedAt}");
+
+    _context.UserFileProgresses.Update(progress);
+    int changes = await _context.SaveChangesAsync();
+
+    Console.WriteLine($"EF SaveChanges affected rows: {changes}");
+}
 
         public async Task SaveChangesAsync()
         {

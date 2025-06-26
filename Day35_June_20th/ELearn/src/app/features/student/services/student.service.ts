@@ -9,6 +9,8 @@ export class StudentService {
 
   constructor(private http: HttpClient) {}
 
+  
+
   getAllCourses() {
      
     return this.http.get<any>(this.baseUrl).pipe(
@@ -62,6 +64,11 @@ getEnrolledCourses() {
     })
   );
 }
+
+markFileAsCompleted(fileId: string) {
+  return this.http.post(`http://localhost:5295/api/v1/progress/complete/${fileId}`, {});
+}
+
 
 
 

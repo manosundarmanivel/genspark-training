@@ -19,6 +19,7 @@ namespace ElearnAPI.Data
         public DbSet<Enrollment> Enrollments { get; set; }
         public DbSet<UserFileProgress> UserFileProgresses { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Role

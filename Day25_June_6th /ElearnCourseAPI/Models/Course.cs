@@ -14,12 +14,11 @@ namespace ElearnAPI.Models
         public string? ThumbnailUrl { get; set; }
 
 
-        public string Domain { get; set; } = null!; // e.g., "Web Development", "Data Science"
+        public string Domain { get; set; } = null!; 
 
-        public string? Level { get; set; } // e.g., "Beginner", "Intermediate", "Advanced"
+        public string? Level { get; set; } 
 
-        public string? Language { get; set; } // e.g., "English", "Hindi"
-
+        public string? Language { get; set; } 
         public List<string> Tags { get; set; } = new();
 
         public Guid InstructorId { get; set; }

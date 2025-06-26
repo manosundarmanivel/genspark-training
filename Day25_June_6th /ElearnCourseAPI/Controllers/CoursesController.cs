@@ -156,6 +156,23 @@ namespace ElearnAPI.Controllers
             });
         }
 
+[AllowAnonymous]
+[HttpGet("stream/{fileName}")]
+public IActionResult StreamVideo(string fileName)
+{
+    var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+    var filePath = Path.Combine(uploadsRoot, fileName);
+
+    if (!System.IO.File.Exists(filePath))
+        return NotFound(new { success = false, message = "File not found." });
+
+    var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+    return File(stream, "video/mp4", enableRangeProcessing: true);
+}
+
+
+
+
 
 
         [Authorize(Roles = "Instructor")]

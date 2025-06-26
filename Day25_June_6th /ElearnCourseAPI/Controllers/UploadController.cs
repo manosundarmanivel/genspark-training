@@ -35,62 +35,180 @@ public UploadController(
     _logger = Log.ForContext<UploadController>();
 }
 
-       [Authorize(Roles = "Instructor")]
-[HttpPost("upload")]
-public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
+        //        [Authorize(Roles = "Instructor")]
+        // [HttpPost("upload")]
+        // public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
+        // {
+        //     try
+        //     {
+        //         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        //         if (!Guid.TryParse(userIdClaim, out var uploadedBy))
+        //         {
+        //             _logger.Warning("Invalid token during upload.");
+        //             return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
+        //         }
+
+        //         var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+        //         if (!Directory.Exists(uploadsRoot))
+        //             Directory.CreateDirectory(uploadsRoot);
+
+        //         var sanitizedFileName = Path.GetFileName(dto.File.FileName);
+        //         var filePath = Path.Combine(uploadsRoot, sanitizedFileName);
+
+        //         using (var stream = new FileStream(filePath, FileMode.Create))
+        //         {
+        //             await dto.File.CopyToAsync(stream);
+        //         }
+
+        //         var publicUrlPath = $"/uploads/{sanitizedFileName}";
+
+        //         var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
+        //         {
+        //             FileName = sanitizedFileName,
+        //             Path = publicUrlPath,
+        //             CourseId = dto.CourseId,
+        //             Topic = dto.Topic,
+        //             Description = dto.Description
+        //         });
+
+
+        //         // await _userFileProgressService.AddProgressAsync(new
+        //         // UserFileProgress
+        //         // {
+        //         //     Id = Guid.NewGuid(),
+        //         //     UserId = uploadedBy,
+        //         //     UploadedFileId = fileMeta.Id,
+        //         //     IsCompleted = false,
+
+        //         // });
+
+
+
+        //         _logger.Information("File uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
+
+        //         await _hubContext.Clients.Group($"course-{dto.CourseId}")
+        //             .SendAsync("ReceiveNotification", new
+        //             {
+        //                 message = $"New file uploaded: {sanitizedFileName}",
+        //                 courseId = dto.CourseId,
+
+        //             });
+
+        //         return Ok(new
+        //         {
+        //             success = true,
+        //             data = new
+        //             {
+        //                 fileMeta.Id,
+        //                 fileMeta.FileName,
+        //                 fileMeta.Topic,
+        //                 fileMeta.Description,
+        //                 fileMeta.CourseId,
+        //                 path = publicUrlPath
+        //             }
+        //         });
+        //     }
+        //     catch (Exception ex)
+        //     {
+        //         _logger.Error(ex, "File upload failed.");
+        //         return StatusCode(500, new
+        //         {
+        //             success = false,
+        //             message = "File upload failed.",
+        //             error = ex.Message
+        //         });
+        //     }
+        // }
+
+
+[Authorize(Roles = "Instructor")]
+[HttpPost("upload/chunk")]
+public async Task<IActionResult> UploadChunked(
+    IFormFile chunk,
+    [FromForm] int chunkIndex,
+    [FromForm] int totalChunks,
+    [FromForm] string fileName,
+    [FromForm] Guid courseId,
+    [FromForm] string topic,
+    [FromForm] string description)
 {
     try
     {
         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
         if (!Guid.TryParse(userIdClaim, out var uploadedBy))
         {
-            _logger.Warning("Invalid token during upload.");
+            _logger.Warning("Invalid token during chunk upload.");
             return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
         }
 
-        var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-        if (!Directory.Exists(uploadsRoot))
-            Directory.CreateDirectory(uploadsRoot);
+        // 1. Save chunk to temp folder
+        var tempFolder = Path.Combine(Directory.GetCurrentDirectory(), "TempUploads", fileName);
+        Directory.CreateDirectory(tempFolder);
+        var chunkPath = Path.Combine(tempFolder, $"{chunkIndex}.part");
 
-        var sanitizedFileName = Path.GetFileName(dto.File.FileName);
-        var filePath = Path.Combine(uploadsRoot, sanitizedFileName);
-
-        using (var stream = new FileStream(filePath, FileMode.Create))
+        using (var stream = new FileStream(chunkPath, FileMode.Create))
         {
-            await dto.File.CopyToAsync(stream);
+            await chunk.CopyToAsync(stream);
         }
+
+        _logger.Information("Chunk {Index}/{Total} for {File} received.", chunkIndex + 1, totalChunks, fileName);
+
+        // 2. Check if all chunks are received
+        var chunkFiles = Directory.GetFiles(tempFolder).Length;
+        if (chunkFiles < totalChunks)
+        {
+            return Ok(new { success = true, message = "Chunk uploaded, waiting for remaining chunks." });
+        }
+
+        // 3. All chunks received — merge
+        var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+        Directory.CreateDirectory(uploadsRoot);
+
+        var sanitizedFileName = Path.GetFileName(fileName);
+        var finalFilePath = Path.Combine(uploadsRoot, sanitizedFileName);
+
+        using (var output = new FileStream(finalFilePath, FileMode.Create))
+        {
+            for (int i = 0; i < totalChunks; i++)
+            {
+                var partPath = Path.Combine(tempFolder, $"{i}.part");
+                using var input = new FileStream(partPath, FileMode.Open);
+                await input.CopyToAsync(output);
+            }
+        }
+
+        Directory.Delete(tempFolder, true); // cleanup
 
         var publicUrlPath = $"/uploads/{sanitizedFileName}";
 
+        // 4. Save metadata
         var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
         {
             FileName = sanitizedFileName,
             Path = publicUrlPath,
-            CourseId = dto.CourseId,
-            Topic = dto.Topic,
-            Description = dto.Description
+            CourseId = courseId,
+            Topic = topic,
+            Description = description
         });
 
-       
-        await _userFileProgressService.AddProgressAsync(new
-        UserFileProgress
-        {
-            Id = Guid.NewGuid(),
-            UserId = uploadedBy,
-            UploadedFileId = fileMeta.Id,
-            IsCompleted = false,
-            
-        });
+        // Optional: track uploader's progress
+        // await _userFileProgressService.AddProgressAsync(new UserFileProgress
+        // {
+        //     Id = Guid.NewGuid(),
+        //     UserId = uploadedBy,
+        //     UploadedFileId = fileMeta.Id,
+        //     IsCompleted = false
+        // });
 
-        _logger.Information("File uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
-
-        await _hubContext.Clients.Group($"course-{dto.CourseId}")
+        // 5. Send real-time notification
+        await _hubContext.Clients.Group($"course-{courseId}")
             .SendAsync("ReceiveNotification", new
             {
                 message = $"New file uploaded: {sanitizedFileName}",
-                courseId = dto.CourseId,
-               
+                courseId
             });
+
+        _logger.Information("File assembled and uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
 
         return Ok(new
         {
@@ -108,15 +226,16 @@ public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
     }
     catch (Exception ex)
     {
-        _logger.Error(ex, "File upload failed.");
+        _logger.Error(ex, "Chunk upload failed.");
         return StatusCode(500, new
         {
             success = false,
-            message = "File upload failed.",
+            message = "Chunk upload failed.",
             error = ex.Message
         });
     }
 }
+
 
 
 

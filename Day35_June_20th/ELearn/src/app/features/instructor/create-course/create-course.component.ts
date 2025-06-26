@@ -30,10 +30,16 @@ export class CreateCourseComponent implements OnInit {
   tagInput = '';
   maxTags = 5;
   tags: string[] = [];
+  
 
-  domainOptions = ['AI', 'Web', 'Cloud', 'Security', 'Data Science'];
+domainOptions = ['Artificial Intelligence', 'Web Development', 'Data Science', 'Cybersecurity', 'Cloud Computing'];
   levelOptions = ['Beginner', 'Intermediate', 'Advanced'];
-  languageOptions = ['English', 'Hindi', 'Spanish'];
+  languageOptions = ['English', 'Hindi', 'Spanish', 'French', 'German'];
+
+  uploadProgress = 0;
+
+  accessToken = localStorage.getItem('token');
+
 
   constructor(
     private fb: FormBuilder,
@@ -146,49 +152,104 @@ export class CreateCourseComponent implements OnInit {
     });
   }
 
-  uploadContent(): void {
-    console.log('Uploading content...');
+//   uploadContent(): void {
+//     console.log('Uploading content...');
     
-    if (this.fileForm.invalid) {
-      alert('Please complete all required fields');
-      return;
-    }
+//     if (this.fileForm.invalid) {
+//       alert('Please complete all required fields');
+//       return;
+//     }
 
-    const courseId = this.createCourseService.getCourseId();
-    if (!courseId) {
-      alert('Missing course ID');
-      return;
-    }
+//     const courseId = this.createCourseService.getCourseId();
+//     if (!courseId) {
+//       alert('Missing course ID');
+//       return;
+//     }
 
-    const file = this.fileForm.get('file')?.value;
-    if (!file) {
-      alert('Please select a file');
-      return;
-    }
+//     const file = this.fileForm.get('file')?.value;
+//     if (!file) {
+//       alert('Please select a file');
+//       return;
+//     }
 
-    const formData = new FormData();
-    formData.append('File', file);
-    formData.append('CourseId', courseId);
-    formData.append('Topic', this.fileForm.value.topic);
-    formData.append('Description', this.fileForm.value.description);
+//     const formData = new FormData();
+//     formData.append('File', file);
+//     formData.append('CourseId', courseId);
+//     formData.append('Topic', this.fileForm.value.topic);
+//     formData.append('Description', this.fileForm.value.description);
 
-    this.createCourseService.setLoading(true);
+//     this.createCourseService.setLoading(true);
 
-    this.instructorService.uploadFile(formData).subscribe({
-      next: res => {
-        if (res?.success) {
-          alert('Upload successful!');
-          this.router.navigate(['/instructor-dashboard']);
-        } else {
-          alert('Upload failed: ' + (res.message || 'Unknown error'));
-        }
-        this.createCourseService.setLoading(false);
-      },
-      error: err => {
-        alert('Error uploading: ' + (err.error?.message || err.message || 'Unknown error'));
-        console.error(err);
-        this.createCourseService.setLoading(false);
-      },
-    });
+//     this.instructorService.uploadFile(formData).subscribe({
+//       next: res => {
+//         if (res?.success) {
+//           alert('Upload successful!');
+//           this.router.navigate(['/instructor-dashboard']);
+//         } else {
+//           alert('Upload failed: ' + (res.message || 'Unknown error'));
+//         }
+//         this.createCourseService.setLoading(false);
+//       },
+//       error: err => {
+//         alert('Error uploading: ' + (err.error?.message || err.message || 'Unknown error'));
+//         console.error(err);
+//         this.createCourseService.setLoading(false);
+//       },
+//     });
+//   }
+
+
+  uploadContent(): void {
+
+    
+
+
+  if (this.fileForm.invalid) {
+    alert('Please complete all required fields');
+    return;
   }
+
+  const courseId = this.createCourseService.getCourseId();
+  const file: File = this.fileForm.get('file')?.value;
+  if (!courseId || !file) return;
+
+  this.createCourseService.setLoading(true);
+
+  const worker = new Worker(
+  new URL('../worker/upload.worker.ts', import.meta.url),
+  { type: 'module' }
+);
+
+  worker.postMessage({
+    file,
+    courseId,
+    topic: this.fileForm.value.topic,
+    description: this.fileForm.value.description,
+    chunkSize: 1 * 1024 * 1024, 
+    uploadUrl: 'http://localhost:5295/api/v1/files/upload/chunk',
+    token : this.accessToken
+  });
+
+worker.onmessage = ({ data }) => {
+  if (data.progress !== undefined) {
+    this.uploadProgress = data.progress;
+  }
+
+  if (data.error) {
+    alert('Upload failed: ' + data.error);
+    this.createCourseService.setLoading(false);
+    worker.terminate();
+  }
+
+  if (data.done) {
+    this.uploadProgress = 100;
+    alert('Upload complete!');
+    this.createCourseService.setLoading(false);
+    this.router.navigate(['/instructor-dashboard']);
+    worker.terminate();
+  }
+};
+
+}
+
 }
