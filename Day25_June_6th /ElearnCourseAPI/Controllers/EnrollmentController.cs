@@ -13,12 +13,12 @@ namespace ElearnAPI.Controllers
 {
     [ApiController]
     [Route("api/v1/enrollments")]
-    [Authorize(Roles = "Student")]
+    // [Authorize(Roles = "Student")]
     public class EnrollmentController : ControllerBase
     {
         private readonly IEnrollmentService _enrollmentService;
         private readonly Serilog.ILogger _logger;
-          private readonly IHubContext<NotificationHub> _hubContext;
+        private readonly IHubContext<NotificationHub> _hubContext;
 
         public EnrollmentController(IEnrollmentService enrollmentService, IHubContext<NotificationHub> hubContext)
         {
@@ -28,52 +28,46 @@ namespace ElearnAPI.Controllers
         }
 
         [HttpPost("{courseId}")]
-public async Task<IActionResult> Enroll(Guid courseId)
-{
-    var userId = GetUserIdFromToken();
-    if (userId == null)
-    {
-        _logger.Warning("Enroll attempt failed due to missing or invalid token.");
-        return Unauthorized(new { success = false, message = "Invalid user token." });
-    }
-
-    var notification = await _enrollmentService.EnrollStudentAsync(userId.Value, courseId);
-    if (notification == null)
-    {
-        _logger.Information("Enrollment failed. User {UserId} may already be enrolled or course {CourseId} is invalid.", userId, courseId);
-        return BadRequest(new { success = false, message = "Already enrolled or invalid course." });
-    }
-
-    _logger.Information("User {UserId} successfully enrolled in course {CourseId}.", userId, courseId);
-
-    await _hubContext.Clients
-        .Group($"instructor-{notification.InstructorId}")
-        .SendAsync("ReceiveEnrollmentNotification", notification.StudentName, notification.CourseTitle);
-
-    return Ok(new { success = true, message = "Enrolled successfully." });
-}
-
-
-        [HttpDelete("{courseId}")]
-        public async Task<IActionResult> Unenroll(Guid courseId)
+        public async Task<IActionResult> Enroll(Guid courseId)
         {
             var userId = GetUserIdFromToken();
             if (userId == null)
             {
-                _logger.Warning("Unenroll attempt failed due to invalid token.");
+                _logger.Warning("Enroll attempt failed due to missing or invalid token.");
                 return Unauthorized(new { success = false, message = "Invalid user token." });
             }
 
-            var result = await _enrollmentService.UnenrollStudentAsync(userId.Value, courseId);
-            if (!result)
+            var notification = await _enrollmentService.EnrollStudentAsync(userId.Value, courseId);
+            if (notification == null)
             {
-                _logger.Information("Unenroll failed. Enrollment not found for user {UserId} in course {CourseId}.", userId, courseId);
-                return NotFound(new { success = false, message = "Enrollment not found." });
+                _logger.Information("Enrollment failed. User {UserId} may already be enrolled or course {CourseId} is invalid.", userId, courseId);
+                return BadRequest(new { success = false, message = "Already enrolled or invalid course." });
             }
 
-            _logger.Information("User {UserId} successfully unenrolled from course {CourseId}.", userId, courseId);
-            return Ok(new { success = true, message = "Unenrolled successfully." });
+            _logger.Information("User {UserId} successfully enrolled in course {CourseId}.", userId, courseId);
+
+            await _hubContext.Clients
+                .Group($"instructor-{notification.InstructorId}")
+                .SendAsync("ReceiveEnrollmentNotification", notification.StudentName, notification.CourseTitle);
+
+            return Ok(new { success = true, message = "Enrolled successfully." });
         }
+
+
+        [HttpDelete("{userId}/{courseId}")]
+public async Task<IActionResult> Unenroll(Guid userId, Guid courseId)
+{
+    var result = await _enrollmentService.UnenrollStudentAsync(userId, courseId);
+    if (!result)
+    {
+        _logger.Information("Unenroll failed. Enrollment not found for user {UserId} in course {CourseId}.", userId, courseId);
+        return NotFound(new { success = false, message = "Enrollment not found." });
+    }
+
+    _logger.Information("User {UserId} successfully unenrolled from course {CourseId}.", userId, courseId);
+    return Ok(new { success = true, message = "Unenrolled successfully." });
+}
+
 
         [HttpGet]
         public async Task<IActionResult> GetMyCourses()
@@ -95,5 +89,16 @@ public async Task<IActionResult> Enroll(Guid courseId)
             var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             return Guid.TryParse(userIdClaim, out var id) ? id : null;
         }
+        
+        [HttpGet("dashboard/{studentId}")]
+        public async Task<IActionResult> GetEnrolledCourses(Guid studentId)
+        {
+            _logger.Information("Fetching enrolled courses for student {StudentId}", studentId);
+
+            var courses = await _enrollmentService.GetEnrolledCourseDetailsAsync(studentId);
+
+            return Ok(new { success = true, data = courses });
+        }
+
     }
 }

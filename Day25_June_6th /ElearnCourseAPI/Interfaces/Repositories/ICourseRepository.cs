@@ -8,7 +8,9 @@ namespace ElearnAPI.Interfaces.Repositories
     public interface ICourseRepository
     {
         Task<Course?> GetByIdAsync(Guid id);
+        Task<Course?> GetByIdAsyncAdmin(Guid id);
         Task<IEnumerable<Course>> GetAllAsync(int page, int pageSize);
+        Task<IEnumerable<Course>> GetAllAsyncAdmin(int page, int pageSize);
         Task<IEnumerable<Course>> GetByInstructorIdAsync(Guid instructorId, int page, int pageSize);
         Task AddAsync(Course course);
         Task UpdateAsync(Course course);

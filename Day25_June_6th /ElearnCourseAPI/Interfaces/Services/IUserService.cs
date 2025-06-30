@@ -10,8 +10,10 @@ namespace ElearnAPI.Interfaces.Services
     {
         // Methods returning DTOs (for API responses)
         Task<UserDto?> GetByIdAsync(Guid id);
+   
         Task<UserDto?> GetByUsernameAsync(string username);
         Task<IEnumerable<UserDto>> GetAllAsync(int page, int pageSize);
+        Task<IEnumerable<UserDto>> GetAllAsyncAdmin(int page, int pageSize);
         Task<UserDto> CreateAsync(UserDto userDto, string password);
         Task<bool> UpdateAsync(Guid id, UserDto userDto);
         Task<bool> DeleteAsync(Guid id);
@@ -24,6 +26,8 @@ namespace ElearnAPI.Interfaces.Services
         Task UpdateRefreshTokenAsync(User user);
 
         Task<bool> UpdateProfileAsync(Guid userId, UpdateProfileDto dto);
+
+        Task<bool> SetActiveStatusAsync(Guid id, bool isActive);
     
 
     }

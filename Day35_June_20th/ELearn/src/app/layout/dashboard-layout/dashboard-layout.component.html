@@ -48,7 +48,7 @@
 
 
     <!-- Notification Bell -->
-<div class="relative ml-4">
+<div  *ngIf="role() === 'student' || role() === 'instructor'"  class="relative ml-4">
   <button
     (click)="toggleNotifications()"
     class="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center relative focus:outline-none"
@@ -82,7 +82,7 @@
 
 
  
-<div class="relative ml-4">
+<div *ngIf="role() === 'student' || role() === 'instructor'|| role() === 'admin' "  class="relative ml-4">
   <button
     (click)="toggleProfileMenu()"
     class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center focus:outline-none"

@@ -1,8 +1,8 @@
-import { Component, OnInit, inject, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { finalize } from 'rxjs';
 import { ProfileService, UserProfile } from '../../services/profile.service';
+import { BehaviorSubject, catchError, map, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-profile',
@@ -13,27 +13,20 @@ import { ProfileService, UserProfile } from '../../services/profile.service';
 export class ProfileComponent implements OnInit {
   private fb = inject(FormBuilder);
   private profileService = inject(ProfileService);
-  private cdr = inject(ChangeDetectorRef);
 
   profileForm!: FormGroup;
   isEditing = false;
-  isLoading = false;
+  selectedFile: File | null = null;
 
   successMessage = '';
   errorMessage = '';
-  previewUrl: string | ArrayBuffer | null = null;
-  selectedFile: File | null = null;
 
-  username = '';
-  role = '';
-  originalProfileData: UserProfile | null = null;
+  previewUrl = signal<string | ArrayBuffer | null>(null);
+
+  private profileSubject = new BehaviorSubject<UserProfile | null>(null);
+  profile$ = this.profileSubject.asObservable();
 
   ngOnInit(): void {
-    this.initializeForm();
-    this.loadProfile();
-  }
-
-  initializeForm(): void {
     this.profileForm = this.fb.group({
       fullName: ['', Validators.required],
       phoneNumber: [''],
@@ -41,42 +34,27 @@ export class ProfileComponent implements OnInit {
       bio: ['']
     });
     this.profileForm.disable();
+    this.loadProfile();
   }
 
   loadProfile(): void {
-    this.isLoading = true;
-    this.profileService.getProfile()
-      .pipe(finalize(() => {
-        this.isLoading = false;
-        this.cdr.detectChanges(); // Ensure UI sync
-      }))
-      .subscribe({
-        next: (res) => {
-          if (!res || !res.data) {
-            this.errorMessage = 'Invalid profile data received.';
-            return;
-          }
-
-          const profile = res.data as UserProfile;
-          this.originalProfileData = { ...profile };
-
-          this.username = profile.username || '';
-          this.role = profile.role || '';
-
-          this.profileForm.patchValue({
-            fullName: profile.fullName || '',
-            phoneNumber: profile.phoneNumber || '',
-            profilePictureUrl: profile.profilePictureUrl || '',
-            bio: profile.bio || ''
-          });
-
-          this.previewUrl = profile.profilePictureUrl;
-        },
-        error: (err) => {
-          console.error(err);
-          this.errorMessage = 'Failed to load profile';
-        }
-      });
+    this.profileService.getProfile().pipe(
+      map(res => res.data as UserProfile),
+      tap(profile => {
+        this.profileSubject.next(profile); // set observable value
+        this.profileForm.patchValue({
+          fullName: profile.fullName,
+          phoneNumber: profile.phoneNumber,
+          profilePictureUrl: profile.profilePictureUrl,
+          bio: profile.bio
+        });
+        this.previewUrl.set(profile.profilePictureUrl ?? null);
+      }),
+      catchError(err => {
+        this.errorMessage = 'Failed to load profile';
+        return of(null);
+      })
+    ).subscribe();
   }
 
   onProfilePicChange(event: Event): void {
@@ -87,9 +65,8 @@ export class ProfileComponent implements OnInit {
 
     const reader = new FileReader();
     reader.onload = () => {
-      this.previewUrl = reader.result;
-      this.profileForm.patchValue({ profilePictureUrl: '' }); // clear old URL
-      this.cdr.detectChanges();
+      this.previewUrl.set(reader.result);
+      this.profileForm.patchValue({ profilePictureUrl: '' });
     };
     reader.readAsDataURL(this.selectedFile);
   }
@@ -102,15 +79,17 @@ export class ProfileComponent implements OnInit {
   }
 
   cancelEdit(): void {
-    if (this.originalProfileData) {
+    const profile = this.profileSubject.value;
+    if (profile) {
       this.profileForm.patchValue({
-        fullName: this.originalProfileData.fullName || '',
-        phoneNumber: this.originalProfileData.phoneNumber || '',
-        profilePictureUrl: this.originalProfileData.profilePictureUrl || '',
-        bio: this.originalProfileData.bio || ''
+        fullName: profile.fullName,
+        phoneNumber: profile.phoneNumber,
+        bio: profile.bio,
+        profilePictureUrl: profile.profilePictureUrl
       });
-      this.previewUrl = this.originalProfileData.profilePictureUrl;
+      this.previewUrl.set(profile.profilePictureUrl ?? null);
     }
+
     this.selectedFile = null;
     this.isEditing = false;
     this.profileForm.disable();
@@ -128,23 +107,32 @@ export class ProfileComponent implements OnInit {
       formData.append('profilePictureUrl', this.selectedFile);
     }
 
-    this.isLoading = true;
-    this.profileService.updateProfile(formData)
-      .pipe(finalize(() => {
-        this.isLoading = false;
-        this.cdr.detectChanges();
-      }))
-      .subscribe({
-        next: (res) => {
-          this.successMessage = res.message;
-          this.isEditing = false;
-          this.profileForm.disable();
-          this.selectedFile = null;
-          this.loadProfile(); // reload to sync username/role
-        },
-        error: () => {
-          this.errorMessage = 'Profile update failed';
-        }
-      });
+    this.successMessage = '';
+    this.errorMessage = '';
+
+    this.profileService.updateProfile(formData).pipe(
+      switchMap(() => this.profileService.getProfile()),
+      tap(res => {
+        const updatedProfile = res.data as UserProfile;
+        this.profileSubject.next(updatedProfile); // 🔁 update observable value
+        this.previewUrl.set(updatedProfile.profilePictureUrl ?? null); // ✅ update preview
+
+        this.profileForm.patchValue({
+          fullName: updatedProfile.fullName,
+          phoneNumber: updatedProfile.phoneNumber,
+          profilePictureUrl: updatedProfile.profilePictureUrl,
+          bio: updatedProfile.bio
+        });
+
+        this.successMessage = 'Profile updated successfully';
+        this.isEditing = false;
+        this.profileForm.disable();
+        this.selectedFile = null;
+      }),
+      catchError(() => {
+        this.errorMessage = 'Profile update failed';
+        return of(null);
+      })
+    ).subscribe();
   }
 }

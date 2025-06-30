@@ -58,6 +58,26 @@ namespace ElearnAPI.Services
             return _mapper.Map<UploadedFileDto>(uploadedFile);
         }
 
+        public async Task<UploadedFileDto?> UpdateFileEditAsync(UploadedFileDto dto)
+{
+    var existingFile = await _uploadRepository.GetByIdAsync(dto.Id);
+    if (existingFile == null)
+        return null;
+
+    // Update fields
+    existingFile.FileName = dto.FileName;
+    existingFile.Path = dto.Path;
+    existingFile.Topic = dto.Topic;
+    existingFile.Description = dto.Description;
+    existingFile.CourseId = dto.CourseId;
+
+    await _uploadRepository.UpdateAsync(existingFile);
+    await _uploadRepository.SaveChangesAsync();
+
+    return _mapper.Map<UploadedFileDto>(existingFile);
+}
+
+
         public async Task<bool> DeleteFileAsync(Guid id)
         {
             var file = await _uploadRepository.GetByIdAsync(id);

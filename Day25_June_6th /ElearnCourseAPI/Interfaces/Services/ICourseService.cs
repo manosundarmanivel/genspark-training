@@ -10,6 +10,7 @@ namespace ElearnAPI.Interfaces.Services
     {
         Task<Course> GetByIdAsync(Guid id);
         Task<IEnumerable<CourseDto>> GetAllAsync(int page, int pageSize);
+        Task<IEnumerable<CourseDto>> GetAllAsyncAdmin(int page, int pageSize);
         Task<IEnumerable<CourseDto>> GetByInstructorIdAsync(Guid instructorId, int page, int pageSize);
         Task<CourseDto> CreateAsync(CreateCourseDto courseDto, Guid instructorId, string? thumbnailPath);
 
@@ -19,6 +20,8 @@ namespace ElearnAPI.Interfaces.Services
 
         Task<List<Guid>> GetCourseIdsByStudentAsync(Guid studentId);
         Task<Guid?> GetInstructorIdByCourseAsync(Guid courseId);
+
+        Task<bool> SetActiveStatusAsync(Guid id, bool isActive);
 
 
     }

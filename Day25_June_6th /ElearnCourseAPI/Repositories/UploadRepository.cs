@@ -40,10 +40,17 @@ namespace ElearnAPI.Repositories
                                  .Where(f => f.CourseId == courseId)
                                  .ToListAsync();
         }
-        
-         public async Task SaveChangesAsync()
+
+        public async Task SaveChangesAsync()
         {
             await _context.SaveChangesAsync();
         }
+        
+        public async Task UpdateAsync(UploadedFile file)
+{
+    _context.UploadedFiles.Update(file);
+    await Task.CompletedTask; // or no-op, EF will track and SaveChangesAsync will apply it
+}
+
     }
 }

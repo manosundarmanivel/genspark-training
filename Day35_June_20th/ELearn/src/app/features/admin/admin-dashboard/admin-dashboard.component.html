@@ -1,5 +1,51 @@
-<div class="p-6 max-w-3xl mx-auto bg-white shadow rounded mt-10">
-      <h2 class="text-2xl font-bold mb-4 text-blue-700">Admin Dashboard</h2>
-      <p>Welcome, Admin! You have full access.</p>
-      <button class="mt-6 bg-red-600 text-white px-4 py-2 rounded" (click)="logout()">Logout</button>
-    </div>
+
+<!-- Dashboard Metrics -->
+ <div class="max-w-6xl mx-auto px-6 py-12">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+  <div class="bg-white shadow-md rounded-2xl p-6 text-center">
+    <p class="text-gray-500 text-sm mb-1">Total Courses</p>
+    <p class="text-3xl font-semibold text-indigo-600">{{ totalCourses$ | async }}</p>
+  </div>
+
+  <div class="bg-white shadow-md rounded-2xl p-6 text-center">
+    <p class="text-gray-500 text-sm mb-1">Students</p>
+    <p class="text-3xl font-semibold text-green-600">{{ studentCount$ | async }}</p>
+  </div>
+
+  <div class="bg-white shadow-md rounded-2xl p-6 text-center">
+    <p class="text-gray-500 text-sm mb-1">Instructors</p>
+    <p class="text-3xl font-semibold text-blue-600">{{ instructorCount$ | async }}</p>
+  </div>
+</div>
+
+<!-- Chart Section -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+  <div class="bg-white shadow-lg rounded-2xl p-4">
+    <h3 class="text-center font-semibold text-lg mb-4">Courses by Domain</h3>
+    <canvas baseChart
+            [data]="(domainChartData$ | async) ?? undefined"
+            [options]="chartOptions"
+            chartType="pie"
+            height="200"></canvas>
+  </div>
+
+  <div class="bg-white shadow-lg rounded-2xl p-4">
+    <h3 class="text-center font-semibold text-lg mb-4">Courses by Level</h3>
+    <canvas baseChart
+            [data]="(levelChartData$ | async) ?? undefined"
+            [options]="chartOptions"
+            chartType="pie"
+            height="200"></canvas>
+  </div>
+
+  <div class="bg-white shadow-lg rounded-2xl p-4">
+    <h3 class="text-center font-semibold text-lg mb-4">Courses by Language</h3>
+    <canvas baseChart
+            [data]="(languageChartData$ | async) ?? undefined"
+            [options]="chartOptions"
+            chartType="pie"
+            height="200"></canvas>
+  </div>
+</div>
+
+</div>

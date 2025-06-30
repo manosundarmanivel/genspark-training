@@ -57,6 +57,9 @@ builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<IUserFileProgressService, UserFileProgressService>();
 
 
+
+
+
 builder.Services.AddRateLimiter(options =>
 {
     options.RejectionStatusCode = 429;
@@ -248,6 +251,12 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
     RequestPath = "/uploads"
 });
+
+
+
+
+
+
 
 
 

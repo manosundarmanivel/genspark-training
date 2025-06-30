@@ -13,6 +13,8 @@ namespace ElearnAPI.Interfaces.Repositories
 
         Task SaveChangesAsync();
 
+       Task UpdateAsync(UploadedFile file);
+
 
     }
 }

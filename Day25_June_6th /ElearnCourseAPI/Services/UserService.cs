@@ -43,6 +43,13 @@ namespace ElearnAPI.Services
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }
 
+
+        public async Task<IEnumerable<UserDto>> GetAllAsyncAdmin(int page, int pageSize)
+        {
+            var users = await _userRepository.GetAllAsyncAdmin(page, pageSize);
+            return _mapper.Map<IEnumerable<UserDto>>(users);
+        }
+
         public async Task<UserDto?> GetByIdAsync(Guid id)
         {
             var user = await _userRepository.GetByIdAsync(id);
@@ -85,32 +92,53 @@ namespace ElearnAPI.Services
             await _userRepository.UpdateAsync(user);
         }
 
-       public async Task<bool> UpdateProfileAsync(Guid userId, UpdateProfileDto dto)
+public async Task<bool> UpdateProfileAsync(Guid userId, UpdateProfileDto dto)
 {
     var user = await _userRepository.GetByIdAsync(userId);
-    if (user == null || user.IsDeleted) return false;
+    if (user == null) return false;
 
-  
-    user.FullName = dto.FullName;
+    user.FullName = dto.FullName ?? user.FullName;
+    user.PhoneNumber = dto.PhoneNumber ?? user.PhoneNumber;
+    user.Bio = dto.Bio ?? user.Bio;
 
-    user.PhoneNumber = dto.PhoneNumber;
-   
-    user.Bio = dto.Bio;
-    user.UpdatedAt = DateTime.UtcNow;
-
-     if (dto.ProfilePictureUrl != null)
+    // Save uploaded profile picture if present
+    if (dto.ProfilePictureUrl != null && dto.ProfilePictureUrl.Length > 0)
     {
-        var fileName = $"{Guid.NewGuid()}_{dto.ProfilePictureUrl.FileName}";
-        var path = Path.Combine("wwwroot/profile-pics", fileName);
-        using var stream = new FileStream(path, FileMode.Create);
-        await dto.ProfilePictureUrl.CopyToAsync(stream);
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "Uploads", "ProfilePictures");
+        Directory.CreateDirectory(uploadsFolder);
 
-        user.ProfilePictureUrl = $"/profile-pics/{fileName}";
+        var sanitizedFileName = Path.GetFileName(dto.ProfilePictureUrl.FileName);
+        var uniqueFileName = $"{Guid.NewGuid()}_{sanitizedFileName}";
+        var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await dto.ProfilePictureUrl.CopyToAsync(stream);
+        }
+
+        // Save public relative URL for frontend to use
+        user.ProfilePictureUrl = $"/uploads/profilepictures/{uniqueFileName}";
     }
 
     await _userRepository.UpdateAsync(user);
     return true;
 }
+
+
+
+        public async Task<bool> SetActiveStatusAsync(Guid id, bool isActive)
+{
+
+    var user = await _userRepository.GetByIdAsyncAdmin(id);
+    if (user == null) return false;
+
+    user.IsDeleted = isActive;
+    user.UpdatedAt = DateTime.UtcNow;
+
+    await _userRepository.UpdateAsync(user);
+    return true;
+}
+
 
     }
 }

@@ -20,85 +20,93 @@
     <div class="max-w-md w-full">
       <h2 class="text-3xl font-semibold text-gray-800 mb-6 text-center">Create your account</h2>
 
-      <form [formGroup]="form" (ngSubmit)="register()" class="space-y-6">
-        <!-- Email -->
-        <div>
-          <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 12H8m0 0l-4 4m4-4l-4-4m4 4h8" />
-              </svg>
-            </span>
-            <input
-              id="username"
-              type="email"
-              formControlName="username"
-              placeholder="you@example.com"
-              class="w-full border border-gray-300 px-10 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-          </div>
-        </div>
+      <form [formGroup]="form" (ngSubmit)="register()" class="space-y-6" novalidate>
+  <!-- Email -->
+  <div>
+    <label for="username" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+    <input
+      id="username"
+      type="email"
+      formControlName="username"
+      placeholder="you@example.com"
+      class="w-full border px-4 py-2 rounded-md"
+      [class.border-red-500]="form.get('username')?.touched && form.get('username')?.invalid"
+    />
+    <div *ngIf="form.get('username')?.touched && form.get('username')?.invalid" class="text-sm text-red-600">
+      A valid email is required.
+    </div>
+  </div>
 
-        <!-- Password -->
-        <div>
-          <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m0-10a4 4 0 014 4v2a4 4 0 01-4 4m0-10a4 4 0 00-4 4v2a4 4 0 004 4" />
-              </svg>
-            </span>
-            <input
-              id="password"
-              type="password"
-              formControlName="password"
-              placeholder="••••••••"
-              class="w-full border border-gray-300 px-10 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            />
-          </div>
-        </div>
+  <!-- Password -->
+  <div>
+    <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+    <input
+      id="password"
+      type="password"
+      formControlName="password"
+      placeholder="••••••••"
+      class="w-full border px-4 py-2 rounded-md"
+      [class.border-red-500]="form.get('password')?.touched && form.get('password')?.invalid"
+    />
+    <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid" class="text-sm text-red-600">
+      Password is required.
+    </div>
+  </div>
 
-        <!-- Role Selection -->
-        <div>
-          <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Select Role</label>
-          <div class="relative">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 7v4a1 1 0 001 1h3m10-5h4a1 1 0 011 1v3m-5 10h-4a1 1 0 01-1-1v-4m5-5v1a2 2 0 01-2 2h-1m-5 5h1a2 2 0 002-2v-1" />
-              </svg>
-            </span>
-            <select
-              id="role"
-              formControlName="roleId"
-              class="w-full border border-gray-300 px-10 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
-            >
-              <option value="" disabled>Select a role</option>
-              <option *ngFor="let role of roles" [ngValue]="role.id">{{ role.name }}</option>
-            </select>
-          </div>
-        </div>
+  <!-- Confirm Password -->
+  <div>
+    <label for="confirmPassword" class="block text-sm font-medium text-gray-700 mb-1">Confirm Password</label>
+    <input
+      id="confirmPassword"
+      type="password"
+      formControlName="confirmPassword"
+      placeholder="••••••••"
+      class="w-full border px-4 py-2 rounded-md"
+      [class.border-red-500]="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.invalid"
+    />
+    <div *ngIf="form.get('confirmPassword')?.touched && form.get('confirmPassword')?.errors?.['required']" class="text-sm text-red-600">
+      Confirmation is required.
+    </div>
+    <div *ngIf="form.errors?.['passwordMismatch'] && form.get('confirmPassword')?.touched" class="text-sm text-red-600">
+      Passwords do not match.
+    </div>
+  </div>
 
-        <!-- Error -->
-        <div *ngIf="error" class="text-sm text-red-600">{{ error }}</div>
+  <!-- Role -->
+  <div>
+    <label for="role" class="block text-sm font-medium text-gray-700 mb-1">Select Role</label>
+    <select
+      id="role"
+      formControlName="roleId"
+      class="w-full border px-4 py-2 rounded-md"
+      [class.border-red-500]="form.get('roleId')?.touched && form.get('roleId')?.invalid"
+    >
+      <option value="" disabled>Select a role</option>
+      <option *ngFor="let role of roles" [ngValue]="role.id">{{ role.name }}</option>
+    </select>
+    <div *ngIf="form.get('roleId')?.touched && form.get('roleId')?.invalid" class="text-sm text-red-600">
+      Role is required.
+    </div>
+  </div>
 
-        <!-- Submit -->
-        <button
-          type="submit"
-          class="w-full py-2.5 bg-green-600 text-white rounded-md font-medium hover:bg-green-700 transition duration-200 flex items-center justify-center gap-2"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
-          </svg>
-          Register
-        </button>
+  <!-- Error -->
+  <div *ngIf="error" class="text-sm text-red-600">{{ error }}</div>
 
-        <!-- Extra link -->
-        <div class="text-sm text-center mt-4 text-gray-600">
-          Already have an account?
-          <a [routerLink]="['/login']" class="text-green-600 hover:underline">Log in</a>
-        </div>
-      </form>
+  <!-- Submit -->
+  <button
+    type="submit"
+    class="w-full py-2.5 bg-green-600 text-white rounded-md font-medium hover:bg-green-700"
+  >
+    Register
+  </button>
+
+  <!-- Link -->
+  <div class="text-sm text-center mt-4 text-gray-600">
+    Already have an account?
+    <a [routerLink]="['/login']" class="text-green-600 hover:underline">Log in</a>
+  </div>
+</form>
+
     </div>
   </div>
 </div>

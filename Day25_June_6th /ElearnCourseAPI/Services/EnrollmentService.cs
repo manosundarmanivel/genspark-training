@@ -21,33 +21,33 @@ namespace ElearnAPI.Services
             _mapper = mapper;
         }
 
-   
-public async Task<EnrollmentNotificationDto?> EnrollStudentAsync(Guid userId, Guid courseId)
-{
- 
-    var alreadyEnrolled = await _enrollmentRepo.IsEnrolledAsync(userId, courseId);
-    if (alreadyEnrolled) return null;
 
-  
-    var newEnrollment = new Enrollment
-    {
-        UserId = userId,
-        CourseId = courseId
-    };
+        public async Task<EnrollmentNotificationDto?> EnrollStudentAsync(Guid userId, Guid courseId)
+        {
 
-    await _enrollmentRepo.AddEnrollmentAsync(newEnrollment);
+            var alreadyEnrolled = await _enrollmentRepo.IsEnrolledAsync(userId, courseId);
+            if (alreadyEnrolled) return null;
 
 
-    var enrollmentDetails = await _enrollmentRepo.GetEnrollmentWithDetailsAsync(userId, courseId);
-    if (enrollmentDetails == null) return null;
+            var newEnrollment = new Enrollment
+            {
+                UserId = userId,
+                CourseId = courseId
+            };
 
-    return new EnrollmentNotificationDto
-    {
-        StudentName = enrollmentDetails.Student.FullName ?? enrollmentDetails.Student.Username,
-        CourseTitle = enrollmentDetails.Course.Title,
-        InstructorId = enrollmentDetails.Course.InstructorId
-    };
-}
+            await _enrollmentRepo.AddEnrollmentAsync(newEnrollment);
+
+
+            var enrollmentDetails = await _enrollmentRepo.GetEnrollmentWithDetailsAsync(userId, courseId);
+            if (enrollmentDetails == null) return null;
+
+            return new EnrollmentNotificationDto
+            {
+                StudentName = enrollmentDetails.Student.FullName ?? enrollmentDetails.Student.Username,
+                CourseTitle = enrollmentDetails.Course.Title,
+                InstructorId = enrollmentDetails.Course.InstructorId
+            };
+        }
 
 
 
@@ -72,10 +72,22 @@ public async Task<EnrollmentNotificationDto?> EnrollStudentAsync(Guid userId, Gu
         }
 
         public async Task<IEnumerable<UserDtoResponse>> GetStudentsEnrolledInCourseAsync(Guid courseId)
-{
-    var enrollments = await _enrollmentRepo.GetEnrollmentsByCourseIdAsync(courseId);
-    return enrollments.Select(e => _mapper.Map<UserDtoResponse>(e.Student));
-}
+        {
+            var enrollments = await _enrollmentRepo.GetEnrollmentsByCourseIdAsync(courseId);
+            return enrollments.Select(e => _mapper.Map<UserDtoResponse>(e.Student));
+        }
+
+
+   
+
+        public async Task<IEnumerable<Course>> GetEnrolledCourseDetailsAsync(Guid studentId)
+        {
+            return await _enrollmentRepo.GetEnrolledCoursesAsync(studentId);
+        }
+    
+
+
+
 
     }
 }

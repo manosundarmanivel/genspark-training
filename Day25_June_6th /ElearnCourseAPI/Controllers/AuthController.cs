@@ -174,38 +174,38 @@ namespace ElearnAPI.Controllers
         }
 
 
-[Authorize]
- [HttpPut("profile")]
-[Consumes("multipart/form-data")]
-public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileDto dto)
-{
-    try
-    {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
-        if (userIdClaim == null)
+        [Authorize]
+        [HttpPut("profile")]
+        [Consumes("multipart/form-data")]
+        public async Task<IActionResult> UpdateProfile([FromForm] UpdateProfileDto dto)
         {
-            _logger.Warning("Unauthorized update attempt - missing user ID claim");
-            return Unauthorized(new { success = false, message = "Unauthorized" });
+            try
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+                if (userIdClaim == null)
+                {
+                    _logger.Warning("Unauthorized update attempt - missing user ID claim");
+                    return Unauthorized(new { success = false, message = "Unauthorized" });
+                }
+
+                var userId = Guid.Parse(userIdClaim.Value);
+                var updated = await _userService.UpdateProfileAsync(userId, dto);
+
+                if (!updated)
+                {
+                    _logger.Warning("Profile update failed for user ID: {UserId}", userId);
+                    return BadRequest(new { success = false, message = "Profile update failed" });
+                }
+
+                _logger.Information("Profile updated successfully for user ID: {UserId}", userId);
+                return Ok(new { success = true, message = "Profile updated successfully" });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Error occurred during profile update");
+                return StatusCode(500, new { success = false, message = "An error occurred while updating the profile" });
+            }
         }
-
-        var userId = Guid.Parse(userIdClaim.Value);
-        var updated = await _userService.UpdateProfileAsync(userId, dto);
-
-        if (!updated)
-        {
-            _logger.Warning("Profile update failed for user ID: {UserId}", userId);
-            return BadRequest(new { success = false, message = "Profile update failed" });
-        }
-
-        _logger.Information("Profile updated successfully for user ID: {UserId}", userId);
-        return Ok(new { success = true, message = "Profile updated successfully" });
-    }
-    catch (Exception ex)
-    {
-        _logger.Error(ex, "Error occurred during profile update");
-        return StatusCode(500, new { success = false, message = "An error occurred while updating the profile" });
-    }
-}
 
 
     }

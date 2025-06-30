@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { StudentService } from '../services/student.service';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
-import { switchMap, map, catchError, of } from 'rxjs';
+import { switchMap, map, catchError, of, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
-
 
 @Component({
   selector: 'app-course-detail',
@@ -18,46 +17,50 @@ export class CourseDetailComponent {
   private studentService = inject(StudentService);
   private sanitizer = inject(DomSanitizer);
   private router = inject(Router);
+
+  private courseSubject = new BehaviorSubject<any>(null);
+  course$ = this.courseSubject.asObservable().pipe(
+    map(data => ({ data, error: null })),
+    catchError(err => of({ error: err.message, data: null }))
+  );
+
   selectedVideo: any = null;
 
+  constructor() {
+    this.loadCourse();
+  }
 
-course$ = this.route.paramMap.pipe(
-  switchMap(paramMap => {
-    const courseId = paramMap.get('courseId');
-    if (!courseId) {
-      console.warn('Course ID is missing in route.');
-      return of({ error: 'Course ID missing', data: null });
-    }
+  private loadCourse(): void {
+    this.route.paramMap
+      .pipe(
+        switchMap(paramMap => {
+          const courseId = paramMap.get('courseId');
+          if (!courseId) return of(null);
+          return this.studentService.getCourseById(courseId);
+        }),
+        catchError(err => {
+          console.error('Failed to load course', err);
+          return of(null);
+        }),
+        tap(course => {
+          this.courseSubject.next(course?.data || null);
+          if (course?.data?.firstUploadedFile) {
+            this.selectedVideo = course.data.firstUploadedFile;
+          }
+        })
+      )
+      .subscribe();
+  }
 
-    return this.studentService.getCourseById(courseId).pipe(
-      map(res => ({ data: res.data, error: null })),
-      catchError(err => {
-        console.error('Error loading course:', err);
-        return of({ error: err.message || 'Failed to load course details.', data: null });
-      })
-    );
-  }),
-  tap(result => {
-    if (result.error) {
-      console.warn('Course load failed:', result.error);
-    } else {
-      console.log('Course data loaded:', result.data);
-    }
-  })
-);
-
-  
-
-getVideoUrl(fileName: string): SafeResourceUrl {
-  const url = `http://localhost:5295/api/v1/courses/stream/${fileName}`;
-  return this.sanitizer.bypassSecurityTrustResourceUrl(url);
-}
-
+  getVideoUrl(fileName: string): SafeResourceUrl {
+    const url = `http://localhost:5295/api/v1/courses/stream/${fileName}`;
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
 
   enroll(courseId: string): void {
     this.studentService.enrollInCourse(courseId).subscribe({
       next: () => {
-        window.confirm('Enrolled successfully! You can now access full content.');
+        alert('Enrolled successfully!');
         this.router.navigate(['/student-dashboard/enrolled']);
       },
       error: err => {
@@ -67,24 +70,27 @@ getVideoUrl(fileName: string): SafeResourceUrl {
   }
 
   markAsCompleted(fileId: string): void {
-  this.studentService.markFileAsCompleted(fileId).subscribe({
-    next: () => {
-      // Update the UI without reload
-      const current = this.selectedVideo;
-      if (current?.id === fileId) current.isCompleted = true;
-      this.course$.pipe(tap(result => {
-        result.data.uploadedFiles.forEach((f: any) => {
-          if (f.id === fileId) f.isCompleted = true;
-        });
-      })).subscribe();
+    this.studentService.markFileAsCompleted(fileId).subscribe({
+      next: () => {
+        const current = this.courseSubject.value;
+        if (!current) return;
 
-      alert('Marked as completed!');
-    },
-    error: err => {
-      console.error('Failed to mark as completed:', err);
-      alert('Failed to mark as completed. Please try again.');
-    }
-  });
-}
+        // update selectedVideo if it's the same
+        if (this.selectedVideo?.id === fileId) {
+          this.selectedVideo.isCompleted = true;
+        }
 
+        const updatedFiles = current.uploadedFiles.map((f: any) =>
+          f.id === fileId ? { ...f, isCompleted: true } : f
+        );
+
+        const updatedCourse = { ...current, uploadedFiles: updatedFiles };
+        this.courseSubject.next(updatedCourse);
+      },
+      error: err => {
+        console.error('Failed to mark as completed', err);
+        alert('Failed to mark as completed.');
+      }
+    });
+  }
 }

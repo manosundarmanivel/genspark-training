@@ -6,13 +6,15 @@ namespace ElearnAPI.DTOs
 {
     public class UploadFileDto
     {
-        [Required(ErrorMessage = "File is required.")]
-        public IFormFile File { get; set; } = null!;
+      
+        public IFormFile? File { get; set; }
 
         [Required(ErrorMessage = "Course ID is required.")]
         public Guid CourseId { get; set; }
 
+        [Required(ErrorMessage = "Topic is required.")]
         public string Topic { get; set; } = null!;
+
         public string? Description { get; set; }
     }
 }

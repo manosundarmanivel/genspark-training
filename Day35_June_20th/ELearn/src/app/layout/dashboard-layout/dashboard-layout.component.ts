@@ -106,21 +106,27 @@ export class DashboardLayoutComponent {
     localStorage.setItem('notifications', JSON.stringify(newNotifications));
   }
 
-  initNotificationConnection() {
-    const token = this.authService.getToken();
-    if (token) {
-      this.notificationService.startConnection(token);
-    } else {
-      console.error('No auth token found. Cannot start notification connection.');
+initNotificationConnection() {
+  const token = this.authService.getToken();
+  const userRole = this.role();
+
+  if (!token) {
+    console.error('No auth token found. Cannot start notification connection.');
+    return;
+  }
+
+  this.notificationService.startConnection(token);
+
+  // Everyone can receive content upload notifications
+  this.notificationService.contentNotification$.subscribe(notification => {
+    if (notification) {
+      const msg = `"${notification.fileName}" uploaded in "${notification.courseTitle}"`;
+      this.addNotification(msg);
     }
+  });
 
-    this.notificationService.contentNotification$.subscribe(notification => {
-      if (notification) {
-        const msg = `"${notification.fileName}" uploaded in "${notification.courseTitle}"`;
-        this.addNotification(msg);
-      }
-    });
-
+  // ✅ Only instructors should get enrollment notifications
+  if (userRole === 'instructor') {
     this.notificationService.enrollmentNotification$.subscribe(notification => {
       if (notification) {
         const msg = `${notification.studentName} enrolled in "${notification.courseTitle}"`;
@@ -128,6 +134,8 @@ export class DashboardLayoutComponent {
       }
     });
   }
+}
+
 
   menuItems = computed(() => {
     switch (this.role()) {
@@ -135,7 +143,7 @@ export class DashboardLayoutComponent {
         return [
           { label: 'Dashboard', path: '/admin-dashboard' },
           { label: 'Manage Users', path: '/admin-dashboard/users' },
-          { label: 'Reports', path: '/admin-dashboard/reports' },
+          { label: 'Manage Courses', path: '/admin-dashboard/courses' },
         ];
       case 'instructor':
         return [

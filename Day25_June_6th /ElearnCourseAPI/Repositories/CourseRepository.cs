@@ -47,9 +47,21 @@ namespace ElearnAPI.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<Course>> GetAllAsyncAdmin(int page, int pageSize)
+        {
+            return await _context.Courses
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+        }
+
         public async Task<Course?> GetByIdAsync(Guid id)
         {
             return await _context.Courses.FirstOrDefaultAsync(c => c.Id == id && !c.IsDeleted);
+        }
+        public async Task<Course?> GetByIdAsyncAdmin(Guid id)
+        {
+            return await _context.Courses.FirstOrDefaultAsync(c => c.Id == id );
         }
 
         public async Task<IEnumerable<Course>> GetByInstructorIdAsync(Guid instructorId, int page, int pageSize)

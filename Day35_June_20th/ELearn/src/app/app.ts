@@ -4,6 +4,7 @@ import { LoginComponent } from "./features/auth/login/login.component";
 import { RegisterComponent } from "./features/auth/register/register.component";
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './features/auth/auth.interceptor';
+import 'chart.js/auto';
 
 @Component({
   selector: 'app-root',

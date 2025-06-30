@@ -59,8 +59,10 @@ namespace ElearnAPI.Controllers
 
             _logger.Information("Fetching courses for instructor {InstructorId}", instructorId);
             var courses = await _courseService.GetByInstructorIdAsync(instructorId, page, pageSize);
+
             return Ok(new { success = true, data = courses });
         }
+
 
         // [HttpGet("{id}")]
         // public async Task<IActionResult> GetById(Guid id)
@@ -156,19 +158,98 @@ namespace ElearnAPI.Controllers
             });
         }
 
-[AllowAnonymous]
-[HttpGet("stream/{fileName}")]
-public IActionResult StreamVideo(string fileName)
-{
-    var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-    var filePath = Path.Combine(uploadsRoot, fileName);
 
-    if (!System.IO.File.Exists(filePath))
-        return NotFound(new { success = false, message = "File not found." });
 
-    var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-    return File(stream, "video/mp4", enableRangeProcessing: true);
-}
+        [HttpGet("instructor/{id}")]
+        public async Task<IActionResult> GetByIdEdit(Guid id)
+        {
+            var course = await _courseService.GetByIdAsync(id);
+            if (course == null)
+                return NotFound(new { success = false, message = "Course not found." });
+
+            var orderedFiles = course.UploadedFiles.OrderBy(f => f.UploadedAt).ToList();
+            var firstFile = orderedFiles.FirstOrDefault();
+            bool isEnrolled = false;
+            bool isCompleted = false;
+            List<Guid> completedFileIds = new();
+            Guid userId = Guid.Empty;
+
+            if (User.Identity?.IsAuthenticated == true)
+            {
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (Guid.TryParse(userIdClaim, out userId))
+                {
+                    isEnrolled = course.Enrollments.Any(e => e.UserId == userId);
+
+                    if (isEnrolled)
+                    {
+                        completedFileIds = await _userFileProgressService.GetCompletedFileIdsAsync(userId, course.Id);
+                        isCompleted = orderedFiles.All(f => completedFileIds.Contains(f.Id));
+                    }
+                }
+            }
+
+           var visibleFiles = orderedFiles;
+            var thumbnailUrl = string.IsNullOrEmpty(course.ThumbnailUrl)
+                ? null
+                : Url.Action(nameof(GetThumbnail), "Courses", new { id = course.Id }, Request.Scheme);
+
+            return Ok(new
+            {
+                success = true,
+                data = new
+                {
+                    course.Id,
+                    course.Title,
+                    course.Description,
+                    course.CreatedAt,
+                    course.Level,
+                    course.Language,
+                    course.Domain,
+                    course.Tags,
+                    ThumbnailUrl = thumbnailUrl,
+                    InstructorName = course.Instructor?.FullName,
+                    IsEnrolled = isEnrolled,
+                    IsCompleted = isCompleted,
+
+                    FirstUploadedFile = firstFile == null ? null : new
+                    {
+                        firstFile.Id,
+                        firstFile.FileName,
+                        firstFile.Topic,
+                        firstFile.Description,
+                        firstFile.Path,
+                        firstFile.UploadedAt,
+                        IsCompleted = completedFileIds.Contains(firstFile.Id)
+                    },
+
+                    UploadedFiles = visibleFiles.Select(f => new
+                    {
+                        f.Id,
+                        f.FileName,
+                        f.Topic,
+                        f.Description,
+                        f.Path,
+                        f.UploadedAt,
+                        IsCompleted = completedFileIds.Contains(f.Id)
+                    })
+                }
+            });
+        }
+
+        [AllowAnonymous]
+        [HttpGet("stream/{fileName}")]
+        public IActionResult StreamVideo(string fileName)
+        {
+            var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+            var filePath = Path.Combine(uploadsRoot, fileName);
+
+            if (!System.IO.File.Exists(filePath))
+                return NotFound(new { success = false, message = "File not found." });
+
+            var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+            return File(stream, "video/mp4", enableRangeProcessing: true);
+        }
 
 
 
@@ -289,34 +370,36 @@ public IActionResult StreamVideo(string fileName)
             }
         }
 
-        [Authorize(Roles = "Instructor")]
-        [HttpGet("students/{courseId}")]
-        public async Task<IActionResult> GetStudentsEnrolledInCourse(Guid courseId)
-        {
-            if (!TryGetUserIdFromToken(out var instructorId))
-            {
-                _logger.Warning("Invalid token for instructor while accessing student list.");
-                return Unauthorized(new { success = false, message = "Invalid token." });
-            }
+        // [Authorize(Roles = "Instructor")]
+      
+[HttpGet("students/{courseId}")]
+public async Task<IActionResult> GetStudentsEnrolledInCourse(Guid courseId)
+{
+    if (!TryGetUserIdFromToken(out var instructorId))
+    {
+        _logger.Warning("Invalid token for instructor while accessing student list.");
+        return Unauthorized(new { success = false, message = "Invalid token." });
+    }
 
-            var course = await _courseService.GetByIdAsync(courseId);
-            if (course == null)
-            {
-                _logger.Warning("Course with ID {CourseId} not found for instructor {InstructorId}", courseId, instructorId);
-                return NotFound(new { success = false, message = "Course not found." });
-            }
+    var course = await _courseService.GetByIdAsync(courseId);
+    if (course == null)
+    {
+        _logger.Warning("Course with ID {CourseId} not found for instructor {InstructorId}", courseId, instructorId);
+        return NotFound(new { success = false, message = "Course not found." });
+    }
 
-            if (course.InstructorId != instructorId)
-            {
-                _logger.Warning("Instructor {InstructorId} tried accessing students of course {CourseId} they do not own.", instructorId, courseId);
-                return Forbid("You do not own this course.");
-            }
+    // if (course.InstructorId != instructorId)
+    // {
+    //     _logger.Warning("Instructor {InstructorId} tried accessing students of course {CourseId} they do not own.", instructorId, courseId);
+    //     return StatusCode(StatusCodes.Status403Forbidden, new { success = false, message = "You do not own this course." });
+    // }
 
-            var students = await _enrollmentService.GetStudentsEnrolledInCourseAsync(courseId);
-            _logger.Information("Fetched students for course {CourseId} by instructor {InstructorId}", courseId, instructorId);
+    var students = await _enrollmentService.GetStudentsEnrolledInCourseAsync(courseId);
+    _logger.Information("Fetched students for course {CourseId} by instructor {InstructorId}", courseId, instructorId);
 
-            return Ok(new { success = true, data = students });
-        }
+    return Ok(new { success = true, data = students });
+}
+
 
         [Authorize(Roles = "Student")]
         [HttpGet("search")]

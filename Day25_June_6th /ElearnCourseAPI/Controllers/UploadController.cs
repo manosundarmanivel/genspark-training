@@ -22,18 +22,18 @@ namespace ElearnAPI.Controllers
         private readonly Serilog.ILogger _logger;
         private readonly string _uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
-       private readonly IUserFileProgressService _userFileProgressService;
+        private readonly IUserFileProgressService _userFileProgressService;
 
-public UploadController(
-    IUploadService uploadService,
-    IHubContext<NotificationHub> hubContext,
-    IUserFileProgressService userFileProgressService)
-{
-    _uploadService = uploadService;
-    _hubContext = hubContext;
-    _userFileProgressService = userFileProgressService;
-    _logger = Log.ForContext<UploadController>();
-}
+        public UploadController(
+            IUploadService uploadService,
+            IHubContext<NotificationHub> hubContext,
+            IUserFileProgressService userFileProgressService)
+        {
+            _uploadService = uploadService;
+            _hubContext = hubContext;
+            _userFileProgressService = userFileProgressService;
+            _logger = Log.ForContext<UploadController>();
+        }
 
         //        [Authorize(Roles = "Instructor")]
         // [HttpPost("upload")]
@@ -121,120 +121,120 @@ public UploadController(
         // }
 
 
-[Authorize(Roles = "Instructor")]
-[HttpPost("upload/chunk")]
-public async Task<IActionResult> UploadChunked(
-    IFormFile chunk,
-    [FromForm] int chunkIndex,
-    [FromForm] int totalChunks,
-    [FromForm] string fileName,
-    [FromForm] Guid courseId,
-    [FromForm] string topic,
-    [FromForm] string description)
-{
-    try
-    {
-        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        if (!Guid.TryParse(userIdClaim, out var uploadedBy))
+        [Authorize(Roles = "Instructor")]
+        [HttpPost("upload/chunk")]
+        public async Task<IActionResult> UploadChunked(
+            IFormFile chunk,
+            [FromForm] int chunkIndex,
+            [FromForm] int totalChunks,
+            [FromForm] string fileName,
+            [FromForm] Guid courseId,
+            [FromForm] string topic,
+            [FromForm] string description)
         {
-            _logger.Warning("Invalid token during chunk upload.");
-            return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
-        }
-
-        // 1. Save chunk to temp folder
-        var tempFolder = Path.Combine(Directory.GetCurrentDirectory(), "TempUploads", fileName);
-        Directory.CreateDirectory(tempFolder);
-        var chunkPath = Path.Combine(tempFolder, $"{chunkIndex}.part");
-
-        using (var stream = new FileStream(chunkPath, FileMode.Create))
-        {
-            await chunk.CopyToAsync(stream);
-        }
-
-        _logger.Information("Chunk {Index}/{Total} for {File} received.", chunkIndex + 1, totalChunks, fileName);
-
-        // 2. Check if all chunks are received
-        var chunkFiles = Directory.GetFiles(tempFolder).Length;
-        if (chunkFiles < totalChunks)
-        {
-            return Ok(new { success = true, message = "Chunk uploaded, waiting for remaining chunks." });
-        }
-
-        // 3. All chunks received — merge
-        var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-        Directory.CreateDirectory(uploadsRoot);
-
-        var sanitizedFileName = Path.GetFileName(fileName);
-        var finalFilePath = Path.Combine(uploadsRoot, sanitizedFileName);
-
-        using (var output = new FileStream(finalFilePath, FileMode.Create))
-        {
-            for (int i = 0; i < totalChunks; i++)
+            try
             {
-                var partPath = Path.Combine(tempFolder, $"{i}.part");
-                using var input = new FileStream(partPath, FileMode.Open);
-                await input.CopyToAsync(output);
+                var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+                if (!Guid.TryParse(userIdClaim, out var uploadedBy))
+                {
+                    _logger.Warning("Invalid token during chunk upload.");
+                    return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
+                }
+
+                // 1. Save chunk to temp folder
+                var tempFolder = Path.Combine(Directory.GetCurrentDirectory(), "TempUploads", fileName);
+                Directory.CreateDirectory(tempFolder);
+                var chunkPath = Path.Combine(tempFolder, $"{chunkIndex}.part");
+
+                using (var stream = new FileStream(chunkPath, FileMode.Create))
+                {
+                    await chunk.CopyToAsync(stream);
+                }
+
+                _logger.Information("Chunk {Index}/{Total} for {File} received.", chunkIndex + 1, totalChunks, fileName);
+
+                // 2. Check if all chunks are received
+                var chunkFiles = Directory.GetFiles(tempFolder).Length;
+                if (chunkFiles < totalChunks)
+                {
+                    return Ok(new { success = true, message = "Chunk uploaded, waiting for remaining chunks." });
+                }
+
+                // 3. All chunks received — merge
+                var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+                Directory.CreateDirectory(uploadsRoot);
+
+                var sanitizedFileName = Path.GetFileName(fileName);
+                var finalFilePath = Path.Combine(uploadsRoot, sanitizedFileName);
+
+                using (var output = new FileStream(finalFilePath, FileMode.Create))
+                {
+                    for (int i = 0; i < totalChunks; i++)
+                    {
+                        var partPath = Path.Combine(tempFolder, $"{i}.part");
+                        using var input = new FileStream(partPath, FileMode.Open);
+                        await input.CopyToAsync(output);
+                    }
+                }
+
+                Directory.Delete(tempFolder, true); // cleanup
+
+                var publicUrlPath = $"/uploads/{sanitizedFileName}";
+
+                // 4. Save metadata
+                var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
+                {
+                    FileName = sanitizedFileName,
+                    Path = publicUrlPath,
+                    CourseId = courseId,
+                    Topic = topic,
+                    Description = description
+                });
+
+                // Optional: track uploader's progress
+                // await _userFileProgressService.AddProgressAsync(new UserFileProgress
+                // {
+                //     Id = Guid.NewGuid(),
+                //     UserId = uploadedBy,
+                //     UploadedFileId = fileMeta.Id,
+                //     IsCompleted = false
+                // });
+
+                // 5. Send real-time notification
+                await _hubContext.Clients.Group($"course-{courseId}")
+                    .SendAsync("ReceiveNotification", new
+                    {
+                        message = $"New file uploaded: {sanitizedFileName}",
+                        courseId
+                    });
+
+                _logger.Information("File assembled and uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
+
+                return Ok(new
+                {
+                    success = true,
+                    data = new
+                    {
+                        fileMeta.Id,
+                        fileMeta.FileName,
+                        fileMeta.Topic,
+                        fileMeta.Description,
+                        fileMeta.CourseId,
+                        path = publicUrlPath
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                _logger.Error(ex, "Chunk upload failed.");
+                return StatusCode(500, new
+                {
+                    success = false,
+                    message = "Chunk upload failed.",
+                    error = ex.Message
+                });
             }
         }
-
-        Directory.Delete(tempFolder, true); // cleanup
-
-        var publicUrlPath = $"/uploads/{sanitizedFileName}";
-
-        // 4. Save metadata
-        var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
-        {
-            FileName = sanitizedFileName,
-            Path = publicUrlPath,
-            CourseId = courseId,
-            Topic = topic,
-            Description = description
-        });
-
-        // Optional: track uploader's progress
-        // await _userFileProgressService.AddProgressAsync(new UserFileProgress
-        // {
-        //     Id = Guid.NewGuid(),
-        //     UserId = uploadedBy,
-        //     UploadedFileId = fileMeta.Id,
-        //     IsCompleted = false
-        // });
-
-        // 5. Send real-time notification
-        await _hubContext.Clients.Group($"course-{courseId}")
-            .SendAsync("ReceiveNotification", new
-            {
-                message = $"New file uploaded: {sanitizedFileName}",
-                courseId
-            });
-
-        _logger.Information("File assembled and uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
-
-        return Ok(new
-        {
-            success = true,
-            data = new
-            {
-                fileMeta.Id,
-                fileMeta.FileName,
-                fileMeta.Topic,
-                fileMeta.Description,
-                fileMeta.CourseId,
-                path = publicUrlPath
-            }
-        });
-    }
-    catch (Exception ex)
-    {
-        _logger.Error(ex, "Chunk upload failed.");
-        return StatusCode(500, new
-        {
-            success = false,
-            message = "Chunk upload failed.",
-            error = ex.Message
-        });
-    }
-}
 
 
 
@@ -257,59 +257,31 @@ public async Task<IActionResult> UploadChunked(
         }
 
         [Authorize(Roles = "Instructor")]
-        [HttpPut("{fileId:guid}")]
-        public async Task<IActionResult> Update(Guid fileId, [FromForm] UploadFileDto dto)
-        {
-            try
-            {
-                var existingFile = await _uploadService.GetFileByIdAsync(fileId);
-                if (existingFile == null)
-                {
-                    _logger.Warning("Update failed. File not found: {FileId}", fileId);
-                    return NotFound(new { success = false, message = "File not found." });
-                }
+     
+       [HttpPut("{fileId}")]
+public async Task<IActionResult> Update(Guid fileId, [FromForm] UploadFileDto dto)
+{
+    var sanitizedFileName = dto.File?.FileName ?? "existing-file.mp4";
+    var newPath = "Uploads/" + sanitizedFileName;
 
-                if (!Directory.Exists(_uploadRoot))
-                    Directory.CreateDirectory(_uploadRoot);
+    // Construct DTO with existing fileId
+    var updateDto = new UploadedFileDto
+    {
+        Id = fileId,
+        FileName = sanitizedFileName,
+        Path = newPath,
+        CourseId = dto.CourseId,
+        Topic = dto.Topic,
+        Description = dto.Description
+    };
 
-                if (System.IO.File.Exists(existingFile.Path))
-                    System.IO.File.Delete(existingFile.Path);
+    var result = await _uploadService.UpdateFileEditAsync(updateDto);
+    if (result == null) return NotFound();
 
-                var sanitizedFileName = Path.GetFileName(dto.File.FileName);
-                var newPath = Path.Combine(_uploadRoot, sanitizedFileName);
+    return Ok(result);
+}
 
-                using (var stream = new FileStream(newPath, FileMode.Create))
-                {
-                    await dto.File.CopyToAsync(stream);
-                }
 
-                existingFile.FileName = sanitizedFileName;
-                existingFile.Path = newPath;
-                existingFile.CourseId = dto.CourseId;
-
-                var updated = await _uploadService.UploadFileAsync(new UploadedFileDto
-                {
-                    FileName = sanitizedFileName,
-                    Path = newPath,
-                    CourseId = dto.CourseId,
-                    Topic = dto.Topic,
-                    Description = dto.Description
-                });
-
-                _logger.Information("File updated: {FileName} for FileId: {FileId}", sanitizedFileName, fileId);
-                return Ok(new { success = true, message = "File updated successfully." });
-            }
-            catch (Exception ex)
-            {
-                _logger.Error(ex, "File update failed for FileId: {FileId}", fileId);
-                return StatusCode(500, new
-                {
-                    success = false,
-                    message = "File update failed.",
-                    error = ex.Message
-                });
-            }
-        }
 
         [Authorize(Roles = "Instructor")]
         [HttpDelete("{fileId:guid}")]

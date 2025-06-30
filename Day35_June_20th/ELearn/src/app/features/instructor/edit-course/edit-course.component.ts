@@ -54,47 +54,81 @@ domainOptions = ['Artificial Intelligence', 'Web Development', 'Data Science', '
     return this.courseForm.get('files') as FormArray<FormGroup>;
   }
 
-  private loadCourseData(): void {
-    console.log('Loading course details...');
-    this.instructorService.getCourseById(this.courseId).subscribe(course => {
-      console.log('Fetched course data:', course);
-      this.courseForm.patchValue(course);
+private loadCourseData(): void {
+  console.log('Loading course details...');
+  this.instructorService.getCourseByIdEdit(this.courseId).subscribe(course => {
+    console.log('Fetched course data:', course);
+
+
+    
+    this.courseForm.patchValue({
+      title: course.title,
+      description: course.description,
+      domain: course.domain,
+      level: course.level,
+      language: course.language,
+      tags: course.tags
     });
 
-    console.log('Loading course files...');
-    this.instructorService.getCourseFiles(this.courseId).subscribe((files) => {
-      console.log('Fetched course files:', files);
-      this.filesFormArray.clear();
-      for (const file of files) {
-        this.filesFormArray.push(this.fb.group({
-          id: [file.id],
-          topic: [file.topic, Validators.required],
-          description: [file.description, Validators.required],
-        }));
-      }
-    });
+  
+    const uploadedFiles = course.uploadedFiles || [];
+    this.filesFormArray.clear();
+   for (const file of uploadedFiles) {
+  this.filesFormArray.push(this.fb.group({
+    id: [file.id],
+    topic: [file.topic, Validators.required],
+    description: [file.description, Validators.required],
+    path: [file.path],
+    file: [null] // for updating file
+  }));
+}
+
+  });
+}
+
+
+
+onUpdateFile(index: number): void {
+  const fileGroup = this.filesFormArray.at(index) as FormGroup;
+  const fileId = fileGroup.get('id')?.value;
+  const file = fileGroup.get('file')?.value;
+
+  if (!fileId) {
+    alert('File ID is missing.');
+    return;
   }
 
-  onUpdateFile(index: number): void {
-    const fileGroup = this.filesFormArray.at(index) as FormGroup;
-    const fileId = fileGroup.get('id')?.value;
-    const updatePayload = {
-      topic: fileGroup.get('topic')?.value,
-      description: fileGroup.get('description')?.value,
-    };
+  const formData = new FormData();
+  formData.append('topic', fileGroup.get('topic')?.value);
+  formData.append('description', fileGroup.get('description')?.value);
+  formData.append('courseId', this.courseId);
 
-    console.log(`Updating file ID: ${fileId}`, updatePayload);
-    this.instructorService.updateCourseFile(fileId, updatePayload).subscribe({
-      next: () => {
-        console.log('File updated successfully');
-        alert('File updated');
-      },
-      error: (err) => {
-        console.error('File update failed:', err);
-        alert('Update failed: ' + err.message);
-      }
-    });
+  if (file) {
+    formData.append('file', file);
   }
+
+  this.instructorService.updateCourseFile(fileId, formData).subscribe({
+    next: () => {
+      console.log('File updated successfully');
+      alert('File updated');
+      this.loadCourseData(); // reload updated info
+    },
+    error: (err) => {
+      console.error('File update failed:', err);
+      alert('Update failed: ' + err.message);
+    }
+  });
+}
+
+
+  onFileChange(event: Event, index: number): void {
+  const file = (event.target as HTMLInputElement).files?.[0];
+  if (file) {
+    this.filesFormArray.at(index).patchValue({ file });
+    this.filesFormArray.at(index).get('file')?.updateValueAndValidity();
+  }
+}
+
 
   onNewFileChange(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
@@ -105,39 +139,65 @@ domainOptions = ['Artificial Intelligence', 'Web Development', 'Data Science', '
     }
   }
 
-  onAddNewFile(): void {
-    if (this.newFileForm.invalid) {
-      console.warn('New file form is invalid');
-      return;
-    }
-
-    const formData = new FormData();
-    const file = this.newFileForm.get('file')?.value;
-    formData.append('File', file, file.name);
-    formData.append('CourseId', this.courseId);
-    formData.append('Topic', this.newFileForm.value.topic);
-    formData.append('Description', this.newFileForm.value.description);
-
-    console.log('Uploading new file:', {
-      CourseId: this.courseId,
-      Topic: this.newFileForm.value.topic,
-      Description: this.newFileForm.value.description,
-      File: file,
-    });
-
-    this.instructorService.uploadFile(formData).subscribe({
-      next: () => {
-        console.log('File uploaded successfully');
-        alert('New file added');
-        this.newFileForm.reset();
-        this.loadCourseData();
-      },
-      error: (err) => {
-        console.error('File upload failed:', err);
-        alert('Upload failed: ' + err.message);
-      }
-    });
+onAddNewFile(): void {
+  if (this.newFileForm.invalid) {
+    console.warn('New file form is invalid');
+    alert('Please complete all required fields');
+    return;
   }
+
+  const file = this.newFileForm.get('file')?.value;
+  const topic = this.newFileForm.value.topic;
+  const description = this.newFileForm.value.description;
+
+  if (!this.courseId || !file) {
+    alert('Course ID or file is missing');
+    return;
+  }
+
+  const uploadUrl = 'http://localhost:5295/api/v1/files/upload/chunk'; 
+  const token = localStorage.getItem('token'); 
+
+  const chunkSize = 1024 * 1024; // 1MB
+
+  const worker = new Worker(
+    new URL('../worker/upload.worker.ts', import.meta.url),
+    { type: 'module' }
+  );
+
+  worker.postMessage({
+    file,
+    courseId: this.courseId,
+    topic,
+    description,
+    chunkSize,
+    uploadUrl,
+    token
+  });
+
+  worker.onmessage = ({ data }) => {
+    if (data.progress !== undefined) {
+      console.log(`Upload progress: ${data.progress}%`);
+    } else if (data.done) {
+      console.log('Upload complete via worker');
+      alert('New file added successfully!');
+      this.newFileForm.reset();
+      this.loadCourseData(); // refresh UI
+      worker.terminate();
+    } else if (data.error) {
+      console.error('Worker upload error:', data.error);
+      alert(`Upload failed: ${data.error}`);
+      worker.terminate();
+    }
+  };
+
+  worker.onerror = (err) => {
+    console.error('Worker encountered an error:', err);
+    alert('Something went wrong during upload.');
+    worker.terminate();
+  };
+}
+
 
   onUpdateCourse(): void {
     if (this.courseForm.invalid) {

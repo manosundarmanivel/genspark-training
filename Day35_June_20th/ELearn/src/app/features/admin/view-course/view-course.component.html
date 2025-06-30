@@ -1,0 +1,45 @@
+<div class="max-w-4xl mx-auto p-6">
+  <h2 class="text-2xl font-bold text-indigo-700 mb-6">Students Enrolled</h2>
+
+  <ng-container *ngIf="students$ | async as result">
+    <div *ngIf="result.loading" class="text-gray-600">Loading students...</div>
+
+    <div *ngIf="result.error" class="text-red-600 font-semibold mb-4">{{ result.error }}</div>
+
+    <div *ngIf="!result.loading && !result.error && result.data.length === 0" class="text-gray-500">
+      No students enrolled in this course.
+    </div>
+
+    <table *ngIf="result.data.length > 0" class="min-w-full bg-white shadow rounded-lg overflow-hidden border">
+      <thead class="bg-gray-100 text-gray-700 text-sm uppercase">
+        <tr>
+          <th class="px-6 py-3 text-left">Profile</th>
+          <th class="px-6 py-3 text-left">Name</th>
+          <th class="px-6 py-3 text-left">Email</th>
+          <th class="px-6 py-3 text-left">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-800">
+        <tr *ngFor="let student of result.data" class="border-t hover:bg-gray-50">
+          <td class="px-6 py-3">
+            <img
+              [src]="student.profilePictureUrl ? 'http://localhost:5295' + student.profilePictureUrl : 'https://via.placeholder.com/40'"
+              alt="Profile Image"
+              class="w-10 h-10 rounded-full object-cover"
+            />
+          </td>
+          <td class="px-6 py-3">{{ student.fullName }}</td>
+          <td class="px-6 py-3">{{ student.username }}</td>
+          <td class="px-6 py-3">
+            <button
+              (click)="unenrollStudent(student.id)"
+              class="text-red-600 hover:text-red-800 font-semibold text-sm px-3 py-1 border border-red-600 rounded"
+            >
+              Unenroll
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-container>
+</div>

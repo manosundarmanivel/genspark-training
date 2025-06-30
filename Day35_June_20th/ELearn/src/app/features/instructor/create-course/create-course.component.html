@@ -1,16 +1,32 @@
 <div class="max-w-4xl mx-auto p-8 space-y-10">
- 
+
+  <!-- Step Indicator -->
+  <div class="w-full">
+    <div class="flex items-center justify-between text-sm font-medium text-gray-600 mb-6">
+      <span [class.text-indigo-700]="step === 1">Step 1: Course Details</span>
+      <span [class.text-green-700]="step === 2">Step 2: Intro Video Upload</span>
+    </div>
+    <div class="w-full bg-gray-200 rounded-full h-2">
+      <div class="h-2 rounded-full transition-all duration-500"
+           [class.bg-indigo-500]="step === 1"
+           [class.bg-green-500]="step === 2"
+           [style.width.%]="step === 1 ? 50 : 100">
+      </div>
+    </div>
+  </div>
 
   <!-- Step 1: Course Details -->
   <form *ngIf="step === 1" [formGroup]="courseForm" (ngSubmit)="submitCourse()" class="space-y-6" novalidate>
-    <h2 class="text-3xl font-bold text-indigo-700">Step 1: Course Details</h2>
+    <h2 class="text-3xl font-bold text-indigo-700">Let’s begin by creating your course </h2>
+    <p class="text-gray-600">Fill in the foundational details to help learners understand what your course is all about.</p>
 
+    <!-- Title -->
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Course Title *</label>
       <input
         formControlName="title"
         type="text"
-        placeholder="Course Title"
+        placeholder="e.g., Mastering Data Structures in C++"
         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
       />
       <div class="text-red-500 text-sm mt-1" 
@@ -19,12 +35,13 @@
       </div>
     </div>
 
+    <!-- Description -->
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Course Description *</label>
       <textarea
         formControlName="description"
         rows="4"
-        placeholder="Course Description"
+        placeholder="Give a detailed overview of your course, goals, and what learners will achieve."
         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
       ></textarea>
       <div class="text-red-500 text-sm mt-1" 
@@ -33,6 +50,7 @@
       </div>
     </div>
 
+    <!-- Domain -->
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Domain *</label>
       <select
@@ -48,6 +66,7 @@
       </div>
     </div>
 
+    <!-- Level & Language -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Level *</label>
@@ -80,28 +99,6 @@
       </div>
     </div>
 
-    <!-- Tags Input -->
-    <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Tags *</label>
-      <input
-        placeholder="Add tags (Press Enter or comma)"
-        [value]="tagInput"
-        (input)="tagInput = $any($event.target).value"
-       
-        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-      />
-      <div class="text-xs text-gray-500 mt-1">Max {{ maxTags }} tags. Press Enter or comma to add</div>
-      <div class="mt-2 flex flex-wrap gap-2">
-        <span *ngFor="let tag of tags" class="bg-indigo-100 text-sm px-3 py-1 rounded-full flex items-center">
-          {{ tag }}
-          <button type="button" (click)="removeTag(tag)" class="ml-2 text-red-600 font-bold">×</button>
-        </span>
-      </div>
-      <div class="text-red-500 text-sm mt-1" *ngIf="tags.length === 0 && courseForm.get('tags')?.touched">
-        At least one tag is required
-      </div>
-    </div>
-
     <!-- Thumbnail Upload -->
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Course Thumbnail *</label>
@@ -112,12 +109,13 @@
         class="text-sm text-gray-600"
         required
       />
+      <div class="text-xs text-gray-500 mt-1">This image will be shown as the course cover. Choose something catchy!</div>
       <div class="text-red-500 text-sm mt-1" *ngIf="!selectedThumbnail && courseForm.touched">
         Thumbnail is required
       </div>
       <img
-        *ngIf="thumbnailPreview"
-        [src]="thumbnailPreview"
+        *ngIf="thumbnailPreview$ | async as preview"
+        [src]="preview"
         alt="Thumbnail Preview"
         class="h-32 mt-3 rounded border"
       />
@@ -128,20 +126,21 @@
       class="bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
       [disabled]="courseForm.invalid || !selectedThumbnail || (loading$ | async)"
     >
-      Continue
+      Save & Continue to Upload Video
     </button>
   </form>
 
   <!-- Step 2: Upload Course File -->
   <form *ngIf="step === 2" [formGroup]="fileForm" (ngSubmit)="uploadContent()" class="space-y-6" novalidate>
-    <h2 class="text-3xl font-bold text-green-700">Step 2: Upload Course File</h2>
+    <h2 class="text-3xl font-bold text-green-700">Great! Now let’s add your introduction video 🎥</h2>
+    <p class="text-gray-600">This will be the first impression of your course. Keep it clear, engaging, and informative.</p>
 
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Topic *</label>
       <input
         formControlName="topic"
         type="text"
-        placeholder="Topic"
+        placeholder="e.g., Welcome to the course!"
         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
       />
       <div class="text-red-500 text-sm mt-1" 
@@ -151,11 +150,11 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">File Description *</label>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Video Description *</label>
       <textarea
         formControlName="description"
         rows="3"
-        placeholder="File Description"
+        placeholder="Describe what this video will cover"
         class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"
       ></textarea>
       <div class="text-red-500 text-sm mt-1" 
@@ -165,16 +164,18 @@
     </div>
 
     <div>
-      <label class="block text-sm font-medium text-gray-700 mb-1">Select File *</label>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Upload Introduction Video *</label>
       <input
         type="file"
+        accept="video/*"
         (change)="onFileChange($event)"
         class="text-sm text-gray-600"
         required
       />
+      <div class="text-xs text-gray-500 mt-1">Make sure it's short, clear, and hooks your students!</div>
       <div class="text-red-500 text-sm mt-1" 
            *ngIf="fileForm.get('file')?.invalid && fileForm.get('file')?.touched">
-        File is required
+        Video file is required
       </div>
     </div>
 
@@ -183,7 +184,7 @@
       class="bg-green-600 text-white px-6 py-2 rounded-md hover:bg-green-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
       [disabled]="fileForm.invalid || (loading$ | async)"
     >
-      Upload & Finish
+      Upload & Finish 
     </button>
   </form>
 </div>

@@ -1,13 +1,20 @@
-<ng-container *ngIf="!isLoading; else loading">
+<ng-container *ngIf="profile$ | async as profile; else loading">
   <div class="max-w-3xl mx-auto mt-12 p-8 space-y-8">
     <h2 class="text-3xl font-bold">My Profile</h2>
 
     <form [formGroup]="profileForm" (ngSubmit)="updateProfile()" class="space-y-6">
-      <!-- Profile Picture Upload Section -->
+
+      <!-- Profile Picture -->
       <div class="flex items-center gap-6">
         <div class="w-24 h-24 rounded-full overflow-hidden border-2 border-indigo-500">
           <img
-            [src]="previewUrl || profileForm.get('profilePictureUrl')?.value || 'https://wallpapers.com/images/hd/pink-smiley-face-simple-background-hdds9tmsyd8utnak.jpg'"
+            [src]="
+              previewUrl() && (previewUrl()?.toString()?.startsWith('data:') ?? false)
+                ? previewUrl()
+                : profile.profilePictureUrl
+                  ? 'http://localhost:5295' + profile.profilePictureUrl
+                  : 'https://wallpapers.com/images/hd/pink-smiley-face-simple-background-hdds9tmsyd8utnak.jpg'
+            "
             alt="Profile Picture"
             class="w-full h-full object-cover"
           />
@@ -24,67 +31,37 @@
         </div>
       </div>
 
-      <!-- Username and Role (read-only) -->
-<!-- Username and Role (read-only) -->
-<div class="grid md:grid-cols-2 gap-6">
-  <div>
-    <label class="block text-sm font-medium text-gray-700">Username</label>
-    <input
-      type="text"
-      class="mt-1 w-full p-2 border rounded bg-gray-100 cursor-not-allowed"
-      [value]="username"
-      disabled
-    />
-  </div>
-  <div>
-    <label class="block text-sm font-medium text-gray-700">Role</label>
-    <input
-      type="text"
-      class="mt-1 w-full p-2 border rounded bg-gray-100 cursor-not-allowed"
-      [value]="role"
-      disabled
-    />
-  </div>
-</div>
-
+      <!-- Username & Role -->
+      <div class="grid md:grid-cols-2 gap-6">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Username</label>
+          <input type="text" class="mt-1 w-full p-2 border rounded bg-gray-100" [value]="profile.username" disabled />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Role</label>
+          <input type="text" class="mt-1 w-full p-2 border rounded bg-gray-100" [value]="profile.role" disabled />
+        </div>
+      </div>
 
       <!-- Editable Fields -->
       <div class="grid md:grid-cols-2 gap-6">
         <div>
           <label class="block text-sm font-medium text-gray-700">Full Name</label>
-          <input
-            type="text"
-            formControlName="fullName"
-            class="mt-1 w-full p-2 border rounded"
-            [readonly]="!isEditing"
-          />
+          <input type="text" formControlName="fullName" class="mt-1 w-full p-2 border rounded" [readonly]="!isEditing" />
         </div>
         <div>
           <label class="block text-sm font-medium text-gray-700">Phone Number</label>
-          <input
-            type="text"
-            formControlName="phoneNumber"
-            class="mt-1 w-full p-2 border rounded"
-            [readonly]="!isEditing"
-          />
+          <input type="text" formControlName="phoneNumber" class="mt-1 w-full p-2 border rounded" [readonly]="!isEditing" />
         </div>
       </div>
-
-      <!-- Profile Picture URL (hidden or used internally) -->
-      <input type="hidden" formControlName="profilePictureUrl" />
 
       <!-- Bio -->
       <div>
         <label class="block text-sm font-medium text-gray-700">Bio</label>
-        <textarea
-          formControlName="bio"
-          rows="3"
-          class="mt-1 w-full p-2 border rounded"
-          [readonly]="!isEditing"
-        ></textarea>
+        <textarea formControlName="bio" rows="3" class="mt-1 w-full p-2 border rounded" [readonly]="!isEditing"></textarea>
       </div>
 
-      <!-- Action Buttons -->
+      <!-- Buttons -->
       <div class="flex gap-4 pt-4">
         <button
           *ngIf="!isEditing"
@@ -96,12 +73,7 @@
         </button>
 
         <div *ngIf="isEditing" class="flex gap-4">
-          <button
-            type="submit"
-            class="px-5 py-2.5 bg-green-600 text-white rounded hover:bg-green-700"
-          >
-            Save
-          </button>
+          <button type="submit" class="px-5 py-2.5 bg-green-600 text-white rounded hover:bg-green-700">Save</button>
           <button
             type="button"
             (click)="cancelEdit()"
@@ -112,8 +84,7 @@
         </div>
       </div>
 
-      
-      <!-- Feedback Messages -->
+      <!-- Messages -->
       <div class="mt-4 text-green-600 font-medium" *ngIf="successMessage">
         {{ successMessage }}
       </div>

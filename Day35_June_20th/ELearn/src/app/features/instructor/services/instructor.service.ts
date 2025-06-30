@@ -33,7 +33,7 @@ getInstructorCourses(page: number, pageSize: number) {
     .set('pageSize', pageSize.toString());
 
   return this.http.get<any>(this.instructorCoursesUrl, { params }).pipe(
-    tap(response => console.log('Instructor Courses API Response:', response)), // 🔍 log full response
+    tap(response => console.log('Instructor Courses API Response:', response)), 
     map(response => response?.data ?? []),
     catchError(this.handleError)
   );
@@ -67,14 +67,19 @@ get(url: string) {
 getCourseById(courseId: string) {
   return this.http.get<any>(`http://localhost:5295/api/v1/courses/${courseId}`).pipe(map(res => res.data));
 }
+getCourseByIdEdit(courseId: string) {
+  return this.http.get<any>(`http://localhost:5295/api/v1/courses/instructor/${courseId}`).pipe(map(res => res.data));
+}
 
 getCourseFiles(courseId: string) {
   return this.http.get<any>(`http://localhost:5295/api/v1/student/files/${courseId}`).pipe(map(res => res.data));
 }
 
-updateCourseFile(fileId: string, data: { topic: string, description: string }) {
-  return this.http.put<any>(`http://localhost:5295/api/v1/files/${fileId}`, data);
+updateCourseFile(fileId: string, formData: FormData) {
+  return this.http.put<any>(`http://localhost:5295/api/v1/files/${fileId}`, formData)
+    .pipe(catchError(this.handleError));
 }
+
 
 updateCourse(courseId: string, data: any) {
   return this.http.put<any>(`http://localhost:5295/api/v1/courses/${courseId}`, data);

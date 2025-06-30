@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { catchError, map, Observable, of, throwError } from 'rxjs';
-import { tap } from 'rxjs/operators'; 
+import { catchError, forkJoin, map, Observable, of, throwError } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
+
 
 @Injectable({ providedIn: 'root' })
 export class StudentService {
@@ -9,71 +10,108 @@ export class StudentService {
 
   constructor(private http: HttpClient) {}
 
-  
+
+
+
+
+getEnrolledCourseDetails(): Observable<any[]> {
+  console.log('Fetching enrolled courses with full details...');
+
+  return this.http.get<any>('http://localhost:5295/api/v1/enrollments').pipe(
+    tap(res => console.log('Enrolled course list:', res)),
+    map(res => res?.data ?? []), // Extract array of courses
+    switchMap((courses: any[]) => {
+      const courseDetailRequests = courses.map(course =>
+        this.http.get<any>(`${this.baseUrl}/${course.id}`).pipe(
+          map(res => res?.data),
+          catchError(err => {
+            console.error(`Error fetching course ${course.id}`, err);
+            return [null]; // Skip failed course
+          })
+        )
+      );
+      return forkJoin(courseDetailRequests); // Wait for all course details
+    }),
+    map(results => results.filter(course => !!course)), // Remove nulls
+    catchError(err => {
+      console.error('Failed to load enrolled course details', err);
+      return throwError(() => new Error('Could not load course details'));
+    })
+  );
+}
+
 
   getAllCourses() {
-     
+    console.log('Calling GetAllCourses...');
     return this.http.get<any>(this.baseUrl).pipe(
-        tap(response => console.log(' GetAllCourses API Response:', response)), 
-        
-      map(res => res?.data ?? []
-        
-        
-      ),
+      tap(response => console.log('GetAllCourses API Response:', response)),
+      map(res => res?.data ?? []),
       catchError(err => {
         console.error('Error fetching courses:', err);
-       
         return throwError(() => new Error('Failed to fetch courses'));
       })
     );
   }
 
   searchCourses(query: string) {
-  if (!query || query.trim().length < 2) return of([]);
-  return this.http.get<any>(`http://localhost:5295/api/v1/courses/search?query=${query}`).pipe(
-    map(res => res?.data ?? []),
-    catchError(() => of([]))
-  );
-}
-
-
- getCourseById(courseId: string): Observable<any> {
-
-    return this.http
-      .get<any>(`${this.baseUrl}/${courseId}`)
-      .pipe(catchError(this.handleError));
+    if (!query || query.trim().length < 2) {
+      console.warn('Search query too short:', query);
+      return of([]);
+    }
+    console.log('Searching courses with query:', query);
+    return this.http.get<any>(`http://localhost:5295/api/v1/courses/search?query=${query}`).pipe(
+      tap(res => console.log('SearchCourses Response:', res)),
+      map(res => res?.data ?? []),
+      catchError(err => {
+        console.error('Error during course search:', err);
+        return of([]);
+      })
+    );
   }
 
- 
-enrollInCourse(courseId: string) {
-  return this.http.post(`http://localhost:5295/api/v1/enrollments/${courseId}`, {})
-    .pipe(
+  getCourseById(courseId: string): Observable<any> {
+    console.log('Fetching course by ID:', courseId);
+    return this.http.get<any>(`${this.baseUrl}/${courseId}`).pipe(
+      tap(res => console.log(`Course ${courseId} fetched:`, res)),
+      catchError(this.handleError)
+    );
+  }
+
+  enrollInCourse(courseId: string) {
+    console.log('Enrolling in course:', courseId);
+    return this.http.post(`http://localhost:5295/api/v1/enrollments/${courseId}`, {}).pipe(
+      tap(() => console.log(`Enrolled in course: ${courseId}`)),
       catchError(err => {
         console.error('Enrollment failed:', err);
         return throwError(() => err);
       })
     );
-}
+  }
 
-getEnrolledCourses() {
-  return this.http.get<any>('http://localhost:5295/api/v1/enrollments').pipe(
-    map(res => res?.data ?? []), 
-    catchError(err => {
-      console.error('Error fetching enrolled courses:', err);
-      return throwError(() => new Error('Failed to load enrolled courses'));
-    })
-  );
-}
+  getEnrolledCourses() {
+    console.log('Fetching enrolled courses...');
+    return this.http.get<any>('http://localhost:5295/api/v1/enrollments').pipe(
+      tap(res => console.log('Enrolled courses:', res)),
+      map(res => res?.data ?? []),
+      catchError(err => {
+        console.error('Error fetching enrolled courses:', err);
+        return throwError(() => new Error('Failed to load enrolled courses'));
+      })
+    );
+  }
 
-markFileAsCompleted(fileId: string) {
-  return this.http.post(`http://localhost:5295/api/v1/progress/complete/${fileId}`, {});
-}
+  markFileAsCompleted(fileId: string) {
+    console.log('Marking file as completed:', fileId);
+    return this.http.post(`http://localhost:5295/api/v1/progress/complete/${fileId}`, {}).pipe(
+      tap(() => console.log(`File ${fileId} marked as completed.`)),
+      catchError(err => {
+        console.error(`Failed to mark file ${fileId} as completed:`, err);
+        return throwError(() => new Error('Failed to update progress'));
+      })
+    );
+  }
 
-
-
-
-
-    private handleError(error: HttpErrorResponse) {
+  private handleError(error: HttpErrorResponse) {
     let message = 'An unknown error occurred.';
     if (error.error instanceof ErrorEvent) {
       message = `Client Error: ${error.error.message}`;
@@ -83,8 +121,7 @@ markFileAsCompleted(fileId: string) {
         message += ` - ${error.error.message}`;
       }
     }
+    console.error('HTTP Error:', message);
     return throwError(() => new Error(message));
   }
-
-
 }

@@ -5,85 +5,66 @@
 
   <ng-template #showCourse>
     <div *ngIf="result.data as course" class="max-w-7xl mx-auto mt-10 px-4 lg:px-6 pb-20">
-      <!-- Header -->
-      <div class="flex flex-col lg:flex-row gap-6 items-start border-b pb-8">
-        <div class="flex-1 space-y-3">
-          <h1 class="text-4xl font-bold text-gray-900">{{ course.title }}</h1>
-          <p class="text-gray-600 text-lg">{{ course.description }}</p>
+      <!-- Header (same as before) -->
 
-          <div class="text-sm text-gray-500 flex flex-wrap gap-4">
-            <span class="flex items-center gap-1">
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M8 7V3m8 4V3m-9 4h10M5 21h14a2 2 0 0 0 2-2V7H3v12a2 2 0 0 0 2 2z"/>
-              </svg>
-              {{ course.createdAt | date: 'mediumDate' }}
-            </span>
-            <span class="flex items-center gap-1">
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 2a10 10 0 0 0 0 20 10 10 0 0 0 0-20z"/>
-              </svg>
-              {{ course.language }}
-            </span>
-            <span class="flex items-center gap-1">
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M16 7V3H8v4M5 21h14a2 2 0 0 0 2-2V7H3v12a2 2 0 0 0 2 2z"/>
-              </svg>
-              {{ course.level }}
-            </span>
-            <span class="flex items-center gap-1">
-              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="1.5"
-                   viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M3 7h18M3 12h18M3 17h18"/>
-              </svg>
-              {{ course.domain }}
-            </span>
-          </div>
+      <!-- Course Header -->
+<div class="rounded-xl p-6 border border-gray-200">
+  <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
+  
 
-          <div *ngIf="course.tags?.length" class="flex flex-wrap gap-2 mt-2">
-            <span *ngFor="let tag of course.tags"
-              class="bg-indigo-100 text-indigo-700 text-xs font-semibold px-2 py-1 rounded-full">
-              #{{ tag }}
-            </span>
-          </div>
-        </div>
+    <div class="flex-1">
+      <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ course.title }}</h1>
+
+      <p class="text-gray-600 mb-3">{{ course.description }}</p>
+
+      <div class="flex flex-wrap text-sm text-gray-500 gap-4">
+        <span><strong>Instructor:</strong> {{ course.instructorName }}</span>
+        <span><strong>Domain:</strong> {{ course.domain }}</span>
+        <span><strong>Language:</strong> {{ course.language }}</span>
+        <span><strong>Level:</strong> {{ course.level }}</span>
       </div>
+
+
+     
+    </div>
+  </div>
+</div>
+
 
       <!-- Enrolled Section -->
       <div *ngIf="course.isEnrolled; else previewOnly" class="mt-10 flex flex-col lg:flex-row gap-8">
         <!-- Video Player -->
         <div class="flex-1">
           <video width="100%" height="400" controls class="rounded-lg shadow-md"
-            [src]="getVideoUrl(course.firstUploadedFile.fileName || selectedVideo.fileName)"></video>
-  
+            [src]="getVideoUrl(selectedVideo?.fileName || course.firstUploadedFile.fileName)">
+          </video>
+
           <div class="mt-4">
-            <h2 class="text-2xl font-semibold text-gray-800">{{ selectedVideo?.topic || course.firstUploadedFile.topic }}</h2>
-            <p class="text-gray-600 mt-2">{{ selectedVideo?.description || course.firstUploadedFile.description }}</p>
+            <h2 class="text-2xl font-semibold text-gray-800">
+              {{ selectedVideo?.topic || course.firstUploadedFile.topic }}
+            </h2>
+            <p class="text-gray-600 mt-2">
+              {{ selectedVideo?.description || course.firstUploadedFile.description }}
+            </p>
             <p class="text-sm text-gray-500 mt-1">
-              Uploaded on: {{ selectedVideo?.uploadedAt || course.firstUploadedFile.uploadedAt | date: 'medium' }}
+              Uploaded on: {{
+                (selectedVideo?.uploadedAt || course.firstUploadedFile.uploadedAt) | date: 'medium'
+              }}
             </p>
           </div>
 
-          <!-- ✅ Completed Course Message -->
           <div *ngIf="course.isCompleted" class="mt-6 bg-green-50 border border-green-200 rounded-md p-5">
             <div class="flex items-center gap-3">
               <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
                    viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M5 13l4 4L19 7"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               <p class="text-green-800 text-lg font-medium">You have completed this course successfully.</p>
             </div>
           </div>
         </div>
 
-        <!-- Sidebar Playlist -->
+        <!-- Playlist Sidebar -->
         <aside class="w-full lg:w-80 bg-white border rounded-lg shadow-sm p-4">
           <h3 class="text-lg font-semibold text-gray-700 mb-3">Course Playlist</h3>
           <div class="divide-y divide-gray-200">
@@ -116,14 +97,15 @@
         </aside>
       </div>
 
-      <!-- Not Enrolled View -->
+      <!-- Preview Only -->
       <ng-template #previewOnly>
         <div class="mt-10 space-y-4">
           <h2 class="text-xl font-semibold text-gray-800">Preview: {{ course.firstUploadedFile.topic }}</h2>
           <p class="text-gray-600">{{ course.firstUploadedFile.description }}</p>
 
           <video width="100%" height="360" controls class="rounded-md shadow"
-            [src]="'http://localhost:5295' + course.firstUploadedFile.path"></video>
+            [src]="'http://localhost:5295' + course.firstUploadedFile.path">
+          </video>
 
           <div class="bg-yellow-50 border border-yellow-200 rounded-md p-6 mt-6">
             <h3 class="text-lg font-semibold text-yellow-900 mb-2 flex items-center gap-2">

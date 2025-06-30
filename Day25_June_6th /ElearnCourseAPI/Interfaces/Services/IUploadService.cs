@@ -12,6 +12,10 @@ namespace ElearnAPI.Interfaces.Services
         Task<bool> DeleteFileAsync(Guid id);
         Task<List<UploadedFile>> GetFilesByCourseIdAsync(Guid courseId);
         Task<UploadedFile?> GetFileByIdAsync(Guid fileId);
+        Task<UploadedFileDto?> UpdateFileEditAsync(UploadedFileDto dto);
+
+
+
 
     }
 }

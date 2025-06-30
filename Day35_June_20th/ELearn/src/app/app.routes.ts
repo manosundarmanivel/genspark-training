@@ -13,52 +13,64 @@ import { EnrolledCoursesComponent } from './features/student/enrolled-courses/en
 import { AdminDashboardComponent } from './features/admin/admin-dashboard/admin-dashboard.component';
 import { ProfileComponent } from './shared/components/profile/profile.component';
 import { EditCourseComponent } from './features/instructor/edit-course/edit-course.component';
+import { ManageUserComponent } from './features/admin/manage-user/manage-user.component';
+import { ManageCourseComponent } from './features/admin/manage-course/manage-course.component';
+import { ViewCourseComponent } from './features/admin/view-course/view-course.component';
 
 export const routes: Routes = [
-{ path: 'login', component: LoginComponent },
+  { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-//   { path: '**', redirectTo: 'login' }, // or a NotFoundComponent if you have one
+  //   { path: '**', redirectTo: 'login' }, // or a NotFoundComponent if you have one
 
 
 
-{
-  path: 'instructor-dashboard',
-  component: DashboardLayoutComponent,
-  canActivate: [RoleGuard],
-  data: { expectedRole: 'Instructor' },
-  children: [
-    { path: '', component: InstructorDashboardComponent },
-    { path: 'create-course', component: CreateCourseComponent },
-    { path: 'my-courses', component: MyCoursesComponent },
-    {path:'profile', component:ProfileComponent},
-      {path: 'edit-course/:id', component:EditCourseComponent},
-  ]
-},
-{
-  path: 'student-dashboard',
-  component: DashboardLayoutComponent,
-  canActivate: [RoleGuard],
-  data: { expectedRole: 'Student' },
-  children: [
-    { path: '', component: StudentDashboardComponent },
-    {path: 'browse', component: BrowseCoursesComponent},
-    {path: 'course-detail/:courseId', component:CourseDetailComponent},
-    {path: 'enrolled', component:EnrolledCoursesComponent},
-    {path:'profile', component:ProfileComponent},
+  {
+    path: 'instructor-dashboard',
+    component: DashboardLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRole: 'Instructor' },
+    children: [
+      { path: '', component: InstructorDashboardComponent },
+      { path: 'create-course', component: CreateCourseComponent },
+      { path: 'my-courses', component: MyCoursesComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'edit-course/:id', component: EditCourseComponent },
+    ]
+  },
+  {
+    path: 'student-dashboard',
+    component: DashboardLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRole: 'Student' },
+    children: [
+      { path: '', component: StudentDashboardComponent },
+      { path: 'browse', component: BrowseCoursesComponent },
+      { path: 'course-detail/:courseId', component: CourseDetailComponent },
+      { path: 'enrolled', component: EnrolledCoursesComponent },
+      { path: 'profile', component: ProfileComponent },
 
-   
-    // { path: 'my-courses', component: MyCoursesComponent }
-  ]
-},
 
-{ 
-  path: 'admin-dashboard',
-  component: DashboardLayoutComponent,
-  canActivate: [RoleGuard],
-  data: { expectedRole: 'Admin' },
-   children: [
-    { path: '', component: AdminDashboardComponent },]
-},
+      // { path: 'my-courses', component: MyCoursesComponent }
+    ]
+  },
+
+  {
+    path: 'admin-dashboard',
+    component: DashboardLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRole: 'Admin' },
+    children: [
+      { path: '', component: AdminDashboardComponent },
+      { path: 'users', component: ManageUserComponent },
+      
+      {
+        path: 'courses', component: ManageCourseComponent,
+
+      },
+      { path: 'view/:id', component: ViewCourseComponent },
+    ]
+  }
+  ,
 
   { path: '', redirectTo: 'login', pathMatch: 'full' }
 ];

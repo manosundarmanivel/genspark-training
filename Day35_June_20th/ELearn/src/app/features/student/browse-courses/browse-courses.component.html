@@ -1,80 +1,81 @@
 <div class="max-w-7xl mx-auto px-6 py-12" *ngIf="coursesState$ | async as state">
-
+  <!-- Header -->
   <div class="text-center mb-12">
-    <h1 class="text-4xl font-bold text-gray-900">Expand Your Knowledge</h1>
+    <h1 class="text-4xl font-bold text-indigo-700">Expand Your Knowledge</h1>
     <p class="text-lg text-gray-600 mt-2">
-      Explore top-rated online courses across development, design, business, and more.
+      Discover top-rated courses in development, design, business, and much more.
     </p>
   </div>
 
-
-  <div class="flex flex-wrap justify-center gap-4 mb-8">
-    <select #lang (change)="updateLanguage(lang.value)" class="border border-gray-300 px-4 py-2 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+  <!-- Filters -->
+  <div class="flex flex-wrap justify-center gap-4 mb-10">
+    <select #lang (change)="updateLanguage(lang.value)"
+      class="border border-gray-300 px-4 py-2 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
       <option value="">All Languages</option>
       <option value="English">English</option>
       <option value="Hindi">Hindi</option>
       <option value="Tamil">Tamil</option>
     </select>
 
-    <select #level (change)="updateLevel(level.value)" class="border border-gray-300 px-4 py-2 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
+    <select #level (change)="updateLevel(level.value)"
+      class="border border-gray-300 px-4 py-2 rounded-md text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500">
       <option value="">All Levels</option>
       <option value="Beginner">Beginner</option>
       <option value="Intermediate">Intermediate</option>
       <option value="Advanced">Advanced</option>
     </select>
 
-     <input
-      #domainInput
-      type="text"
-      placeholder="Search by Domain"
-      (input)="updateDomain(domainInput.value)"
-      class="border border-gray-300 px-4 py-2 rounded-md text-sm w-52 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-    />
+    <input #domainInput type="text" placeholder="Search by Domain" (input)="updateDomain(domainInput.value)"
+      class="border border-gray-300 px-4 py-2 rounded-md text-sm w-52 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" />
 
-    <input
-      #tagInput
-      type="text"
-      placeholder="Search by tag (e.g., 'AI')"
-      (input)="updateTag(tagInput.value)"
-      class="border border-gray-300 px-4 py-2 rounded-md text-sm w-52 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-    />
+
   </div>
 
-  <!-- Error -->
-  <div *ngIf="state.error" class="text-center text-red-600 mt-4 text-base">
-    {{ state.error }}
+  <!-- Error Message -->
+  <div *ngIf="state.error" class="text-center text-red-600 mt-4 text-base font-medium">
+    {{ state.error }}<br />
+    Please try again later.
   </div>
 
-  <!-- Loading -->
-  <div *ngIf="state.loading" class="text-center text-indigo-600 mt-10 text-lg font-medium animate-pulse">
-    Loading popular courses...
+  <!-- Loading State -->
+  <div *ngIf="state.loading" class="text-center text-indigo-600 mt-10 text-lg font-semibold animate-pulse">
+    Fetching the best courses for you...
   </div>
 
-  <!-- No Courses -->
-  <div *ngIf="!state.loading && !state.error && state.courses.length === 0" class="text-center text-gray-500 mt-10 text-base">
-    No courses found. New content coming soon!
+  <!-- No Courses Found -->
+  <div *ngIf="!state.loading && !state.error && state.courses.length === 0"
+    class="text-center text-gray-500 mt-10 text-base space-y-3">
+    <p>We couldn't find any matching courses right now.</p>
+    <p class="text-sm text-gray-400">
+      Try adjusting the filters or check back later for new content.
+    </p>
+    <a routerLink="/instructor-dashboard/create-course"
+      class="inline-block mt-2 bg-green-600 text-white px-5 py-2 rounded-md hover:bg-green-700 transition text-sm font-medium">
+      Or share your own knowledge — Create a Course
+    </a>
   </div>
 
   <!-- Courses Grid -->
-  <div *ngIf="!state.loading && state.courses.length > 0" class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-    <div
-      *ngFor="let course of state.courses"
-      class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-200 overflow-hidden flex flex-col border border-gray-200"
-    >
-     <img
-  [src]="course?.thumbnailUrl ? 'http://localhost:5295/' + course.thumbnailUrl : 'https://static.skillshare.com/uploads/video/thumbnails/02789fe5c46b98db955cd8be0d103bd7/original'"
-  alt="Course Image"
-  class="h-48 w-full object-cover"
-/>
+  <div *ngIf="!state.loading && state.courses.length > 0"
+    class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+    <div *ngFor="let course of state.courses"
+      class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-200 overflow-hidden flex flex-col border border-gray-200">
+      
+      <!-- Course Image -->
+      <img [src]="course?.thumbnailUrl ? 'http://localhost:5295/' + course.thumbnailUrl : 'https://static.skillshare.com/uploads/video/thumbnails/02789fe5c46b98db955cd8be0d103bd7/original'"
+        alt="Course Image" class="h-48 w-full object-cover" />
+
+      <!-- Course Content -->
       <div class="p-5 flex flex-col justify-between flex-1">
         <div>
-          <h3 class="text-md font-semibold text-gray-800 truncate mb-1">{{ course.title }}</h3>
+          <h3 class="text-md font-semibold text-gray-800 truncate mb-1">
+            {{ course.title }}
+          </h3>
           <p class="text-sm text-gray-600 line-clamp-3">{{ course.description }}</p>
         </div>
-        <button
-          [routerLink]="['/student-dashboard/course-detail', course.id]"
-          class="mt-4 bg-indigo-600 text-white text-sm px-4 py-2 rounded hover:bg-indigo-700 transition"
-        >
+
+        <button [routerLink]="['/student-dashboard/course-detail', course.id]"
+          class="mt-4 bg-indigo-600 text-white text-sm px-4 py-2 rounded hover:bg-indigo-700 transition">
           View Course
         </button>
       </div>
