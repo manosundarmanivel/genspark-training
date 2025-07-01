@@ -165,13 +165,14 @@
 
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Upload Introduction Video *</label>
-      <input
-        type="file"
-        accept="video/*"
-        (change)="onFileChange($event)"
-        class="text-sm text-gray-600"
-        required
-      />
+    <input
+  type="file"
+  accept="video/*"
+  (change)="onFileChange($event)"
+  class="text-sm text-gray-600"
+  required
+/>
+
       <div class="text-xs text-gray-500 mt-1">Make sure it's short, clear, and hooks your students!</div>
       <div class="text-red-500 text-sm mt-1" 
            *ngIf="fileForm.get('file')?.invalid && fileForm.get('file')?.touched">

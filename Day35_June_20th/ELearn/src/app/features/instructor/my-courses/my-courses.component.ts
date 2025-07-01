@@ -36,6 +36,17 @@ interface CourseState {
 export class MyCoursesComponent {
   courses$!: Observable<CourseState>;
 
+  selectedCourse: any = null;
+
+openModal(course: any): void {
+  this.selectedCourse = course;
+}
+
+closeModal(): void {
+  this.selectedCourse = null;
+}
+
+
   constructor(private instructorService: InstructorService) {
     this.loadCourses();
   }

@@ -22,13 +22,17 @@ namespace ElearnAPI.Controllers
         private readonly Serilog.ILogger _logger;
         private readonly string _uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
+           private readonly ICourseService _courseService;
+
         private readonly IUserFileProgressService _userFileProgressService;
 
         public UploadController(
+              ICourseService courseService,
             IUploadService uploadService,
             IHubContext<NotificationHub> hubContext,
             IUserFileProgressService userFileProgressService)
         {
+             _courseService = courseService;
             _uploadService = uploadService;
             _hubContext = hubContext;
             _userFileProgressService = userFileProgressService;
@@ -190,6 +194,12 @@ namespace ElearnAPI.Controllers
                     Topic = topic,
                     Description = description
                 });
+                
+var courseTitle = await  _courseService.GetCourseTitleById(courseId);
+                 await _hubContext.Clients.Group($"course-{courseId}")
+                .SendAsync("ReceiveContentUploadNotification", courseTitle, sanitizedFileName);
+
+            _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
 
                 // Optional: track uploader's progress
                 // await _userFileProgressService.AddProgressAsync(new UserFileProgress
@@ -199,16 +209,12 @@ namespace ElearnAPI.Controllers
                 //     UploadedFileId = fileMeta.Id,
                 //     IsCompleted = false
                 // });
+                // var courseTitle = await _uploadService.GetCourseTitleById(dto.CourseId);
+                //                 // 5. Send real-time notification
+                //              await _hubContext.Clients.Group($"course-{dto.CourseId}")
+                //                 .SendAsync("ReceiveContentUploadNotification", courseTitle, sanitizedFileName);
 
-                // 5. Send real-time notification
-                await _hubContext.Clients.Group($"course-{courseId}")
-                    .SendAsync("ReceiveNotification", new
-                    {
-                        message = $"New file uploaded: {sanitizedFileName}",
-                        courseId
-                    });
-
-                _logger.Information("File assembled and uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
+                //             _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
 
                 return Ok(new
                 {
@@ -257,29 +263,34 @@ namespace ElearnAPI.Controllers
         }
 
         [Authorize(Roles = "Instructor")]
-     
-       [HttpPut("{fileId}")]
-public async Task<IActionResult> Update(Guid fileId, [FromForm] UploadFileDto dto)
-{
-    var sanitizedFileName = dto.File?.FileName ?? "existing-file.mp4";
-    var newPath = "Uploads/" + sanitizedFileName;
 
-    // Construct DTO with existing fileId
-    var updateDto = new UploadedFileDto
-    {
-        Id = fileId,
-        FileName = sanitizedFileName,
-        Path = newPath,
-        CourseId = dto.CourseId,
-        Topic = dto.Topic,
-        Description = dto.Description
-    };
+        [HttpPut("{fileId}")]
+        public async Task<IActionResult> Update(Guid fileId, [FromForm] UploadFileDto dto)
+        {
+            var sanitizedFileName = dto.File?.FileName ?? "existing-file.mp4";
+            var newPath = "/uploads/" + sanitizedFileName;
 
-    var result = await _uploadService.UpdateFileEditAsync(updateDto);
-    if (result == null) return NotFound();
+            // Construct DTO with existing fileId
+            var updateDto = new UploadedFileDto
+            {
+                Id = fileId,
+                FileName = sanitizedFileName,
+                Path = newPath,
+                CourseId = dto.CourseId,
+                Topic = dto.Topic,
+                Description = dto.Description
+            };
 
-    return Ok(result);
-}
+            var result = await _uploadService.UpdateFileEditAsync(updateDto);
+            if (result == null) return NotFound();
+
+            // 5. Send real-time notification
+           await _hubContext.Clients.Group($"course-{dto.CourseId}")
+                .SendAsync("ReceiveContentUploadNotification", dto.Topic, sanitizedFileName);
+
+            _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
+            return Ok(result);
+        }
 
 
 

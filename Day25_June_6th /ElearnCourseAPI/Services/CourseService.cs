@@ -81,6 +81,11 @@ namespace ElearnAPI.Services
     return courseDtos;
 }
 
+public async Task<string?> GetCourseTitleById(Guid courseId)
+{
+    var course = await _courseRepository.GetByIdAsync(courseId);
+    return course?.Title;
+}
 
 
 

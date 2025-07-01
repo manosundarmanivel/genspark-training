@@ -50,28 +50,37 @@ export class RegisterComponent {
     return password === confirmPassword ? null : { passwordMismatch: true };
   };
 
-  register() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
+loading = false;
 
-    const selectedRole = this.roles.find(r => r.id === this.form.value.roleId);
-
-    if (!selectedRole) {
-      this.error = 'Please select a valid role.';
-      return;
-    }
-
-    const payload = {
-      username: this.form.value.username,
-      password: this.form.value.password,
-      role: selectedRole.name
-    };
-
-    this.authService.register(payload).subscribe({
-      next: () => this.router.navigate(['/login']),
-      error: err => (this.error = err.error?.message || 'Registration failed')
-    });
+register() {
+  if (this.form.invalid) {
+    this.form.markAllAsTouched();
+    return;
   }
+
+  const selectedRole = this.roles.find(r => r.id === this.form.value.roleId);
+  if (!selectedRole) {
+    this.error = 'Please select a valid role.';
+    return;
+  }
+
+  const payload = {
+    username: this.form.value.username,
+    password: this.form.value.password,
+    role: selectedRole.name
+  };
+
+  this.loading = true;
+  this.authService.register(payload).subscribe({
+    next: () => {
+      this.loading = false;
+      this.router.navigate(['/login']);
+    },
+    error: err => {
+      this.loading = false;
+      this.error = err.error?.message || 'Registration failed';
+    }
+  });
+}
+
 }

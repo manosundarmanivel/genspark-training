@@ -1,60 +1,67 @@
-<div class="max-w-7xl mx-auto p-6 mt-12 space-y-12" *ngIf="dashboardData$ | async as data">
-  <!-- Dashboard Header -->
+<div class="max-w-7xl mx-auto p-6 mt-12 space-y-16 bg-gradient-to-b from-white to-gray-50 rounded-xl shadow-sm"
+     *ngIf="dashboardData$ | async as data">
+
+  <!-- Header Section -->
   <div class="flex justify-between items-center border-b pb-6">
     <div>
-      <h2 class="text-3xl font-bold text-gray-900">Instructor Dashboard</h2>
-      <p class="text-gray-500 mt-1">Welcome back! Manage your courses and materials efficiently.</p>
+      <h2 class="text-4xl font-bold ">Instructor Dashboard</h2>
+      <p class="text-gray-600 mt-2">
+        Welcome back! Easily track your course performance and manage content with confidence.
+      </p>
     </div>
   </div>
 
-  <!-- Statistics Summary -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-    <div class="bg-blue-50 p-5 rounded-xl text-center shadow-sm hover:shadow-md transition">
-      <h3 class="text-sm font-medium text-blue-700">Total Courses</h3>
-      <p class="text-3xl font-bold text-blue-900 mt-2">{{ data.totalCourses }}</p>
+  <!-- Stats Summary Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+    <div class="bg-blue-100 p-6 rounded-2xl text-center shadow hover:shadow-lg transition-all">
+      <h3 class="text-sm font-semibold text-blue-700 uppercase">Total Courses</h3>
+      <p class="text-4xl font-extrabold text-blue-900 mt-2">{{ data.totalCourses }}</p>
+      <p class="text-xs text-blue-700 mt-1">Keep adding valuable content!</p>
     </div>
-    <div class="bg-indigo-50 p-5 rounded-xl text-center shadow-sm hover:shadow-md transition">
-      <h3 class="text-sm font-medium text-indigo-700">Enrolled Students</h3>
-      <p class="text-3xl font-bold text-indigo-900 mt-2">{{ data.totalEnrollments }}</p>
+    <div class="bg-indigo-100 p-6 rounded-2xl text-center shadow hover:shadow-lg transition-all">
+      <h3 class="text-sm font-semibold text-indigo-700 uppercase">Enrolled Students</h3>
+      <p class="text-4xl font-extrabold text-indigo-900 mt-2">{{ data.totalEnrollments }}</p>
+      <p class="text-xs text-indigo-700 mt-1">Your reach is growing </p>
     </div>
-    <div class="bg-teal-50 p-5 rounded-xl text-center shadow-sm hover:shadow-md transition">
-      <h3 class="text-sm font-medium text-teal-700">Files Uploaded</h3>
-      <p class="text-3xl font-bold text-teal-900 mt-2">{{ data.totalUploads }}</p>
+    <div class="bg-teal-100 p-6 rounded-2xl text-center shadow hover:shadow-lg transition-all">
+      <h3 class="text-sm font-semibold text-teal-700 uppercase">Files Uploaded</h3>
+      <p class="text-4xl font-extrabold text-teal-900 mt-2">{{ data.totalUploads }}</p>
+      <p class="text-xs text-teal-700 mt-1">Your content library is expanding </p>
     </div>
   </div>
 
   <!-- Quick Action Buttons -->
   <div>
-    <h3 class="text-xl font-semibold mb-4 text-gray-800">Quick Actions</h3>
+    <h3 class="text-2xl font-semibold mb-6 text-gray-800">Quick Actions</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <button
-      routerLink="create-course"
-      class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium shadow transition">
-        + New Course
+        routerLink="create-course"
+        class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-semibold shadow transition">
+        + Create New Course
       </button>
       <button 
-         routerLink="my-courses"
-      class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-lg font-medium shadow transition">
-        Upload Material
+        routerLink="my-courses"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-semibold shadow transition">
+        Upload Course Material
       </button>
     </div>
   </div>
 
-  <!-- Recent Courses Section -->
+  <!-- Recent Courses List -->
   <div>
-    <h3 class="text-xl font-semibold mb-4 text-gray-800">Your Recent Courses</h3>
+    <h3 class="text-2xl font-semibold mb-6 text-gray-800">Your Recent Courses</h3>
     <ul class="space-y-4">
-      <li
-        *ngFor="let course of data.recentCourses"
-        class="border p-5 rounded-xl hover:shadow-md transition flex justify-between items-center"
-      >
+      <li *ngFor="let course of data.recentCourses"
+          class="flex justify-between items-center bg-white border border-gray-200 rounded-xl p-5 hover:shadow-md transition">
         <div>
           <h4 class="text-lg font-semibold text-gray-900">{{ course.title }}</h4>
-          <p class="text-sm text-gray-500">Updated recently</p>
+          <p class="text-sm text-gray-500">Recently updated</p>
         </div>
         <a 
-        [routerLink]="'edit-course/' + course.id"
-        class="text-blue-600 hover:text-blue-800 font-medium cursor-pointer">Manage</a>
+          [routerLink]="'edit-course/' + course.id"
+          class="text-blue-600 hover:text-blue-700 hover:underline font-medium transition">
+          Manage
+        </a>
       </li>
     </ul>
   </div>

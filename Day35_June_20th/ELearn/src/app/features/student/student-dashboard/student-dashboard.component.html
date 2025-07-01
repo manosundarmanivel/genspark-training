@@ -1,41 +1,46 @@
-<div class="p-8 max-w-7xl mx-auto mt-12 space-y-12">
+<div class="p-8 max-w-7xl mx-auto mt-12 space-y-16 bg-gradient-to-b from-white to-gray-50 rounded-xl">
 
   <!-- Header Section -->
   <div class="flex justify-between items-center border-b pb-6">
     <div>
-      <h2 class="text-4xl font-bold text-gray-900">Student Dashboard</h2>
-      <p class="text-gray-500 mt-1 text-base">Welcome back 👋 — Keep learning and reach your goals.</p>
+      <h2 class="text-4xl font-bold ">Student Dashboard</h2>
+      <p class="text-gray-600 mt-2 text-base">
+        Welcome back 👋 Let's continue your learning journey and track your progress.
+      </p>
     </div>
   </div>
 
   <!-- Statistics Overview -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-center">
-    <div class="bg-purple-50 p-6 rounded-xl shadow hover:shadow-md transition">
-      <h3 class="text-sm font-medium text-purple-700">Courses Enrolled</h3>
-      <p class="text-4xl font-bold text-purple-900 mt-2">{{ totalCourses$ | async }}</p>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 text-center">
+    <div class="bg-purple-100 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+      <h3 class="text-sm font-semibold text-purple-700 uppercase">Courses Enrolled</h3>
+      <p class="text-5xl font-extrabold text-purple-900 mt-3">{{ totalCourses$ | async }}</p>
+      <p class="text-xs text-purple-700 mt-1">Keep exploring and learning more!</p>
     </div>
-    <div class="bg-indigo-50 p-6 rounded-xl shadow hover:shadow-md transition">
-      <h3 class="text-sm font-medium text-indigo-700">Courses Completed</h3>
-      <p class="text-4xl font-bold text-indigo-900 mt-2">{{ completedCourses$ | async }}</p>
+    <div class="bg-indigo-100 p-6 rounded-2xl shadow-md hover:shadow-lg transition-all">
+      <h3 class="text-sm font-semibold text-indigo-700 uppercase">Courses Completed</h3>
+      <p class="text-5xl font-extrabold text-indigo-900 mt-3">{{ completedCourses$ | async }}</p>
+      <p class="text-xs text-indigo-700 mt-1">Great job finishing your courses!</p>
     </div>
   </div>
 
   <!-- Continue Learning Section -->
   <div *ngIf="enrolledCourses$ | async as courses">
-    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Continue Learning</h3>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Continue Learning</h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <ng-container *ngFor="let course of courses.slice(0, 2)">
-        <div class="bg-gray-50 border border-gray-200 p-5 rounded-xl shadow hover:shadow-lg transition">
+        <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow hover:shadow-lg transition">
           <h4 class="text-lg font-bold text-gray-900">{{ course.title }}</h4>
           <p class="text-sm text-gray-500 mt-1">
             {{ course.isCompleted ? '100% complete' : 'In Progress' }}
           </p>
-          <div class="w-full bg-gray-200 h-2 rounded mt-2">
-            <div class="h-2 rounded bg-purple-600" [style.width]="course.isCompleted ? '100%' : '50%'"></div>
+          <div class="w-full bg-gray-200 h-2 rounded-full mt-3">
+            <div class="h-2 rounded-full bg-purple-600 transition-all" 
+                 [style.width]="course.isCompleted ? '100%' : '50%'"></div>
           </div>
           <button
-          routerLink="course-detail/{{course.id}}"
-           class="mt-4 bg-purple-600 text-white text-sm px-4 py-2 rounded hover:bg-purple-700 transition">
+            routerLink="course-detail/{{course.id}}"
+            class="mt-5 bg-purple-600 text-white text-sm px-4 py-2 rounded-xl hover:bg-purple-700 transition">
             {{ course.isCompleted ? 'Review Course' : 'Resume Course' }}
           </button>
         </div>
@@ -45,17 +50,19 @@
 
   <!-- My Courses List -->
   <div *ngIf="enrolledCourses$ | async as courses">
-    <h3 class="text-2xl font-semibold text-gray-800 mb-4">My Courses</h3>
+    <h3 class="text-2xl font-semibold text-gray-800 mb-6">My Courses</h3>
     <ul class="space-y-4">
       <li *ngFor="let course of courses"
-          class="flex justify-between items-center bg-white border rounded-lg shadow-sm p-5 hover:shadow-md transition">
+          class="flex justify-between items-center bg-white border border-gray-200 rounded-xl shadow-sm p-5 hover:shadow-md transition">
         <div>
           <h4 class="font-semibold text-gray-900">{{ course.title }}</h4>
           <p class="text-sm text-gray-500">Instructor: {{ course.instructorName }}</p>
         </div>
         <a 
-        routerLink="course-detail/{{course.id}}"
-        class="text-purple-600 hover:underline font-medium cursor-pointer">View Course</a>
+          routerLink="course-detail/{{course.id}}"
+          class="text-purple-600 hover:text-purple-700 hover:underline font-medium transition">
+          View Course
+        </a>
       </li>
     </ul>
   </div>

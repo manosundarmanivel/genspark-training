@@ -78,15 +78,29 @@
         <div *ngIf="error" class="text-sm text-red-600">{{ error }}</div>
 
         <!-- Submit -->
-        <button
-          type="submit"
-          class="w-full py-2.5 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 transition duration-200 flex items-center justify-center gap-2"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
-          </svg>
-          Log In
-        </button>
+       <button
+  type="submit"
+  [disabled]="loading"
+  class="w-full py-2.5 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 transition duration-200 flex items-center justify-center gap-2"
+>
+  <ng-container *ngIf="!loading; else loadingSpinner">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
+    </svg>
+    Log In
+  </ng-container>
+
+  <!-- Shimmer/Spinner -->
+  <ng-template #loadingSpinner>
+    <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+      <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+      <path class="opacity-75" fill="currentColor"
+        d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+    </svg>
+    Loading...
+  </ng-template>
+</button>
+
 
         <!-- Extra links -->
         <div class="text-sm text-center mt-4 text-gray-600">

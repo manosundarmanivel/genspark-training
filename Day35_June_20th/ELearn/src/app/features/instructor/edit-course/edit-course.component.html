@@ -4,26 +4,21 @@
   <p class="text-gray-600">Take a moment to refine your course details. You’re doing great!</p>
 
   <!-- Course Edit Form -->
-  <form [formGroup]="courseForm" (ngSubmit)="onUpdateCourse()" class="grid grid-cols-1 gap-6 bg-white p-6 rounded-xl shadow">
+  <form [formGroup]="courseForm" (ngSubmit)="onUpdateCourse()"
+    class="grid grid-cols-1 gap-6 bg-white p-6 rounded-xl shadow">
     <h3 class="text-xl font-semibold text-gray-800">Step 1: Course Info</h3>
 
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Course Title *</label>
-      <input
-        formControlName="title"
-        placeholder="e.g., Mastering TypeScript for Angular"
-        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-      />
+      <input formControlName="title" placeholder="e.g., Mastering TypeScript for Angular"
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
     </div>
 
     <div>
       <label class="block text-sm font-medium text-gray-700 mb-1">Course Description *</label>
-      <textarea
-        formControlName="description"
-        placeholder="What's this course about? Give learners a reason to join!"
+      <textarea formControlName="description" placeholder="What's this course about? Give learners a reason to join!"
         rows="4"
-        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"
-      ></textarea>
+        class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none resize-none"></textarea>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -38,20 +33,14 @@
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Level *</label>
-        <input
-          formControlName="level"
-          placeholder="e.g., Beginner, Intermediate, Advanced"
-          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
+        <input formControlName="level" placeholder="e.g., Beginner, Intermediate, Advanced"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Language *</label>
-        <input
-          formControlName="language"
-          placeholder="e.g., English, Hindi"
-          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none"
-        />
+        <input formControlName="language" placeholder="e.g., English, Hindi"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
       </div>
     </div>
 
@@ -64,10 +53,8 @@
       />
     </div> -->
 
-    <button
-      type="submit"
-      class="mt-4 self-start bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition"
-    >
+    <button type="submit"
+      class="mt-4 self-start bg-indigo-600 text-white px-6 py-2 rounded-md hover:bg-indigo-700 transition">
       Save Course Info
     </button>
   </form>
@@ -80,49 +67,44 @@
     <h3 class="text-2xl font-semibold text-gray-800">Step 2: Manage Course Files</h3>
     <p class="text-gray-600 mb-6">Edit or update your existing course content below.</p>
 
-    <div
-      *ngFor="let fileCtrl of filesFormArray.controls; let i = index"
-      [formGroup]="fileCtrl"
-      class="mb-6 bg-white p-4 rounded-xl shadow space-y-4"
-    >
+    <div *ngFor="let fileCtrl of filesFormArray.controls; let i = index" [formGroup]="fileCtrl"
+      class="mb-6 bg-white p-4 rounded-xl shadow space-y-4">
       <h4 class="text-lg font-medium text-indigo-600">File {{ i + 1 }}</h4>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Topic</label>
-        <input
-          formControlName="topic"
-          placeholder="e.g., Introduction to Angular"
-          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none"
-        />
+        <input formControlName="topic" placeholder="e.g., Introduction to Angular"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none" />
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Description</label>
-        <textarea
-          formControlName="description"
-          placeholder="Briefly describe this lesson."
-          rows="3"
-          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"
-        ></textarea>
+        <textarea formControlName="description" placeholder="Briefly describe this lesson." rows="3"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"></textarea>
       </div>
 
-      <div>
-  <label class="block text-sm font-medium text-gray-700 mb-1">Replace File (optional)</label>
-  <input
-    type="file"
-    (change)="onFileChange($event, i)"
-    class="w-full border border-gray-300 px-4 py-2 rounded-md"
-  />
+      <!-- Video Preview -->
+<div >
+  <label class="block text-sm font-medium text-gray-700 mb-2">Video Preview</label>
+  <video
+    [src]="'http://localhost:5295' + fileCtrl.value.path"
+    controls
+    class="w-full rounded"
+  ></video>
 </div>
 
 
-      
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Replace File (optional)</label>
+        <input accept="video/*" type="file" (change)="onFileChange($event, i)"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md" />
+      </div>
 
-      <button
-        (click)="onUpdateFile(i)"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-      >
-        Update This File 
+
+
+
+      <button (click)="onUpdateFile(i)" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+        Update This File
       </button>
     </div>
   </div>
@@ -135,39 +117,26 @@
     <h3 class="text-2xl font-semibold text-gray-800">Step 3: Add New Course File</h3>
     <p class="text-gray-600 mb-6">Want to add new content? Upload it below to enrich your course.</p>
 
-    <form [formGroup]="newFileForm" (ngSubmit)="onAddNewFile()" class="grid grid-cols-1 gap-4 bg-white p-6 rounded-xl shadow">
+    <form [formGroup]="newFileForm" (ngSubmit)="onAddNewFile()"
+      class="grid grid-cols-1 gap-4 bg-white p-6 rounded-xl shadow">
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">New Topic *</label>
-        <input
-          formControlName="topic"
-          placeholder="New Topic"
-          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-        />
+        <input formControlName="topic" placeholder="New Topic"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none" />
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">New Description *</label>
-        <textarea
-          formControlName="description"
-          placeholder="What is this file about?"
-          rows="3"
-          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"
-        ></textarea>
+        <textarea formControlName="description" placeholder="What is this file about?" rows="3"
+          class="w-full border border-gray-300 px-4 py-2 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none resize-none"></textarea>
       </div>
 
       <div>
         <label class="block text-sm font-medium text-gray-700 mb-1">Upload File *</label>
-        <input
-          type="file"
-          (change)="onNewFileChange($event)"
-          class="w-full text-sm text-gray-600"
-        />
+        <input  accept="video/*" type="file" (change)="onNewFileChange($event)" class="w-full text-sm text-gray-600" />
       </div>
 
-      <button
-        type="submit"
-        class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition"
-      >
+      <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">
         Add New File
       </button>
     </form>

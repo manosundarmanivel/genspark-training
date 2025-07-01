@@ -23,6 +23,8 @@ namespace ElearnAPI.Interfaces.Services
 
         Task<bool> SetActiveStatusAsync(Guid id, bool isActive);
 
+        Task<string?> GetCourseTitleById(Guid courseId);
+
 
     }
 }
