@@ -28,11 +28,16 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.profileForm = this.fb.group({
-      fullName: ['', Validators.required],
-      phoneNumber: [''],
-      profilePictureUrl: [''],
-      bio: ['']
-    });
+    fullName: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],
+    phoneNumber: [
+      '',
+      [
+        Validators.pattern(/^\+?[0-9]{7,15}$/) 
+      ]
+    ],
+    profilePictureUrl: [''],
+    bio: ['', [Validators.maxLength(300)]]
+  });
     this.profileForm.disable();
     this.loadProfile();
   }
@@ -41,7 +46,7 @@ export class ProfileComponent implements OnInit {
     this.profileService.getProfile().pipe(
       map(res => res.data as UserProfile),
       tap(profile => {
-        this.profileSubject.next(profile); // set observable value
+        this.profileSubject.next(profile); 
         this.profileForm.patchValue({
           fullName: profile.fullName,
           phoneNumber: profile.phoneNumber,

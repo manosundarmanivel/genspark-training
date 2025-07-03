@@ -5,6 +5,8 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { switchMap, map, catchError, of, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-course-detail',
@@ -17,6 +19,9 @@ export class CourseDetailComponent {
   private studentService = inject(StudentService);
   private sanitizer = inject(DomSanitizer);
   private router = inject(Router);
+  private toastr= inject(ToastrService)
+   private cdr = inject(ChangeDetectorRef )
+  
 
   private courseSubject = new BehaviorSubject<any>(null);
   course$ = this.courseSubject.asObservable().pipe(
@@ -60,11 +65,16 @@ export class CourseDetailComponent {
   enroll(courseId: string): void {
     this.studentService.enrollInCourse(courseId).subscribe({
       next: () => {
-        alert('Enrolled successfully!');
+        this.toastr.success('Enrolled successfully!');
+        this.cdr.detectChanges(); 
         this.router.navigate(['/student-dashboard/enrolled']);
       },
       error: err => {
-        alert(`Enrollment failed: ${err.error?.message || err.message}`);
+        
+
+        this.toastr.error(`Enrollment failed: ${err.error?.message || err.message}`);
+        this.cdr.detectChanges(); 
+        
       }
     });
   }
@@ -89,7 +99,9 @@ export class CourseDetailComponent {
       },
       error: err => {
         console.error('Failed to mark as completed', err);
-        alert('Failed to mark as completed.');
+      
+         this.toastr.error('Failed to mark as completed.');
+            this.cdr.detectChanges(); 
       }
     });
   }

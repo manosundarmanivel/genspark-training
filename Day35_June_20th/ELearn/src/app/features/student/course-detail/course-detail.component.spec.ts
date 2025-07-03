@@ -6,6 +6,7 @@ import { of, throwError, BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { By } from '@angular/platform-browser';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ToastrService } from 'ngx-toastr';
 
 describe('CourseDetailComponent', () => {
   let component: CourseDetailComponent;
@@ -56,39 +57,43 @@ describe('CourseDetailComponent', () => {
     }
   };
 
-  beforeEach(async () => {
-    // Mock ActivatedRoute.paramMap
-    paramMapSubject = new BehaviorSubject({
-      get: (key: string) => key === 'courseId' ? 'course1' : null
-    });
+let toastrServiceSpy: jasmine.SpyObj<ToastrService>;
 
-    // Mock StudentService
-    studentServiceSpy = jasmine.createSpyObj('StudentService', [
-      'getCourseById',
-      'enrollInCourse',
-      'markFileAsCompleted'
-    ]);
-    studentServiceSpy.getCourseById.and.returnValue(of({ data: mockCourse }));
-    studentServiceSpy.enrollInCourse.and.returnValue(of({}));
-    studentServiceSpy.markFileAsCompleted.and.returnValue(of({}));
-
-    // Mock Router
-    routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-
-    await TestBed.configureTestingModule({
-      imports: [CommonModule, CourseDetailComponent],
-      providers: [
-        { provide: StudentService, useValue: studentServiceSpy },
-        { provide: ActivatedRoute, useValue: { paramMap: paramMapSubject.asObservable() } },
-        { provide: Router, useValue: routerSpy }
-      ]
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(CourseDetailComponent);
-    component = fixture.componentInstance;
-    sanitizer = TestBed.inject(DomSanitizer);
-    fixture.detectChanges();
+beforeEach(async () => {
+  paramMapSubject = new BehaviorSubject({
+    get: (key: string) => key === 'courseId' ? 'course1' : null
   });
+
+  studentServiceSpy = jasmine.createSpyObj('StudentService', [
+    'getCourseById',
+    'enrollInCourse',
+    'markFileAsCompleted'
+  ]);
+  studentServiceSpy.getCourseById.and.returnValue(of({ data: mockCourse }));
+  studentServiceSpy.enrollInCourse.and.returnValue(of({}));
+  studentServiceSpy.markFileAsCompleted.and.returnValue(of({}));
+
+  routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+
+  // ✅ Proper toastr spy
+  toastrServiceSpy = jasmine.createSpyObj('ToastrService', ['success', 'error']);
+
+  await TestBed.configureTestingModule({
+    imports: [CommonModule, CourseDetailComponent],
+    providers: [
+      { provide: StudentService, useValue: studentServiceSpy },
+      { provide: ActivatedRoute, useValue: { paramMap: paramMapSubject.asObservable() } },
+      { provide: Router, useValue: routerSpy },
+      { provide: ToastrService, useValue: toastrServiceSpy }
+    ]
+  }).compileComponents();
+
+  fixture = TestBed.createComponent(CourseDetailComponent);
+  component = fixture.componentInstance;
+  sanitizer = TestBed.inject(DomSanitizer);
+  fixture.detectChanges();
+});
+
 
   it('should create the component', () => {
     expect(component).toBeTruthy();
@@ -108,34 +113,37 @@ describe('CourseDetailComponent', () => {
 
 
 
-  it('should call enrollInCourse and navigate on enroll()', fakeAsync(() => {
-    // Set up not enrolled
-    const notEnrolledCourse = { ...mockCourse, isEnrolled: false };
-    studentServiceSpy.getCourseById.and.returnValue(of({ data: notEnrolledCourse }));
-    paramMapSubject.next({ get: (key: string) => 'course1' });
-    fixture = TestBed.createComponent(CourseDetailComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-    tick();
+it('should call enrollInCourse and navigate on enroll()', fakeAsync(() => {
+  const notEnrolledCourse = { ...mockCourse, isEnrolled: false };
+  studentServiceSpy.getCourseById.and.returnValue(of({ data: notEnrolledCourse }));
+  paramMapSubject.next({ get: (key: string) => 'course1' });
 
-    spyOn(window, 'alert');
-    component.enroll('course1');
-    tick();
-    expect(studentServiceSpy.enrollInCourse).toHaveBeenCalledWith('course1');
-    expect(routerSpy.navigate).toHaveBeenCalledWith(['/student-dashboard/enrolled']);
-    expect(window.alert).toHaveBeenCalledWith('Enrolled successfully!');
-  }));
+  fixture = TestBed.createComponent(CourseDetailComponent);
+  component = fixture.componentInstance;
+  fixture.detectChanges();
+  tick();
 
-  it('should handle enrollInCourse error', fakeAsync(() => {
-    studentServiceSpy.enrollInCourse.and.returnValue(throwError(() => ({ error: { message: 'Already enrolled' } })));
-    spyOn(window, 'alert');
-    component.enroll('course1');
-    tick();
-    expect(window.alert).toHaveBeenCalledWith('Enrollment failed: Already enrolled');
-  }));
+  component.enroll('course1');
+  tick();
+
+  expect(studentServiceSpy.enrollInCourse).toHaveBeenCalledWith('course1');
+  expect(routerSpy.navigate).toHaveBeenCalledWith(['/student-dashboard/enrolled']);
+  expect(toastrServiceSpy.success).toHaveBeenCalledWith('Enrolled successfully!');
+}));
+
+
+it('should handle enrollInCourse error', fakeAsync(() => {
+  studentServiceSpy.enrollInCourse.and.returnValue(throwError(() => ({ error: { message: 'Already enrolled' } })));
+
+  component.enroll('course1');
+  tick();
+
+  expect(toastrServiceSpy.error).toHaveBeenCalledWith('Enrollment failed: Already enrolled');
+}));
+
 
   it('should call markFileAsCompleted and update local state', fakeAsync(() => {
-    // Mark file1 as completed
+   
     component.selectedVideo = { ...mockCourse.firstUploadedFile };
     component['courseSubject'].next({ ...mockCourse });
     fixture.detectChanges();
@@ -143,9 +151,8 @@ describe('CourseDetailComponent', () => {
     tick();
     fixture.detectChanges();
 
-    // The selectedVideo should now be marked as completed
     expect(component.selectedVideo.isCompleted).toBeTrue();
-    // The courseSubject value's uploadedFiles should have file1 as completed
+   
     const updatedCourse = component['courseSubject'].value;
     expect(updatedCourse.uploadedFiles.find((f: any) => f.id === 'file1').isCompleted).toBeTrue();
   }));

@@ -11,6 +11,9 @@ import { InstructorService } from '../services/instructor.service';
 import { CreateCourseService } from './create-course.service';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { ChangeDetectorRef } from '@angular/core';
+
 
 
 @Component({
@@ -47,8 +50,14 @@ export class CreateCourseComponent implements OnInit {
         private fb: FormBuilder,
         private instructorService: InstructorService,
         private createCourseService: CreateCourseService,
-        private router: Router
-    ) { }
+        private router: Router,
+        private toastr: ToastrService,
+        private cdr: ChangeDetectorRef 
+    ) { 
+
+       
+       
+    }
 
     ngOnInit(): void {
         this.loading$ = this.createCourseService.loading$;
@@ -122,7 +131,7 @@ export class CreateCourseComponent implements OnInit {
         console.log('Thumbnail:', !!this.selectedThumbnail);
 
         if (this.courseForm.invalid || !this.selectedThumbnail) {
-            alert('Please complete all required fields and select a thumbnail');
+            this.toastr.error('Please complete all required fields and select a thumbnail');
             return;
         }
 
@@ -146,12 +155,12 @@ export class CreateCourseComponent implements OnInit {
                     this.createCourseService.setCourseId(res.data.id);
                     this.step = 2;
                 } else {
-                    alert('Course creation failed: ' + (res.message || 'Unknown error'));
+                    this.toastr.error('Course creation failed: ' + (res.message || 'Unknown error'));
                 }
                 this.createCourseService.setLoading(false);
             },
             error: err => {
-                alert('Error: ' + (err.error?.message || err.message || 'Unknown error'));
+               this.toastr.error('Error: ' + (err.error?.message || err.message || 'Unknown error'));
                 console.error(err);
                 this.createCourseService.setLoading(false);
             },
@@ -167,7 +176,8 @@ export class CreateCourseComponent implements OnInit {
 
 
         if (this.fileForm.invalid) {
-            alert('Please complete all required fields');
+            this.toastr.warning('Please complete all required fields');
+            this.cdr.detectChanges(); 
             return;
         }
 
@@ -198,14 +208,16 @@ export class CreateCourseComponent implements OnInit {
             }
 
             if (data.error) {
-                alert('Upload failed: ' + data.error);
+                this.toastr.error('Upload failed: ' + data.error);
+                this.cdr.detectChanges(); 
                 this.createCourseService.setLoading(false);
                 worker.terminate();
             }
 
             if (data.done) {
                 this.uploadProgress = 100;
-                alert('Upload complete!');
+                this.toastr.success('Upload complete!');
+                 this.cdr.detectChanges(); 
                 this.createCourseService.setLoading(false);
                 this.router.navigate(['/instructor-dashboard']);
                 worker.terminate();

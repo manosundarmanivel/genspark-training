@@ -4,3 +4,50 @@
 @tailwind utilities;
 
 
+@import 'ngx-toastr/toastr.css';
+
+.toast-container {
+  z-index: 99999 !important;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.toast-top-right {
+  top: 1rem !important;
+  right: 1rem !important;
+  bottom: auto !important;
+  left: auto !important;
+  position: fixed !important;
+  z-index: 99999 !important;
+}
+
+/* Base toast style using Tailwind */
+.custom-toast {
+  @apply bg-white text-gray-800 border border-gray-200 shadow-lg rounded-lg px-4 py-3 text-sm;
+  @apply min-w-[300px] max-w-sm; /* ✅ Minimum and maximum width */
+  font-family: 'Inter', sans-serif;
+}
+
+/* Success Toast */
+.toast-success {
+  @apply border-green-500 bg-green-50 text-green-800;
+}
+
+/* Error Toast */
+.toast-error {
+  @apply border-red-500 bg-red-50 text-red-800;
+}
+
+/* Info Toast */
+.toast-info {
+  @apply border-blue-500 bg-blue-50 text-blue-800;
+}
+
+/* Warning Toast */
+.toast-warning {
+  @apply border-yellow-500 bg-yellow-50 text-yellow-800;
+}
+
+
+
+

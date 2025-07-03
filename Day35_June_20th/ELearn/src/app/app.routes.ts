@@ -16,11 +16,13 @@ import { EditCourseComponent } from './features/instructor/edit-course/edit-cour
 import { ManageUserComponent } from './features/admin/manage-user/manage-user.component';
 import { ManageCourseComponent } from './features/admin/manage-course/manage-course.component';
 import { ViewCourseComponent } from './features/admin/view-course/view-course.component';
+import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
 
 export const routes: Routes = [
+  { path: '', component: LandingPageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  //   { path: '**', redirectTo: 'login' }, // or a NotFoundComponent if you have one
+  
 
 
 
@@ -48,9 +50,6 @@ export const routes: Routes = [
       { path: 'course-detail/:courseId', component: CourseDetailComponent },
       { path: 'enrolled', component: EnrolledCoursesComponent },
       { path: 'profile', component: ProfileComponent },
-
-
-      // { path: 'my-courses', component: MyCoursesComponent }
     ]
   },
 

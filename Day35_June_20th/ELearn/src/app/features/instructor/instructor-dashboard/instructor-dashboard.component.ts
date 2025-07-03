@@ -19,6 +19,7 @@ export class InstructorDashboardComponent implements OnInit {
     recentCourses: any[];
   }>;
 
+
   constructor(private instructorService: InstructorService) {}
 
   ngOnInit(): void {

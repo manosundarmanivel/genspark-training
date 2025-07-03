@@ -17,7 +17,7 @@ import { CommonModule } from '@angular/common';
 export class LoginComponent {
   form: FormGroup;
   error = '';
-  loading = false; // 👈 Add this
+  loading = false; 
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +36,7 @@ export class LoginComponent {
       return;
     }
 
-    this.loading = true; // 👈 Start loader
+    this.loading = true; 
 
     this.authService.login({
       username: this.form.value.email,

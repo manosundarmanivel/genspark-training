@@ -188,6 +188,25 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+
+//https
+
+// builder.Services.AddHttpsRedirection(options =>
+// {
+//     options.RedirectStatusCode = StatusCodes.Status307TemporaryRedirect;
+//     options.HttpsPort = 7255;
+// });
+
+// builder.WebHost.ConfigureKestrel(options =>
+// {
+//     options.ListenAnyIP(5295); // HTTP
+//     options.ListenAnyIP(7255, listenOptions =>
+//     {
+//         listenOptions.UseHttps("certs/dev-cert.pfx", "password123");
+//     });
+// });
+
+
 // Swagger
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(o =>
@@ -234,6 +253,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 
@@ -270,3 +290,5 @@ app.MapControllers();
 app.MapHub<NotificationHub>("/notificationHub");
 
 app.Run();
+
+

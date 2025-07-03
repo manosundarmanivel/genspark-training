@@ -4,6 +4,6 @@ import { App } from './app/app';
 import 'zone.js/testing';
 
 bootstrapApplication(App, appConfig)
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err), );
 
 

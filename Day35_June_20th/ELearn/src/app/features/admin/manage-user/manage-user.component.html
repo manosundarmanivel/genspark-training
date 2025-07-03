@@ -1,11 +1,11 @@
 <div class="max-w-7xl mx-auto px-6 py-14 space-y-10 bg-gray-50">
 
-  <!-- Header -->
+ 
   <h2 class="text-3xl font-bold text-gray-800">Manage Users</h2>
 
-  <!-- Search and Filters -->
+
   <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    <!-- Username Search -->
+
     <input
       type="text"
       [(ngModel)]="searchTerm"
@@ -14,7 +14,7 @@
       class="w-full px-4 py-2 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
     />
 
-    <!-- Role Filter -->
+
     <select
       [(ngModel)]="selectedRole"
       (ngModelChange)="onRoleFilterChange($event)"
@@ -24,7 +24,7 @@
       <option *ngFor="let role of uniqueRoles" [value]="role">{{ role }}</option>
     </select>
 
-    <!-- Status Filter -->
+   
     <select
       [(ngModel)]="selectedStatus"
       (ngModelChange)="onStatusFilterChange($event)"
@@ -36,10 +36,10 @@
     </select>
   </div>
 
-  <!-- Users Table -->
+ 
   <div class="overflow-x-auto border border-gray-200 rounded-2xl bg-white shadow-xl">
     <table class="min-w-full table-auto text-sm text-left">
-      <!-- Table Header -->
+   
       <thead class="bg-gray-100 text-gray-600 uppercase text-xs font-semibold">
         <tr>
           <th class="px-6 py-4">Username</th>
@@ -49,12 +49,14 @@
         </tr>
       </thead>
 
-      <!-- Table Body -->
+     
       <tbody class="divide-y divide-gray-100">
-        <tr
-          *ngFor="let u of (filteredUsers$ | async)?.data; trackBy: trackByUserId"
-          class="hover:bg-gray-50 transition"
-        >
+ <ng-container *ngFor="let u of (filteredUsers$ | async)?.data; trackBy: trackByUserId">
+   <tr
+     class="hover:bg-gray-50 transition"
+     *ngIf="u.role?.name !== 'Admin' && u.role !== 'Admin'"
+   >
+
           <td class="px-6 py-4 font-medium text-gray-900">{{ u.username }}</td>
 
           <td class="px-6 py-4 text-gray-600">{{ u.role?.name || u.role }}</td>
@@ -79,6 +81,7 @@
             </button>
           </td>
         </tr>
+        </ng-container>
       </tbody>
     </table>
   </div>
