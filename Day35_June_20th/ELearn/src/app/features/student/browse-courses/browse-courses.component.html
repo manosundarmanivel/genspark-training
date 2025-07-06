@@ -59,29 +59,50 @@
   </div>
 
   <!-- Courses Grid -->
-  <div *ngIf="!state.loading && state.courses.length > 0"
-    class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-    <div *ngFor="let course of state.courses"
-      class="bg-white rounded-xl shadow-sm hover:shadow-lg transition duration-200 overflow-hidden flex flex-col border border-gray-200">
-      
-      <!-- Course Image -->
-      <img [src]="course?.thumbnailUrl ? 'http://localhost:5295/' + course.thumbnailUrl : 'https://static.skillshare.com/uploads/video/thumbnails/02789fe5c46b98db955cd8be0d103bd7/original'"
-        alt="Course Image" class="h-48 w-full object-cover" />
+<div *ngIf="!state.loading && state.courses.length > 0"
+  class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+  <div *ngFor="let course of state.courses"
+    class="bg-white rounded-2xl shadow-md hover:shadow-xl transition duration-300 overflow-hidden flex flex-col border border-gray-200">
+    
+    <!-- Course Thumbnail -->
+    <img [src]="course?.thumbnailUrl ? 'http://localhost:5295/' + course.thumbnailUrl : 'https://static.skillshare.com/uploads/video/thumbnails/02789fe5c46b98db955cd8be0d103bd7/original'"
+      alt="Course Image" class="h-48 w-full object-cover" />
 
-      <!-- Course Content -->
-      <div class="p-5 flex flex-col justify-between flex-1">
-        <div>
-          <h3 class="text-md font-semibold text-gray-800 truncate mb-1">
-            {{ course.title }}
-          </h3>
-          <p class="text-sm text-gray-600 line-clamp-3">{{ course.description }}</p>
+    <!-- Course Content -->
+    <div class="p-5 flex flex-col justify-between flex-1">
+      <!-- Title & Description -->
+      <div>
+        <h3 class="text-lg font-semibold text-gray-800 mb-1 truncate">
+          {{ course.title }}
+        </h3>
+        <p class="text-sm text-gray-600 line-clamp-3 mb-4">
+          {{ course.description }}
+        </p>
+
+        <!-- Metadata Badges -->
+        <div class="flex flex-wrap gap-2 mb-4 text-xs">
+          <span class="inline-flex items-center px-2 py-1 bg-indigo-100 text-indigo-700 rounded-full">
+            
+            {{ course.domain }}
+          </span>
+          <span class="inline-flex items-center px-2 py-1 bg-green-100 text-green-700 rounded-full">
+           
+            {{ course.language }}
+          </span>
+          <span class="inline-flex items-center px-2 py-1 bg-yellow-100 text-yellow-800 rounded-full">
+            
+            {{ course.level }}
+          </span>
         </div>
-
-        <button [routerLink]="['/student-dashboard/course-detail', course.id]"
-          class="mt-4 bg-indigo-600 text-white text-sm px-4 py-2 rounded hover:bg-indigo-700 transition">
-          View Course
-        </button>
       </div>
+
+      <!-- View Button -->
+      <button [routerLink]="['/student-dashboard/course-detail', course.id]"
+        class="mt-auto bg-indigo-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-indigo-700 transition duration-200">
+        View Course
+      </button>
     </div>
   </div>
+</div>
+
 </div>

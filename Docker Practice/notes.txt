@@ -1,0 +1,42 @@
+1. docker build -t hello-node .
+   docker run -p 3000:3000 hello-node
+
+2. docker run -d --name mysql-test -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=testdb -v mydbdata:/var/lib/mysql mysql:latest
+   docker exec -it mysql-test 
+   docker exec -it mysql-test mysql -uroot -proot
+   USE testdb;
+   CREATE TABLE hello (id INT PRIMARY KEY, message VARCHAR(255));
+   INSERT INTO hello VALUES (1, 'Hello Docker!');
+
+   docker stop mysql-test
+   docker rm mysql-test
+
+3. Multi stage build
+    -> build 
+    -> serve
+
+4. docker network create mynet
+   docker run -d --name api --network mynet my-api-image
+   docker run -d --name frontend --network mynet -e API_URL=http://api:3000 my-frontend-image
+
+5. Docker compose
+
+6.docker swarm init
+  docker service create --name nginx-web --replicas 3 -p 8080:80 nginx
+  docker service ls
+  docker service ps nginx-web
+  curl localhost:8080
+
+7. docker service update --image nginx:alpine nginx-web
+8. docker service scale nginx-web=5
+9. docker service create --name webapp --replicas 3 --update-delay 10s httpd
+   docker service update --image httpd:alpine webapp
+
+10. docker service create \
+  --name=viz \
+  --publish=8081:8080/tcp \
+  --constraint=node.role==manager \
+  --mount=type=bind,src=/var/run/docker.sock,dst=/var/run/docker.sock \
+  dockersamples/visualizer
+
+

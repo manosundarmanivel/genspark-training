@@ -32,34 +32,38 @@ namespace ElearnAPI.Services
             return await _repository.GetByUserAsync(userId);
         }
 
-        public async Task MarkAsCompletedAsync(Guid userId, Guid fileId)
+       public async Task MarkAsCompletedAsync(Guid userId, Guid fileId)
+{
+    var progress = await _repository.GetByUserAndFileAsync(userId, fileId);
+
+    Console.WriteLine($"[SERVICE LOG] Progress: {(progress == null ? "null" : $"IsCompleted={progress.IsCompleted}")}");
+
+    if (progress == null)
+    {
+        // First time progress
+        progress = new UserFileProgress
         {
-            var progress = await _repository.GetByUserAndFileAsync(userId, fileId);
+            UserId = userId,
+            UploadedFileId = fileId,
+            IsCompleted = true,
+            CompletedAt = DateTime.UtcNow
+        };
+        await _repository.AddAsync(progress);
+    }
+    else if (!progress.IsCompleted)
+    {
+        // Already exists but not yet completed → update it
+        progress.IsCompleted = true;
+        progress.CompletedAt = DateTime.UtcNow;
+        await _repository.UpdateAsync(progress);
+    }
 
-            Console.WriteLine($"[SERVICE LOG] Progress: {(progress == null ? "null" : $"IsCompleted={progress.IsCompleted}")}");
+ 
+    await _repository.SaveChangesAsync();
 
+    Console.WriteLine($"[SERVICE LOG] Updated Progress: IsCompleted={progress.IsCompleted}, CompletedAt={progress.CompletedAt}");
+}
 
-            if (progress == null)
-            {
-                progress = new UserFileProgress
-                {
-                    UserId = userId,
-                    UploadedFileId = fileId,
-                    IsCompleted = true,
-                    CompletedAt = DateTime.UtcNow
-                };
-                await _repository.AddAsync(progress);
-            }
-
-            // if (progress != null && !progress.IsCompleted)
-            // {
-            //     progress.IsCompleted = true;
-            //     progress.CompletedAt = DateTime.UtcNow;
-
-            //     await _repository.UpdateAsync(progress);
-            //     await _repository.SaveChangesAsync();
-            // }
-        }
 
 
        public async Task<List<Guid>> GetCompletedFileIdsAsync(Guid userId, Guid courseId)

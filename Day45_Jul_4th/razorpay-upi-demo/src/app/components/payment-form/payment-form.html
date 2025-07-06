@@ -1,0 +1,29 @@
+<div class="max-w-md mx-auto mt-10 p-6 bg-white rounded shadow space-y-4">
+  <form [formGroup]="paymentForm" (ngSubmit)="payNow()">
+    <div>
+      <label>Amount (INR)</label>
+      <input formControlName="amount" type="number" class="input" />
+    </div>
+
+    <div>
+      <label>Name</label>
+      <input formControlName="name" type="text" class="input" />
+    </div>
+
+    <div>
+      <label>Email</label>
+      <input formControlName="email" type="email" class="input" />
+    </div>
+
+    <div>
+      <label>Contact Number</label>
+      <input formControlName="contact" type="text" class="input" />
+    </div>
+
+    <button type="submit" [disabled]="paymentForm.invalid || isLoading" class="btn">
+      {{ isLoading ? 'Processing...' : 'Pay with Razorpay' }}
+    </button>
+  </form>
+
+  <div *ngIf="message" class="mt-4 font-semibold text-center">{{ message }}</div>
+</div>

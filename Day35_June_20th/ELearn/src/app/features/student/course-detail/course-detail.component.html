@@ -65,36 +65,56 @@
         </div>
 
         <!-- Playlist Sidebar -->
-        <aside class="w-full lg:w-80 bg-white border rounded-lg shadow-sm p-4">
-          <h3 class="text-lg font-semibold text-gray-700 mb-3">Course Playlist</h3>
-          <div class="divide-y divide-gray-200">
-            <button *ngFor="let file of course.uploadedFiles"
-              class="w-full text-left py-3 px-2 hover:bg-gray-50 rounded transition"
-              [ngClass]="{ 'bg-gray-100': file.id === (selectedVideo?.id || course.firstUploadedFile.id) }"
-              (click)="selectedVideo = file">
-              <div class="flex justify-between items-start">
-                <div>
-                  <p class="text-gray-800 font-medium">{{ file.topic }}</p>
-                  <p class="text-xs text-gray-500 line-clamp-2">{{ file.description }}</p>
-                  <p class="text-[10px] text-gray-400 mt-1">Uploaded: {{ file.uploadedAt | date: 'short' }}</p>
-                  <label *ngIf="course.isEnrolled" class="flex items-center gap-2 text-sm mt-2">
-                    <input type="checkbox" [checked]="file.isCompleted"
-                      [disabled]="file.isCompleted" (click)="$event.stopPropagation()"
-                      (change)="markAsCompleted(file.id)" />
-                    <span class="text-gray-600">Mark as Completed</span>
-                  </label>
-                </div>
-                <div *ngIf="file.isCompleted" class="text-green-600 text-xs font-semibold flex items-center gap-1">
-                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
-                       viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-                  </svg>
-                  Completed
-                </div>
-              </div>
-            </button>
-          </div>
-        </aside>
+       <!-- Playlist Sidebar -->
+<aside class="w-full lg:w-80 bg-white border rounded-lg shadow-sm p-4">
+  <h3 class="text-lg font-semibold text-gray-700 mb-3">Course Playlist</h3>
+  <div class="divide-y divide-gray-200">
+    <button *ngFor="let file of course.uploadedFiles; let i = index"
+      class="w-full text-left py-3 px-2 hover:bg-gray-50 rounded transition relative group"
+      [ngClass]="{
+        'bg-gray-100': file.id === (selectedVideo?.id || course.firstUploadedFile.id),
+        'cursor-not-allowed opacity-50': isLessonLocked(i)
+      }"
+      [disabled]="isLessonLocked(i)"
+      (click)="!isLessonLocked(i) && (selectedVideo = file)">
+      
+      <div class="flex justify-between items-start">
+        <div>
+          <p class="text-gray-800 font-medium">{{ file.topic }}</p>
+          <p class="text-xs text-gray-500 line-clamp-2">{{ file.description }}</p>
+          <p class="text-[10px] text-gray-400 mt-1">Uploaded: {{ file.uploadedAt | date: 'short' }}</p>
+
+          <label *ngIf="course.isEnrolled && !isLessonLocked(i)" class="flex items-center gap-2 text-sm mt-2">
+            <input type="checkbox" [checked]="file.isCompleted"
+              [disabled]="file.isCompleted" (click)="$event.stopPropagation()"
+              (change)="markAsCompleted(file.id)" />
+            <span class="text-gray-600">Mark as Completed</span>
+          </label>
+        </div>
+
+        <div *ngIf="file.isCompleted" class="text-green-600 text-xs font-semibold flex items-center gap-1">
+          <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+          Completed
+        </div>
+      </div>
+
+      <!-- Lock Icon -->
+      <div *ngIf="isLessonLocked(i)" class="absolute top-3 right-3 text-gray-400 group-hover:text-gray-600">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
+             viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M12 11c1.657 0 3-1.343 3-3V6a3 3 0 10-6 0v2c0 1.657 1.343 3 3 3z"/>
+          <path stroke-linecap="round" stroke-linejoin="round"
+                d="M5 11h14v10H5z"/>
+        </svg>
+      </div>
+    </button>
+  </div>
+</aside>
+
       </div>
 
       <!-- Preview Only -->

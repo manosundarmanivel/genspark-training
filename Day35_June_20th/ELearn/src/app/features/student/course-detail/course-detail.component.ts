@@ -57,6 +57,19 @@ export class CourseDetailComponent {
       .subscribe();
   }
 
+  isLessonLocked(fileIndex: number): boolean {
+  const current = this.courseSubject.value;
+  if (!current || !Array.isArray(current.uploadedFiles)) return false;
+
+  // All lessons before this index must be completed
+  for (let i = 0; i < fileIndex; i++) {
+    if (!current.uploadedFiles[i].isCompleted) return true;
+  }
+
+  return false;
+}
+
+  
   getVideoUrl(fileName: string): SafeResourceUrl {
     const url = `http://localhost:5295/api/v1/courses/stream/${fileName}`;
     return this.sanitizer.bypassSecurityTrustResourceUrl(url);

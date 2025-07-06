@@ -23,9 +23,6 @@ export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   
-
-
-
   {
     path: 'instructor-dashboard',
     component: DashboardLayoutComponent,
@@ -39,6 +36,7 @@ export const routes: Routes = [
       { path: 'edit-course/:id', component: EditCourseComponent },
     ]
   },
+  
   {
     path: 'student-dashboard',
     component: DashboardLayoutComponent,
