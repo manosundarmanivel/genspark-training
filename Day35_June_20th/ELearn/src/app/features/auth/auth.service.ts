@@ -20,6 +20,8 @@ export class AuthService {
     
         const payload = JSON.parse(atob(token.split('.')[1]));
         const role = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        const userId = payload['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+        localStorage.setItem('userId', userId);
         localStorage.setItem('role', role); 
       })
     );

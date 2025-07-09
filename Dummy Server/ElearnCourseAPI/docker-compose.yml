@@ -1,0 +1,73 @@
+# version: '3.8'
+
+# services:
+#   postgres:
+#     image: postgres:15
+#     restart: always
+#     environment:
+#       POSTGRES_USER: presidio
+#       POSTGRES_PASSWORD: presidio123
+#       POSTGRES_DB: ElearnDb
+#     ports:
+#       - "5432:5432"
+#     volumes:
+#       - postgres_data:/var/lib/postgresql/data
+
+#   elearnapp:
+#     build: .
+#     depends_on:
+#       - postgres
+#     ports:
+#       - "5295:8080"
+#     environment:
+#       - ASPNETCORE_ENVIRONMENT=Development
+#       - ASPNETCORE_URLS=http://+:8080
+#       - ConnectionStrings__DefaultConnection=Host=postgres;Database=ElearnDb;Username=presidio;Password=presidio123
+
+# volumes:
+#   postgres_data:
+
+
+
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: presidio
+      POSTGRES_PASSWORD: presidio123
+      POSTGRES_DB: ElearnDb
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - elearn-net
+
+  elearnapp:
+    image: elearnapp:latest  
+    depends_on:
+      - postgres
+    ports:
+      - "5295:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+      ConnectionStrings__DefaultConnection: Host=postgres;Database=ElearnDb;Username=presidio;Password=presidio123
+    networks:
+      - elearn-net
+
+volumes:
+  postgres_data:
+
+networks:
+  elearn-net:
+    driver: overlay
+
+# docker swarm init
+# docker stack deploy -c docker-compose.yml elearn
+# docker service scale elearn_elearnapp=3 
+# docker stack rm elearn
+# docker swarm leave
+
+
+

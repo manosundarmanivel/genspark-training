@@ -31,27 +31,34 @@ export class DashboardLayoutComponent {
   showProfileMenu = signal(false);
   showNotifications = signal(false);
   notifications = signal<{ message: string; timestamp: Date }[]>([]);
+  hasUnseenNotifications = signal(false); 
 
-  constructor() {
-  
-    const stored = localStorage.getItem('notifications');
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored) as { message: string; timestamp: string }[];
-        this.notifications.set(
-          parsed.map(n => ({ ...n, timestamp: new Date(n.timestamp) }))
-        );
-      } catch {
-        localStorage.removeItem('notifications');
-      }
+
+constructor() {
+  const stored = localStorage.getItem('notifications');
+  const seen = localStorage.getItem('notificationsSeen');
+
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored) as { message: string; timestamp: string }[];
+      this.notifications.set(
+        parsed.map(n => ({ ...n, timestamp: new Date(n.timestamp) }))
+      );
+    } catch {
+      localStorage.removeItem('notifications');
     }
-
-    if (this.role() === 'student') {
-      this.setupSearch();
-    }
-
-    this.initNotificationConnection();
   }
+
+ 
+  this.hasUnseenNotifications.set(seen !== 'true');
+
+  if (this.role() === 'student') {
+    this.setupSearch();
+  }
+
+  this.initNotificationConnection();
+}
+
 
   logout() {
     this.authService.logout();
@@ -75,9 +82,15 @@ export class DashboardLayoutComponent {
     this.showProfileMenu.set(false);
   }
 
-  toggleNotifications() {
-    this.showNotifications.update(val => !val);
+ toggleNotifications() {
+  this.showNotifications.update(val => !val);
+
+  if (!this.showNotifications()) {
+    this.hasUnseenNotifications.set(false);
+    localStorage.setItem('notificationsSeen', 'true'); // ✅ Seen
   }
+}
+
 
   setupSearch() {
     this.searchControl.valueChanges
@@ -95,16 +108,19 @@ export class DashboardLayoutComponent {
     this.suggestions.set([]);
     this.searchControl.setValue('');
   }
+private addNotification(message: string) {
+  const newNotifications = [
+    { message, timestamp: new Date() },
+    ...this.notifications(),
+  ].slice(0, 10);
 
-  private addNotification(message: string) {
-    const newNotifications = [
-      { message, timestamp: new Date() },
-      ...this.notifications(),
-    ].slice(0, 10);
+  this.notifications.set(newNotifications);
+  localStorage.setItem('notifications', JSON.stringify(newNotifications));
 
-    this.notifications.set(newNotifications);
-    localStorage.setItem('notifications', JSON.stringify(newNotifications));
-  }
+  this.hasUnseenNotifications.set(true);
+  localStorage.setItem('notificationsSeen', 'false'); // ✅ Save seen status
+}
+
 
 initNotificationConnection() {
   const token = this.authService.getToken();
@@ -120,7 +136,7 @@ initNotificationConnection() {
   // Everyone can receive content upload notifications
   this.notificationService.contentNotification$.subscribe(notification => {
     if (notification) {
-      const msg = `"${notification.fileName}" uploaded in "${notification.courseTitle}"`;
+      const msg = `"${notification.topic}" uploaded in "${notification.courseTitle}"`;
       this.addNotification(msg);
     }
   });
@@ -144,6 +160,8 @@ initNotificationConnection() {
           { label: 'Dashboard', path: '/admin-dashboard' },
           { label: 'Manage Users', path: '/admin-dashboard/users' },
           { label: 'Manage Courses', path: '/admin-dashboard/courses' },
+          {label: 'Manage Coupons', path:'/admin-dashboard/coupons'},
+          { label: 'Transactions', path: '/admin-dashboard/transactions' },
         ];
       case 'instructor':
         return [

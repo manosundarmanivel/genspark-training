@@ -135,27 +135,32 @@
     </div>
 
     <!-- Enrolled Students -->
-    <div *ngIf="selectedCourse.enrolledStudents?.length > 0">
-      <h3 class="text-xl font-semibold text-gray-800 mb-3 flex items-center">
-        Enrolled Students
-      </h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div
-          *ngFor="let student of selectedCourse.enrolledStudents"
-          class="flex items-center gap-3 p-3 bg-gray-50 rounded-lg shadow-sm border"
-        >
-          <img
-            [src]="'http://localhost:5295' + student.profilePictureUrl"
-            alt="Student"
-            class="w-12 h-12 rounded-full object-cover"
-          />
-          <div>
-            <p class="font-medium text-gray-800">{{ student.fullName }}</p>
-            <p class="text-gray-500 text-sm">{{ student.username }}</p>
-          </div>
-        </div>
+   <div *ngIf="selectedCourse.enrolledStudents?.length > 0" class="mt-6">
+  <div class="flex items-center justify-between mb-4">
+    <h3 class="text-2xl font-bold text-gray-800">Enrolled Students</h3>
+    <span class="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full">
+      Total: {{ selectedCourse.enrolledStudents.length }}
+    </span>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div
+      *ngFor="let student of selectedCourse.enrolledStudents"
+      class="flex items-center gap-4 p-4 bg-white border border-gray-200 rounded-xl shadow-sm"
+    >
+      <img
+        [src]="'http://localhost:5295' + student.profilePictureUrl"
+        alt="Student profile picture"
+        class="w-14 h-14 rounded-full object-cover border"
+      />
+      <div>
+        <p class="text-lg font-semibold text-gray-900">{{ student.fullName }}</p>
+        <p class="text-sm text-gray-500">{{ student.username }}</p>
       </div>
     </div>
+  </div>
+</div>
+
   </div>
 </div>
 

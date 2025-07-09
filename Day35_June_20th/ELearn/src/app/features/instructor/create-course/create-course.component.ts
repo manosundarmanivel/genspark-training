@@ -68,6 +68,7 @@ export class CreateCourseComponent implements OnInit {
             domain: ['', Validators.required],
             level: ['', Validators.required],
             language: ['', Validators.required],
+            price:['', Validators.required],
             tags: [[]]
         });
 
@@ -143,6 +144,7 @@ export class CreateCourseComponent implements OnInit {
         formData.append('Domain', this.courseForm.value.domain);
         formData.append('Level', this.courseForm.value.level);
         formData.append('Language', this.courseForm.value.language);
+        formData.append('Price', this.courseForm.value.price)
 
         // Append tags properly
         this.tags.forEach(tag => formData.append('Tags', tag));

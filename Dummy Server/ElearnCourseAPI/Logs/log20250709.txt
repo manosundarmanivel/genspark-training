@@ -1,0 +1,830 @@
+2025-07-09 13:32:29.431 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-09 13:32:29.431 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - null null
+2025-07-09 13:32:29.431 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=7 - null null
+2025-07-09 13:32:29.431 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 13:32:29.431 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-09 13:32:29.431 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/courses - null null
+2025-07-09 13:32:29.550 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.550 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.550 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.550 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.550 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.550 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - 204 null null 122.7119ms
+2025-07-09 13:32:29.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 122.7108ms
+2025-07-09 13:32:29.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/courses - 204 null null 122.7001ms
+2025-07-09 13:32:29.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/users - 204 null null 122.0846ms
+2025-07-09 13:32:29.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 122.7114ms
+2025-07-09 13:32:29.552 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=7 - 204 null null 122.7106ms
+2025-07-09 13:32:29.556 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/admin/courses - null null
+2025-07-09 13:32:29.557 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-09 13:32:29.557 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=7 - null null
+2025-07-09 13:32:29.557 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-09 13:32:29.558 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.558 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.558 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.558 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.576 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 13:32:29.576 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.576 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-09 13:32:29.577 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.585 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.585 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.585 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.585 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.598 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.585 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.597 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.597 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.598 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.598 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.585 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.599 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.600 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AdminController.GetAllCourses (ElearnCourseAPI)'
+2025-07-09 13:32:29.601 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 13:32:29.605 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-09 13:32:29.605 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-09 13:32:29.605 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-09 13:32:29.605 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin|Instructor)
+2025-07-09 13:32:29.610 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-09 13:32:29.610 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-09 13:32:29.610 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-09 13:32:29.610 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-09 13:32:29.610 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 401 0 null 53.1282ms
+2025-07-09 13:32:29.610 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 401 0 null 33.6988ms
+2025-07-09 13:32:29.610 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 401 0 null 53.4757ms
+2025-07-09 13:32:29.611 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=7 - 401 0 null 54.1721ms
+2025-07-09 13:32:29.613 +05:30 [INF] Route matched with {action = "GetAllUsers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllUsers(Int32, Int32) on controller ElearnAPI.Controllers.AdminController (ElearnCourseAPI).
+2025-07-09 13:32:29.613 +05:30 [INF] Route matched with {action = "GetAllCourses", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCourses(Int32, Int32) on controller ElearnAPI.Controllers.AdminController (ElearnCourseAPI).
+2025-07-09 13:32:29.655 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - null null
+2025-07-09 13:32:29.655 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - null null
+2025-07-09 13:32:29.656 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.656 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - 204 null null 0.8058ms
+2025-07-09 13:32:29.656 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.657 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - 204 null null 1.2857ms
+2025-07-09 13:32:29.657 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - application/json 107
+2025-07-09 13:32:29.658 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - application/json 107
+2025-07-09 13:32:29.658 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.659 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.659 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:29.663 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.663 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 13:32:29.663 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-09 13:32:29.667 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/8/2025 4:36:50 PM', Current time (UTC): '7/9/2025 8:02:29 AM'.
+2025-07-09 13:32:29.667 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-09 13:32:29.669 +05:30 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(ElearnAPI.DTOs.RefreshTokenDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-07-09 13:32:29.669 +05:30 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(ElearnAPI.DTOs.RefreshTokenDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-07-09 13:32:29.683 +05:30 [INF] Refresh token request
+2025-07-09 13:32:29.683 +05:30 [INF] Refresh token request
+2025-07-09 13:32:29.990 +05:30 [INF] Executed DbCommand (102ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Price", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-09 13:32:29.996 +05:30 [INF] Admin fetched all courses: Page=1, PageSize=10
+2025-07-09 13:32:29.999 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 13:32:30.003 +05:30 [INF] Executed action ElearnAPI.Controllers.AdminController.GetAllCourses (ElearnCourseAPI) in 387.7021ms
+2025-07-09 13:32:30.003 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AdminController.GetAllCourses (ElearnCourseAPI)'
+2025-07-09 13:32:30.004 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/admin/courses - 200 null application/json; charset=utf-8 446.2436ms
+2025-07-09 13:32:30.018 +05:30 [INF] Executed DbCommand (134ms) [Parameters=[@__refreshToken_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."RefreshToken" = @__refreshToken_0 AND u."RefreshTokenExpiryTime" > now() AND NOT (u."IsDeleted")
+LIMIT 1
+2025-07-09 13:32:30.018 +05:30 [INF] Executed DbCommand (135ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Id", u0."Bio", u0."CreatedAt", u0."Email", u0."FullName", u0."IsDeleted", u0."PasswordHash", u0."PhoneNumber", u0."ProfilePictureUrl", u0."RefreshToken", u0."RefreshTokenExpiryTime", u0."RoleId", u0."UpdatedAt", u0."Username", r."Id", r."Name"
+FROM (
+    SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username"
+    FROM "Users" AS u
+    LIMIT @__p_1 OFFSET @__p_0
+) AS u0
+INNER JOIN "Roles" AS r ON u0."RoleId" = r."Id"
+2025-07-09 13:32:30.019 +05:30 [INF] Executed DbCommand (134ms) [Parameters=[@__refreshToken_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."RefreshToken" = @__refreshToken_0 AND u."RefreshTokenExpiryTime" > now() AND NOT (u."IsDeleted")
+LIMIT 1
+2025-07-09 13:32:30.023 +05:30 [INF] Admin fetched all users
+2025-07-09 13:32:30.023 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 13:32:30.025 +05:30 [INF] Executed action ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI) in 410.7051ms
+2025-07-09 13:32:30.025 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 13:32:30.025 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - 200 null application/json; charset=utf-8 448.5559ms
+2025-07-09 13:32:30.091 +05:30 [INF] Executed DbCommand (57ms) [Parameters=[@p13='?' (DbType = Guid), @p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?', @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32), @p11='?' (DbType = DateTime), @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "Bio" = @p0, "CreatedAt" = @p1, "Email" = @p2, "FullName" = @p3, "IsDeleted" = @p4, "PasswordHash" = @p5, "PhoneNumber" = @p6, "ProfilePictureUrl" = @p7, "RefreshToken" = @p8, "RefreshTokenExpiryTime" = @p9, "RoleId" = @p10, "UpdatedAt" = @p11, "Username" = @p12
+WHERE "Id" = @p13;
+2025-07-09 13:32:30.091 +05:30 [INF] Executed DbCommand (57ms) [Parameters=[@p13='?' (DbType = Guid), @p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?', @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32), @p11='?' (DbType = DateTime), @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "Bio" = @p0, "CreatedAt" = @p1, "Email" = @p2, "FullName" = @p3, "IsDeleted" = @p4, "PasswordHash" = @p5, "PhoneNumber" = @p6, "ProfilePictureUrl" = @p7, "RefreshToken" = @p8, "RefreshTokenExpiryTime" = @p9, "RoleId" = @p10, "UpdatedAt" = @p11, "Username" = @p12
+WHERE "Id" = @p13;
+2025-07-09 13:32:30.092 +05:30 [INF] Refresh token generated successfully for user "0197c0b7-dd5c-7420-8e23-ad911bb83c4d"
+2025-07-09 13:32:30.092 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType3`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 13:32:30.092 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI) in 422.3311ms
+2025-07-09 13:32:30.092 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-09 13:32:30.092 +05:30 [INF] Refresh token generated successfully for user "0197c0aa-2c3a-756f-b492-1816bd92c7db"
+2025-07-09 13:32:30.093 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - 200 null application/json; charset=utf-8 434.5345ms
+2025-07-09 13:32:30.093 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType3`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 13:32:30.093 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI) in 423.3749ms
+2025-07-09 13:32:30.094 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-09 13:32:30.094 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - 200 null application/json; charset=utf-8 435.4348ms
+2025-07-09 13:32:30.096 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-09 13:32:30.096 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:30.097 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-09 13:32:30.097 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-07-09 13:32:30.098 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-07-09 13:32:30.100 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Price", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-09 13:32:30.101 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 13:32:30.101 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 3.5526ms
+2025-07-09 13:32:30.101 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-09 13:32:30.102 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 5.9521ms
+2025-07-09 13:32:30.119 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/38f16df6-cebf-478e-bfe2-f4d1264ffc32_hq720.jpg - null null
+2025-07-09 13:32:30.120 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2dba0858-490c-4aa2-9229-f5362de0ca52_graphic.jpg - null null
+2025-07-09 13:32:30.120 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/f14e81b0-7333-4b74-92f8-55a4badb112e_5694494_297a.webp - null null
+2025-07-09 13:32:30.125 +05:30 [INF] The file /2dba0858-490c-4aa2-9229-f5362de0ca52_graphic.jpg was not modified
+2025-07-09 13:32:30.125 +05:30 [INF] The file /38f16df6-cebf-478e-bfe2-f4d1264ffc32_hq720.jpg was not modified
+2025-07-09 13:32:30.125 +05:30 [INF] The file /f14e81b0-7333-4b74-92f8-55a4badb112e_5694494_297a.webp was not modified
+2025-07-09 13:32:30.125 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2dba0858-490c-4aa2-9229-f5362de0ca52_graphic.jpg - 304 null image/jpeg 5.3726ms
+2025-07-09 13:32:30.125 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/f14e81b0-7333-4b74-92f8-55a4badb112e_5694494_297a.webp - 304 null image/webp 5.3829ms
+2025-07-09 13:32:30.125 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/38f16df6-cebf-478e-bfe2-f4d1264ffc32_hq720.jpg - 304 null image/jpeg 6.0622ms
+2025-07-09 13:32:30.129 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=7 - null null
+2025-07-09 13:32:30.129 +05:30 [INF] CORS policy execution successful.
+2025-07-09 13:32:30.129 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.EnrollmentController.GetDailyEnrollmentStats (ElearnCourseAPI)'
+2025-07-09 13:32:30.129 +05:30 [INF] Route matched with {action = "GetDailyEnrollmentStats", controller = "Enrollment"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDailyEnrollmentStats(Int32) on controller ElearnAPI.Controllers.EnrollmentController (ElearnCourseAPI).
+2025-07-09 13:32:30.146 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__sinceDate_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e0."Key" AS "Date", count(*)::int AS "EnrollmentCount"
+FROM (
+    SELECT date_trunc('day', e."EnrolledAt", 'UTC') AS "Key"
+    FROM "Enrollments" AS e
+    WHERE e."EnrolledAt" >= @__sinceDate_0
+) AS e0
+GROUP BY e0."Key"
+ORDER BY e0."Key"
+2025-07-09 13:32:30.146 +05:30 [INF] Fetched daily enrollment stats for past 7 days.
+2025-07-09 13:32:30.147 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[ElearnAPI.DTOs.EnrollmentStatsDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 13:32:30.147 +05:30 [INF] Executed action ElearnAPI.Controllers.EnrollmentController.GetDailyEnrollmentStats (ElearnCourseAPI) in 17.7558ms
+2025-07-09 13:32:30.148 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.EnrollmentController.GetDailyEnrollmentStats (ElearnCourseAPI)'
+2025-07-09 13:32:30.148 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=7 - 200 null application/json; charset=utf-8 18.8902ms
+2025-07-09 13:32:30.149 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/e6f15ae3-72e5-4ee9-ae85-240b5acdf539_excel.png - null null
+2025-07-09 13:32:30.150 +05:30 [INF] The file /e6f15ae3-72e5-4ee9-ae85-240b5acdf539_excel.png was not modified
+2025-07-09 13:32:30.150 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/e6f15ae3-72e5-4ee9-ae85-240b5acdf539_excel.png - 304 null image/png 0.5569ms
+2025-07-09 13:32:30.149 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2b98d7b9-94d8-4415-9773-29a25b3e2c63_Fundamentals-of-Solid-UIUX-Design-copy.webp - null null
+2025-07-09 13:32:30.150 +05:30 [INF] The file /2b98d7b9-94d8-4415-9773-29a25b3e2c63_Fundamentals-of-Solid-UIUX-Design-copy.webp was not modified
+2025-07-09 13:32:30.150 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2b98d7b9-94d8-4415-9773-29a25b3e2c63_Fundamentals-of-Solid-UIUX-Design-copy.webp - 304 null image/webp 1.0971ms
+2025-07-09 13:32:30.156 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/fbf932e9-6862-41ed-b79a-1230feb85848_Full_Stack.png - null null
+2025-07-09 13:32:30.157 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/6a50c131-280a-4e61-a8b3-ecf6510a50fc_product3.jpeg - null null
+2025-07-09 13:32:30.157 +05:30 [INF] The file /fbf932e9-6862-41ed-b79a-1230feb85848_Full_Stack.png was not modified
+2025-07-09 13:32:30.157 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/fbf932e9-6862-41ed-b79a-1230feb85848_Full_Stack.png - 304 null image/png 1.1679ms
+2025-07-09 13:32:30.157 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/22e1f614-4588-4688-a242-b787609b2822_339f8ba2e92c.png - null null
+2025-07-09 13:32:30.158 +05:30 [INF] The file /6a50c131-280a-4e61-a8b3-ecf6510a50fc_product3.jpeg was not modified
+2025-07-09 13:32:30.158 +05:30 [INF] The file /22e1f614-4588-4688-a242-b787609b2822_339f8ba2e92c.png was not modified
+2025-07-09 13:32:30.158 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/6a50c131-280a-4e61-a8b3-ecf6510a50fc_product3.jpeg - 304 null image/jpeg 0.892ms
+2025-07-09 13:32:30.158 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/22e1f614-4588-4688-a242-b787609b2822_339f8ba2e92c.png - 304 null image/png 0.3805ms
+2025-07-09 13:32:30.163 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/419abbf2-2e82-4ede-8259-0357f6d3eacf_product2.jpeg - null null
+2025-07-09 13:32:30.163 +05:30 [INF] The file /419abbf2-2e82-4ede-8259-0357f6d3eacf_product2.jpeg was not modified
+2025-07-09 13:32:30.164 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/419abbf2-2e82-4ede-8259-0357f6d3eacf_product2.jpeg - 304 null image/jpeg 0.4465ms
+2025-07-09 15:21:52.557 +05:30 [INF] Application is shutting down...
+2025-07-09 15:27:01.109 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-09 15:27:01.329 +05:30 [INF] Now listening on: http://localhost:5295
+2025-07-09 15:27:01.331 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-09 15:27:01.331 +05:30 [INF] Hosting environment: Development
+2025-07-09 15:27:01.332 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Day25_June_6th /ElearnCourseAPI
+2025-07-09 15:27:30.842 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 15:27:30.913 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:30.920 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/users - 204 null null 82.0234ms
+2025-07-09 15:27:30.937 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 15:27:30.941 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:30.968 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-09 15:27:31.070 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:31 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 15:27:31.094 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:31 AM'.
+2025-07-09 15:27:31.099 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 15:27:31.127 +05:30 [INF] Route matched with {action = "GetAllUsers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllUsers(Int32, Int32) on controller ElearnAPI.Controllers.AdminController (ElearnCourseAPI).
+2025-07-09 15:27:32.143 +05:30 [WRN] The property 'Course.Tags' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-07-09 15:27:32.485 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-09 15:27:32.487 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-09 15:27:33.019 +05:30 [INF] Executed DbCommand (63ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Id", u0."Bio", u0."CreatedAt", u0."Email", u0."FullName", u0."IsDeleted", u0."PasswordHash", u0."PhoneNumber", u0."ProfilePictureUrl", u0."RefreshToken", u0."RefreshTokenExpiryTime", u0."RoleId", u0."UpdatedAt", u0."Username", r."Id", r."Name"
+FROM (
+    SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username"
+    FROM "Users" AS u
+    LIMIT @__p_1 OFFSET @__p_0
+) AS u0
+INNER JOIN "Roles" AS r ON u0."RoleId" = r."Id"
+2025-07-09 15:27:33.147 +05:30 [INF] Admin fetched all users
+2025-07-09 15:27:33.152 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 15:27:33.212 +05:30 [INF] Executed action ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI) in 2080.616ms
+2025-07-09 15:27:33.213 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 15:27:33.226 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - 200 null application/json; charset=utf-8 2289.952ms
+2025-07-09 15:27:33.852 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-09 15:27:33.853 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:33.854 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 1.3517ms
+2025-07-09 15:27:33.870 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-09 15:27:33.871 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:33.875 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 15:27:33.877 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:33.887 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:33 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 15:27:33.887 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:33 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 15:27:33.890 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:33 AM'.
+2025-07-09 15:27:33.890 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:33 AM'.
+2025-07-09 15:27:33.891 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 15:27:33.898 +05:30 [INF] Route matched with {action = "GetAllUsers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllUsers(Int32, Int32) on controller ElearnAPI.Controllers.AdminController (ElearnCourseAPI).
+2025-07-09 15:27:33.903 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-09 15:27:33.912 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-09 15:27:33.912 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 401 0 null 42.109ms
+2025-07-09 15:27:33.982 +05:30 [INF] Executed DbCommand (38ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Id", u0."Bio", u0."CreatedAt", u0."Email", u0."FullName", u0."IsDeleted", u0."PasswordHash", u0."PhoneNumber", u0."ProfilePictureUrl", u0."RefreshToken", u0."RefreshTokenExpiryTime", u0."RoleId", u0."UpdatedAt", u0."Username", r."Id", r."Name"
+FROM (
+    SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username"
+    FROM "Users" AS u
+    LIMIT @__p_1 OFFSET @__p_0
+) AS u0
+INNER JOIN "Roles" AS r ON u0."RoleId" = r."Id"
+2025-07-09 15:27:33.985 +05:30 [INF] Admin fetched all users
+2025-07-09 15:27:33.986 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 15:27:33.986 +05:30 [INF] Executed action ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI) in 87.8897ms
+2025-07-09 15:27:33.987 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 15:27:33.987 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - 200 null application/json; charset=utf-8 111.6026ms
+2025-07-09 15:27:36.583 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/courses - null null
+2025-07-09 15:27:36.583 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:36.583 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 15:27:36.584 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/courses - 204 null null 1.0971ms
+2025-07-09 15:27:36.584 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:36.584 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/admin/users - 204 null null 0.6728ms
+2025-07-09 15:27:36.585 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/admin/courses - null null
+2025-07-09 15:27:36.586 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - null null
+2025-07-09 15:27:36.586 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:36.586 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:36.587 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:36 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 15:27:36.587 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:36 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 15:27:36.588 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:36 AM'.
+2025-07-09 15:27:36.589 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:36 AM'.
+2025-07-09 15:27:36.590 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AdminController.GetAllCourses (ElearnCourseAPI)'
+2025-07-09 15:27:36.590 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 15:27:36.590 +05:30 [INF] Route matched with {action = "GetAllUsers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllUsers(Int32, Int32) on controller ElearnAPI.Controllers.AdminController (ElearnCourseAPI).
+2025-07-09 15:27:36.597 +05:30 [INF] Route matched with {action = "GetAllCourses", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllCourses(Int32, Int32) on controller ElearnAPI.Controllers.AdminController (ElearnCourseAPI).
+2025-07-09 15:27:36.674 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT u0."Id", u0."Bio", u0."CreatedAt", u0."Email", u0."FullName", u0."IsDeleted", u0."PasswordHash", u0."PhoneNumber", u0."ProfilePictureUrl", u0."RefreshToken", u0."RefreshTokenExpiryTime", u0."RoleId", u0."UpdatedAt", u0."Username", r."Id", r."Name"
+FROM (
+    SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username"
+    FROM "Users" AS u
+    LIMIT @__p_1 OFFSET @__p_0
+) AS u0
+INNER JOIN "Roles" AS r ON u0."RoleId" = r."Id"
+2025-07-09 15:27:36.674 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-09 15:27:36.675 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2025-07-09 15:27:36.676 +05:30 [INF] Admin fetched all users
+2025-07-09 15:27:36.676 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 15:27:36.676 +05:30 [INF] Executed action ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI) in 86.0659ms
+2025-07-09 15:27:36.677 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AdminController.GetAllUsers (ElearnCourseAPI)'
+2025-07-09 15:27:36.677 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/admin/users - 200 null application/json; charset=utf-8 91.1874ms
+2025-07-09 15:27:36.700 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Price", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-09 15:27:36.753 +05:30 [INF] Admin fetched all courses: Page=1, PageSize=10
+2025-07-09 15:27:36.754 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-09 15:27:36.775 +05:30 [INF] Executed action ElearnAPI.Controllers.AdminController.GetAllCourses (ElearnCourseAPI) in 178.0792ms
+2025-07-09 15:27:36.775 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AdminController.GetAllCourses (ElearnCourseAPI)'
+2025-07-09 15:27:36.775 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/admin/courses - 200 null application/json; charset=utf-8 190.0067ms
+2025-07-09 15:27:38.800 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/transactions - null null
+2025-07-09 15:27:38.801 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:38.801 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/transactions - 204 null null 0.7967ms
+2025-07-09 15:27:38.802 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/transactions - null null
+2025-07-09 15:27:38.803 +05:30 [INF] CORS policy execution successful.
+2025-07-09 15:27:38.803 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:38 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-09 15:27:38.804 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/9/2025 8:32:30 AM', Current time (UTC): '7/9/2025 9:57:38 AM'.
+2025-07-09 15:27:38.804 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.TransactionsController.GetAll (ElearnCourseAPI)'
+2025-07-09 15:27:38.810 +05:30 [INF] Route matched with {action = "GetAll", controller = "Transactions"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll() on controller ElearnAPI.Controllers.TransactionsController (ElearnCourseAPI).
+2025-07-09 15:27:38.851 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT t."Id", t."Amount", t."CourseId", t."CreatedAt", t."Currency", t."OrderId", t."PaymentId", t."Status", t."UserId", u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Price", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Transactions" AS t
+INNER JOIN "Users" AS u ON t."UserId" = u."Id"
+INNER JOIN "Courses" AS c ON t."CourseId" = c."Id"
+ORDER BY t."CreatedAt" DESC
+2025-07-09 15:27:38.878 +05:30 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[ElearnAPI.DTOs.TransactionDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-09 15:27:38.883 +05:30 [INF] Executed action ElearnAPI.Controllers.TransactionsController.GetAll (ElearnCourseAPI) in 73.6713ms
+2025-07-09 15:27:38.884 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.TransactionsController.GetAll (ElearnCourseAPI)'
+2025-07-09 15:27:38.884 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/transactions - 200 null application/json; charset=utf-8 81.4393ms
+2025-07-09 15:37:09.265 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-09 15:37:09.490 +05:30 [INF] Now listening on: http://localhost:5295
+2025-07-09 15:37:09.493 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-09 15:37:09.494 +05:30 [INF] Hosting environment: Development
+2025-07-09 15:37:09.494 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Dummy Server/ElearnCourseAPI
+2025-07-09 15:38:09.513 +05:30 [INF] Application is shutting down...
+2025-07-09 15:39:10.219 +05:30 [WRN] The property 'Course.Tags' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-07-09 15:39:10.320 +05:30 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Course'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:39:10.321 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:39:48.986 +05:30 [WRN] The property 'Course.Tags' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-07-09 15:39:49.083 +05:30 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Course'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:39:49.084 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:40:10.767 +05:30 [WRN] The property 'Course.Tags' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-07-09 15:40:10.879 +05:30 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Course'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:40:10.880 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:42:37.270 +05:30 [WRN] The property 'Course.Tags' is a collection or enumeration type with a value converter but with no value comparer. Set a value comparer to ensure the collection/enumeration elements are compared correctly.
+2025-07-09 15:42:37.383 +05:30 [WRN] No store type was specified for the decimal property 'Price' on entity type 'Course'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:42:37.384 +05:30 [WRN] No store type was specified for the decimal property 'Amount' on entity type 'Transaction'. This will cause values to be silently truncated if they do not fit in the default precision and scale. Explicitly specify the SQL server column type that can accommodate all the values in 'OnModelCreating' using 'HasColumnType', specify precision and scale using 'HasPrecision', or configure a value converter using 'HasConversion'.
+2025-07-09 15:42:42.276 +05:30 [INF] Executed DbCommand (263ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 15:42:42.293 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-09 15:42:42.555 +05:30 [INF] Executed DbCommand (258ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-07-09 15:42:43.129 +05:30 [INF] Executed DbCommand (246ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-07-09 15:42:43.862 +05:30 [INF] Executed DbCommand (239ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 15:42:44.101 +05:30 [INF] Executed DbCommand (238ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 15:42:44.357 +05:30 [INF] Executed DbCommand (251ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 15:42:44.373 +05:30 [INF] Applying migration '20250609170045_FixUserRoleNavigation'.
+2025-07-09 15:42:44.674 +05:30 [INF] Executed DbCommand (240ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Roles] (
+    [Id] integer NOT NULL,
+    [Name] text NOT NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);
+2025-07-09 15:42:44.917 +05:30 [ERR] Failed executing DbCommand (242ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uuid NOT NULL,
+    [Username] character varying(50) NOT NULL,
+    [PasswordHash] text NOT NULL,
+    [RoleId] integer NOT NULL,
+    [RefreshToken] text NULL,
+    [RefreshTokenExpiryTime] timestamp with time zone NULL,
+    [IsDeleted] boolean NOT NULL DEFAULT CAST(0 AS boolean),
+    [CreatedAt] timestamp with time zone NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    [UpdatedAt] timestamp with time zone NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 15:57:31.084 +05:30 [INF] Executed DbCommand (245ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 15:57:31.136 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-09 15:57:31.383 +05:30 [INF] Executed DbCommand (243ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-07-09 15:57:31.929 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-07-09 15:57:32.626 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 15:57:32.857 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 15:57:33.094 +05:30 [INF] Executed DbCommand (232ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 15:57:33.109 +05:30 [INF] Applying migration '20250609170045_FixUserRoleNavigation'.
+2025-07-09 15:57:33.403 +05:30 [INF] Executed DbCommand (233ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Roles] (
+    [Id] integer NOT NULL,
+    [Name] text NOT NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);
+2025-07-09 15:57:33.638 +05:30 [ERR] Failed executing DbCommand (233ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uuid NOT NULL,
+    [Username] character varying(50) NOT NULL,
+    [PasswordHash] text NOT NULL,
+    [RoleId] integer NOT NULL,
+    [RefreshToken] text NULL,
+    [RefreshTokenExpiryTime] timestamp with time zone NULL,
+    [IsDeleted] boolean NOT NULL DEFAULT CAST(0 AS boolean),
+    [CreatedAt] timestamp with time zone NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    [UpdatedAt] timestamp with time zone NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 16:01:17.351 +05:30 [INF] Executed DbCommand (262ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:01:17.666 +05:30 [INF] Executed DbCommand (253ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:01:17.929 +05:30 [INF] Executed DbCommand (240ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:02:08.761 +05:30 [INF] Executed DbCommand (260ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:02:09.077 +05:30 [INF] Executed DbCommand (255ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:02:09.338 +05:30 [INF] Executed DbCommand (238ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:02:27.224 +05:30 [INF] Executed DbCommand (256ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:02:27.285 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-09 16:02:27.539 +05:30 [INF] Executed DbCommand (251ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-07-09 16:02:28.113 +05:30 [INF] Executed DbCommand (235ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-07-09 16:02:28.827 +05:30 [INF] Executed DbCommand (234ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:02:29.062 +05:30 [INF] Executed DbCommand (235ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:02:29.301 +05:30 [INF] Executed DbCommand (235ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:02:29.316 +05:30 [INF] Applying migration '20250609170045_FixUserRoleNavigation'.
+2025-07-09 16:02:29.610 +05:30 [INF] Executed DbCommand (237ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Roles] (
+    [Id] integer NOT NULL,
+    [Name] text NOT NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);
+2025-07-09 16:02:29.849 +05:30 [ERR] Failed executing DbCommand (238ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uuid NOT NULL,
+    [Username] character varying(50) NOT NULL,
+    [PasswordHash] text NOT NULL,
+    [RoleId] integer NOT NULL,
+    [RefreshToken] text NULL,
+    [RefreshTokenExpiryTime] timestamp with time zone NULL,
+    [IsDeleted] boolean NOT NULL DEFAULT CAST(0 AS boolean),
+    [CreatedAt] timestamp with time zone NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    [UpdatedAt] timestamp with time zone NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 16:05:53.631 +05:30 [INF] Executed DbCommand (258ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:05:53.946 +05:30 [INF] Executed DbCommand (251ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:05:54.204 +05:30 [INF] Executed DbCommand (236ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:06:12.299 +05:30 [INF] Executed DbCommand (266ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:06:12.358 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-09 16:06:12.622 +05:30 [INF] Executed DbCommand (260ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-07-09 16:06:13.201 +05:30 [INF] Executed DbCommand (246ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-07-09 16:06:13.944 +05:30 [INF] Executed DbCommand (244ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:06:14.190 +05:30 [INF] Executed DbCommand (244ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:06:14.439 +05:30 [INF] Executed DbCommand (245ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:06:14.454 +05:30 [INF] Applying migration '20250609170045_FixUserRoleNavigation'.
+2025-07-09 16:06:14.759 +05:30 [INF] Executed DbCommand (248ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Roles] (
+    [Id] integer NOT NULL,
+    [Name] text NOT NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);
+2025-07-09 16:06:15.007 +05:30 [ERR] Failed executing DbCommand (247ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uuid NOT NULL,
+    [Username] character varying(50) NOT NULL,
+    [PasswordHash] text NOT NULL,
+    [RoleId] integer NOT NULL,
+    [RefreshToken] text NULL,
+    [RefreshTokenExpiryTime] timestamp with time zone NULL,
+    [IsDeleted] boolean NOT NULL DEFAULT CAST(0 AS boolean),
+    [CreatedAt] timestamp with time zone NOT NULL DEFAULT (CURRENT_TIMESTAMP),
+    [UpdatedAt] timestamp with time zone NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 16:07:17.504 +05:30 [INF] Executed DbCommand (259ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:07:17.947 +05:30 [INF] Executed DbCommand (366ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:07:18.438 +05:30 [INF] Executed DbCommand (241ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:08:01.955 +05:30 [INF] Executed DbCommand (252ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:08:02.017 +05:30 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-07-09 16:08:02.265 +05:30 [INF] Executed DbCommand (245ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_getapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session', @LockMode = 'Exclusive';
+SELECT @result
+2025-07-09 16:08:02.813 +05:30 [INF] Executed DbCommand (229ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF OBJECT_ID(N'[__EFMigrationsHistory]') IS NULL
+BEGIN
+    CREATE TABLE [__EFMigrationsHistory] (
+        [MigrationId] nvarchar(150) NOT NULL,
+        [ProductVersion] nvarchar(32) NOT NULL,
+        CONSTRAINT [PK___EFMigrationsHistory] PRIMARY KEY ([MigrationId])
+    );
+END;
+2025-07-09 16:08:03.559 +05:30 [INF] Executed DbCommand (274ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT 1
+2025-07-09 16:08:03.790 +05:30 [INF] Executed DbCommand (230ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT OBJECT_ID(N'[__EFMigrationsHistory]');
+2025-07-09 16:08:04.023 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [MigrationId], [ProductVersion]
+FROM [__EFMigrationsHistory]
+ORDER BY [MigrationId];
+2025-07-09 16:08:04.036 +05:30 [INF] Applying migration '20250709103751_InitialCre'.
+2025-07-09 16:08:04.394 +05:30 [INF] Executed DbCommand (278ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [CouponCodes] (
+    [Id] uniqueidentifier NOT NULL,
+    [Code] nvarchar(450) NOT NULL,
+    [DiscountAmount] decimal(10,2) NULL,
+    [DiscountPercentage] decimal(5,2) NULL,
+    [ExpiryDate] datetime2 NOT NULL,
+    [UsageLimit] int NOT NULL,
+    [TimesUsed] int NOT NULL,
+    [IsActive] bit NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    CONSTRAINT [PK_CouponCodes] PRIMARY KEY ([Id])
+);
+2025-07-09 16:08:04.626 +05:30 [INF] Executed DbCommand (232ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Roles] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NOT NULL,
+    CONSTRAINT [PK_Roles] PRIMARY KEY ([Id])
+);
+2025-07-09 16:08:04.861 +05:30 [INF] Executed DbCommand (235ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Users] (
+    [Id] uniqueidentifier NOT NULL,
+    [Username] nvarchar(50) NOT NULL,
+    [PasswordHash] nvarchar(max) NOT NULL,
+    [RoleId] int NOT NULL,
+    [RefreshToken] nvarchar(max) NULL,
+    [RefreshTokenExpiryTime] datetime2 NULL,
+    [IsDeleted] bit NOT NULL DEFAULT CAST(0 AS bit),
+    [CreatedAt] datetime2 NOT NULL DEFAULT (GETUTCDATE()),
+    [UpdatedAt] datetime2 NULL,
+    [FullName] nvarchar(max) NULL,
+    [Email] nvarchar(max) NULL,
+    [PhoneNumber] nvarchar(max) NULL,
+    [ProfilePictureUrl] nvarchar(max) NULL,
+    [Bio] nvarchar(max) NULL,
+    CONSTRAINT [PK_Users] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Users_Roles_RoleId] FOREIGN KEY ([RoleId]) REFERENCES [Roles] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 16:08:05.096 +05:30 [INF] Executed DbCommand (234ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Courses] (
+    [Id] uniqueidentifier NOT NULL,
+    [Title] nvarchar(100) NOT NULL,
+    [Description] nvarchar(500) NULL,
+    [ThumbnailUrl] nvarchar(500) NULL,
+    [Domain] nvarchar(max) NOT NULL,
+    [Level] nvarchar(50) NULL,
+    [Language] nvarchar(50) NULL,
+    [Tags] nvarchar(max) NOT NULL,
+    [Price] decimal(18,2) NOT NULL,
+    [InstructorId] uniqueidentifier NOT NULL,
+    [IsDeleted] bit NOT NULL DEFAULT CAST(0 AS bit),
+    [CreatedAt] datetime2 NOT NULL DEFAULT (GETUTCDATE()),
+    [UpdatedAt] datetime2 NULL,
+    CONSTRAINT [PK_Courses] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Courses_Users_InstructorId] FOREIGN KEY ([InstructorId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 16:08:05.330 +05:30 [INF] Executed DbCommand (234ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Enrollments] (
+    [UserId] uniqueidentifier NOT NULL,
+    [CourseId] uniqueidentifier NOT NULL,
+    [EnrolledAt] datetime2 NOT NULL,
+    CONSTRAINT [PK_Enrollments] PRIMARY KEY ([UserId], [CourseId]),
+    CONSTRAINT [FK_Enrollments_Courses_CourseId] FOREIGN KEY ([CourseId]) REFERENCES [Courses] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_Enrollments_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);
+2025-07-09 16:08:05.622 +05:30 [INF] Executed DbCommand (292ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [Transactions] (
+    [Id] uniqueidentifier NOT NULL,
+    [PaymentId] nvarchar(max) NOT NULL,
+    [OrderId] nvarchar(max) NOT NULL,
+    [UserId] uniqueidentifier NOT NULL,
+    [CourseId] uniqueidentifier NOT NULL,
+    [Amount] decimal(18,2) NOT NULL,
+    [Currency] nvarchar(max) NOT NULL,
+    [Status] nvarchar(max) NOT NULL,
+    [CreatedAt] datetime2 NOT NULL,
+    CONSTRAINT [PK_Transactions] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Transactions_Courses_CourseId] FOREIGN KEY ([CourseId]) REFERENCES [Courses] ([Id]) ON DELETE NO ACTION,
+    CONSTRAINT [FK_Transactions_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE NO ACTION
+);
+2025-07-09 16:08:05.856 +05:30 [INF] Executed DbCommand (233ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [UploadedFiles] (
+    [Id] uniqueidentifier NOT NULL,
+    [FileName] nvarchar(max) NOT NULL,
+    [FileType] nvarchar(10) NULL,
+    [UploadedAt] datetime2 NOT NULL DEFAULT (GETUTCDATE()),
+    [CourseId] uniqueidentifier NOT NULL,
+    [Path] nvarchar(max) NOT NULL,
+    [Topic] nvarchar(150) NOT NULL,
+    [Description] nvarchar(1000) NULL,
+    CONSTRAINT [PK_UploadedFiles] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UploadedFiles_Courses_CourseId] FOREIGN KEY ([CourseId]) REFERENCES [Courses] ([Id]) ON DELETE CASCADE
+);
+2025-07-09 16:08:06.090 +05:30 [INF] Executed DbCommand (234ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE [UserFileProgresses] (
+    [Id] uniqueidentifier NOT NULL,
+    [UserId] uniqueidentifier NOT NULL,
+    [UploadedFileId] uniqueidentifier NOT NULL,
+    [IsCompleted] bit NOT NULL DEFAULT CAST(0 AS bit),
+    [CompletedAt] datetime2 NULL,
+    CONSTRAINT [PK_UserFileProgresses] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_UserFileProgresses_UploadedFiles_UploadedFileId] FOREIGN KEY ([UploadedFileId]) REFERENCES [UploadedFiles] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_UserFileProgresses_Users_UserId] FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id]) ON DELETE CASCADE
+);
+2025-07-09 16:08:06.350 +05:30 [INF] Executed DbCommand (260ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Roles]'))
+    SET IDENTITY_INSERT [Roles] ON;
+INSERT INTO [Roles] ([Id], [Name])
+VALUES (1, N'Admin'),
+(2, N'Instructor'),
+(3, N'Student');
+IF EXISTS (SELECT * FROM [sys].[identity_columns] WHERE [name] IN (N'Id', N'Name') AND [object_id] = OBJECT_ID(N'[Roles]'))
+    SET IDENTITY_INSERT [Roles] OFF;
+2025-07-09 16:08:06.583 +05:30 [INF] Executed DbCommand (232ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX [IX_CouponCodes_Code] ON [CouponCodes] ([Code]);
+2025-07-09 16:08:06.815 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Courses_InstructorId] ON [Courses] ([InstructorId]);
+2025-07-09 16:08:07.046 +05:30 [INF] Executed DbCommand (230ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Enrollments_CourseId] ON [Enrollments] ([CourseId]);
+2025-07-09 16:08:07.277 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Transactions_CourseId] ON [Transactions] ([CourseId]);
+2025-07-09 16:08:07.522 +05:30 [INF] Executed DbCommand (245ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Transactions_UserId] ON [Transactions] ([UserId]);
+2025-07-09 16:08:07.754 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UploadedFiles_CourseId] ON [UploadedFiles] ([CourseId]);
+2025-07-09 16:08:07.986 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UserFileProgresses_UploadedFileId] ON [UserFileProgresses] ([UploadedFileId]);
+2025-07-09 16:08:08.218 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_UserFileProgresses_UserId] ON [UserFileProgresses] ([UserId]);
+2025-07-09 16:08:08.449 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX [IX_Users_RoleId] ON [Users] ([RoleId]);
+2025-07-09 16:08:08.683 +05:30 [INF] Executed DbCommand (234ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20250709103751_InitialCre', N'9.0.7');
+2025-07-09 16:08:09.207 +05:30 [INF] Executed DbCommand (289ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+DECLARE @result int;
+EXEC @result = sp_releaseapplock @Resource = '__EFMigrationsLock', @LockOwner = 'Session';
+SELECT @result
+2025-07-09 16:08:55.422 +05:30 [INF] User profile is available. Using '/Users/presidio/.aspnet/DataProtection-Keys' as key repository; keys will not be encrypted at rest.
+2025-07-09 16:08:55.579 +05:30 [INF] Now listening on: http://localhost:5295
+2025-07-09 16:08:55.582 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2025-07-09 16:08:55.582 +05:30 [INF] Hosting environment: Development
+2025-07-09 16:08:55.582 +05:30 [INF] Content root path: /Users/presidio/Desktop/genspark-training/Dummy Server/ElearnCourseAPI
+2025-07-09 16:09:11.454 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.html - null null
+2025-07-09 16:09:11.653 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.html - 200 null text/html;charset=utf-8 199.5728ms
+2025-07-09 16:09:11.730 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-bundle.js - null null
+2025-07-09 16:09:11.730 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui.css - null null
+2025-07-09 16:09:11.730 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.css - null null
+2025-07-09 16:09:11.730 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/index.js - null null
+2025-07-09 16:09:11.730 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-standalone-preset.js - null null
+2025-07-09 16:09:11.733 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.js - 200 null application/javascript;charset=utf-8 3.7679ms
+2025-07-09 16:09:11.746 +05:30 [INF] Sending file. Request path: '/index.css'. Physical path: 'N/A'
+2025-07-09 16:09:11.746 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/index.css - 200 202 text/css 17.1464ms
+2025-07-09 16:09:11.753 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2025-07-09 16:09:11.753 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2025-07-09 16:09:11.755 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui.css - 200 154949 text/css 25.7401ms
+2025-07-09 16:09:11.755 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-standalone-preset.js - 200 229223 text/javascript 25.7401ms
+2025-07-09 16:09:11.761 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2025-07-09 16:09:11.762 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/swagger-ui-bundle.js - 200 1484234 text/javascript 32.1861ms
+2025-07-09 16:09:12.096 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - null null
+2025-07-09 16:09:12.106 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/swagger/favicon-32x32.png - null null
+2025-07-09 16:09:12.107 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2025-07-09 16:09:12.108 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/favicon-32x32.png - 200 628 image/png 1.3253ms
+2025-07-09 16:09:12.281 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 184.0612ms
+2025-07-09 16:09:30.250 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - application/json 69
+2025-07-09 16:09:30.257 +05:30 [INF] CORS policy execution failed.
+2025-07-09 16:09:30.257 +05:30 [INF] Request origin http://localhost:5295 does not have permission to access the resource.
+2025-07-09 16:09:30.259 +05:30 [WRN] Failed to determine the https port for redirect.
+2025-07-09 16:09:30.301 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-07-09 16:09:30.322 +05:30 [INF] Route matched with {action = "Register", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Register(ElearnAPI.DTOs.RegisterDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-07-09 16:09:30.626 +05:30 [INF] Registering user string with role admin
+2025-07-09 16:09:36.671 +05:30 [INF] Executed DbCommand (292ms) [Parameters=[@__username_0='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Bio], [u].[CreatedAt], [u].[Email], [u].[FullName], [u].[IsDeleted], [u].[PasswordHash], [u].[PhoneNumber], [u].[ProfilePictureUrl], [u].[RefreshToken], [u].[RefreshTokenExpiryTime], [u].[RoleId], [u].[UpdatedAt], [u].[Username], [r].[Id], [r].[Name]
+FROM [Users] AS [u]
+INNER JOIN [Roles] AS [r] ON [u].[RoleId] = [r].[Id]
+WHERE [u].[Username] = @__username_0
+2025-07-09 16:09:36.966 +05:30 [INF] Executed DbCommand (254ms) [Parameters=[@__name_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [r].[Id], [r].[Name]
+FROM [Roles] AS [r]
+WHERE [r].[Name] = @__name_0
+2025-07-09 16:09:37.730 +05:30 [INF] Executed DbCommand (250ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (Size = 4000), @p2='?' (DbType = DateTime2), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (DbType = DateTime2), @p10='?' (DbType = Int32), @p11='?' (DbType = DateTime2), @p12='?' (Size = 50)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Users] ([Id], [Bio], [CreatedAt], [Email], [FullName], [PasswordHash], [PhoneNumber], [ProfilePictureUrl], [RefreshToken], [RefreshTokenExpiryTime], [RoleId], [UpdatedAt], [Username])
+OUTPUT INSERTED.[IsDeleted]
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2025-07-09 16:09:37.760 +05:30 [INF] User string registered successfully
+2025-07-09 16:09:37.765 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[ElearnAPI.DTOs.UserDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-07-09 16:09:37.794 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI) in 7463.3936ms
+2025-07-09 16:09:37.794 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Register (ElearnCourseAPI)'
+2025-07-09 16:09:37.802 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/register - 200 null application/json; charset=utf-8 7548.224ms

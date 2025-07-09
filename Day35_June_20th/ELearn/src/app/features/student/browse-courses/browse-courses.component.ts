@@ -16,6 +16,7 @@ interface Course {
   level: string;
   tags: string[];
   domain: string;
+  price: number;
   thumbnailUrl: string;
 }
 

@@ -20,6 +20,11 @@ namespace ElearnAPI.Data
         public DbSet<UserFileProgress> UserFileProgresses { get; set; }
 
 
+        public DbSet<CouponCode> CouponCodes { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Role
@@ -121,6 +126,26 @@ namespace ElearnAPI.Data
                       .HasForeignKey(e => e.UploadedFileId)
                       .OnDelete(DeleteBehavior.Cascade);
             });
+
+            modelBuilder.Entity<CouponCode>(entity =>
+{
+    entity.HasIndex(c => c.Code).IsUnique();
+    entity.Property(c => c.DiscountAmount).HasColumnType("decimal(10,2)");
+    entity.Property(c => c.DiscountPercentage).HasColumnType("decimal(5,2)");
+});
+
+            modelBuilder.Entity<Transaction>()
+                   .HasOne(t => t.User)
+                   .WithMany() 
+                   .HasForeignKey(t => t.UserId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Transaction>()
+                .HasOne(t => t.Course)
+                .WithMany() 
+                .HasForeignKey(t => t.CourseId)
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             base.OnModelCreating(modelBuilder);
         }

@@ -1,0 +1,267 @@
+2025-07-06 12:03:00.453 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-06 12:03:00.455 +05:30 [INF] Connection id "0HNDQB2F6ROUU", Request id "0HNDQB2F6ROUU:00000001": the application aborted the connection.
+2025-07-06 12:03:00.583 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:00.589 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 138.4628ms
+2025-07-06 12:03:00.601 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-06 12:03:00.605 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:00.617 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-06 12:03:00.617 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=opN8pECVF5jURub-LhndQw&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTdjMGI3LWRkNWMtNzQyMC04ZTIzLWFkOTExYmI4M2M0ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NTE1NjUzMTIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.NSjFK1PiWn5ez-H3ZZQQi3mez5KTrrN_j8v_6vYiy_8 - 101 null null 1377034.4803ms
+2025-07-06 12:03:00.682 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:00 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 12:03:00.829 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:00 AM'.
+2025-07-06 12:03:00.836 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-06 12:03:00.864 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-06 12:03:00.864 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 401 0 null 263.8196ms
+2025-07-06 12:03:01.988 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-06 12:03:01.989 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:01.989 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.5227ms
+2025-07-06 12:03:01.990 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-06 12:03:01.990 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:01.991 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:01 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 12:03:01.992 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:01 AM'.
+2025-07-06 12:03:01.992 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-06 12:03:01.993 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-06 12:03:01.993 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 401 0 null 3.3655ms
+2025-07-06 12:03:02.022 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:03:02.023 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:02.023 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - 204 null null 0.9989ms
+2025-07-06 12:03:02.024 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:03:02.025 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:02.027 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:02 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 12:03:02.028 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:02 AM'.
+2025-07-06 12:03:02.029 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-06 12:03:02.029 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-06 12:03:02.029 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 401 0 null 4.4987ms
+2025-07-06 12:03:02.040 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - null null
+2025-07-06 12:03:02.040 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:02.040 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - 204 null null 0.3799ms
+2025-07-06 12:03:02.041 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - application/json 107
+2025-07-06 12:03:02.042 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:02.043 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:02 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 12:03:02.043 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/3/2025 5:55:12 PM', Current time (UTC): '7/6/2025 6:33:02 AM'.
+2025-07-06 12:03:02.044 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-06 12:03:02.067 +05:30 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(ElearnAPI.DTOs.RefreshTokenDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-07-06 12:03:02.112 +05:30 [INF] Refresh token request
+2025-07-06 12:03:02.206 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__refreshToken_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."RefreshToken" = @__refreshToken_0 AND u."RefreshTokenExpiryTime" > now() AND NOT (u."IsDeleted")
+LIMIT 1
+2025-07-06 12:03:02.277 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p13='?' (DbType = Guid), @p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?', @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32), @p11='?' (DbType = DateTime), @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "Bio" = @p0, "CreatedAt" = @p1, "Email" = @p2, "FullName" = @p3, "IsDeleted" = @p4, "PasswordHash" = @p5, "PhoneNumber" = @p6, "ProfilePictureUrl" = @p7, "RefreshToken" = @p8, "RefreshTokenExpiryTime" = @p9, "RoleId" = @p10, "UpdatedAt" = @p11, "Username" = @p12
+WHERE "Id" = @p13;
+2025-07-06 12:03:02.279 +05:30 [INF] Refresh token generated successfully for user "0197c0b7-dd5c-7420-8e23-ad911bb83c4d"
+2025-07-06 12:03:02.279 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType3`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-06 12:03:02.281 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI) in 213.2578ms
+2025-07-06 12:03:02.282 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-06 12:03:02.282 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - 200 null application/json; charset=utf-8 240.6563ms
+2025-07-06 12:03:02.295 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:03:02.295 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:03:02.296 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 12:03:02.296 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-07-06 12:03:02.296 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-07-06 12:03:02.299 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-06 12:03:02.299 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-06 12:03:02.301 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 4.8233ms
+2025-07-06 12:03:02.301 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 12:03:02.301 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 5.9975ms
+2025-07-06 12:03:02.320 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2b98d7b9-94d8-4415-9773-29a25b3e2c63_Fundamentals-of-Solid-UIUX-Design-copy.webp - null null
+2025-07-06 12:03:02.328 +05:30 [INF] The file /2b98d7b9-94d8-4415-9773-29a25b3e2c63_Fundamentals-of-Solid-UIUX-Design-copy.webp was not modified
+2025-07-06 12:03:02.329 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2b98d7b9-94d8-4415-9773-29a25b3e2c63_Fundamentals-of-Solid-UIUX-Design-copy.webp - 304 null image/webp 8.8903ms
+2025-07-06 12:03:02.334 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/22e1f614-4588-4688-a242-b787609b2822_339f8ba2e92c.png - null null
+2025-07-06 12:03:02.334 +05:30 [INF] The file /22e1f614-4588-4688-a242-b787609b2822_339f8ba2e92c.png was not modified
+2025-07-06 12:03:02.334 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/22e1f614-4588-4688-a242-b787609b2822_339f8ba2e92c.png - 304 null image/png 0.7153ms
+2025-07-06 12:03:02.335 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/1c47514f-deeb-4788-8fa3-1be34b1c421d_thumbnail-2.png - null null
+2025-07-06 12:03:02.335 +05:30 [INF] The file /1c47514f-deeb-4788-8fa3-1be34b1c421d_thumbnail-2.png was not modified
+2025-07-06 12:03:02.335 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/1c47514f-deeb-4788-8fa3-1be34b1c421d_thumbnail-2.png - 304 null image/png 0.4029ms
+2025-07-06 12:03:02.345 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/38f16df6-cebf-478e-bfe2-f4d1264ffc32_hq720.jpg - null null
+2025-07-06 12:03:02.345 +05:30 [INF] The file /38f16df6-cebf-478e-bfe2-f4d1264ffc32_hq720.jpg was not modified
+2025-07-06 12:03:02.345 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/38f16df6-cebf-478e-bfe2-f4d1264ffc32_hq720.jpg - 304 null image/jpeg 0.6455ms
+2025-07-06 12:03:02.346 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2dba0858-490c-4aa2-9229-f5362de0ca52_graphic.jpg - null null
+2025-07-06 12:03:02.346 +05:30 [INF] The file /2dba0858-490c-4aa2-9229-f5362de0ca52_graphic.jpg was not modified
+2025-07-06 12:03:02.346 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/f14e81b0-7333-4b74-92f8-55a4badb112e_5694494_297a.webp - null null
+2025-07-06 12:03:02.347 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/2dba0858-490c-4aa2-9229-f5362de0ca52_graphic.jpg - 304 null image/jpeg 0.5228ms
+2025-07-06 12:03:02.347 +05:30 [INF] The file /f14e81b0-7333-4b74-92f8-55a4badb112e_5694494_297a.webp was not modified
+2025-07-06 12:03:02.347 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/f14e81b0-7333-4b74-92f8-55a4badb112e_5694494_297a.webp - 304 null image/webp 0.6433ms
+2025-07-06 12:03:02.351 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/e6f15ae3-72e5-4ee9-ae85-240b5acdf539_excel.png - null null
+2025-07-06 12:03:02.352 +05:30 [INF] The file /e6f15ae3-72e5-4ee9-ae85-240b5acdf539_excel.png was not modified
+2025-07-06 12:03:02.352 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/UploadedThumbnails/e6f15ae3-72e5-4ee9-ae85-240b5acdf539_excel.png - 304 null image/png 1.4521ms
+2025-07-06 12:14:12.708 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-06 12:14:12.709 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:14:12.709 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.6325ms
+2025-07-06 12:14:12.710 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-06 12:14:12.711 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:14:12.711 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-06 12:14:12.714 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-06 12:14:12.715 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 4.5729ms
+2025-07-06 12:14:12.761 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:14:12.761 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:14:12.762 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - 204 null null 0.5695ms
+2025-07-06 12:14:12.797 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:14:12.799 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:14:12.802 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 12:14:12.802 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-07-06 12:14:12.812 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-07-06 12:14:12.812 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=TAokyXmPN46PINrXbNechQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTdjMGI3LWRkNWMtNzQyMC04ZTIzLWFkOTExYmI4M2M0ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NTE3ODUzODIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.6RwC1M8NHKELtwFmmcowlSG_EEBbVaMoTvVrXgYi4tQ - null null
+2025-07-06 12:14:12.813 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:14:12.814 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-06 12:14:12.843 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-06 12:14:12.843 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-06 12:14:12.844 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 33.5994ms
+2025-07-06 12:14:12.844 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 12:14:12.845 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 47.8286ms
+2025-07-06 12:14:12.921 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[@__studentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."UserId", e."CourseId", e."EnrolledAt"
+FROM "Enrollments" AS e
+WHERE e."UserId" = @__studentId_0
+2025-07-06 12:16:00.222 +05:30 [INF] Connection id "0HNDQB2F6ROV4", Request id "0HNDQB2F6ROV4:00000001": the application aborted the connection.
+2025-07-06 12:16:00.223 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-06 12:16:00.223 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.224 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-06 12:16:00.224 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 1.2013ms
+2025-07-06 12:16:00.224 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=TAokyXmPN46PINrXbNechQ&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTdjMGI3LWRkNWMtNzQyMC04ZTIzLWFkOTExYmI4M2M0ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NTE3ODUzODIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.6RwC1M8NHKELtwFmmcowlSG_EEBbVaMoTvVrXgYi4tQ - 101 null null 63968.1803ms
+2025-07-06 12:16:00.233 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-06 12:16:00.233 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.237 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-06 12:16:00.238 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-06 12:16:00.238 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 5.1417ms
+2025-07-06 12:16:00.641 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-06 12:16:00.642 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.642 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 0.8334ms
+2025-07-06 12:16:00.651 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-06 12:16:00.651 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.651 +05:30 [INF] Executing endpoint '/notificationHub/negotiate'
+2025-07-06 12:16:00.652 +05:30 [INF] Executed endpoint '/notificationHub/negotiate'
+2025-07-06 12:16:00.652 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 200 316 application/json 1.1212ms
+2025-07-06 12:16:00.664 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:16:00.665 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.665 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - 204 null null 0.4507ms
+2025-07-06 12:16:00.666 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-06 12:16:00.667 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.668 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 12:16:00.669 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-07-06 12:16:00.670 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-07-06 12:16:00.673 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-06 12:16:00.674 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-06 12:16:00.675 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 6.1103ms
+2025-07-06 12:16:00.675 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 12:16:00.675 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 8.8921ms
+2025-07-06 12:16:00.717 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/notificationHub?id=m0n4MkAfbROejk2Tf5_08g&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTdjMGI3LWRkNWMtNzQyMC04ZTIzLWFkOTExYmI4M2M0ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NTE3ODUzODIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.6RwC1M8NHKELtwFmmcowlSG_EEBbVaMoTvVrXgYi4tQ - null null
+2025-07-06 12:16:00.717 +05:30 [INF] CORS policy execution successful.
+2025-07-06 12:16:00.718 +05:30 [INF] Executing endpoint '/notificationHub'
+2025-07-06 12:16:00.725 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__studentId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."UserId", e."CourseId", e."EnrolledAt"
+FROM "Enrollments" AS e
+WHERE e."UserId" = @__studentId_0
+2025-07-06 14:14:56.382 +05:30 [INF] Executed endpoint '/notificationHub'
+2025-07-06 14:14:56.396 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/notificationHub?id=m0n4MkAfbROejk2Tf5_08g&access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoibWFub0BnbWFpbC5jb20iLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjAxOTdjMGI3LWRkNWMtNzQyMC04ZTIzLWFkOTExYmI4M2M0ZCIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IlN0dWRlbnQiLCJleHAiOjE3NTE3ODUzODIsImlzcyI6IkVsZWFybkFQSSIsImF1ZCI6IkVsZWFybkNsaWVudCJ9.6RwC1M8NHKELtwFmmcowlSG_EEBbVaMoTvVrXgYi4tQ - 101 null null 3851446.6619ms
+2025-07-06 14:14:56.565 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null null
+2025-07-06 14:14:56.567 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - null null
+2025-07-06 14:14:56.568 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.568 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.570 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/courses - 204 null null 3.468ms
+2025-07-06 14:14:56.573 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 204 null null 8.2836ms
+2025-07-06 14:14:56.579 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-06 14:14:56.581 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - null 0
+2025-07-06 14:14:56.581 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.582 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.597 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/6/2025 7:03:02 AM', Current time (UTC): '7/6/2025 8:44:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 14:14:56.597 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/6/2025 7:03:02 AM', Current time (UTC): '7/6/2025 8:44:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 14:14:56.611 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/6/2025 7:03:02 AM', Current time (UTC): '7/6/2025 8:44:56 AM'.
+2025-07-06 14:14:56.611 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/6/2025 7:03:02 AM', Current time (UTC): '7/6/2025 8:44:56 AM'.
+2025-07-06 14:14:56.612 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-06 14:14:56.612 +05:30 [INF] Authorization failed. These requirements were not met:
+DenyAnonymousAuthorizationRequirement: Requires an authenticated user.
+2025-07-06 14:14:56.613 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-06 14:14:56.613 +05:30 [INF] AuthenticationScheme: Bearer was challenged.
+2025-07-06 14:14:56.614 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 401 0 null 34.9618ms
+2025-07-06 14:14:56.616 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/notificationHub/negotiate?negotiateVersion=1 - 401 0 null 34.8611ms
+2025-07-06 14:14:56.624 +05:30 [INF] Request starting HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - null null
+2025-07-06 14:14:56.630 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.630 +05:30 [INF] Request finished HTTP/1.1 OPTIONS http://localhost:5295/api/v1/auth/refresh - 204 null null 5.4586ms
+2025-07-06 14:14:56.634 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - application/json 107
+2025-07-06 14:14:56.636 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.640 +05:30 [INF] Failed to validate the token.
+Microsoft.IdentityModel.Tokens.SecurityTokenExpiredException: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/6/2025 7:03:02 AM', Current time (UTC): '7/6/2025 8:44:56 AM'.
+   at Microsoft.IdentityModel.Tokens.ValidatorUtilities.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.Tokens.Validators.ValidateLifetime(Nullable`1 notBefore, Nullable`1 expires, SecurityToken securityToken, TokenValidationParameters validationParameters)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateTokenPayloadAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+   at Microsoft.IdentityModel.JsonWebTokens.JsonWebTokenHandler.ValidateJWSAsync(JsonWebToken jsonWebToken, TokenValidationParameters validationParameters, BaseConfiguration configuration)
+2025-07-06 14:14:56.641 +05:30 [INF] Bearer was not authenticated. Failure message: IDX10223: Lifetime validation failed. The token is expired. ValidTo (UTC): '7/6/2025 7:03:02 AM', Current time (UTC): '7/6/2025 8:44:56 AM'.
+2025-07-06 14:14:56.642 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-06 14:14:56.644 +05:30 [INF] Route matched with {action = "Refresh", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Refresh(ElearnAPI.DTOs.RefreshTokenDto) on controller ElearnAPI.Controllers.AuthController (ElearnCourseAPI).
+2025-07-06 14:14:56.686 +05:30 [INF] Refresh token request
+2025-07-06 14:14:56.786 +05:30 [INF] Executed DbCommand (38ms) [Parameters=[@__refreshToken_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT u."Id", u."Bio", u."CreatedAt", u."Email", u."FullName", u."IsDeleted", u."PasswordHash", u."PhoneNumber", u."ProfilePictureUrl", u."RefreshToken", u."RefreshTokenExpiryTime", u."RoleId", u."UpdatedAt", u."Username", r."Id", r."Name"
+FROM "Users" AS u
+INNER JOIN "Roles" AS r ON u."RoleId" = r."Id"
+WHERE u."RefreshToken" = @__refreshToken_0 AND u."RefreshTokenExpiryTime" > now() AND NOT (u."IsDeleted")
+LIMIT 1
+2025-07-06 14:14:56.814 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p13='?' (DbType = Guid), @p0='?', @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?', @p7='?', @p8='?', @p9='?' (DbType = DateTime), @p10='?' (DbType = Int32), @p11='?' (DbType = DateTime), @p12='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "Users" SET "Bio" = @p0, "CreatedAt" = @p1, "Email" = @p2, "FullName" = @p3, "IsDeleted" = @p4, "PasswordHash" = @p5, "PhoneNumber" = @p6, "ProfilePictureUrl" = @p7, "RefreshToken" = @p8, "RefreshTokenExpiryTime" = @p9, "RoleId" = @p10, "UpdatedAt" = @p11, "Username" = @p12
+WHERE "Id" = @p13;
+2025-07-06 14:14:56.814 +05:30 [INF] Refresh token generated successfully for user "0197c0b7-dd5c-7420-8e23-ad911bb83c4d"
+2025-07-06 14:14:56.815 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType3`3[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-06 14:14:56.816 +05:30 [INF] Executed action ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI) in 171.6674ms
+2025-07-06 14:14:56.816 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.AuthController.Refresh (ElearnCourseAPI)'
+2025-07-06 14:14:56.816 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5295/api/v1/auth/refresh - 200 null application/json; charset=utf-8 182.7573ms
+2025-07-06 14:14:56.819 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5295/api/v1/courses - null null
+2025-07-06 14:14:56.820 +05:30 [INF] CORS policy execution successful.
+2025-07-06 14:14:56.821 +05:30 [INF] Executing endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 14:14:56.822 +05:30 [INF] Route matched with {action = "GetAll", controller = "Courses"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAll(Int32, Int32) on controller ElearnAPI.Controllers.CoursesController (ElearnCourseAPI).
+2025-07-06 14:14:56.824 +05:30 [INF] Fetching all courses. Page: 1, PageSize: 10
+2025-07-06 14:14:56.828 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__p_1='?' (DbType = Int32), @__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT c."Id", c."CreatedAt", c."Description", c."Domain", c."InstructorId", c."IsDeleted", c."Language", c."Level", c."Tags", c."ThumbnailUrl", c."Title", c."UpdatedAt"
+FROM "Courses" AS c
+WHERE NOT (c."IsDeleted")
+LIMIT @__p_1 OFFSET @__p_0
+2025-07-06 14:14:56.830 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType1`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.IEnumerable`1[[ElearnAPI.DTOs.CourseDto, ElearnCourseAPI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-07-06 14:14:56.831 +05:30 [INF] Executed action ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI) in 8.9335ms
+2025-07-06 14:14:56.831 +05:30 [INF] Executed endpoint 'ElearnAPI.Controllers.CoursesController.GetAll (ElearnCourseAPI)'
+2025-07-06 14:14:56.831 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5295/api/v1/courses - 200 null application/json; charset=utf-8 12.3607ms

@@ -39,6 +39,8 @@ domainOptions = ['Artificial Intelligence', 'Web Development', 'Data Science', '
       language: [''],
       tags: [[]],
       files: this.fb.array([]),
+      price: ['', Validators.required],
+
     });
 
     this.newFileForm = this.fb.group({
@@ -67,7 +69,8 @@ private loadCourseData(): void {
       domain: course.domain,
       level: course.level,
       language: course.language,
-      tags: course.tags
+      tags: course.tags,
+      price: course.price
     });
 
   

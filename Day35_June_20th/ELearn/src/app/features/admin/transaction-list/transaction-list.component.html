@@ -1,0 +1,55 @@
+<section class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-2xl font-bold mb-6 text-gray-800">Transactions</h2>
+
+  <div *ngIf="transactions$ | async as transactions; else loading">
+    <div *ngIf="transactions.length > 0; else noData">
+      <div class="overflow-x-auto">
+        <table class="min-w-full text-sm text-left text-gray-600 bg-white border border-gray-200 rounded-xl">
+          <thead class="bg-gray-100 text-xs text-gray-700 uppercase">
+            <tr>
+              <th class="px-4 py-2">Payment ID</th>
+              <th class="px-4 py-2">Order ID</th>
+              <th class="px-4 py-2">User</th>
+              <th class="px-4 py-2">Course</th>
+              <th class="px-4 py-2">Amount</th>
+              <th class="px-4 py-2">Currency</th>
+              <th class="px-4 py-2">Status</th>
+              <th class="px-4 py-2">Date</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let txn of transactions" class="border-t">
+              <td class="px-4 py-2">{{ txn.paymentId }}</td>
+              <td class="px-4 py-2">{{ txn.orderId }}</td>
+              <td class="px-4 py-2">{{ txn.userName }}</td>
+              <td class="px-4 py-2">{{ txn.courseTitle }}</td>
+              <td class="px-4 py-2">{{ txn.amount | currency: txn.currency }}</td>
+              <td class="px-4 py-2">{{ txn.currency }}</td>
+              <td class="px-4 py-2">
+                <span
+                  class="inline-block px-2 py-1 rounded text-xs font-medium"
+                  [ngClass]="{
+                    'bg-green-100 text-green-800': txn.status === 'captured',
+                    'bg-yellow-100 text-yellow-800': txn.status === 'pending',
+                    'bg-red-100 text-red-800': txn.status === 'failed'
+                  }"
+                >
+                  {{ txn.status }}
+                </span>
+              </td>
+              <td class="px-4 py-2">{{ txn.createdAt | date: 'short' }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <ng-template #noData>
+      <p class="text-gray-500">No transactions found.</p>
+    </ng-template>
+  </div>
+
+  <ng-template #loading>
+    <p class="text-gray-500">Loading transactions...</p>
+  </ng-template>
+</section>

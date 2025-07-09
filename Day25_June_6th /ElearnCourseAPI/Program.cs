@@ -41,6 +41,12 @@ builder.Services.AddScoped<IRoleRepository, RoleRepository>();
 builder.Services.AddScoped<IEnrollmentRepository, EnrollmentRepository>();
 builder.Services.AddScoped<IUserFileProgressRepository, UserFileProgressRepository>();
 builder.Services.AddScoped<IUserFileProgressRepository, UserFileProgressRepository>();
+builder.Services.AddScoped<ICouponCodeRepository, CouponCodeRepository>();
+builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+
+
+
+
 
 
 
@@ -55,6 +61,8 @@ builder.Services.AddScoped<IUploadService, UploadService>();
 builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
 builder.Services.AddScoped<IEnrollmentService, EnrollmentService>();
 builder.Services.AddScoped<IUserFileProgressService, UserFileProgressService>();
+builder.Services.AddScoped<ICouponCodeService, CouponCodeService>();
+builder.Services.AddScoped<ITransactionService, TransactionService>();
 
 
 

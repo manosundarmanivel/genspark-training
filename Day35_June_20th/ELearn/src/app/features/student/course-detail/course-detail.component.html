@@ -8,27 +8,27 @@
       <!-- Header (same as before) -->
 
       <!-- Course Header -->
-<div class="rounded-xl p-6 border border-gray-200">
-  <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
-  
+      <div class="rounded-xl p-6 border border-gray-200">
+        <div class="flex flex-col lg:flex-row items-start lg:items-center gap-6">
 
-    <div class="flex-1">
-      <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ course.title }}</h1>
 
-      <p class="text-gray-600 mb-3">{{ course.description }}</p>
+          <div class="flex-1">
+            <h1 class="text-3xl font-bold text-gray-800 mb-2">{{ course.title }}</h1>
 
-      <div class="flex flex-wrap text-sm text-gray-500 gap-4">
-        <span><strong>Instructor:</strong> {{ course.instructorName }}</span>
-        <span><strong>Domain:</strong> {{ course.domain }}</span>
-        <span><strong>Language:</strong> {{ course.language }}</span>
-        <span><strong>Level:</strong> {{ course.level }}</span>
+            <p class="text-gray-600 mb-3">{{ course.description }}</p>
+
+            <div class="flex flex-wrap text-sm text-gray-500 gap-4">
+              <span><strong>Instructor:</strong> {{ course.instructorName }}</span>
+              <span><strong>Domain:</strong> {{ course.domain }}</span>
+              <span><strong>Language:</strong> {{ course.language }}</span>
+              <span><strong>Level:</strong> {{ course.level }}</span>
+            </div>
+
+
+
+          </div>
+        </div>
       </div>
-
-
-     
-    </div>
-  </div>
-</div>
 
 
       <!-- Enrolled Section -->
@@ -48,7 +48,7 @@
             </p>
             <p class="text-sm text-gray-500 mt-1">
               Uploaded on: {{
-                (selectedVideo?.uploadedAt || course.firstUploadedFile.uploadedAt) | date: 'medium'
+              (selectedVideo?.uploadedAt || course.firstUploadedFile.uploadedAt) | date: 'medium'
               }}
             </p>
           </div>
@@ -56,7 +56,7 @@
           <div *ngIf="course.isCompleted" class="mt-6 bg-green-50 border border-green-200 rounded-md p-5">
             <div class="flex items-center gap-3">
               <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2"
-                   viewBox="0 0 24 24">
+                viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
               </svg>
               <p class="text-green-800 text-lg font-medium">You have completed this course successfully.</p>
@@ -65,55 +65,49 @@
         </div>
 
         <!-- Playlist Sidebar -->
-       <!-- Playlist Sidebar -->
-<aside class="w-full lg:w-80 bg-white border rounded-lg shadow-sm p-4">
-  <h3 class="text-lg font-semibold text-gray-700 mb-3">Course Playlist</h3>
-  <div class="divide-y divide-gray-200">
-    <button *ngFor="let file of course.uploadedFiles; let i = index"
-      class="w-full text-left py-3 px-2 hover:bg-gray-50 rounded transition relative group"
-      [ngClass]="{
+        <!-- Playlist Sidebar -->
+        <aside class="w-full lg:w-80 bg-white border rounded-lg shadow-sm p-4">
+          <h3 class="text-lg font-semibold text-gray-700 mb-3">Course Playlist</h3>
+          <div class="divide-y divide-gray-200">
+            <button *ngFor="let file of course.uploadedFiles; let i = index"
+              class="w-full text-left py-3 px-2 hover:bg-gray-50 rounded transition relative group" [ngClass]="{
         'bg-gray-100': file.id === (selectedVideo?.id || course.firstUploadedFile.id),
         'cursor-not-allowed opacity-50': isLessonLocked(i)
-      }"
-      [disabled]="isLessonLocked(i)"
-      (click)="!isLessonLocked(i) && (selectedVideo = file)">
-      
-      <div class="flex justify-between items-start">
-        <div>
-          <p class="text-gray-800 font-medium">{{ file.topic }}</p>
-          <p class="text-xs text-gray-500 line-clamp-2">{{ file.description }}</p>
-          <p class="text-[10px] text-gray-400 mt-1">Uploaded: {{ file.uploadedAt | date: 'short' }}</p>
+      }" [disabled]="isLessonLocked(i)" (click)="!isLessonLocked(i) && (selectedVideo = file)">
 
-          <label *ngIf="course.isEnrolled && !isLessonLocked(i)" class="flex items-center gap-2 text-sm mt-2">
-            <input type="checkbox" [checked]="file.isCompleted"
-              [disabled]="file.isCompleted" (click)="$event.stopPropagation()"
-              (change)="markAsCompleted(file.id)" />
-            <span class="text-gray-600">Mark as Completed</span>
-          </label>
-        </div>
+              <div class="flex justify-between items-start">
+                <div>
+                  <p class="text-gray-800 font-medium">{{ file.topic }}</p>
+                  <p class="text-xs text-gray-500 line-clamp-2">{{ file.description }}</p>
+                  <p class="text-[10px] text-gray-400 mt-1">Uploaded: {{ file.uploadedAt | date: 'short' }}</p>
 
-        <div *ngIf="file.isCompleted" class="text-green-600 text-xs font-semibold flex items-center gap-1">
-          <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
-              viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
-          </svg>
-          Completed
-        </div>
-      </div>
+                  <label *ngIf="course.isEnrolled && !isLessonLocked(i)" class="flex items-center gap-2 text-sm mt-2">
+                    <input type="checkbox" [checked]="file.isCompleted" [disabled]="file.isCompleted"
+                      (click)="$event.stopPropagation()" (change)="markAsCompleted(file.id)" />
+                    <span class="text-gray-600">Mark as Completed</span>
+                  </label>
+                </div>
 
-      <!-- Lock Icon -->
-      <div *ngIf="isLessonLocked(i)" class="absolute top-3 right-3 text-gray-400 group-hover:text-gray-600">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"
-             viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M12 11c1.657 0 3-1.343 3-3V6a3 3 0 10-6 0v2c0 1.657 1.343 3 3 3z"/>
-          <path stroke-linecap="round" stroke-linejoin="round"
-                d="M5 11h14v10H5z"/>
-        </svg>
-      </div>
-    </button>
-  </div>
-</aside>
+                <div *ngIf="file.isCompleted" class="text-green-600 text-xs font-semibold flex items-center gap-1">
+                  <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2"
+                    viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Completed
+                </div>
+              </div>
+
+              <!-- Lock Icon -->
+              <div *ngIf="isLessonLocked(i)" class="absolute top-3 right-3 text-gray-400 group-hover:text-gray-600">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M12 11c1.657 0 3-1.343 3-3V6a3 3 0 10-6 0v2c0 1.657 1.343 3 3 3z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 11h14v10H5z" />
+                </svg>
+              </div>
+            </button>
+          </div>
+        </aside>
 
       </div>
 
@@ -130,23 +124,55 @@
           <div class="bg-yellow-50 border border-yellow-200 rounded-md p-6 mt-6">
             <h3 class="text-lg font-semibold text-yellow-900 mb-2 flex items-center gap-2">
               <svg class="w-5 h-5 text-yellow-600" fill="none" stroke="currentColor" stroke-width="2"
-                   viewBox="0 0 24 24">
+                viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round"
-                      d="M12 17v.01M12 13V9m0-4h.01M12 3a9 9 0 1 1-9 9 9 9 0 0 1 9-9z"/>
+                  d="M12 17v.01M12 13V9m0-4h.01M12 3a9 9 0 1 1-9 9 9 9 0 0 1 9-9z" />
               </svg>
               Full Course Locked
             </h3>
             <p class="text-gray-700 mb-4">
               Enroll now to access all {{ course.uploadedFiles.length }} lessons and track your progress.
             </p>
-            <button
-              class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-semibold transition"
-              (click)="enroll(course.id)">
-              Enroll Now
+ 
+            <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-2 rounded-md font-semibold transition"
+              (click)="openCheckoutModal(course)">
+               ₹{{ course.price }} Buy Now
             </button>
+
           </div>
         </div>
       </ng-template>
     </div>
   </ng-template>
+</div>
+
+<!-- Modal -->
+<div *ngIf="checkoutVisible" class="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+  <div class="bg-white p-6 rounded-xl w-full max-w-md space-y-4 shadow-lg">
+    <h2 class="text-xl font-bold text-gray-800">Checkout</h2>
+    <p><strong>Course:</strong> {{ selectedCourse.title }}</p>
+    <p><strong>Original Price:</strong> ₹{{ selectedCourse.price }}</p>
+
+    <form [formGroup]="checkoutForm" (ngSubmit)="applyCoupon()" class="flex gap-2">
+      <input type="text" formControlName="coupon" placeholder="Enter Coupon Code"
+        class="border border-gray-300 px-4 py-2 rounded w-full" />
+      <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700">
+        Apply
+      </button>
+    </form>
+
+    <div *ngIf="coupons$ | async as coupon">
+
+    </div>
+
+
+    <p><strong>Payable:</strong> ₹{{ finalAmount }}</p>
+
+    <div class="flex justify-end gap-3 mt-4">
+      <button (click)="checkoutVisible = false" class="px-4 py-2 rounded border border-gray-300">Cancel</button>
+      <button (click)="payAndEnroll()" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+        Pay & Enroll
+      </button>
+    </div>
+  </div>
 </div>

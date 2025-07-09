@@ -78,19 +78,18 @@
         <div *ngIf="error" class="text-sm text-red-600">{{ error }}</div>
 
         <!-- Submit -->
-       <button
+<button
   type="submit"
-  [disabled]="loading"
+  [disabled]="loading$ | async"
   class="w-full py-2.5 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 transition duration-200 flex items-center justify-center gap-2"
 >
-  <ng-container *ngIf="!loading; else loadingSpinner">
+  <ng-container *ngIf="!(loading$ | async); else loadingSpinner">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 13l4 4L19 7" />
     </svg>
     Log In
   </ng-container>
 
-  <!-- Shimmer/Spinner -->
   <ng-template #loadingSpinner>
     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
       <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
@@ -100,6 +99,7 @@
     Loading...
   </ng-template>
 </button>
+
 
 
         <!-- Extra links -->

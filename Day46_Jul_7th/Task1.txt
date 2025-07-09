@@ -1,0 +1,51 @@
+Step 1: Switch to root user. Switch to root user so that we have the rights to create new users and groups.
+1. login as root user  - sudo -i
+2. whoami 
+3. create the group 
+4. groupadd dev-team 
+dscl . -create /Groups/dev-team (macOS uses dscl (Directory Service command-line) to manage users/groups.)
+dscl . -read /Groups/dev-team
+
+5. create the user 
+sudo sysadminctl -addUser John -password secret123
+sudo sysadminctl -addUser Bob -password secret123
+
+6. add the user to the group
+sudo dscl . -append /Groups/dev-team GroupMembership John
+sudo dscl . -append /Groups/dev-team GroupMembership Bob
+
+7. Create directory
+sudo mkdir -p /home/dev-team
+
+8.Change group ownership to dev-team
+sudo chgrp dev-team /home/dev-team
+
+9. Set permissions to allow group members to create/delete files
+sudo chmod 770 /home/dev-team
+
+10. Exit root and switch to John
+su - John
+
+11.Navigate to /home/dev-team
+cd /home/dev-team
+touch john-file.txt
+
+12.Change group ownership to dev-team
+chgrp dev-team john-file.txt
+
+13. Create new group project-manager and add Fatima
+sudo dscl . -create /Groups/project-manager
+
+14. sudo sysadminctl -addUser Fatima -password secret123
+15. sudo dscl . -append /Groups/project-manager GroupMembership Fatima
+
+
+16.Test Fatima’s access
+su - Fatima
+cd /home/dev-team
+
+output -> Permission denied
+
+
+
+

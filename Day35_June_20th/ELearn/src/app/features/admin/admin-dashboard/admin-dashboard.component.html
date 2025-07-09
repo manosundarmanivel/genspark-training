@@ -27,10 +27,31 @@
     </div>
   </div>
 
+  <div class="bg-white shadow-xl rounded-2xl p-6 hover:shadow-2xl transition-shadow flex flex-col items-center col-span-full w-full">
+  <div class="flex justify-between items-center w-full mb-4">
+    <h4 class="text-lg font-medium text-gray-800">Daily Enrollment Trends</h4>
+    <select [(ngModel)]="selectedDays" (change)="loadEnrollmentStats()" class="border rounded px-2 py-1 text-sm">
+      <option [value]="7">Past 7 Days</option>
+      <option [value]="15">Past 15 Days</option>
+      <option [value]="30">Past 30 Days</option>
+    </select>
+  </div>
+  <canvas baseChart
+          [data]="(enrollmentStatsChartData$ | async) ?? undefined"
+          [options]="lineChartOptions"
+          chartType="line"
+          height="100">
+  </canvas>
+</div>
+
+
 
   <div class="space-y-12">
     <h3 class="text-2xl font-semibold text-gray-700 text-center">Course Insights</h3>
     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-2 gap-10">
+
+
+
       
   
       <div class="bg-white shadow-xl rounded-2xl p-6 hover:shadow-2xl transition-shadow flex flex-col items-center">
@@ -64,6 +85,9 @@
                 height="200">
         </canvas>
       </div>
+
+  
+
 
     </div>
   </div>

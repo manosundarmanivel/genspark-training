@@ -3,12 +3,44 @@ import { HttpClient } from '@angular/common/http';
 import { forkJoin, Observable, of } from 'rxjs';
 import { map, switchMap, tap, catchError } from 'rxjs/operators';
 
+
+export interface CouponResponse {
+  discountAmount?: number;
+  discountPercentage?: number;
+}
+
+export interface Transaction {
+  id: string;
+  paymentId: string;
+  orderId: string;
+  amount: number;
+  currency: string;
+  status: string;
+  createdAt: string;
+
+  userId: string;
+  userName: string;
+  courseId: string;
+  courseTitle: string;
+}
+
+export interface EnrollmentStats {
+  date: string;
+  enrollmentCount: number;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
+
+
 export class AdminService {
   private readonly baseUrl = 'http://localhost:5295/api/v1/admin';
   private readonly baseUrlCourse = 'http://localhost:5295/api/v1/courses';
+  private readonly baseUrlCoupon = 'http://localhost:5295/api/v1/coupons';
+  private readonly baseUrlTransaction = 'http://localhost:5295/api/v1/transactions';
 
   constructor(private http: HttpClient) {}
 
@@ -112,4 +144,114 @@ getUsersAndDetailedCourses(): Observable<{ users: any[]; courses: any[] }> {
       tap(res => console.log(`[Disable Course ${id}]`, res))
     );
   }
+
+
+  // Get all coupons
+getAllCoupons(): Observable<any[]> {
+  return this.http.get<any[]>(`${this.baseUrlCoupon}`).pipe(
+    tap(res => console.log('[GET Coupons]', res))
+  );
 }
+
+// Get coupon by ID
+getCouponById(id: string): Observable<any> {
+  return this.http.get(`${this.baseUrlCoupon}/${id}`).pipe(
+    tap(res => console.log(`[GET Coupon ${id}]`, res))
+  );
+}
+
+// Create new coupon
+createCoupon(payload: {
+  code: string;
+  discountAmount?: number;
+  discountPercentage?: number;
+  expiryDate: string;
+  usageLimit: number;
+}): Observable<any> {
+  return this.http.post(`${this.baseUrlCoupon}`, payload).pipe(
+    tap(res => console.log('[CREATE Coupon]', res))
+  );
+}
+
+// Update coupon
+updateCoupon(id: string, payload: {
+  code: string;
+  discountAmount?: number;
+  discountPercentage?: number;
+  expiryDate: string;
+  usageLimit: number;
+  isActive: boolean;
+}): Observable<any> {
+  return this.http.put(`${this.baseUrlCoupon}/${id}`, payload).pipe(
+    tap(res => console.log(`[UPDATE Coupon ${id}]`, res))
+  );
+}
+
+// Enable/Disable coupon
+setCouponStatus(id: string, isActive: boolean): Observable<any> {
+  const action = isActive ? 'enable' : 'disable';
+  return this.http.patch(`${this.baseUrlCoupon}/${id}/${action}`, {}).pipe(
+    tap(res => console.log(`[${action.toUpperCase()} Coupon ${id}]`, res))
+  );
+}
+
+
+
+validateCoupon(code: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrlCoupon}/validate?code=${code}`);
+  }
+
+  // Increment coupon usage (TimesUsed++)
+incrementCouponUsage(id: string): Observable<any> {
+  return this.http.patch(`${this.baseUrlCoupon}/${id}/increment-usage`, {}).pipe(
+    tap(res => console.log(`[INCREMENT Coupon Usage ${id}]`, res)),
+    catchError(err => {
+      console.error(`Failed to increment usage for coupon ${id}`, err);
+      return of(null); // or throwError if you want it to propagate
+    })
+  );
+}
+
+//Fetch all transactions (with user and course names)
+  getAllTransactions(): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.baseUrlTransaction).pipe(
+      tap(res => console.log('[GET Transactions]', res))
+    );
+  }
+
+  // Add a new transaction
+  addTransaction(payload: {
+    paymentId: string;
+    orderId: string;
+    userId: string;
+    courseId: string;
+    amount: number;
+    currency: string;
+    status: string;
+  }): Observable<any> {
+    return this.http.post(this.baseUrlTransaction, payload).pipe(
+      tap(res => console.log('[ADD Transaction]', res)),
+      catchError(err => {
+        console.error('Failed to add transaction', err);
+        return of(null);
+      })
+    );
+  }
+
+  // Get daily enrollment stats (e.g., last 7 days)
+getDailyEnrollmentStats(pastDays: number): Observable<EnrollmentStats[]> {
+  return this.http
+    .get<EnrollmentStats[]>(`http://localhost:5295/api/v1/enrollments/analytics/daily-enrollments?days=${pastDays}`)
+    .pipe(
+      tap(res => console.log(`[GET Daily Enrollment Stats]`, res)),
+      catchError(err => {
+        console.error('Failed to fetch daily enrollment stats', err);
+        return of([]); // fallback to empty list
+      })
+    );
+}
+
+
+
+}
+

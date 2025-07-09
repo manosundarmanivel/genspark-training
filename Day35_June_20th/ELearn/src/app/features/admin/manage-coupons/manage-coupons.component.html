@@ -1,0 +1,111 @@
+<div class="max-w-6xl mx-auto px-4 py-12">
+  <!-- Header -->
+  <h2 class="text-3xl font-bold text-gray-800 mb-8">Manage Coupons</h2>
+
+  <!-- Coupon Form Card -->
+  <form
+    [formGroup]="couponForm"
+    (ngSubmit)="submitForm()"
+    class="bg-white shadow-lg rounded-2xl p-8 space-y-6 border"
+  >
+    <h3 class="text-xl font-semibold text-gray-700">Add / Edit Coupon</h3>
+
+    <div class="bg-indigo-50 text-indigo-800 text-sm p-4 rounded-lg border border-indigo-200 mb-4">
+  <strong>Note:</strong> If both <span class="font-semibold">percentage</span> and <span class="font-semibold">amount</span> discounts are provided,
+  the system will <u>always apply the percentage discount first</u>.
+  <br />
+  To apply a fixed amount discount, <span class="font-semibold">only fill the amount field</span> and leave the percentage empty.
+</div>
+
+    <!-- Grid Inputs -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div>
+        <label class="text-sm font-medium text-gray-600 mb-1 block">Coupon Code</label>
+        <input type="text" formControlName="code" placeholder="E.g. NEWUSER50"
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-600 mb-1 block">Discount (₹)</label>
+        <input type="number" formControlName="discountAmount" placeholder="₹100"
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-600 mb-1 block">Discount (%)</label>
+        <input type="number" formControlName="discountPercentage" placeholder="10%"
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-600 mb-1 block">Expiry Date</label>
+        <input type="date" formControlName="expiryDate"
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div>
+        <label class="text-sm font-medium text-gray-600 mb-1 block">Usage Limit</label>
+        <input type="number" formControlName="usageLimit" placeholder="100"
+               class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500" />
+      </div>
+
+      <div class="flex items-center space-x-3 mt-6">
+        <input type="checkbox" formControlName="isActive" id="active-toggle" class="accent-indigo-600" />
+        <label for="active-toggle" class="text-sm text-gray-700">Active</label>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="flex items-center gap-4 mt-4">
+      <button
+        type="submit"
+        class="bg-indigo-600 text-white px-6 py-2 rounded-lg font-medium hover:bg-indigo-700 transition"
+      >
+        {{ buttonLabel() }}
+      </button>
+      <button
+        type="button"
+        (click)="resetForm()"
+        class="text-sm text-gray-600 hover:underline"
+      >
+        Reset
+      </button>
+    </div>
+  </form>
+
+  <!-- Coupon List -->
+  <div class="mt-12">
+    <h3 class="text-2xl font-semibold text-gray-800 mb-6">Existing Coupons</h3>
+
+    <div *ngIf="coupons()?.length === 0" class="text-gray-500 text-sm italic">No coupons found.</div>
+
+    <div *ngFor="let coupon of coupons()" class="bg-gray-50 border border-gray-200 rounded-xl p-6 mb-6">
+      <div class="flex justify-between items-center flex-wrap gap-4">
+        <div>
+          <h4 class="text-lg font-bold text-indigo-700">{{ coupon.code }}</h4>
+          <p class="text-sm text-gray-600 mt-1">
+            ₹{{ coupon.discountAmount || 0 }} / {{ coupon.discountPercentage || 0 }}% off ·
+            Uses: {{ coupon.timesUsed }}/{{ coupon.usageLimit }} ·
+            Expires: {{ coupon.expiryDate | date:'mediumDate' }}
+          </p>
+          <span class="inline-block text-xs font-medium mt-1 px-2 py-1 rounded-full"
+                [ngClass]="coupon.isActive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-600'">
+            {{ coupon.isActive ? 'Active' : 'Disabled' }}
+          </span>
+        </div>
+
+        <div class="flex gap-4">
+          <button (click)="editCoupon(coupon)"
+                  class="text-sm text-blue-600 hover:underline font-medium">Edit</button>
+          <button 
+  (click)="toggleStatus(coupon)"
+  class="text-sm text-yellow-600 hover:underline font-medium"
+  [disabled]="isCouponExpiredOrOverused(coupon)">
+  {{ coupon.isActive ? 'Disable' : 'Enable' }}
+</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

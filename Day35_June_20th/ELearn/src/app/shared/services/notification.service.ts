@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 export class NotificationService {
   private hubConnection: signalR.HubConnection | null = null;
 
-  private contentNotificationSource = new BehaviorSubject<{ courseTitle: string, fileName: string } | null>(null);
+  private contentNotificationSource = new BehaviorSubject<{ topic: string, courseTitle: string, fileName: string } | null>(null);
   contentNotification$ = this.contentNotificationSource.asObservable();
 
   private enrollmentNotificationSource = new BehaviorSubject<{ studentName: string, courseTitle: string } | null>(null);
@@ -45,9 +45,9 @@ export class NotificationService {
 
     console.log('[SignalR] Registering notification handlers...');
 
-    this.hubConnection.on('ReceiveContentUploadNotification', (courseTitle: string, fileName: string) => {
-      console.log('[SignalR] Received content upload notification:', { courseTitle, fileName });
-      this.contentNotificationSource.next({ courseTitle, fileName });
+    this.hubConnection.on('ReceiveContentUploadNotification', (topic: string ,courseTitle: string, fileName: string) => {
+      console.log('[SignalR] Received content upload notification:', { topic,courseTitle, fileName });
+      this.contentNotificationSource.next({topic, courseTitle, fileName });
     });
 
     this.hubConnection.on('ReceiveEnrollmentNotification', (studentName: string, courseTitle: string) => {

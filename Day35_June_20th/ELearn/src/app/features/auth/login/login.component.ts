@@ -3,21 +3,23 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
-    selector: 'app-login',
-    standalone: true,
-    templateUrl: './login.component.html',
-    imports: [
-        CommonModule,
-        ReactiveFormsModule,
-        RouterModule
-    ]
+  selector: 'app-login',
+  standalone: true,
+  templateUrl: './login.component.html',
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule
+  ]
 })
 export class LoginComponent {
   form: FormGroup;
   error = '';
-  loading = false; 
+  private loadingSubject = new BehaviorSubject<boolean>(false);
+  loading$ = this.loadingSubject.asObservable();
 
   constructor(
     private fb: FormBuilder,
@@ -36,7 +38,7 @@ export class LoginComponent {
       return;
     }
 
-    this.loading = true; 
+    this.loadingSubject.next(true);
 
     this.authService.login({
       username: this.form.value.email,
@@ -54,12 +56,11 @@ export class LoginComponent {
       },
       error: err => {
         this.error = err.error?.message || 'Login failed';
-        this.loading = false; // 👈 Stop loader on error
+        this.loadingSubject.next(false);
       },
       complete: () => {
-        this.loading = false; // 👈 Stop loader on success
+        this.loadingSubject.next(false);
       }
     });
   }
 }
-

@@ -17,6 +17,8 @@ import { ManageUserComponent } from './features/admin/manage-user/manage-user.co
 import { ManageCourseComponent } from './features/admin/manage-course/manage-course.component';
 import { ViewCourseComponent } from './features/admin/view-course/view-course.component';
 import { LandingPageComponent } from './shared/components/landing-page/landing-page.component';
+import { ManageCouponsComponent } from './features/admin/manage-coupons/manage-coupons.component';
+import { TransactionListComponent } from './features/admin/transaction-list/transaction-list.component';
 
 export const routes: Routes = [
   { path: '', component: LandingPageComponent },
@@ -65,6 +67,8 @@ export const routes: Routes = [
 
       },
       { path: 'view/:id', component: ViewCourseComponent },
+      {path:'coupons', component:ManageCouponsComponent},
+      {path:'transactions', component:TransactionListComponent},
     ]
   }
   ,
