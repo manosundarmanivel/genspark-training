@@ -10,6 +10,9 @@ using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ElearnAPI.Models;
+using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Specialized;
+
 
 namespace ElearnAPI.Controllers
 {
@@ -22,107 +25,27 @@ namespace ElearnAPI.Controllers
         private readonly Serilog.ILogger _logger;
         private readonly string _uploadRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
 
-           private readonly ICourseService _courseService;
+        private readonly ICourseService _courseService;
 
         private readonly IUserFileProgressService _userFileProgressService;
+
+        private readonly string _blobContainerSasUrl;
+
 
         public UploadController(
               ICourseService courseService,
             IUploadService uploadService,
             IHubContext<NotificationHub> hubContext,
-            IUserFileProgressService userFileProgressService)
+            IUserFileProgressService userFileProgressService,
+            IConfiguration configuration)
         {
-             _courseService = courseService;
+            _courseService = courseService;
             _uploadService = uploadService;
             _hubContext = hubContext;
             _userFileProgressService = userFileProgressService;
+            _blobContainerSasUrl = configuration["AzureStorage:BlobContainerSasUrl"];
             _logger = Log.ForContext<UploadController>();
         }
-
-        //        [Authorize(Roles = "Instructor")]
-        // [HttpPost("upload")]
-        // public async Task<IActionResult> Upload([FromForm] UploadFileDto dto)
-        // {
-        //     try
-        //     {
-        //         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        //         if (!Guid.TryParse(userIdClaim, out var uploadedBy))
-        //         {
-        //             _logger.Warning("Invalid token during upload.");
-        //             return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
-        //         }
-
-        //         var uploadsRoot = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
-        //         if (!Directory.Exists(uploadsRoot))
-        //             Directory.CreateDirectory(uploadsRoot);
-
-        //         var sanitizedFileName = Path.GetFileName(dto.File.FileName);
-        //         var filePath = Path.Combine(uploadsRoot, sanitizedFileName);
-
-        //         using (var stream = new FileStream(filePath, FileMode.Create))
-        //         {
-        //             await dto.File.CopyToAsync(stream);
-        //         }
-
-        //         var publicUrlPath = $"/uploads/{sanitizedFileName}";
-
-        //         var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
-        //         {
-        //             FileName = sanitizedFileName,
-        //             Path = publicUrlPath,
-        //             CourseId = dto.CourseId,
-        //             Topic = dto.Topic,
-        //             Description = dto.Description
-        //         });
-
-
-        //         // await _userFileProgressService.AddProgressAsync(new
-        //         // UserFileProgress
-        //         // {
-        //         //     Id = Guid.NewGuid(),
-        //         //     UserId = uploadedBy,
-        //         //     UploadedFileId = fileMeta.Id,
-        //         //     IsCompleted = false,
-
-        //         // });
-
-
-
-        //         _logger.Information("File uploaded: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
-
-        //         await _hubContext.Clients.Group($"course-{dto.CourseId}")
-        //             .SendAsync("ReceiveNotification", new
-        //             {
-        //                 message = $"New file uploaded: {sanitizedFileName}",
-        //                 courseId = dto.CourseId,
-
-        //             });
-
-        //         return Ok(new
-        //         {
-        //             success = true,
-        //             data = new
-        //             {
-        //                 fileMeta.Id,
-        //                 fileMeta.FileName,
-        //                 fileMeta.Topic,
-        //                 fileMeta.Description,
-        //                 fileMeta.CourseId,
-        //                 path = publicUrlPath
-        //             }
-        //         });
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         _logger.Error(ex, "File upload failed.");
-        //         return StatusCode(500, new
-        //         {
-        //             success = false,
-        //             message = "File upload failed.",
-        //             error = ex.Message
-        //         });
-        //     }
-        // }
 
 
         [Authorize(Roles = "Instructor")]
@@ -194,27 +117,14 @@ namespace ElearnAPI.Controllers
                     Topic = topic,
                     Description = description
                 });
-                
-var courseTitle = await  _courseService.GetCourseTitleById(courseId);
-                 await _hubContext.Clients.Group($"course-{courseId}")
-                .SendAsync("ReceiveContentUploadNotification",topic, courseTitle, sanitizedFileName);
 
-            _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
+                var courseTitle = await _courseService.GetCourseTitleById(courseId);
+                await _hubContext.Clients.Group($"course-{courseId}")
+               .SendAsync("ReceiveContentUploadNotification", topic, courseTitle, sanitizedFileName);
 
-                // Optional: track uploader's progress
-                // await _userFileProgressService.AddProgressAsync(new UserFileProgress
-                // {
-                //     Id = Guid.NewGuid(),
-                //     UserId = uploadedBy,
-                //     UploadedFileId = fileMeta.Id,
-                //     IsCompleted = false
-                // });
-                // var courseTitle = await _uploadService.GetCourseTitleById(dto.CourseId);
-                //                 // 5. Send real-time notification
-                //              await _hubContext.Clients.Group($"course-{dto.CourseId}")
-                //                 .SendAsync("ReceiveContentUploadNotification", courseTitle, sanitizedFileName);
+                _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, courseId);
 
-                //             _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
+
 
                 return Ok(new
                 {
@@ -241,6 +151,130 @@ var courseTitle = await  _courseService.GetCourseTitleById(courseId);
                 });
             }
         }
+
+
+
+        //azure blob upload
+
+//         [Authorize(Roles = "Instructor")]
+// [HttpPost("upload/chunk")]
+// public async Task<IActionResult> UploadChunked(
+//     IFormFile chunk,
+//     [FromForm] int chunkIndex,
+//     [FromForm] int totalChunks,
+//     [FromForm] string fileName,
+//     [FromForm] Guid courseId,
+//     [FromForm] string topic,
+//     [FromForm] string description)
+// {
+//     try
+//     {
+//         var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+//         if (!Guid.TryParse(userIdClaim, out var uploadedBy))
+//         {
+//             _logger.Warning("Invalid token during chunk upload.");
+//             return Unauthorized(new { success = false, message = "Invalid token. Cannot extract user ID." });
+//         }
+
+//         // 1. Save current chunk
+//         var sanitizedFileName = Path.GetFileName(fileName);
+//         var tempFolder = Path.Combine(Directory.GetCurrentDirectory(), "TempUploads", sanitizedFileName);
+//         Directory.CreateDirectory(tempFolder);
+
+//         var chunkPath = Path.Combine(tempFolder, $"{chunkIndex}.part");
+//         await using (var stream = new FileStream(chunkPath, FileMode.Create))
+//         {
+//             await chunk.CopyToAsync(stream);
+//         }
+
+//         _logger.Information("Chunk {Index}/{Total} for {File} received.", chunkIndex + 1, totalChunks, sanitizedFileName);
+
+//         // 2. Check if all chunks received
+//         var chunkFiles = Directory.GetFiles(tempFolder, "*.part").Length;
+//         if (chunkFiles < totalChunks)
+//         {
+//             return Ok(new { success = true, message = "Chunk uploaded, waiting for remaining chunks." });
+//         }
+
+//         // 3. Merge chunks into one file
+//         var mergedFilePath = Path.Combine(tempFolder, $"_merged_{sanitizedFileName}");
+//         await using (var output = new FileStream(mergedFilePath, FileMode.Create))
+//         {
+//             for (int i = 0; i < totalChunks; i++)
+//             {
+//                 var partPath = Path.Combine(tempFolder, $"{i}.part");
+//                 await using var input = new FileStream(partPath, FileMode.Open);
+//                 await input.CopyToAsync(output);
+//             }
+//         }
+
+//         // 4. Upload to Azure Blob Storage using SAS URL from config
+//         var blobBaseUri = new Uri(_blobContainerSasUrl);
+//         var containerUri = new Uri($"{blobBaseUri.Scheme}://{blobBaseUri.Host}/uploads/");
+//         var blobUri = new Uri(containerUri, sanitizedFileName);
+
+//         var builder = new UriBuilder(blobUri)
+//         {
+//             Query = blobBaseUri.Query
+//         };
+//         var blobUriWithSas = builder.Uri;
+
+//         var blobClient = new BlobClient(blobUriWithSas);
+//         await using (var mergedStream = new FileStream(mergedFilePath, FileMode.Open))
+//         {
+//             await blobClient.UploadAsync(mergedStream, overwrite: true);
+//         }
+
+//         // 5. Cleanup
+//         Directory.Delete(tempFolder, true);
+
+//         // 6. Save metadata
+//        var publicUrlPath = blobUriWithSas.ToString(); // Full streaming-capable SAS URL
+
+//         var fileMeta = await _uploadService.UploadFileAsync(new UploadedFileDto
+//         {
+//             FileName = sanitizedFileName,
+//             Path = publicUrlPath,
+//             CourseId = courseId,
+//             Topic = topic,
+//             Description = description
+//         });
+
+//         // 7. Notify users
+//         var courseTitle = await _courseService.GetCourseTitleById(courseId);
+//         await _hubContext.Clients.Group($"course-{courseId}")
+//             .SendAsync("ReceiveContentUploadNotification", topic, courseTitle, sanitizedFileName);
+
+//         _logger.Information("File uploaded to Azure: {FileName}", sanitizedFileName);
+
+//         return Ok(new
+//         {
+//             success = true,
+//             data = new
+//             {
+//                 fileMeta.Id,
+//                 fileMeta.FileName,
+//                 fileMeta.Topic,
+//                 fileMeta.Description,
+//                 fileMeta.CourseId,
+//                 path = publicUrlPath
+//             }
+//         });
+//     }
+//     catch (Exception ex)
+//     {
+//         _logger.Error(ex, "Chunk upload failed.");
+//         return StatusCode(500, new
+//         {
+//             success = false,
+//             message = "Chunk upload failed.",
+//             error = ex.Message
+//         });
+//     }
+// }
+
+
+
 
 
 
@@ -285,8 +319,8 @@ var courseTitle = await  _courseService.GetCourseTitleById(courseId);
             if (result == null) return NotFound();
 
             // 5. Send real-time notification
-           await _hubContext.Clients.Group($"course-{dto.CourseId}")
-                .SendAsync("ReceiveContentUploadNotification", dto.Topic, sanitizedFileName);
+            await _hubContext.Clients.Group($"course-{dto.CourseId}")
+                 .SendAsync("ReceiveContentUploadNotification", dto.Topic, sanitizedFileName);
 
             _logger.Information("File updated: {FileName} for Course: {CourseId}", sanitizedFileName, dto.CourseId);
             return Ok(result);

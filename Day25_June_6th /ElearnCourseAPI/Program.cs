@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.RateLimiting;
 using System.Threading.RateLimiting;
 using Serilog;
 using Microsoft.Extensions.FileProviders;
+using Serilog.Sinks.AzureBlobStorage;
 
 
 
@@ -197,7 +198,31 @@ Log.Logger = new LoggerConfiguration()
 builder.Host.UseSerilog();
 
 
-//https
+//serilog azure blob storage
+
+// var blobConnectionString = builder.Configuration["AzureStorage:ConnectionString"];
+// var blobContainerName = "logs"; // You MUST create this container manually in Azure Portal.
+// var blobFileName = "log.txt";
+
+// Log.Logger = new LoggerConfiguration()
+//     .MinimumLevel.Information()
+//     .Enrich.FromLogContext()
+//     .WriteTo.Console()
+//     .WriteTo.File("Logs/log.txt", rollingInterval: RollingInterval.Day)
+//    .WriteTo.AzureBlobStorage(
+//     connectionString: blobConnectionString,
+//     storageContainerName: blobContainerName,
+//     storageFileName: blobFileName,
+//     restrictedToMinimumLevel: Serilog.Events.LogEventLevel.Information
+// )
+
+//     .CreateLogger();
+
+// builder.Host.UseSerilog();
+
+
+
+// https
 
 // builder.Services.AddHttpsRedirection(options =>
 // {
