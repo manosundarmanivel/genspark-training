@@ -18,6 +18,8 @@ using System.Threading.RateLimiting;
 using Serilog;
 using Microsoft.Extensions.FileProviders;
 using Serilog.Sinks.AzureBlobStorage;
+using Azure.Security.KeyVault.Secrets;
+using Azure.Identity;
 
 
 
@@ -28,8 +30,30 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSignalR();
 
+// builder.Services.AddDbContext<ElearnDbContext>(options =>
+//     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+//azure key vault 
+
+
+var keyVaultUrl = builder.Configuration["KeyVault:Url"];
+var secretClient = new SecretClient(new Uri(keyVaultUrl), new DefaultAzureCredential());
+
+var secret = await secretClient.GetSecretAsync("mano-sec");
+var connectionString = secret.Value.Value;
+
+
+builder.Configuration["ConnectionStrings:DefaultConnection"] = connectionString;
+
+
 builder.Services.AddDbContext<ElearnDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
+
+
 
 // AutoMapper
 builder.Services.AddAutoMapper(typeof(Program));
@@ -238,6 +262,11 @@ builder.Host.UseSerilog();
 //         listenOptions.UseHttps("certs/dev-cert.pfx", "password123");
 //     });
 // });
+
+
+
+
+
 
 
 // Swagger
