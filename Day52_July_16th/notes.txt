@@ -1,0 +1,38 @@
+
+az version
+-------------------------------------
+az group create --name reJul25 --location eastus2
+-------------------------------------
+
+az storage account create --name mystorageacct20250715 --location eastus2 --resource-group reJul25 --sku Standard_LRS
+
+-------------------------------------
+
+az functionapp create --resource-group reJul25 --consumption-plan-location eastus2 --name mydotnetfunc20250715 --storage-account mystorageacct20250715 --runtime dotnet-isolated --functions-version 4
+
+------------------------------- 
+az functionapp config appsettings set  --name mydotnetfunc20250715 --resource-group reJul25 --settings AzureStorageConnectionString="DefaultEndpointsProtocol=https;AccountName=myblobgayathri;AccountKey=yTZPVePn4QqPKBednsAqbxUMyOLS+CP/Ix8lEhhr+ZRM6b9kJ2tyQWftcXpXPHBW3PXhrS9WhDxS+ASt+VcEWw==;EndpointSuffix=core.windows.net" ContainerName="images" KeyVaultUri="https://blobconnectiong3.vault.azure.net/"
+-------------------------------------
+
+az functionapp function keys list --resource-group reJul25 --name mydotnetfunc20250715 --function-name Function
+
+
+func azure functionapp logstream mydotnetfunc20250715 --output json
+
+
+
+
+
+
+dotnet build --configuration Release
+dotnet publish --configuration Release
+func azure functionapp publish mano-function-app 
+
+
+
+
+
+
+
+
+
