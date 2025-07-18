@@ -1,0 +1,8 @@
+1. ACR 
+2. ACR - DNL(domain name label)
+    1. Unsecure - acrname.azurecr.io
+    2. TenantReuse - acrname.hash.azurecr.io
+    3. SubscriptionReuse
+    4. ResourceGroupReuse
+    5. NoReuse
+
