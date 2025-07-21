@@ -1,0 +1,56 @@
+<div class="max-w-5xl mx-auto px-6 py-8  space-y-6">
+
+  <!-- Video Player -->
+  <div *ngIf="selectedVideoUrl" class="mt-8">
+    <video
+      [src]="selectedVideoUrl"
+      controls
+      class="w-full max-w-3xl mx-auto rounded-lg shadow border"
+      preload="metadata"
+    ></video>
+  </div>
+
+  <!-- Header + Search + Upload Button -->
+  <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
+    <h2 class="text-2xl font-bold text-gray-900">Video Library</h2>
+
+    <div class="flex flex-col sm:flex-row sm:items-center gap-3 w-full sm:w-auto">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Search videos..."
+        class="w-full sm:w-64 px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-indigo-300"
+      />
+      <button
+        class="px-4 py-2 text-sm font-semibold text-white bg-green-600 hover:bg-green-700 rounded-md transition whitespace-nowrap"
+        (click)="showUpload = !showUpload"
+      >
+        Upload Video
+      </button>
+    </div>
+  </div>
+
+  <!-- Optional Upload Form (Toggled by button) -->
+  <div *ngIf="showUpload">
+    <app-upload-video></app-upload-video>
+  </div>
+
+  <!-- Video List -->
+  <ul class="divide-y divide-gray-200">
+    <li
+      *ngFor="let video of filteredVideos"
+      class="py-4 flex items-center justify-between hover:bg-gray-50 px-4 rounded transition"
+    >
+      <div>
+        <p class="text-base md:text-lg font-semibold text-gray-800 truncate">{{ video.title }}</p>
+        <p class="text-sm text-gray-500">{{ video.description }}</p>
+      </div>
+      <button
+        (click)="play(video)"
+        class="px-4 py-2 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition"
+      >
+        Play
+      </button>
+    </li>
+  </ul>
+</div>
