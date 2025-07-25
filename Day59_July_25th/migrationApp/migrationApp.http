@@ -1,0 +1,6 @@
+@migrationApp_HostAddress = http://localhost:5228
+
+GET {{migrationApp_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

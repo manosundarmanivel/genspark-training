@@ -72,7 +72,7 @@ public class VideosController : ControllerBase
         var contentType = "video/mp4";
 
         Response.Headers.Add("Content-Disposition", "inline; filename=" + video.BlobFileName);
-return File(stream, contentType, enableRangeProcessing: true);
+        return File(stream, contentType, enableRangeProcessing: true);
 
 
     }
@@ -104,7 +104,7 @@ return File(stream, contentType, enableRangeProcessing: true);
             return Ok(new { message = $"Chunk {chunkIndex + 1}/{totalChunks} uploaded" });
         }
 
-        // All chunks received — merge and upload to blob
+
         var finalFileName = Guid.NewGuid() + Path.GetExtension(fileName);
         var mergedPath = Path.Combine(tempDir, finalFileName);
 
@@ -118,7 +118,7 @@ return File(stream, contentType, enableRangeProcessing: true);
             }
         }
 
-        // Upload to Azure Blob
+      
         var containerClient = _blobServiceClient.GetBlobContainerClient(_containerName);
         await containerClient.CreateIfNotExistsAsync();
         var blobClient = containerClient.GetBlobClient(finalFileName);
@@ -128,7 +128,7 @@ return File(stream, contentType, enableRangeProcessing: true);
             await blobClient.UploadAsync(uploadStream, overwrite: true);
         }
 
-        // Save to DB
+      
         var video = new TrainingVideo
         {
             Title = title,
@@ -139,7 +139,7 @@ return File(stream, contentType, enableRangeProcessing: true);
         _context.TrainingVideos.Add(video);
         await _context.SaveChangesAsync();
 
-        // Cleanup temp
+    
         Directory.Delete(tempDir, true);
 
         return Ok(new { message = "Upload complete", video });
