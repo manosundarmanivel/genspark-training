@@ -53,39 +53,40 @@ namespace ChienVHShopOnline.Services
             };
         }
 
-        public async Task<ProductDto> CreateAsync(CreateProductDto dto)
-        {
-            var p = new Product
-            {
-                ProductName = dto.ProductName,
-                Image = dto.Image,
-                Price = dto.Price,
-                UserId = dto.UserId,
-                CategoryId = dto.CategoryId,
-                ColorId = dto.ColorId,
-                ModelId = dto.ModelId,
-                SellStartDate = dto.SellStartDate,
-                SellEndDate = dto.SellEndDate,
-                IsNew = dto.IsNew
-            };
-            await _repo.AddAsync(p);
-            await _repo.SaveChangesAsync();
+        public async Task<ProductDto> CreateAsync(CreateProductDto dto, string imagePath)
+{
+    var p = new Product
+    {
+        ProductName = dto.ProductName,
+        Image = imagePath, // Save relative path in DB
+        Price = dto.Price,
+        UserId = dto.UserId,
+        CategoryId = dto.CategoryId,
+        ColorId = dto.ColorId,
+        ModelId = dto.ModelId,
+        SellStartDate = dto.SellStartDate,
+        SellEndDate = dto.SellEndDate,
+        IsNew = dto.IsNew
+    };
+    await _repo.AddAsync(p);
+    await _repo.SaveChangesAsync();
 
-            return new ProductDto
-            {
-                ProductId = p.ProductId,
-                ProductName = p.ProductName,
-                Image = p.Image,
-                Price = p.Price,
-                UserId = p.UserId,
-                CategoryId = p.CategoryId,
-                ColorId = p.ColorId,
-                ModelId = p.ModelId,
-                SellStartDate = p.SellStartDate,
-                SellEndDate = p.SellEndDate,
-                IsNew = p.IsNew
-            };
-        }
+    return new ProductDto
+    {
+        ProductId = p.ProductId,
+        ProductName = p.ProductName,
+        Image = p.Image,
+        Price = p.Price,
+        UserId = p.UserId,
+        CategoryId = p.CategoryId,
+        ColorId = p.ColorId,
+        ModelId = p.ModelId,
+        SellStartDate = p.SellStartDate,
+        SellEndDate = p.SellEndDate,
+        IsNew = p.IsNew
+    };
+}
+
 
         public async Task<ProductDto?> UpdateAsync(UpdateProductDto dto)
         {

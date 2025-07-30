@@ -30,14 +30,35 @@ namespace ChienVHShopOnline.ApiControllers
             return Ok(data);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateProductDto dto)
-        {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
+       [HttpPost]
+[Consumes("multipart/form-data")]
+public async Task<IActionResult> Create([FromForm] CreateProductDto dto)
+{
+    if (!ModelState.IsValid) return BadRequest(ModelState);
 
-            var created = await _service.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.ProductId }, created);
+    // Handle file saving
+    var imageFile = dto.ImageFile;
+    string fileName = null;
+
+    if (imageFile != null && imageFile.Length > 0)
+    {
+        var uploadsDir = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads");
+        if (!Directory.Exists(uploadsDir))
+            Directory.CreateDirectory(uploadsDir);
+
+        fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+        var filePath = Path.Combine(uploadsDir, fileName);
+
+        using (var stream = new FileStream(filePath, FileMode.Create))
+        {
+            await imageFile.CopyToAsync(stream);
         }
+    }
+
+    var created = await _service.CreateAsync(dto, "/uploads/" + fileName);
+    return CreatedAtAction(nameof(GetById), new { id = created.ProductId }, created);
+}
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] UpdateProductDto dto)

@@ -1,0 +1,68 @@
+<div class="div-container">
+  <div class="div-header">
+    <h2>Your Shopping Cart</h2>
+  </div>
+
+  <div class="div-main">
+    <div class="main-content">
+      <table class="table shopping-cart">
+        <thead>
+          <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td><img [src]="'http://localhost:5228' + item.image" width="80" /></td>
+            <td>{{ item.productName }}</td>
+                <td>{{item.quantity}}</td>
+            <td>₹{{ item.price }}</td>
+        
+            <td>
+              <a href="#" class="delete-shopping" (click)="removeItem(item.productId)">Remove</a>
+            </td>
+          </tr>
+          <tr *ngIf="cartItems.length === 0">
+            <td colspan="4" class="text-center">Cart is empty.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="text-end mt-3" *ngIf="cartItems.length > 0">
+        <span class="total-price-text me-3">Total:</span>
+        <span class="total-price-digit">₹{{ getTotalPrice() }}</span>
+      </div>
+
+      <!-- Order Form -->
+      <form [formGroup]="orderForm" class="mt-4" (ngSubmit)="placeOrder()" *ngIf="cartItems.length > 0">
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <input class="form-control" formControlName="customerName" placeholder="Customer Name" />
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" formControlName="customerPhone" placeholder="Phone" />
+          </div>
+        </div>
+        <div class="row mb-2">
+          <div class="col-md-6">
+            <input class="form-control" formControlName="customerEmail" placeholder="Email" />
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" formControlName="customerAddress" placeholder="Address" />
+          </div>
+        </div>
+        <div class="text-end">
+          <button type="submit" class="btn btn-success">Place Order</button>
+        </div>
+      </form>
+
+      <div class="alert alert-success mt-3" *ngIf="successMessage">
+        {{ successMessage }}
+      </div>
+    </div>
+  </div>
+</div>

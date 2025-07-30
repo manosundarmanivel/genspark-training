@@ -21,7 +21,7 @@ namespace ChienVHShopOnline.Dtos
         [Required]
         public string ProductName { get; set; }
 
-        public string Image { get; set; }
+        public IFormFile ImageFile { get; set; }
         public double? Price { get; set; }
 
         public int? UserId { get; set; }

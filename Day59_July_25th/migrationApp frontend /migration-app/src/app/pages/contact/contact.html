@@ -1,0 +1,41 @@
+<div class="max-w-lg mx-auto mt-10 p-6 bg-white shadow-md rounded">
+  <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+
+  <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+    <div class="mb-4">
+      <label class="block font-semibold">Name</label>
+      <input formControlName="name" type="text" class="w-full border p-2 rounded" />
+      <div *ngIf="contactForm.get('name')?.invalid && contactForm.get('name')?.touched" class="text-red-500">
+        Name is required.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold">Email</label>
+      <input formControlName="email" type="email" class="w-full border p-2 rounded" />
+      <div *ngIf="contactForm.get('email')?.invalid && contactForm.get('email')?.touched" class="text-red-500">
+        Valid email is required.
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold">Phone</label>
+      <input formControlName="phone" type="text" class="w-full border p-2 rounded" />
+    </div>
+
+    <div class="mb-4">
+      <label class="block font-semibold">Message</label>
+      <textarea formControlName="content" rows="4" class="w-full border p-2 rounded"></textarea>
+      <div *ngIf="contactForm.get('content')?.invalid && contactForm.get('content')?.touched" class="text-red-500">
+        Message is required.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="contactForm.invalid" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+      Submit
+    </button>
+  </form>
+
+  <div *ngIf="successMessage" class="text-green-600 mt-4">{{ successMessage }}</div>
+  <div *ngIf="errorMessage" class="text-red-600 mt-4">{{ errorMessage }}</div>
+</div>

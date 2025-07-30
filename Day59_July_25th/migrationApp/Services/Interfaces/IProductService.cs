@@ -6,7 +6,7 @@ namespace ChienVHShopOnline.Services
     {
         Task<IEnumerable<ProductDto>> GetAllAsync();
         Task<ProductDto?> GetByIdAsync(int id);
-        Task<ProductDto> CreateAsync(CreateProductDto dto);
+        Task<ProductDto> CreateAsync(CreateProductDto dto,string imagePath);
         Task<ProductDto?> UpdateAsync(UpdateProductDto dto);
         Task<bool> DeleteAsync(int id);
     }

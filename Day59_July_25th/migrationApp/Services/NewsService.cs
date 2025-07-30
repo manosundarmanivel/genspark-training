@@ -47,24 +47,25 @@ namespace ChienVHShopOnline.Services
             };
         }
 
-        public async Task<NewsDto> CreateAsync(CreateNewsDto dto)
-        {
-            var news = new News
-            {
-                UserId = dto.UserId,
-                Title = dto.Title,
-                ShortDescription = dto.ShortDescription,
-                Image = dto.Image,
-                Content = dto.Content,
-                CreatedDate = dto.CreatedDate,
-                Status = dto.Status
-            };
+public async Task<NewsDto> CreateAsync(CreateNewsDto dto)
+{
+    var news = new News
+    {
+        UserId = dto.UserId,
+        Title = dto.Title,
+        ShortDescription = dto.ShortDescription,
+        Image = dto.Image, 
+        Content = dto.Content,
+        CreatedDate = dto.CreatedDate,
+        Status = dto.Status
+    };
 
-            await _repo.AddAsync(news);
-            await _repo.SaveChangesAsync();
+    await _repo.AddAsync(news);
+    await _repo.SaveChangesAsync();
 
-            return await GetByIdAsync(news.NewsId) ?? throw new Exception("News creation failed");
-        }
+    return await GetByIdAsync(news.NewsId) ?? throw new Exception("News creation failed");
+}
+
 
         public async Task<bool> DeleteAsync(int id)
         {
@@ -76,23 +77,24 @@ namespace ChienVHShopOnline.Services
             return true;
         }
 
-        public async Task<bool> UpdateAsync(int id, CreateNewsDto dto)
-        {
-            var existing = await _repo.GetByIdAsync(id);
-            if (existing == null) return false;
+public async Task<bool> UpdateAsync(int id, CreateNewsDto dto)
+{
+    var existing = await _repo.GetByIdAsync(id);
+    if (existing == null) return false;
 
-            existing.UserId = dto.UserId;
-            existing.Title = dto.Title;
-            existing.ShortDescription = dto.ShortDescription;
-            existing.Image = dto.Image;
-            existing.Content = dto.Content;
-            existing.Status = dto.Status;
-            existing.CreatedDate = dto.CreatedDate ?? existing.CreatedDate;
+    existing.UserId = dto.UserId;
+    existing.Title = dto.Title;
+    existing.ShortDescription = dto.ShortDescription;
+    existing.Image = dto.Image; 
+    existing.Content = dto.Content;
+    existing.Status = dto.Status;
+    existing.CreatedDate = dto.CreatedDate ?? existing.CreatedDate;
 
-            _repo.Update(existing);
-            await _repo.SaveChangesAsync();
+    _repo.Update(existing);
+    await _repo.SaveChangesAsync();
 
-            return true;
-        }
+    return true;
+}
+
     }
 }

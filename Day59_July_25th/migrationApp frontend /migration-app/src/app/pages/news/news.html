@@ -1,0 +1,101 @@
+<h2>News Management</h2>
+
+<!-- List View -->
+<div *ngIf="mode === 'list'">
+  <button class="btn btn-primary" (click)="showCreate()">Create News</button>
+  <table class="table table-bordered mt-3">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Created Date</th>
+        <th style="width: 200px;"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let news of pagedNews">
+        <td>{{ news.title }}</td>
+        <td>{{ news.createdDate | date:'short' }}</td>
+        <td>
+          <button class="btn btn-sm btn-warning" (click)="showEdit(news)">Edit</button>
+          <button class="btn btn-sm btn-info" (click)="showDetails(news)">Details</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteNews(news.newsId)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-3 d-flex justify-content-between">
+    <button class="btn btn-secondary" (click)="prevPage()" [disabled]="currentPage === 1">Previous</button>
+    <button class="btn btn-secondary" (click)="nextPage()" [disabled]="currentPage * pageSize >= newsList.length">Next</button>
+  </div>
+</div>
+
+<!-- Create View -->
+<div *ngIf="mode === 'create'">
+  <h4>Create News</h4>
+  <form (ngSubmit)="createNews()">
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" [(ngModel)]="form.title" name="title" required />
+    </div>
+    <div class="form-group">
+      <label>Short Description</label>
+      <textarea class="form-control" [(ngModel)]="form.shortDescription" name="shortDescription"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Image</label>
+      <input type="file" class="form-control" (change)="onFileSelected($event)" />
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea class="form-control" [(ngModel)]="form.content" name="content"></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Create</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </form>
+</div>
+
+<!-- Edit View -->
+<div *ngIf="mode === 'edit'">
+  <h4>Edit News</h4>
+  <form (ngSubmit)="updateNews()">
+    <div class="form-group">
+      <label>Title</label>
+      <input class="form-control" [(ngModel)]="form.title" name="title" required />
+    </div>
+    <div class="form-group">
+      <label>Short Description</label>
+      <textarea class="form-control" [(ngModel)]="form.shortDescription" name="shortDescription"></textarea>
+    </div>
+    <div class="form-group">
+      <label>Current Image</label><br />
+      <img *ngIf="selectedNews?.image" [src]="'http://localhost:5228' + selectedNews?.image" width="100" class="mb-2" />
+    </div>
+    <div class="form-group">
+      <label>Change Image</label>
+      <input type="file" class="form-control" (change)="onFileSelected($event)" />
+    </div>
+    <div class="form-group">
+      <label>Content</label>
+      <textarea class="form-control" [(ngModel)]="form.content" name="content"></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Update</button>
+    <button type="button" class="btn btn-secondary" (click)="cancel()">Cancel</button>
+  </form>
+</div>
+
+<!-- Details View -->
+<div *ngIf="mode === 'details' && selectedNews">
+  <h4>News Details</h4>
+  <p><strong>ID:</strong> {{ selectedNews.newsId }}</p>
+  <p><strong>Title:</strong> {{ selectedNews.title }}</p>
+  <p><strong>Description:</strong> {{ selectedNews.shortDescription }}</p>
+  <p><strong>Image:</strong><br />
+    <img [src]="'http://localhost:5228' + selectedNews.image" width="200" *ngIf="selectedNews.image" />
+  </p>
+  <p><strong>Content:</strong> {{ selectedNews.content }}</p>
+  <p><strong>Created:</strong> {{ selectedNews.createdDate | date:'short' }}</p>
+  <button class="btn btn-secondary" (click)="cancel()">Back</button>
+</div>

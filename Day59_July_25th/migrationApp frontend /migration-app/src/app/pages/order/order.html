@@ -1,0 +1,43 @@
+<div class="container mx-auto px-4">
+  <h2 class="text-2xl font-bold mb-4">All Orders</h2>
+  <div class="text-right mb-4">
+  <button (click)="downloadPdf()" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
+    Download PDF
+  </button>
+</div>
+
+
+  <div *ngFor="let order of orders" class="border rounded-lg shadow mb-6 p-4">
+    <div class="mb-2">
+      <strong>Order Name:</strong> {{ order.orderName }} <br>
+      <strong>Order Date:</strong> {{ order.orderDate | date:'short' }} <br>
+      <strong>Customer:</strong> {{ order.customerName }} ({{ order.customerEmail }}) <br>
+      <strong>Phone:</strong> {{ order.customerPhone }} <br>
+      <strong>Address:</strong> {{ order.customerAddress }} <br>
+      <strong>Status:</strong> {{ order.status }} | <strong>Payment:</strong> {{ order.paymentType }}
+    </div>
+
+    <div class="mt-4">
+      <h4 class="font-semibold">Order Details:</h4>
+      <table class="w-full border-collapse border mt-2">
+        <thead>
+          <tr>
+            <th class="border px-2 py-1">Product ID</th>
+            <th class="border px-2 py-1">Price</th>
+            <th class="border px-2 py-1">Quantity</th>
+            <th class="border px-2 py-1">Total</th>
+          </tr>
+        </thead>
+        <tbody>
+  <tr *ngFor="let detail of orderDetailsMap[order.orderID] || []">
+    <td class="border px-2 py-1">{{ productMap[detail.productID] || 'Product ' + detail.productID }}</td>
+    <td class="border px-2 py-1">₹{{ detail.price }}</td>
+    <td class="border px-2 py-1">{{ detail.quantity }}</td>
+    <td class="border px-2 py-1">₹{{ detail.price * detail.quantity }}</td>
+  </tr>
+</tbody>
+
+      </table>
+    </div>
+  </div>
+</div>

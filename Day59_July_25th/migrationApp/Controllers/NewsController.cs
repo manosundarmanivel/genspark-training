@@ -29,13 +29,38 @@ namespace ChienVHShopOnline.Controllers
             return news == null ? NotFound() : Ok(news);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Create([FromBody] CreateNewsDto dto)
+[HttpPost]
+[Consumes("multipart/form-data")]
+public async Task<IActionResult> Create([FromForm] CreateNewsDto dto)
+{
+    if (!ModelState.IsValid) return BadRequest(ModelState);
+
+    string? filePath = null;
+
+    if (dto.ImageFile != null && dto.ImageFile.Length > 0)
+    {
+        var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/news-images");
+        if (!Directory.Exists(uploadsFolder))
+            Directory.CreateDirectory(uploadsFolder);
+
+        var fileName = Guid.NewGuid().ToString() + Path.GetExtension(dto.ImageFile.FileName);
+        var fullPath = Path.Combine(uploadsFolder, fileName);
+
+        using (var stream = new FileStream(fullPath, FileMode.Create))
         {
-            if (!ModelState.IsValid) return BadRequest(ModelState);
-            var created = await _service.CreateAsync(dto);
-            return CreatedAtAction(nameof(Get), new { id = created.NewsId }, created);
+            await dto.ImageFile.CopyToAsync(stream);
         }
+
+        filePath = "/news-images/" + fileName;
+    }
+
+    dto.Image = filePath; 
+    dto.ImageFile = null; 
+
+    var created = await _service.CreateAsync(dto);
+    return CreatedAtAction(nameof(Get), new { id = created.NewsId }, created);
+}
+
 
         [HttpPut("{id}")]
         public async Task<IActionResult> Update(int id, [FromBody] CreateNewsDto dto)
